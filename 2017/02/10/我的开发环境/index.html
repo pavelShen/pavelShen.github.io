@@ -18,7 +18,8 @@ iterm
 zsh
 cheetsheet
 
-使用zsh123Cat /etc/shells         //查看安装的shell列表Chsh -s /bi">
+使用zshCat /etc/shells         //查看安装的shell列表
+Chsh -s /bin/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="我的开发环境">
 <meta property="og:url" content="https://github.com/pavelShen/2017/02/10/我的开发环境/index.html">
@@ -36,8 +37,9 @@ iterm
 zsh
 cheetsheet
 
-使用zsh123Cat /etc/shells         //查看安装的shell列表Chsh -s /bi">
-<meta property="og:updated_time" content="2017-02-10T10:50:42.000Z">
+使用zshCat /etc/shells         //查看安装的shell列表
+Chsh -s /bin/">
+<meta property="og:updated_time" content="2017-02-10T10:54:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="我的开发环境">
 <meta name="twitter:description" content="听过 &amp;lt; demo过 &amp;lt; 实际工作用过 &amp;lt; 实际工作中被坑过 &amp;lt; 实际工作中被多次坑过或者深入研究总结过 
@@ -53,7 +55,8 @@ iterm
 zsh
 cheetsheet
 
-使用zsh123Cat /etc/shells         //查看安装的shell列表Chsh -s /bi">
+使用zshCat /etc/shells         //查看安装的shell列表
+Chsh -s /bin/">
   
     <link rel="alternate" href="/atom.xml" title="pavelShen的个人博客" type="application/atom+xml">
   
@@ -144,9 +147,19 @@ cheetsheet
 <li>zsh</li>
 <li>cheetsheet</li>
 </ul>
-<h2 id="使用zsh"><a href="#使用zsh" class="headerlink" title="使用zsh"></a>使用zsh</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Cat /etc/shells         //查看安装的shell列表</div><div class="line">Chsh -s /bin/zsh     // 修改登录的shell, chsh -s其实修改的就是/etc/passwd文件里和你的用户名相对应的那一行</div><div class="line">重启shell</div></pre></td></tr></table></figure>
-<h2 id="Vscode-配置"><a href="#Vscode-配置" class="headerlink" title="Vscode 配置"></a>Vscode 配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    &quot;terminal.integrated.shell.osx&quot;: &quot;/bin/zsh&quot;,</div><div class="line">    &quot;editor.wordSeparators&quot;: &quot;`~!@#$%^&amp;*()=+[&#123;]&#125;\\|;:&apos;\&quot;,.&lt;&gt;/?&quot;,</div><div class="line">    &quot;files.associations&quot;: &#123;</div><div class="line">        &quot;*.wxml&quot;: &quot;html&quot;,</div><div class="line">        &quot;*.wxss&quot;: &quot;css&quot;</div><div class="line">    &#125;,</div><div class="line">    &quot;editor.tabSize&quot;: 2</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="Vscode插件"><a href="#Vscode插件" class="headerlink" title="Vscode插件"></a>Vscode插件</h2><ul>
+<h2 id="使用zsh"><a href="#使用zsh" class="headerlink" title="使用zsh"></a>使用zsh</h2><pre><code>Cat /etc/shells         //查看安装的shell列表
+Chsh -s /bin/zsh     // 修改登录的shell, chsh -s其实修改的就是/etc/passwd文件里和你的用户名相对应的那一行
+重启shell
+</code></pre><h2 id="Vscode-配置"><a href="#Vscode-配置" class="headerlink" title="Vscode 配置"></a>Vscode 配置</h2><pre><code>{
+    &quot;terminal.integrated.shell.osx&quot;: &quot;/bin/zsh&quot;,
+    &quot;editor.wordSeparators&quot;: &quot;`~!@#$%^&amp;*()=+[{]}\\|;:&apos;\&quot;,.&lt;&gt;/?&quot;,
+    &quot;files.associations&quot;: {
+        &quot;*.wxml&quot;: &quot;html&quot;,
+        &quot;*.wxss&quot;: &quot;css&quot;
+    },
+    &quot;editor.tabSize&quot;: 2
+}
+</code></pre><h2 id="Vscode插件"><a href="#Vscode插件" class="headerlink" title="Vscode插件"></a>Vscode插件</h2><ul>
 <li>git history</li>
 <li>vscode-icon</li>
 <li>vscode-wechat</li>
@@ -154,17 +167,20 @@ cheetsheet
 <li>git history</li>
 </ul>
 <p>ctrl-shift-p  呼出命令行 输入path 将code命令添加进shell</p>
-<h2 id="homebrew"><a href="#homebrew" class="headerlink" title="homebrew"></a>homebrew</h2><p>安装命令：<figure class="highlight plain"><figcaption><span>-e "$(curl -fsSL</span><a href="https://raw.githubusercontent.com/Homebrew/install/master/install)" "="" target="_blank" rel="external">```</a></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">安装失败的话：把/usr/local/.git 目录删了即可，就是执行rm -rf /usr/local/.git</div><div class="line"></div><div class="line">## nvm node包管理工具</div><div class="line"></div><div class="line">1.  ```curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash ``` </div><div class="line">2. ``` export NVM_DIR=&quot;$HOME/.nvm&quot;</div><div class="line">[ -s &quot;$NVM_DIR/nvm.sh&quot; ] &amp;&amp; . &quot;$NVM_DIR/nvm.sh&quot; # This loads nvm</div></pre></td></tr></table></figure></p>
-<ol>
-<li><figure class="highlight plain"><figcaption><span>ls-remote```</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">4. ```nvm alias default node</div></pre></td></tr></table></figure>
-</li>
+<h2 id="homebrew"><a href="#homebrew" class="headerlink" title="homebrew"></a>homebrew</h2><p>安装命令：<code>/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</code><br>安装失败的话：把/usr/local/.git 目录删了即可，就是执行rm -rf /usr/local/.git</p>
+<h2 id="nvm-node包管理工具"><a href="#nvm-node包管理工具" class="headerlink" title="nvm node包管理工具"></a>nvm node包管理工具</h2><ol>
+<li><code>curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash</code></li>
+<li><code>export NVM_DIR=&quot;$HOME/.nvm&quot; [ -s &quot;$NVM_DIR/nvm.sh&quot; ] &amp;&amp; . &quot;$NVM_DIR/nvm.sh&quot; # This loads nvm</code></li>
+<li><code>nvm ls-remote</code></li>
+<li><code>nvm alias default node</code></li>
 </ol>
-<h2 id="node包"><a href="#node包" class="headerlink" title="node包"></a>node包</h2><p>vue-cli:需要安装node-sass <figure class="highlight plain"><figcaption><span>i sass-loader node-sass -D ``` </span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">node-sass : npm run dev 失败 -&gt; npm rebuild node-sass</div><div class="line"></div><div class="line">## 允许第三方来源软件</div><div class="line"></div><div class="line">``` sudo spctl --master-disable</div></pre></td></tr></table></figure></p>
+<h2 id="node包"><a href="#node包" class="headerlink" title="node包"></a>node包</h2><p>vue-cli:需要安装node-sass <code>npm i sass-loader node-sass -D</code><br>node-sass : npm run dev 失败 -&gt; npm rebuild node-sass</p>
+<h2 id="允许第三方来源软件"><a href="#允许第三方来源软件" class="headerlink" title="允许第三方来源软件"></a>允许第三方来源软件</h2><p><code>sudo spctl --master-disable</code></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/02/10/我的开发环境/" data-id="ciyzp0m79000kw4vgbcqv2tqc" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/02/10/我的开发环境/" data-id="ciyzp54gk000kzcvgl38y9imv" class="article-share-link">Share</a>
       
       
     </footer>

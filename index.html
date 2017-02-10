@@ -106,9 +106,19 @@
 <li>zsh</li>
 <li>cheetsheet</li>
 </ul>
-<h2 id="使用zsh"><a href="#使用zsh" class="headerlink" title="使用zsh"></a>使用zsh</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Cat /etc/shells         //查看安装的shell列表</div><div class="line">Chsh -s /bin/zsh     // 修改登录的shell, chsh -s其实修改的就是/etc/passwd文件里和你的用户名相对应的那一行</div><div class="line">重启shell</div></pre></td></tr></table></figure>
-<h2 id="Vscode-配置"><a href="#Vscode-配置" class="headerlink" title="Vscode 配置"></a>Vscode 配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    &quot;terminal.integrated.shell.osx&quot;: &quot;/bin/zsh&quot;,</div><div class="line">    &quot;editor.wordSeparators&quot;: &quot;`~!@#$%^&amp;*()=+[&#123;]&#125;\\|;:&apos;\&quot;,.&lt;&gt;/?&quot;,</div><div class="line">    &quot;files.associations&quot;: &#123;</div><div class="line">        &quot;*.wxml&quot;: &quot;html&quot;,</div><div class="line">        &quot;*.wxss&quot;: &quot;css&quot;</div><div class="line">    &#125;,</div><div class="line">    &quot;editor.tabSize&quot;: 2</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="Vscode插件"><a href="#Vscode插件" class="headerlink" title="Vscode插件"></a>Vscode插件</h2><ul>
+<h2 id="使用zsh"><a href="#使用zsh" class="headerlink" title="使用zsh"></a>使用zsh</h2><pre><code>Cat /etc/shells         //查看安装的shell列表
+Chsh -s /bin/zsh     // 修改登录的shell, chsh -s其实修改的就是/etc/passwd文件里和你的用户名相对应的那一行
+重启shell
+</code></pre><h2 id="Vscode-配置"><a href="#Vscode-配置" class="headerlink" title="Vscode 配置"></a>Vscode 配置</h2><pre><code>{
+    &quot;terminal.integrated.shell.osx&quot;: &quot;/bin/zsh&quot;,
+    &quot;editor.wordSeparators&quot;: &quot;`~!@#$%^&amp;*()=+[{]}\\|;:&apos;\&quot;,.&lt;&gt;/?&quot;,
+    &quot;files.associations&quot;: {
+        &quot;*.wxml&quot;: &quot;html&quot;,
+        &quot;*.wxss&quot;: &quot;css&quot;
+    },
+    &quot;editor.tabSize&quot;: 2
+}
+</code></pre><h2 id="Vscode插件"><a href="#Vscode插件" class="headerlink" title="Vscode插件"></a>Vscode插件</h2><ul>
 <li>git history</li>
 <li>vscode-icon</li>
 <li>vscode-wechat</li>
@@ -116,17 +126,20 @@
 <li>git history</li>
 </ul>
 <p>ctrl-shift-p  呼出命令行 输入path 将code命令添加进shell</p>
-<h2 id="homebrew"><a href="#homebrew" class="headerlink" title="homebrew"></a>homebrew</h2><p>安装命令：<figure class="highlight plain"><figcaption><span>-e "$(curl -fsSL</span><a href="https://raw.githubusercontent.com/Homebrew/install/master/install)" "="" target="_blank" rel="external">```</a></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">安装失败的话：把/usr/local/.git 目录删了即可，就是执行rm -rf /usr/local/.git</div><div class="line"></div><div class="line">## nvm node包管理工具</div><div class="line"></div><div class="line">1.  ```curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash ``` </div><div class="line">2. ``` export NVM_DIR=&quot;$HOME/.nvm&quot;</div><div class="line">[ -s &quot;$NVM_DIR/nvm.sh&quot; ] &amp;&amp; . &quot;$NVM_DIR/nvm.sh&quot; # This loads nvm</div></pre></td></tr></table></figure></p>
-<ol>
-<li><figure class="highlight plain"><figcaption><span>ls-remote```</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">4. ```nvm alias default node</div></pre></td></tr></table></figure>
-</li>
+<h2 id="homebrew"><a href="#homebrew" class="headerlink" title="homebrew"></a>homebrew</h2><p>安装命令：<code>/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</code><br>安装失败的话：把/usr/local/.git 目录删了即可，就是执行rm -rf /usr/local/.git</p>
+<h2 id="nvm-node包管理工具"><a href="#nvm-node包管理工具" class="headerlink" title="nvm node包管理工具"></a>nvm node包管理工具</h2><ol>
+<li><code>curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash</code></li>
+<li><code>export NVM_DIR=&quot;$HOME/.nvm&quot; [ -s &quot;$NVM_DIR/nvm.sh&quot; ] &amp;&amp; . &quot;$NVM_DIR/nvm.sh&quot; # This loads nvm</code></li>
+<li><code>nvm ls-remote</code></li>
+<li><code>nvm alias default node</code></li>
 </ol>
-<h2 id="node包"><a href="#node包" class="headerlink" title="node包"></a>node包</h2><p>vue-cli:需要安装node-sass <figure class="highlight plain"><figcaption><span>i sass-loader node-sass -D ``` </span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">node-sass : npm run dev 失败 -&gt; npm rebuild node-sass</div><div class="line"></div><div class="line">## 允许第三方来源软件</div><div class="line"></div><div class="line">``` sudo spctl --master-disable</div></pre></td></tr></table></figure></p>
+<h2 id="node包"><a href="#node包" class="headerlink" title="node包"></a>node包</h2><p>vue-cli:需要安装node-sass <code>npm i sass-loader node-sass -D</code><br>node-sass : npm run dev 失败 -&gt; npm rebuild node-sass</p>
+<h2 id="允许第三方来源软件"><a href="#允许第三方来源软件" class="headerlink" title="允许第三方来源软件"></a>允许第三方来源软件</h2><p><code>sudo spctl --master-disable</code></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/02/10/我的开发环境/" data-id="ciyzp0m79000kw4vgbcqv2tqc" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/02/10/我的开发环境/" data-id="ciyzp54gk000kzcvgl38y9imv" class="article-share-link">Share</a>
       
       
     </footer>
@@ -169,7 +182,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/02/10/npm命令/" data-id="ciyzp0m72000bw4vgxdw0zsgk" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/02/10/npm命令/" data-id="ciyzp54gf000bzcvgwdzj7n60" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li></ul>
@@ -236,7 +249,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/02/10/css片段1/" data-id="ciyzp0m6l0002w4vg81y4tm3f" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/02/10/css片段1/" data-id="ciyzp54fu0000zcvg2tbn593d" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li></ul>
@@ -300,7 +313,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/02/10/charles入门/" data-id="ciyzp0m6f0000w4vgs689srsr" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/02/10/charles入门/" data-id="ciyzp54fz0002zcvgyl3zmb1y" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tools/">tools</a></li></ul>
@@ -354,7 +367,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/02/10/视频全屏播放-开发总结/" data-id="ciyzp0m7b000mw4vg6vif3fwq" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/02/10/视频全屏播放-开发总结/" data-id="ciyzp54gm000mzcvgprr12btt" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -415,7 +428,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/01/17/js片段1/" data-id="ciyzp0m6u0006w4vgs8ezk8em" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/01/17/js片段1/" data-id="ciyzp54g70006zcvgs46gi0q0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -463,10 +476,50 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2016/12/16/hello-world/" data-id="ciyzp0m6s0005w4vgo66vkocn" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2016/12/16/hello-world/" data-id="ciyzp54g50005zcvg6r4b0s8o" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-小程序新建页面脚本" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/09/26/小程序新建页面脚本/" class="article-date">
+  <time datetime="2016-09-26T00:53:00.000Z" itemprop="datePublished">2016-09-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/26/小程序新建页面脚本/">小程序新建页面脚本</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>  // 创建命令：node createNewWeappPage pagename<br>  const path = require(‘path’);<br>  const fs = require(‘fs’);<br>  let pagesPath = path.join(__dirname, ‘./pages’);<br>  let pageName = process.argv[2];<br>  if(!!pageName){<br>      let targetPath = pagesPath + ‘/‘+pageName;<br>      fs.exists(targetPath, function (exists) {<br>        if(!exists){<br>          fs.mkdir(targetPath, function (err) {<br>            if(err)<br>              throw err;<br>            else{<br>              console.log(‘创建目录’+pageName+’成功’);<br>              fs.writeFile(targetPath+’/‘+pageName+’.wxml’, ‘’, (err) =&gt; {<br>                if (err) throw err;<br>                console.log(‘wxml文件创建成功’);<br>              });<br>              fs.writeFile(targetPath+’/‘+pageName+’.wxss’, ‘’, (err) =&gt; {<br>                if (err) throw err;<br>                console.log(‘wxss文件创建成功’);<br>              });<br>              fs.writeFile(targetPath+’/‘+pageName+’.json’, ‘’, (err) =&gt; {<br>                if (err) throw err;<br>                console.log(‘json文件创建成功’);<br>              });<br>              fs.writeFile(targetPath+’/‘+pageName+’.js’, ‘’, (err) =&gt; {<br>                if (err) throw err;<br>                console.log(‘js文件创建成功’);<br>              });<br>            }<br>          });<br>        }<br>        else{<br>          console.log(‘文件已存在，请检查目录’)<br>        }<br>      });<br>  }</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/pavelShen/2016/09/26/小程序新建页面脚本/" data-id="ciyzp54gh000fzcvg4hte9ixb" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/weixin/">weixin</a></li></ul>
 
     </footer>
   </div>
@@ -519,50 +572,10 @@ this.audioCtx.play();
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2016/09/26/weixin小程序/" data-id="ciyzp0m74000fw4vgtdbdiool" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2016/09/26/weixin小程序/" data-id="ciyzp54gj000izcvggh7mh9wb" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/app/">app</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/weixin/">weixin</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-小程序新建页面脚本" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/09/26/小程序新建页面脚本/" class="article-date">
-  <time datetime="2016-09-26T00:53:00.000Z" itemprop="datePublished">2016-09-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/26/小程序新建页面脚本/">小程序新建页面脚本</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>  // 创建命令：node createNewWeappPage pagename<br>  const path = require(‘path’);<br>  const fs = require(‘fs’);<br>  let pagesPath = path.join(__dirname, ‘./pages’);<br>  let pageName = process.argv[2];<br>  if(!!pageName){<br>      let targetPath = pagesPath + ‘/‘+pageName;<br>      fs.exists(targetPath, function (exists) {<br>        if(!exists){<br>          fs.mkdir(targetPath, function (err) {<br>            if(err)<br>              throw err;<br>            else{<br>              console.log(‘创建目录’+pageName+’成功’);<br>              fs.writeFile(targetPath+’/‘+pageName+’.wxml’, ‘’, (err) =&gt; {<br>                if (err) throw err;<br>                console.log(‘wxml文件创建成功’);<br>              });<br>              fs.writeFile(targetPath+’/‘+pageName+’.wxss’, ‘’, (err) =&gt; {<br>                if (err) throw err;<br>                console.log(‘wxss文件创建成功’);<br>              });<br>              fs.writeFile(targetPath+’/‘+pageName+’.json’, ‘’, (err) =&gt; {<br>                if (err) throw err;<br>                console.log(‘json文件创建成功’);<br>              });<br>              fs.writeFile(targetPath+’/‘+pageName+’.js’, ‘’, (err) =&gt; {<br>                if (err) throw err;<br>                console.log(‘js文件创建成功’);<br>              });<br>            }<br>          });<br>        }<br>        else{<br>          console.log(‘文件已存在，请检查目录’)<br>        }<br>      });<br>  }</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2016/09/26/小程序新建页面脚本/" data-id="ciyzp0m76000iw4vgswuvinbr" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/weixin/">weixin</a></li></ul>
 
     </footer>
   </div>
@@ -665,7 +678,7 @@ app.listen(3000);
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2016/08/09/learn-koa/" data-id="ciyzp0m6x0007w4vgrzm5bg9t" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2016/08/09/learn-koa/" data-id="ciyzp54g80007zcvgk0w6pkm0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/koa/">koa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li></ul>
