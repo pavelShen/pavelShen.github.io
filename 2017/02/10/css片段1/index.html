@@ -15,7 +15,7 @@
 <meta property="og:description" content="div边框重叠设置div的margin值为边框值的相反数：1.div &amp;#123;width:100px; height:103px; border:1px solid #333; margin-right:-1px; margin-bottom:-1px;&amp;#125;
 
 背景图中间扣出毛玻璃区域（内部背景和外部背景互相契合）参考链接：http://www.cnblogs.com/ghost-xy">
-<meta property="og:updated_time" content="2017-02-10T10:28:30.000Z">
+<meta property="og:updated_time" content="2017-02-10T10:42:08.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="css片段1">
 <meta name="twitter:description" content="div边框重叠设置div的margin值为边框值的相反数：1.div &amp;#123;width:100px; height:103px; border:1px solid #333; margin-right:-1px; margin-bottom:-1px;&amp;#125;
@@ -101,15 +101,15 @@
         <h2 id="div边框重叠"><a href="#div边框重叠" class="headerlink" title="div边框重叠"></a>div边框重叠</h2><p>设置div的margin值为边框值的相反数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">.div &#123;width:100px; height:103px; border:1px solid #333; margin-right:-1px; margin-bottom:-1px;&#125;</div></pre></td></tr></table></figure></p>
 <hr>
 <h2 id="背景图中间扣出毛玻璃区域（内部背景和外部背景互相契合）"><a href="#背景图中间扣出毛玻璃区域（内部背景和外部背景互相契合）" class="headerlink" title="背景图中间扣出毛玻璃区域（内部背景和外部背景互相契合）"></a>背景图中间扣出毛玻璃区域（内部背景和外部背景互相契合）</h2><p>参考链接：<a href="http://www.cnblogs.com/ghost-xyx/p/5677168.html" target="_blank" rel="external">http://www.cnblogs.com/ghost-xyx/p/5677168.html</a><br><a href="https://darylxyx.github.io/Demo/blur/" target="_blank" rel="external">demo</a></p>
-<p>坑： 该方案是靠 <figure class="highlight plain"><figcaption><span>来实现，所以不适合有滚动条的页面，如果有滚动条，还是老老实实用background-position来定位</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#### html ####</div></pre></td></tr></table></figure></p>
-<p><div class="content"><br></div><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#### css ####</div></pre></td></tr></table></figure></p>
+<p>坑： 该方案是靠 <figure class="highlight plain"><figcaption><span>来实现，所以不适合有滚动条的页面，如果有滚动条，还是老老实实用background-position来定位</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#### html</div></pre></td></tr></table></figure></p>
+<p><div class="content"><br></div><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#### css</div></pre></td></tr></table></figure></p>
 <p>*{margin:0;padding:0}<br>.content{<br>    width:540px;<br>    height:303px;<br>    background:url(‘<a href="http://n1image.hjfile.cn/mh/2017/01/12/bcfb0406e08ba59e779316c20c373cf6.jpg" target="_blank" rel="external">http://n1image.hjfile.cn/mh/2017/01/12/bcfb0406e08ba59e779316c20c373cf6.jpg</a>‘);<br>    position:relative;<br>}<br>.content:after{<br>    background:url(‘<a href="http://n1image.hjfile.cn/mh/2017/01/12/bcfb0406e08ba59e779316c20c373cf6.jpg" target="_blank" rel="external">http://n1image.hjfile.cn/mh/2017/01/12/bcfb0406e08ba59e779316c20c373cf6.jpg</a>‘);<br>    content:’’;<br>    width:250px;<br>    height:150px;<br>    position:absolute;<br>    left:50%;<br>    TOP:50%;<br>    margin-top:-75px;<br>    margin-left:-125px;<br>    background-attachment:fixed;<br>    -webkit-filter: blur(20px);<br>    overflow:hidden;<br>}</p>
 <p>```</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/02/10/css片段1/" data-id="ciyzocua600059pvg4n7qu17q" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/pavelShen/2017/02/10/css片段1/" data-id="ciyzoqbpk0002l6vgkuda2y0l" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li></ul>

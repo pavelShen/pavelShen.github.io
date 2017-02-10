@@ -15,7 +15,7 @@ app.json pages数组第一项代表小程序初始页,可以修改顺序方便�
 <meta property="og:description" content="scroll-view 需要height 才能触发bindscrolltolower，如果使用100%，则父元素需要有高度（可以使用100%，我偷偷的把page设成100%，感觉会埋坑，不过page的样式只会在当前页面有效，又感觉还行）实在不行，可以使用onReachBottom 替代
 app.json pages数组第一项代表小程序初始页,可以修改顺序方便调试页面
 不要在小程序中随便用es6浪">
-<meta property="og:updated_time" content="2017-02-10T10:21:20.000Z">
+<meta property="og:updated_time" content="2017-02-10T10:39:02.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="'小程序填坑之路'">
 <meta name="twitter:description" content="scroll-view 需要height 才能触发bindscrolltolower，如果使用100%，则父元素需要有高度（可以使用100%，我偷偷的把page设成100%，感觉会埋坑，不过page的样式只会在当前页面有效，又感觉还行）实在不行，可以使用onReachBottom 替代
@@ -105,8 +105,9 @@ app.json pages数组第一项代表小程序初始页,可以修改顺序方便�
 <li>预览二维码牛逼的缓存，可以通过开关代码压缩上传选项重新生成二维码</li>
 <li>和wx:if相对应的hidden 逻辑与wx:if相反的  hidden=”true” 才是隐藏组件</li>
 <li><p>在一个页面中有多个音频的情况下<br>如果直接在audio标签中通过模板变量修改src，使用play()方法会提示播放被中断，需要双击才能正确播放，<br>但是可以通过</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">this.audioCtx.setSrc(src);</div><div class="line">this.audioCtx.play();</div></pre></td></tr></table></figure>
-<p>的方式修改音频的播放地址,则一切ok</p>
+<pre><code>this.audioCtx.setSrc(src);
+this.audioCtx.play();   
+</code></pre><p>的方式修改音频的播放地址,则一切ok</p>
 </li>
 </ul>
 <p>相关文章：</p>
@@ -118,7 +119,7 @@ app.json pages数组第一项代表小程序初始页,可以修改顺序方便�
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2016/09/26/weixin小程序/" data-id="ciyzocuag000d9pvggbnj8ply" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/pavelShen/2016/09/26/weixin小程序/" data-id="ciyzoqbqd000nl6vgv87ewjwr" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/app/">app</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/weixin/">weixin</a></li></ul>
@@ -129,19 +130,19 @@ app.json pages数组第一项代表小程序初始页,可以修改顺序方便�
     
 <nav id="article-nav">
   
-    <a href="/2016/12/16/hello-world/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2016/09/26/小程序新建页面脚本/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Récent</strong>
       <div class="article-nav-title">
         
-          Hello World
+          &#39;小程序新建页面脚本&#39;
         
       </div>
     </a>
   
   
-    <a href="/2016/09/26/小程序新建页面脚本/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/2016/08/09/use-fiddler/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Ancien</strong>
-      <div class="article-nav-title">&#39;小程序新建页面脚本&#39;</div>
+      <div class="article-nav-title">使用fiddler</div>
     </a>
   
 </nav>
