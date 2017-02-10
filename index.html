@@ -58,9 +58,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/pavelShen"></form>
@@ -93,13 +93,31 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <figure class="highlight plain"><figcaption><span>< demo过 < 实际工作用过 < 实际工作中被坑过 < 实际工作中被多次坑过或者深入研究总结过 ```</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">## 软件</div><div class="line"></div><div class="line">- 为知笔记</div><div class="line">- alfred</div><div class="line">- shiftlt</div><div class="line">- lantern</div><div class="line">- vscode</div><div class="line">- charles</div><div class="line">- postman</div><div class="line">- iterm</div><div class="line">- zsh</div><div class="line">- cheetsheet</div><div class="line"></div><div class="line">## 使用zsh</div></pre></td></tr></table></figure>
-<p>Cat /etc/shells         //查看安装的shell列表<br>Chsh -s /bin/zsh     // 修改登录的shell, chsh -s其实修改的就是/etc/passwd文件里和你的用户名相对应的那一行<br>重启shell<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">## Vscode 配置</div></pre></td></tr></table></figure></p>
-<p>{<br>    “terminal.integrated.shell.osx”: “/bin/zsh”,<br>    “editor.wordSeparators”: “`~!@#$%^&amp;<em>()=+[{]}\|;:’\”,.&lt;&gt;/?”,<br>    “files.associations”: {<br>        “</em>.wxml”: “html”,<br>        “*.wxss”: “css”<br>    },<br>    “editor.tabSize”: 2<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">## Vscode插件</div><div class="line">- git history</div><div class="line">- vscode-icon</div><div class="line">- vscode-wechat</div><div class="line">- js-css-html formatter</div><div class="line">- git history</div><div class="line"></div><div class="line">ctrl-shift-p  呼出命令行 输入path 将code命令添加进shell</div><div class="line"></div><div class="line">## homebrew</div><div class="line"></div><div class="line">安装命令：``` /usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</div></pre></td></tr></table></figure></p>
-<p>安装失败的话：把/usr/local/.git 目录删了即可，就是执行rm -rf /usr/local/.git</p>
-<h2 id="nvm-node包管理工具"><a href="#nvm-node包管理工具" class="headerlink" title="nvm node包管理工具"></a>nvm node包管理工具</h2><ol>
-<li><figure class="highlight plain"><figcaption><span>-o-</span><a href="https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh" target="_blank" rel="external">| bash ``` </a></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">2. ``` export NVM_DIR=&quot;$HOME/.nvm&quot;</div><div class="line">[ -s &quot;$NVM_DIR/nvm.sh&quot; ] &amp;&amp; . &quot;$NVM_DIR/nvm.sh&quot; # This loads nvm</div></pre></td></tr></table></figure>
-</li>
+        <p><strong> 听过 &lt; demo过 &lt; 实际工作用过 &lt; 实际工作中被坑过 &lt; 实际工作中被多次坑过或者深入研究总结过 </strong></p>
+<h2 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h2><ul>
+<li>为知笔记</li>
+<li>alfred</li>
+<li>shiftlt</li>
+<li>lantern</li>
+<li>vscode</li>
+<li>charles</li>
+<li>postman</li>
+<li>iterm</li>
+<li>zsh</li>
+<li>cheetsheet</li>
+</ul>
+<h2 id="使用zsh"><a href="#使用zsh" class="headerlink" title="使用zsh"></a>使用zsh</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Cat /etc/shells         //查看安装的shell列表</div><div class="line">Chsh -s /bin/zsh     // 修改登录的shell, chsh -s其实修改的就是/etc/passwd文件里和你的用户名相对应的那一行</div><div class="line">重启shell</div></pre></td></tr></table></figure>
+<h2 id="Vscode-配置"><a href="#Vscode-配置" class="headerlink" title="Vscode 配置"></a>Vscode 配置</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    &quot;terminal.integrated.shell.osx&quot;: &quot;/bin/zsh&quot;,</div><div class="line">    &quot;editor.wordSeparators&quot;: &quot;`~!@#$%^&amp;*()=+[&#123;]&#125;\\|;:&apos;\&quot;,.&lt;&gt;/?&quot;,</div><div class="line">    &quot;files.associations&quot;: &#123;</div><div class="line">        &quot;*.wxml&quot;: &quot;html&quot;,</div><div class="line">        &quot;*.wxss&quot;: &quot;css&quot;</div><div class="line">    &#125;,</div><div class="line">    &quot;editor.tabSize&quot;: 2</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Vscode插件"><a href="#Vscode插件" class="headerlink" title="Vscode插件"></a>Vscode插件</h2><ul>
+<li>git history</li>
+<li>vscode-icon</li>
+<li>vscode-wechat</li>
+<li>js-css-html formatter</li>
+<li>git history</li>
+</ul>
+<p>ctrl-shift-p  呼出命令行 输入path 将code命令添加进shell</p>
+<h2 id="homebrew"><a href="#homebrew" class="headerlink" title="homebrew"></a>homebrew</h2><p>安装命令：<figure class="highlight plain"><figcaption><span>-e "$(curl -fsSL</span><a href="https://raw.githubusercontent.com/Homebrew/install/master/install)" "="" target="_blank" rel="external">```</a></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">安装失败的话：把/usr/local/.git 目录删了即可，就是执行rm -rf /usr/local/.git</div><div class="line"></div><div class="line">## nvm node包管理工具</div><div class="line"></div><div class="line">1.  ```curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash ``` </div><div class="line">2. ``` export NVM_DIR=&quot;$HOME/.nvm&quot;</div><div class="line">[ -s &quot;$NVM_DIR/nvm.sh&quot; ] &amp;&amp; . &quot;$NVM_DIR/nvm.sh&quot; # This loads nvm</div></pre></td></tr></table></figure></p>
+<ol>
 <li><figure class="highlight plain"><figcaption><span>ls-remote```</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">4. ```nvm alias default node</div></pre></td></tr></table></figure>
 </li>
 </ol>
@@ -108,7 +126,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/02/10/我的开发环境/" data-id="ciyzoqbqa000kl6vgtrc9ufq6" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/pavelShen/2017/02/10/我的开发环境/" data-id="ciyzp0m79000kw4vgbcqv2tqc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -151,7 +169,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/02/10/npm命令/" data-id="ciyzoqbq2000bl6vgsq4b2tax" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/pavelShen/2017/02/10/npm命令/" data-id="ciyzp0m72000bw4vgxdw0zsgk" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li></ul>
@@ -186,18 +204,39 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="div边框重叠"><a href="#div边框重叠" class="headerlink" title="div边框重叠"></a>div边框重叠</h2><p>设置div的margin值为边框值的相反数：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">.div &#123;width:100px; height:103px; border:1px solid #333; margin-right:-1px; margin-bottom:-1px;&#125;</div></pre></td></tr></table></figure></p>
-<hr>
+        <h2 id="div边框重叠"><a href="#div边框重叠" class="headerlink" title="div边框重叠"></a>div边框重叠</h2><p>设置div的margin值为边框值的相反数：</p>
+<pre><code>.div {width:100px; height:103px; border:1px solid #333; margin-right:-1px; margin-bottom:-1px;}
+</code></pre><hr>
 <h2 id="背景图中间扣出毛玻璃区域（内部背景和外部背景互相契合）"><a href="#背景图中间扣出毛玻璃区域（内部背景和外部背景互相契合）" class="headerlink" title="背景图中间扣出毛玻璃区域（内部背景和外部背景互相契合）"></a>背景图中间扣出毛玻璃区域（内部背景和外部背景互相契合）</h2><p>参考链接：<a href="http://www.cnblogs.com/ghost-xyx/p/5677168.html" target="_blank" rel="external">http://www.cnblogs.com/ghost-xyx/p/5677168.html</a><br><a href="https://darylxyx.github.io/Demo/blur/" target="_blank" rel="external">demo</a></p>
-<p>坑： 该方案是靠 <figure class="highlight plain"><figcaption><span>来实现，所以不适合有滚动条的页面，如果有滚动条，还是老老实实用background-position来定位</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#### html</div></pre></td></tr></table></figure></p>
-<p><div class="content"><br></div><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#### css</div></pre></td></tr></table></figure></p>
-<p>*{margin:0;padding:0}<br>.content{<br>    width:540px;<br>    height:303px;<br>    background:url(‘<a href="http://n1image.hjfile.cn/mh/2017/01/12/bcfb0406e08ba59e779316c20c373cf6.jpg" target="_blank" rel="external">http://n1image.hjfile.cn/mh/2017/01/12/bcfb0406e08ba59e779316c20c373cf6.jpg</a>‘);<br>    position:relative;<br>}<br>.content:after{<br>    background:url(‘<a href="http://n1image.hjfile.cn/mh/2017/01/12/bcfb0406e08ba59e779316c20c373cf6.jpg" target="_blank" rel="external">http://n1image.hjfile.cn/mh/2017/01/12/bcfb0406e08ba59e779316c20c373cf6.jpg</a>‘);<br>    content:’’;<br>    width:250px;<br>    height:150px;<br>    position:absolute;<br>    left:50%;<br>    TOP:50%;<br>    margin-top:-75px;<br>    margin-left:-125px;<br>    background-attachment:fixed;<br>    -webkit-filter: blur(20px);<br>    overflow:hidden;<br>}</p>
-<p>```</p>
-
+<p>坑： 该方案是靠 <code>background-attachment:fixed;</code> 来实现，所以不适合有滚动条的页面，如果有滚动条，还是老老实实用background-position来定位</p>
+<h4 id="html"><a href="#html" class="headerlink" title="html"></a>html</h4><pre><code>&lt;div class=&apos;content&apos;&gt;
+&lt;/div&gt;
+</code></pre><h4 id="css"><a href="#css" class="headerlink" title="css"></a>css</h4><pre><code>*{margin:0;padding:0}
+.content{
+    width:540px;
+    height:303px;
+    background:url(&apos;http://n1image.hjfile.cn/mh/2017/01/12/bcfb0406e08ba59e779316c20c373cf6.jpg&apos;);
+    position:relative;
+}
+.content:after{
+    background:url(&apos;http://n1image.hjfile.cn/mh/2017/01/12/bcfb0406e08ba59e779316c20c373cf6.jpg&apos;);
+    content:&apos;&apos;;
+    width:250px;
+    height:150px;
+    position:absolute;
+    left:50%;
+    TOP:50%;
+    margin-top:-75px;
+    margin-left:-125px;
+    background-attachment:fixed;
+    -webkit-filter: blur(20px);
+    overflow:hidden;
+}
+</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/02/10/css片段1/" data-id="ciyzoqbpk0002l6vgkuda2y0l" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/pavelShen/2017/02/10/css片段1/" data-id="ciyzp0m6l0002w4vg81y4tm3f" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li></ul>
@@ -261,7 +300,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/02/10/charles入门/" data-id="ciyzoqbpr0005l6vgyfm0s3oy" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/pavelShen/2017/02/10/charles入门/" data-id="ciyzp0m6f0000w4vgs689srsr" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tools/">tools</a></li></ul>
@@ -301,19 +340,21 @@
 <li>设置视频宽高为1,display none</li>
 <li>微信中 视频url必须在video标签中写明，不然全屏api执行一次只做显示操作，再点一次再全屏</li>
 <li>iphone safari中不支持js重写video url,重写后 视频地址为空，无法播放,所以采用了2个video标签去处理</li>
-<li>某些手机 无法自动退出全屏，播放结束的时候调取 <figure class="highlight plain"><figcaption><span>```</span></figcaption><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">- preload=&quot;none&quot; 某些手机下无法播放，在播放前修改video属性</div><div class="line">- ios7 safari 视频体积大于1M 无法播放</div><div class="line">- video loop 重复请求 也和视频大小有关</div><div class="line"></div><div class="line">### 关键代码：</div><div class="line"></div><div class="line">&lt;!--more--&gt;</div><div class="line"></div><div class="line">#### 关闭视频：</div><div class="line">video元素display:none,调用video的pause方法</div></pre></td></tr></table></figure></li>
+<li>某些手机 无法自动退出全屏，播放结束的时候调取 <code>_this.exitFullScreen(longvideo)</code></li>
+<li>preload=”none” 某些手机下无法播放，在播放前修改video属性</li>
+<li>ios7 safari 视频体积大于1M 无法播放</li>
+<li>video loop 重复请求 也和视频大小有关</li>
 </ul>
-<p>$(‘.headShortVideoBox’).css(‘display’,’none’);<br>$(‘.shortvideo’).get(‘0’).pause();<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#### 监听视频播放结束</div></pre></td></tr></table></figure></p>
-<p>$(‘.longvideo’).on(‘ended’, function(){<br>   var longvideo = $(‘.longvideo’).get(0);<br>   _this.exitFullScreen(longvideo);<br>});<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#### 视频加载完成</div></pre></td></tr></table></figure></p>
-<p>$(‘.shortvideo’).canPlayThrough(shortvideoSrc).done(function(){<br>   $(‘.shortvideo’).css(‘display’,’block’);<br>   $(‘.shortvideo’).get(‘0’).play();<br>});<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#### 视频全屏事件</div></pre></td></tr></table></figure></p>
-<p>launchFullScreen:function(element) {<br>   if(element.requestFullscreen) {<br>      element.requestFullscreen();<br>   }<br>   else if(element.webkitRequestFullscreen) {<br>       element.webkitRequestFullscreen();<br>   }<br>   else if(element.mozRequestFullScreen) {<br>      element.mozRequestFullScreen();<br>   }<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#### 退出全屏事件</div></pre></td></tr></table></figure></p>
-<p>exitFullScreen:function(element){<br>   if(element.exitFullScreen) {<br>       element.exitFullScreen();<br>   }<br>   else if(element.webkitExitFullScreen) {<br>       element.webkitExitFullScreen();<br>   }<br>   else if(document.mozCancelFullScreen) {<br>       document.mozCancelFullScreen();<br>   }<br>}<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"></div><div class="line">#### 监听全屏切换事件</div></pre></td></tr></table></figure></p>
-<p>fullScreenChange:function(){<br>    //true 全屏<br>   document.addEventListener(‘fullscreenchange’,function(){<br>       //webkitIsFullScreen for win10 edge<br>       if(document.fullScreen===false||document.webkitIsFullScreen===false){<br>           $(‘.hideVideoBox’).css(‘display’,’none’);<br>           $(‘.longvideo’).get(0).pause();<br>       }<br>   });<br>   document.addEventListener(‘webkitfullscreenchange’,function(){<br>       if(document.webkitIsFullScreen===false){<br>           $(‘.hideVideoBox’).css(‘display’,’none’);<br>           $(‘.longvideo’).get(0).pause();<br>       }<br>   });<br>   document.addEventListener(‘mozfullscreenchange’,function(){<br>       if(document.mozFullScreen===false){<br>           $(‘.hideVideoBox’).css(‘display’,’none’);<br>           $(‘.longvideo’).get(0).pause();<br>       }<br>   });<br>}<br>```</p>
-
+<h3 id="关键代码："><a href="#关键代码：" class="headerlink" title="关键代码："></a>关键代码：</h3>
+        
+          <p class="article-more-link">
+            <a href="/2017/02/10/视频全屏播放-开发总结/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/02/10/视频全屏播放-开发总结/" data-id="ciyzoqbq7000il6vgeidwi9hw" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/pavelShen/2017/02/10/视频全屏播放-开发总结/" data-id="ciyzp0m7b000mw4vg6vif3fwq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -348,8 +389,24 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="获取url中的参数"><a href="#获取url中的参数" class="headerlink" title="获取url中的参数"></a>获取url中的参数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">function getUrlParam(key)&#123;</div><div class="line">    var obj = &#123;&#125;;</div><div class="line">    var str = location.search.substring(1);</div><div class="line">    var arr = str.split(&quot;&amp;&quot;);</div><div class="line">    var name,value;</div><div class="line">    if(str.length&gt;0)&#123;</div><div class="line">        for(var i=0,length=arr.length;i&lt;length;i++)&#123;</div><div class="line">            var num = arr[i].indexOf(&quot;=&quot;);</div><div class="line">            if(num&gt;0)&#123;</div><div class="line">                name =arr[i].substring(0,num);</div><div class="line">                value=arr[i].substring(num+1);</div><div class="line">            &#125;</div><div class="line">            obj[name] = value;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return obj[key];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<hr>
+        <h2 id="获取url中的参数"><a href="#获取url中的参数" class="headerlink" title="获取url中的参数"></a>获取url中的参数</h2><pre><code>function getUrlParam(key){
+    var obj = {};
+    var str = location.search.substring(1);
+    var arr = str.split(&quot;&amp;&quot;);
+    var name,value;
+    if(str.length&gt;0){
+        for(var i=0,length=arr.length;i&lt;length;i++){
+            var num = arr[i].indexOf(&quot;=&quot;);
+            if(num&gt;0){
+                name =arr[i].substring(0,num);
+                value=arr[i].substring(num+1);
+            }
+            obj[name] = value;
+        }
+    }
+    return obj[key];
+}
+</code></pre><hr>
         
           <p class="article-more-link">
             <a href="/2017/01/17/js片段1/#more">Read More</a>
@@ -358,7 +415,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/01/17/js片段1/" data-id="ciyzoqbps0006l6vgf09z5xf3" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/pavelShen/2017/01/17/js片段1/" data-id="ciyzp0m6u0006w4vgs8ezk8em" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -406,50 +463,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2016/12/16/hello-world/" data-id="ciyzoqbpd0000l6vgo61w6mrm" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/pavelShen/2016/12/16/hello-world/" data-id="ciyzp0m6s0005w4vgo66vkocn" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-小程序新建页面脚本" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/09/26/小程序新建页面脚本/" class="article-date">
-  <time datetime="2016-09-26T00:53:00.000Z" itemprop="datePublished">2016-09-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/26/小程序新建页面脚本/">&#39;小程序新建页面脚本&#39;</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line">// 创建命令：node createNewWeappPage pagename</div><div class="line">const path = require(&apos;path&apos;);</div><div class="line">const fs = require(&apos;fs&apos;);</div><div class="line">let pagesPath = path.join(__dirname, &apos;./pages&apos;);</div><div class="line">let pageName = process.argv[2];</div><div class="line">if(!!pageName)&#123;</div><div class="line">    let targetPath = pagesPath + &apos;/&apos;+pageName;</div><div class="line">    fs.exists(targetPath, function (exists) &#123;</div><div class="line">      if(!exists)&#123;</div><div class="line">        fs.mkdir(targetPath, function (err) &#123;</div><div class="line">          if(err)</div><div class="line">            throw err;</div><div class="line">          else&#123;</div><div class="line">            console.log(&apos;创建目录&apos;+pageName+&apos;成功&apos;);</div><div class="line">            fs.writeFile(targetPath+&apos;/&apos;+pageName+&apos;.wxml&apos;, &apos;&apos;, (err) =&gt; &#123;</div><div class="line">              if (err) throw err;</div><div class="line">              console.log(&apos;wxml文件创建成功&apos;);</div><div class="line">            &#125;);</div><div class="line">            fs.writeFile(targetPath+&apos;/&apos;+pageName+&apos;.wxss&apos;, &apos;&apos;, (err) =&gt; &#123;</div><div class="line">              if (err) throw err;</div><div class="line">              console.log(&apos;wxss文件创建成功&apos;);</div><div class="line">            &#125;);</div><div class="line">            fs.writeFile(targetPath+&apos;/&apos;+pageName+&apos;.json&apos;, &apos;&apos;, (err) =&gt; &#123;</div><div class="line">              if (err) throw err;</div><div class="line">              console.log(&apos;json文件创建成功&apos;);</div><div class="line">            &#125;);</div><div class="line">            fs.writeFile(targetPath+&apos;/&apos;+pageName+&apos;.js&apos;, &apos;&apos;, (err) =&gt; &#123;</div><div class="line">              if (err) throw err;</div><div class="line">              console.log(&apos;js文件创建成功&apos;);</div><div class="line">            &#125;);</div><div class="line">          &#125;</div><div class="line">        &#125;);</div><div class="line">      &#125;</div><div class="line">      else&#123;</div><div class="line">        console.log(&apos;文件已存在，请检查目录&apos;)</div><div class="line">      &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2016/09/26/小程序新建页面脚本/" data-id="ciyzoqbq5000fl6vgn8f5sj2u" class="article-share-link">Partager</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/weixin/">weixin</a></li></ul>
 
     </footer>
   </div>
@@ -473,7 +490,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/26/weixin小程序/">&#39;小程序填坑之路&#39;</a>
+      <a class="article-title" href="/2016/09/26/weixin小程序/">小程序填坑之路</a>
     </h1>
   
 
@@ -502,7 +519,7 @@ this.audioCtx.play();
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2016/09/26/weixin小程序/" data-id="ciyzoqbqd000nl6vgv87ewjwr" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/pavelShen/2016/09/26/weixin小程序/" data-id="ciyzp0m74000fw4vgtdbdiool" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/app/">app</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/weixin/">weixin</a></li></ul>
@@ -515,9 +532,49 @@ this.audioCtx.play();
 
 
   
-    <article id="post-use-fiddler" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-小程序新建页面脚本" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/08/09/use-fiddler/" class="article-date">
+    <a href="/2016/09/26/小程序新建页面脚本/" class="article-date">
+  <time datetime="2016-09-26T00:53:00.000Z" itemprop="datePublished">2016-09-26</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/26/小程序新建页面脚本/">小程序新建页面脚本</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>  // 创建命令：node createNewWeappPage pagename<br>  const path = require(‘path’);<br>  const fs = require(‘fs’);<br>  let pagesPath = path.join(__dirname, ‘./pages’);<br>  let pageName = process.argv[2];<br>  if(!!pageName){<br>      let targetPath = pagesPath + ‘/‘+pageName;<br>      fs.exists(targetPath, function (exists) {<br>        if(!exists){<br>          fs.mkdir(targetPath, function (err) {<br>            if(err)<br>              throw err;<br>            else{<br>              console.log(‘创建目录’+pageName+’成功’);<br>              fs.writeFile(targetPath+’/‘+pageName+’.wxml’, ‘’, (err) =&gt; {<br>                if (err) throw err;<br>                console.log(‘wxml文件创建成功’);<br>              });<br>              fs.writeFile(targetPath+’/‘+pageName+’.wxss’, ‘’, (err) =&gt; {<br>                if (err) throw err;<br>                console.log(‘wxss文件创建成功’);<br>              });<br>              fs.writeFile(targetPath+’/‘+pageName+’.json’, ‘’, (err) =&gt; {<br>                if (err) throw err;<br>                console.log(‘json文件创建成功’);<br>              });<br>              fs.writeFile(targetPath+’/‘+pageName+’.js’, ‘’, (err) =&gt; {<br>                if (err) throw err;<br>                console.log(‘js文件创建成功’);<br>              });<br>            }<br>          });<br>        }<br>        else{<br>          console.log(‘文件已存在，请检查目录’)<br>        }<br>      });<br>  }</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/pavelShen/2016/09/26/小程序新建页面脚本/" data-id="ciyzp0m76000iw4vgswuvinbr" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/weixin/">weixin</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-learn-koa" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/09/learn-koa/" class="article-date">
   <time datetime="2016-08-09T00:36:08.000Z" itemprop="datePublished">2016-08-09</time>
 </a>
     
@@ -529,7 +586,7 @@ this.audioCtx.play();
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/09/use-fiddler/">使用fiddler</a>
+      <a class="article-title" href="/2016/08/09/learn-koa/">学习koa 1.0</a>
     </h1>
   
 
@@ -537,58 +594,81 @@ this.audioCtx.play();
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="其他设备通过fiddler访问网络（手机调试抓包使用）"><a href="#其他设备通过fiddler访问网络（手机调试抓包使用）" class="headerlink" title="其他设备通过fiddler访问网络（手机调试抓包使用）"></a>其他设备通过fiddler访问网络（手机调试抓包使用）</h2><p>菜单栏点击 Tools &gt; Fiddler Options.</p>
-<p>勾选 ‘’’Ensure Allow remote clients to connect’’’.</p>
-<p><img src="/img/use-fiddler/1-1.png" alt="1-1"></p>
-<p>在手机中设置网络代理</p>
-<p>代理模式为手动，IP地址为电脑的IP,端口为上图中port的值</p>
-<p>用手机访问网站时，可以通过fiddler查看网络通信</p>
-<p><strong>事后别忘记把代理关闭，不然你关了fiddler就上不了网了</strong></p>
-<hr>
-<h2 id="fiddler插件安装"><a href="#fiddler插件安装" class="headerlink" title="fiddler插件安装"></a>fiddler插件安装</h2><p>地址：<a href="http://www.telerik.com/fiddler/add-ons" target="_blank" rel="external">http://www.telerik.com/fiddler/add-ons</a></p>
-<p>tip: 如果使用迅雷下载，记得选择只从原始地址下载，不然任务总是失败</p>
-<hr>
-<h2 id="定制fiddler规则-Write-a-FiddlerScript-Rule"><a href="#定制fiddler规则-Write-a-FiddlerScript-Rule" class="headerlink" title="定制fiddler规则 ( Write a FiddlerScript Rule )"></a>定制fiddler规则 ( Write a FiddlerScript Rule )</h2><p>菜单栏点击 Tools &gt; Fiddler Options &gt; Tools. 修改默认编辑器</p>
-<p>菜单栏点击 Rules &gt; Customize Rules.</p>
-<p>修改js文件</p>
-<h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><p>在 OnBeforeRequest 方法中加入代码:</p>
-<pre><code>if (oSession.host.toLowerCase() == &quot;localhost:8888&quot;){
-  oSession.host = &quot;localhost:80&quot;;
-}
-</code></pre><p>访问localhost:8888 实际访问的是localhost:80</p>
-<hr>
-<h2 id="Session-List-操作"><a href="#Session-List-操作" class="headerlink" title="Session List 操作"></a>Session List 操作</h2><ul>
-<li>ctrl+f 查找</li>
-<li>选择session 按p 定为请求的父级 按c 定为请求的子集</li>
-</ul>
-<hr>
-<h2 id="AutoResponder"><a href="#AutoResponder" class="headerlink" title="AutoResponder"></a>AutoResponder</h2><ul>
-<li>在选项卡内勾选Enable rules 开启规则</li>
-<li>rule列表上方的权重较高，可以通过+-来调整rule的权重</li>
-</ul>
-<h4 id="导入-导出rules"><a href="#导入-导出rules" class="headerlink" title="导入/导出rules"></a>导入/导出rules</h4><ol>
-<li>选择多个rule，右击 选择Export all 导出 </li>
-<li>Add Rule 右侧的Import按钮 点击选择之前导出的文件进行导入</li>
-</ol>
-<hr>
-<h2 id="重发请求"><a href="#重发请求" class="headerlink" title="重发请求"></a>重发请求</h2><p>方法1：选择左侧session,右击 选择replay-&gt;reissue requests<br>方法2：</p>
-<ol>
-<li>在右侧composer的选项卡内选择Scratchpad</li>
-<li>点击或者拖动左侧session至选项卡内</li>
-<li>三次点击选中选项卡内的请求头部信息</li>
-<li>点击Execute 发送</li>
-</ol>
-<hr>
-<h2 id="导入-导出网络请求"><a href="#导入-导出网络请求" class="headerlink" title="导入/导出网络请求"></a>导入/导出网络请求</h2><p>File-&gt;import session / File-&gt;export session </p>
-<hr>
+        <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p>  koa基础：<a href="http://javascript.ruanyifeng.com/nodejs/koa.html">http://javascript.ruanyifeng.com/nodejs/koa.html</a><br>  log4js: <a href="http://qianduan.guru/2016/08/21/nodejs-lesson-1-log4js/">http://qianduan.guru/2016/08/21/nodejs-lesson-1-log4js/</a><br>  单元测试：<a href="http://taobaofed.org/blog/2015/12/29/nodejs-unit-tests-workflow/">http://taobaofed.org/blog/2015/12/29/nodejs-unit-tests-workflow/</a></p>
+<p>具体实际代码参考github库 <a href="https://github.com/pavelShen/koa_project">https://github.com/pavelShen/koa_project</a></p>
+<h2 id="koa基础"><a href="#koa基础" class="headerlink" title="koa基础"></a>koa基础</h2><h3 id="中间件级联"><a href="#中间件级联" class="headerlink" title="中间件级联"></a>中间件级联</h3><pre><code>app.use(function* () {
+  this.body = &quot;header\n&quot;;
+  yield saveResults.call(this);
+  this.body += &quot;footer\n&quot;;}
+);
 
+function* saveResults() {
+  this.body += &quot;Results Saved!\n&quot;;
+}
+</code></pre><h3 id="中间件传参"><a href="#中间件传参" class="headerlink" title="中间件传参"></a>中间件传参</h3><pre><code>function logger(format) {
+  return function* (next){
+    var str = format
+      .replace(&apos;:method&apos;, this.method)
+      .replace(&apos;:url&apos;, this.url);
+
+    console.log(str);
+
+    yield next;
+  }}
+
+app.use(logger(&apos;:method :url&apos;));
+</code></pre><h3 id="多个中间件的合并-完整事例"><a href="#多个中间件的合并-完整事例" class="headerlink" title="多个中间件的合并 完整事例"></a>多个中间件的合并 完整事例</h3><pre><code>var koa = require(&apos;koa&apos;);
+var app = koa();
+
+function* random(next) {
+    console.log(&apos;r&apos;);
+    yield next;
+    console.log(&apos;over&apos;);
+};
+
+function* backwards(next) {
+    console.log(&apos;b&apos;);
+    yield next;
+}
+
+function* pi(next) {
+    console.log(&apos;pi&apos;);
+    yield next;
+}
+
+function test(str){
+    return function* (next){
+        console.log(str);
+        yield next;
+    }
+}
+
+function* all(next) {
+  yield random.call(this, backwards.call(this, pi.call(this, next)));
+}
+
+function* all2(next) {
+  yield random.call(this, backwards.call(this, pi.call(this, test(&apos;aa&apos;).call(this,next))));
+}
+
+app.use(all2);
+app.listen(3000);
+</code></pre><h3 id="错误监听"><a href="#错误监听" class="headerlink" title="错误监听"></a>错误监听</h3><pre><code>app.on(&apos;error&apos;, function(err){
+  log.error(&apos;server error&apos;, err);}
+);
+</code></pre><hr>
+        
+          <p class="article-more-link">
+            <a href="/2016/08/09/learn-koa/#more">Read More</a>
+          </p>
+        
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2016/08/09/use-fiddler/" data-id="ciyzoqbq3000dl6vg3h51r13t" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/pavelShen/2016/08/09/learn-koa/" data-id="ciyzp0m6x0007w4vgrzm5bg9t" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tools/">tools</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/koa/">koa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li></ul>
 
     </footer>
   </div>
@@ -612,7 +692,7 @@ this.audioCtx.play();
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Mot-clés</h3>
+    <h3 class="widget-title">Tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/app/">app</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/koa/">koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/weixin/">weixin</a></li></ul>
     </div>
@@ -622,7 +702,7 @@ this.audioCtx.play();
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
       <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/koa/" style="font-size: 10px;">koa</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/nodejs/" style="font-size: 20px;">nodejs</a> <a href="/tags/tools/" style="font-size: 20px;">tools</a> <a href="/tags/weixin/" style="font-size: 20px;">weixin</a>
     </div>
@@ -641,7 +721,7 @@ this.audioCtx.play();
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
@@ -678,7 +758,7 @@ this.audioCtx.play();
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 pavelShen<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

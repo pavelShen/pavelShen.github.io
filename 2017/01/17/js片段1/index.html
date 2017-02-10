@@ -5,16 +5,34 @@
   
   <title>js片段1 | pavelShen的个人博客</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="获取url中的参数1234567891011121314151617function getUrlParam(key)&amp;#123;    var obj = &amp;#123;&amp;#125;;    var str = location.search.substring(1);    var arr = str.split(&amp;quot;&amp;amp;&amp;quot;);    var name,value;">
+  <meta name="description" content="获取url中的参数function getUrlParam(key){
+    var obj = {};
+    var str = location.search.substring(1);
+    var arr = str.split(&amp;quot;&amp;amp;&amp;quot;);
+    var name,value;
+    if(str.length&amp;gt;0){
+        for(v">
 <meta property="og:type" content="article">
 <meta property="og:title" content="js片段1">
 <meta property="og:url" content="https://github.com/pavelShen/2017/01/17/js片段1/index.html">
 <meta property="og:site_name" content="pavelShen的个人博客">
-<meta property="og:description" content="获取url中的参数1234567891011121314151617function getUrlParam(key)&amp;#123;    var obj = &amp;#123;&amp;#125;;    var str = location.search.substring(1);    var arr = str.split(&amp;quot;&amp;amp;&amp;quot;);    var name,value;">
-<meta property="og:updated_time" content="2017-02-10T10:41:55.000Z">
+<meta property="og:description" content="获取url中的参数function getUrlParam(key){
+    var obj = {};
+    var str = location.search.substring(1);
+    var arr = str.split(&amp;quot;&amp;amp;&amp;quot;);
+    var name,value;
+    if(str.length&amp;gt;0){
+        for(v">
+<meta property="og:updated_time" content="2017-02-10T10:49:11.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="js片段1">
-<meta name="twitter:description" content="获取url中的参数1234567891011121314151617function getUrlParam(key)&amp;#123;    var obj = &amp;#123;&amp;#125;;    var str = location.search.substring(1);    var arr = str.split(&amp;quot;&amp;amp;&amp;quot;);    var name,value;">
+<meta name="twitter:description" content="获取url中的参数function getUrlParam(key){
+    var obj = {};
+    var str = location.search.substring(1);
+    var arr = str.split(&amp;quot;&amp;amp;&amp;quot;);
+    var name,value;
+    if(str.length&amp;gt;0){
+        for(v">
   
     <link rel="alternate" href="/atom.xml" title="pavelShen的个人博客" type="application/atom+xml">
   
@@ -59,9 +77,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/pavelShen"></form>
@@ -92,24 +110,87 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="获取url中的参数"><a href="#获取url中的参数" class="headerlink" title="获取url中的参数"></a>获取url中的参数</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">function getUrlParam(key)&#123;</div><div class="line">    var obj = &#123;&#125;;</div><div class="line">    var str = location.search.substring(1);</div><div class="line">    var arr = str.split(&quot;&amp;&quot;);</div><div class="line">    var name,value;</div><div class="line">    if(str.length&gt;0)&#123;</div><div class="line">        for(var i=0,length=arr.length;i&lt;length;i++)&#123;</div><div class="line">            var num = arr[i].indexOf(&quot;=&quot;);</div><div class="line">            if(num&gt;0)&#123;</div><div class="line">                name =arr[i].substring(0,num);</div><div class="line">                value=arr[i].substring(num+1);</div><div class="line">            &#125;</div><div class="line">            obj[name] = value;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return obj[key];</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<hr>
+        <h2 id="获取url中的参数"><a href="#获取url中的参数" class="headerlink" title="获取url中的参数"></a>获取url中的参数</h2><pre><code>function getUrlParam(key){
+    var obj = {};
+    var str = location.search.substring(1);
+    var arr = str.split(&quot;&amp;&quot;);
+    var name,value;
+    if(str.length&gt;0){
+        for(var i=0,length=arr.length;i&lt;length;i++){
+            var num = arr[i].indexOf(&quot;=&quot;);
+            if(num&gt;0){
+                name =arr[i].substring(0,num);
+                value=arr[i].substring(num+1);
+            }
+            obj[name] = value;
+        }
+    }
+    return obj[key];
+}
+</code></pre><hr>
 <a id="more"></a>
 <h2 id="深度克隆"><a href="#深度克隆" class="headerlink" title="深度克隆"></a>深度克隆</h2><p>来源：<a href="http://www.tuicool.com/articles/6FvYFfn" target="_blank" rel="external">http://www.tuicool.com/articles/6FvYFfn</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line">var cloneObj = function(obj) &#123;</div><div class="line">    var str, newobj = obj.constructor === Array ? [] : &#123;&#125;;</div><div class="line">    if (typeof obj !== &apos;object&apos;) &#123;</div><div class="line">        return;</div><div class="line">    &#125; else if (window.JSON) &#123;</div><div class="line">        str = JSON.stringify(obj), newobj = JSON.parse(str);</div><div class="line">    &#125; else &#123;</div><div class="line">        for (var i in obj) &#123;</div><div class="line">            newobj[i] = typeof obj[i] === &apos;object&apos; ? cloneObj(obj[i]) : obj[i];</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    return newobj;</div><div class="line">&#125;;</div><div class="line">var obj = &#123; a: 0, b: 1, c: 2 &#125;;</div><div class="line">var arr = [0, 1, 2];</div><div class="line">var newobj = cloneObj(obj);</div><div class="line">var newarr = cloneObj(arr);</div><div class="line">delete newobj.a;</div><div class="line">newarr.splice(0, 1);</div><div class="line">console.log(obj, arr, newobj, newarr); //结果： &#123;a: 0, b: 1, c: 2&#125;, [0, 1, 2], &#123;b: 1, c: 2&#125;, [1, 2];</div></pre></td></tr></table></figure>
-<hr>
-<h2 id="设置返回页面"><a href="#设置返回页面" class="headerlink" title="设置返回页面"></a>设置返回页面</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">if(document.referrer===&apos;&apos;)&#123;</div><div class="line">  //iphone 6 (without plus) load auto popstate</div><div class="line">  setTimeout(function()&#123;</div><div class="line">    window.onpopstate = function(event) &#123;</div><div class="line">      location.replace(&quot;http://&quot;+location.host+&quot;/&quot;+CUR_DATA.langs+&quot;/&quot;)</div><div class="line">    &#125;;</div><div class="line">    history.pushState(&#123;&#125;, &quot;&quot;);</div><div class="line">  &#125;,1000);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<hr>
-<h2 id="通过setTimeout实现输入框与页面元素内容同步"><a href="#通过setTimeout实现输入框与页面元素内容同步" class="headerlink" title="通过setTimeout实现输入框与页面元素内容同步"></a>通过setTimeout实现输入框与页面元素内容同步</h2><p>来源：<a href="http://ghmagical.com/article/page/id/H61NOVU0RZ9Y" target="_blank" rel="external">http://ghmagical.com/article/page/id/H61NOVU0RZ9Y</a><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">document.querySelector(&apos;#one input&apos;).onkeydown = function() &#123;   </div><div class="line">  document.querySelector(&apos;#one span&apos;).innerHTML = this.value;   </div><div class="line">&#125;;   </div><div class="line">document.querySelector(&apos;#second input&apos;).onkeydown = function() &#123;   </div><div class="line">  setTimeout(function() &#123;   </div><div class="line">    document.querySelector(&apos;#second span&apos;).innerHTML = document.querySelector(&apos;#second input&apos;).value;</div><div class="line">  &#125;, 0);</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
-<p><strong>原理：</strong><br>未使用setTimeout函数，执行顺序是：onkeydown =&gt; onkeypress =&gt; onkeyup<br>使用setTimeout函数，执行顺序是：onkeydown =&gt; onkeypress =&gt; function =&gt; onkeyup<br>虽然我们可以使用keyup来替代keydown，不过有一些问题，那就是长按时，keyup并不会触发。</p>
-<p>长按时，keydown、keypress、keyup的调用顺序：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">keydown</div><div class="line">keypress</div><div class="line">keydown</div><div class="line">keypress</div><div class="line">...</div><div class="line">keyup</div></pre></td></tr></table></figure></p>
+<pre><code>var cloneObj = function(obj) {
+    var str, newobj = obj.constructor === Array ? [] : {};
+    if (typeof obj !== &apos;object&apos;) {
+        return;
+    } else if (window.JSON) {
+        str = JSON.stringify(obj), newobj = JSON.parse(str);
+    } else {
+        for (var i in obj) {
+            newobj[i] = typeof obj[i] === &apos;object&apos; ? cloneObj(obj[i]) : obj[i];
+        }
+    }
+    return newobj;
+};
+var obj = { a: 0, b: 1, c: 2 };
+var arr = [0, 1, 2];
+var newobj = cloneObj(obj);
+var newarr = cloneObj(arr);
+delete newobj.a;
+newarr.splice(0, 1);
+console.log(obj, arr, newobj, newarr); //结果： {a: 0, b: 1, c: 2}, [0, 1, 2], {b: 1, c: 2}, [1, 2];
+</code></pre><hr>
+<h2 id="设置返回页面"><a href="#设置返回页面" class="headerlink" title="设置返回页面"></a>设置返回页面</h2><pre><code>if(document.referrer===&apos;&apos;){
+//iphone 6 (without plus) load auto popstate
+setTimeout(function(){
+    window.onpopstate = function(event) {
+    location.replace(&quot;http://&quot;+location.host+&quot;/&quot;+CUR_DATA.langs+&quot;/&quot;)
+    };
+    history.pushState({}, &quot;&quot;);
+},1000);
+}
+</code></pre><hr>
+<h2 id="通过setTimeout实现输入框与页面元素内容同步"><a href="#通过setTimeout实现输入框与页面元素内容同步" class="headerlink" title="通过setTimeout实现输入框与页面元素内容同步"></a>通过setTimeout实现输入框与页面元素内容同步</h2><p>来源：<a href="http://ghmagical.com/article/page/id/H61NOVU0RZ9Y" target="_blank" rel="external">http://ghmagical.com/article/page/id/H61NOVU0RZ9Y</a></p>
+<pre><code>document.querySelector(&apos;#one input&apos;).onkeydown = function() {   
+document.querySelector(&apos;#one span&apos;).innerHTML = this.value;   
+};   
+document.querySelector(&apos;#second input&apos;).onkeydown = function() {   
+setTimeout(function() {   
+    document.querySelector(&apos;#second span&apos;).innerHTML = document.querySelector(&apos;#second input&apos;).value;
+}, 0);
+};
+</code></pre><p><strong>原理：</strong><br>未使用setTimeout函数，执行顺序是：onkeydown =&gt; onkeypress =&gt; onkeyup<br>使用setTimeout函数，执行顺序是：onkeydown =&gt; onkeypress =&gt; function =&gt; onkeyup<br>虽然我们可以使用keyup来替代keydown，不过有一些问题，那就是长按时，keyup并不会触发。</p>
+<p>长按时，keydown、keypress、keyup的调用顺序：</p>
+<ul>
+<li>keydown</li>
+<li>keypress</li>
+<li>keydown</li>
+<li>keypress</li>
+<li>…</li>
+<li>keyup</li>
+</ul>
 <p>也就是说keyup只会触发一次，所以你无法用keyup来实时获取值。</p>
-<p><strong>附赠：</strong><br>setTimeout 第三第四个参数<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">setTimeout(function(a, b)&#123;   </div><div class="line">  console.log(a); // 3</div><div class="line">  console.log(b); // 4</div><div class="line">&#125;,0, 3, 4);</div></pre></td></tr></table></figure></p>
-
+<p><strong>附赠：</strong><br>setTimeout 第三第四个参数</p>
+<pre><code>setTimeout(function(a, b){   
+console.log(a); // 3
+console.log(b); // 4
+},0, 3, 4);
+</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/01/17/js片段1/" data-id="ciyzoqbps0006l6vgf09z5xf3" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/pavelShen/2017/01/17/js片段1/" data-id="ciyzp0m6u0006w4vgs8ezk8em" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -121,7 +202,7 @@
 <nav id="article-nav">
   
     <a href="/2017/02/10/视频全屏播放-开发总结/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Récent</strong>
+      <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
           视频全屏播放 开发总结
@@ -131,7 +212,7 @@
   
   
     <a href="/2016/12/16/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ancien</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">Hello World</div>
     </a>
   
@@ -169,7 +250,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Mot-clés</h3>
+    <h3 class="widget-title">Tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/app/">app</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/koa/">koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/weixin/">weixin</a></li></ul>
     </div>
@@ -179,7 +260,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
       <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/koa/" style="font-size: 10px;">koa</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/nodejs/" style="font-size: 20px;">nodejs</a> <a href="/tags/tools/" style="font-size: 20px;">tools</a> <a href="/tags/weixin/" style="font-size: 20px;">weixin</a>
     </div>
@@ -198,7 +279,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
@@ -235,7 +316,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 pavelShen<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>

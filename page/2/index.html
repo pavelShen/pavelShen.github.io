@@ -58,9 +58,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/pavelShen"></form>
@@ -71,9 +71,9 @@
         <div class="outer">
           <section id="main">
   
-    <article id="post-learn-koa" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-use-fiddler" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/08/09/learn-koa/" class="article-date">
+    <a href="/2016/08/09/use-fiddler/" class="article-date">
   <time datetime="2016-08-09T00:36:08.000Z" itemprop="datePublished">2016-08-09</time>
 </a>
     
@@ -85,7 +85,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/09/learn-koa/">学习koa 1.0</a>
+      <a class="article-title" href="/2016/08/09/use-fiddler/">使用fiddler</a>
     </h1>
   
 
@@ -93,81 +93,58 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p>  koa基础：<a href="http://javascript.ruanyifeng.com/nodejs/koa.html">http://javascript.ruanyifeng.com/nodejs/koa.html</a><br>  log4js: <a href="http://qianduan.guru/2016/08/21/nodejs-lesson-1-log4js/">http://qianduan.guru/2016/08/21/nodejs-lesson-1-log4js/</a><br>  单元测试：<a href="http://taobaofed.org/blog/2015/12/29/nodejs-unit-tests-workflow/">http://taobaofed.org/blog/2015/12/29/nodejs-unit-tests-workflow/</a></p>
-<p>具体实际代码参考github库 <a href="https://github.com/pavelShen/koa_project">https://github.com/pavelShen/koa_project</a></p>
-<h2 id="koa基础"><a href="#koa基础" class="headerlink" title="koa基础"></a>koa基础</h2><h3 id="中间件级联"><a href="#中间件级联" class="headerlink" title="中间件级联"></a>中间件级联</h3><pre><code>app.use(function* () {
-  this.body = &quot;header\n&quot;;
-  yield saveResults.call(this);
-  this.body += &quot;footer\n&quot;;}
-);
-
-function* saveResults() {
-  this.body += &quot;Results Saved!\n&quot;;
+        <h2 id="其他设备通过fiddler访问网络（手机调试抓包使用）"><a href="#其他设备通过fiddler访问网络（手机调试抓包使用）" class="headerlink" title="其他设备通过fiddler访问网络（手机调试抓包使用）"></a>其他设备通过fiddler访问网络（手机调试抓包使用）</h2><p>菜单栏点击 Tools &gt; Fiddler Options.</p>
+<p>勾选 ‘’’Ensure Allow remote clients to connect’’’.</p>
+<p><img src="/img/use-fiddler/1-1.png" alt="1-1"></p>
+<p>在手机中设置网络代理</p>
+<p>代理模式为手动，IP地址为电脑的IP,端口为上图中port的值</p>
+<p>用手机访问网站时，可以通过fiddler查看网络通信</p>
+<p><strong>事后别忘记把代理关闭，不然你关了fiddler就上不了网了</strong></p>
+<hr>
+<h2 id="fiddler插件安装"><a href="#fiddler插件安装" class="headerlink" title="fiddler插件安装"></a>fiddler插件安装</h2><p>地址：<a href="http://www.telerik.com/fiddler/add-ons" target="_blank" rel="external">http://www.telerik.com/fiddler/add-ons</a></p>
+<p>tip: 如果使用迅雷下载，记得选择只从原始地址下载，不然任务总是失败</p>
+<hr>
+<h2 id="定制fiddler规则-Write-a-FiddlerScript-Rule"><a href="#定制fiddler规则-Write-a-FiddlerScript-Rule" class="headerlink" title="定制fiddler规则 ( Write a FiddlerScript Rule )"></a>定制fiddler规则 ( Write a FiddlerScript Rule )</h2><p>菜单栏点击 Tools &gt; Fiddler Options &gt; Tools. 修改默认编辑器</p>
+<p>菜单栏点击 Rules &gt; Customize Rules.</p>
+<p>修改js文件</p>
+<h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><p>在 OnBeforeRequest 方法中加入代码:</p>
+<pre><code>if (oSession.host.toLowerCase() == &quot;localhost:8888&quot;){
+  oSession.host = &quot;localhost:80&quot;;
 }
-</code></pre><h3 id="中间件传参"><a href="#中间件传参" class="headerlink" title="中间件传参"></a>中间件传参</h3><pre><code>function logger(format) {
-  return function* (next){
-    var str = format
-      .replace(&apos;:method&apos;, this.method)
-      .replace(&apos;:url&apos;, this.url);
+</code></pre><p>访问localhost:8888 实际访问的是localhost:80</p>
+<hr>
+<h2 id="Session-List-操作"><a href="#Session-List-操作" class="headerlink" title="Session List 操作"></a>Session List 操作</h2><ul>
+<li>ctrl+f 查找</li>
+<li>选择session 按p 定为请求的父级 按c 定为请求的子集</li>
+</ul>
+<hr>
+<h2 id="AutoResponder"><a href="#AutoResponder" class="headerlink" title="AutoResponder"></a>AutoResponder</h2><ul>
+<li>在选项卡内勾选Enable rules 开启规则</li>
+<li>rule列表上方的权重较高，可以通过+-来调整rule的权重</li>
+</ul>
+<h4 id="导入-导出rules"><a href="#导入-导出rules" class="headerlink" title="导入/导出rules"></a>导入/导出rules</h4><ol>
+<li>选择多个rule，右击 选择Export all 导出 </li>
+<li>Add Rule 右侧的Import按钮 点击选择之前导出的文件进行导入</li>
+</ol>
+<hr>
+<h2 id="重发请求"><a href="#重发请求" class="headerlink" title="重发请求"></a>重发请求</h2><p>方法1：选择左侧session,右击 选择replay-&gt;reissue requests<br>方法2：</p>
+<ol>
+<li>在右侧composer的选项卡内选择Scratchpad</li>
+<li>点击或者拖动左侧session至选项卡内</li>
+<li>三次点击选中选项卡内的请求头部信息</li>
+<li>点击Execute 发送</li>
+</ol>
+<hr>
+<h2 id="导入-导出网络请求"><a href="#导入-导出网络请求" class="headerlink" title="导入/导出网络请求"></a>导入/导出网络请求</h2><p>File-&gt;import session / File-&gt;export session </p>
+<hr>
 
-    console.log(str);
-
-    yield next;
-  }}
-
-app.use(logger(&apos;:method :url&apos;));
-</code></pre><h3 id="多个中间件的合并-完整事例"><a href="#多个中间件的合并-完整事例" class="headerlink" title="多个中间件的合并 完整事例"></a>多个中间件的合并 完整事例</h3><pre><code>var koa = require(&apos;koa&apos;);
-var app = koa();
-
-function* random(next) {
-    console.log(&apos;r&apos;);
-    yield next;
-    console.log(&apos;over&apos;);
-};
-
-function* backwards(next) {
-    console.log(&apos;b&apos;);
-    yield next;
-}
-
-function* pi(next) {
-    console.log(&apos;pi&apos;);
-    yield next;
-}
-
-function test(str){
-    return function* (next){
-        console.log(str);
-        yield next;
-    }
-}
-
-function* all(next) {
-  yield random.call(this, backwards.call(this, pi.call(this, next)));
-}
-
-function* all2(next) {
-  yield random.call(this, backwards.call(this, pi.call(this, test(&apos;aa&apos;).call(this,next))));
-}
-
-app.use(all2);
-app.listen(3000);
-</code></pre><h3 id="错误监听"><a href="#错误监听" class="headerlink" title="错误监听"></a>错误监听</h3><pre><code>app.on(&apos;error&apos;, function(err){
-  log.error(&apos;server error&apos;, err);}
-);
-</code></pre><hr>
-        
-          <p class="article-more-link">
-            <a href="/2016/08/09/learn-koa/#more">Read More</a>
-          </p>
-        
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2016/08/09/learn-koa/" data-id="ciyzoqbpw0007l6vgs6zw8y0g" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/pavelShen/2016/08/09/use-fiddler/" data-id="ciyzp0m73000dw4vghrvxgyy4" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/koa/">koa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tools/">tools</a></li></ul>
 
     </footer>
   </div>
@@ -226,7 +203,7 @@ app.listen(3000);
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2016/08/06/markdown/" data-id="ciyzoqbq1000al6vg2z5m5o5f" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/pavelShen/2016/08/06/markdown/" data-id="ciyzp0m71000aw4vg67l54xku" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/markdown/">markdown</a></li></ul>
@@ -253,7 +230,7 @@ app.listen(3000);
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Mot-clés</h3>
+    <h3 class="widget-title">Tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/app/">app</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/koa/">koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/weixin/">weixin</a></li></ul>
     </div>
@@ -263,7 +240,7 @@ app.listen(3000);
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
       <a href="/tags/app/" style="font-size: 10px;">app</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/koa/" style="font-size: 10px;">koa</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/nodejs/" style="font-size: 20px;">nodejs</a> <a href="/tags/tools/" style="font-size: 20px;">tools</a> <a href="/tags/weixin/" style="font-size: 20px;">weixin</a>
     </div>
@@ -282,7 +259,7 @@ app.listen(3000);
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
@@ -319,7 +296,7 @@ app.listen(3000);
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 pavelShen<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
