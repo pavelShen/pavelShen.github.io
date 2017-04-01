@@ -35,7 +35,7 @@ zsh （命令行强化）
 cheetsheet （快捷键查看工具）
 
 chr">
-<meta property="og:updated_time" content="2017-02-14T06:16:42.000Z">
+<meta property="og:updated_time" content="2017-04-01T09:39:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="我的开发环境">
 <meta name="twitter:description" content="听过 &amp;lt; demo过 &amp;lt; 实际工作用过 &amp;lt; 实际工作中被坑过 &amp;lt; 实际工作中被多次坑过或者深入研究总结过 
@@ -97,7 +97,7 @@ chr">
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/pavelShen"></form>
@@ -150,24 +150,17 @@ chr">
 <li>Vue.js devtools （vue开发工具）</li>
 <li>掘金 （文章浏览）</li>
 </ul>
-<h2 id="使用zsh"><a href="#使用zsh" class="headerlink" title="使用zsh"></a>使用zsh</h2><pre><code>Cat /etc/shells         //查看安装的shell列表
-Chsh -s /bin/zsh     // 修改登录的shell, chsh -s其实修改的就是/etc/passwd文件里和你的用户名相对应的那一行
-重启shell
-</code></pre><h2 id="Vscode-配置"><a href="#Vscode-配置" class="headerlink" title="Vscode 配置"></a>Vscode 配置</h2><pre><code>{
-    &quot;terminal.integrated.shell.osx&quot;: &quot;/bin/zsh&quot;,
-    &quot;editor.wordSeparators&quot;: &quot;`~!@#$%^&amp;*()=+[{]}\\|;:&apos;\&quot;,.&lt;&gt;/?&quot;,
-    &quot;files.associations&quot;: {
-        &quot;*.wxml&quot;: &quot;html&quot;,
-        &quot;*.wxss&quot;: &quot;css&quot;
-    },
-    &quot;editor.tabSize&quot;: 2
-}
-</code></pre><h2 id="Vscode插件"><a href="#Vscode插件" class="headerlink" title="Vscode插件"></a>Vscode插件</h2><ul>
-<li>git history</li>
-<li>vscode-icon</li>
-<li>vscode-wechat</li>
-<li>js-css-html formatter</li>
-<li>git history</li>
+<h2 id="使用zsh"><a href="#使用zsh" class="headerlink" title="使用zsh"></a>使用zsh</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Cat /etc/shells         //查看安装的shell列表</div><div class="line">Chsh -s /bin/zsh     // 修改登录的shell, chsh -s其实修改的就是/etc/passwd文件里和你的用户名相对应的那一行</div><div class="line">重启shell</div></pre></td></tr></table></figure>
+<h2 id="Vscode-配置"><a href="#Vscode-配置" class="headerlink" title="Vscode 配置"></a>Vscode 配置</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="string">"terminal.integrated.shell.osx"</span>: <span class="string">"/bin/zsh"</span>,</div><div class="line">    <span class="string">"editor.wordSeparators"</span>: <span class="string">"`~!@#$%^&amp;*()=+[&#123;]&#125;\\|;:'\",.&lt;&gt;/?"</span>,</div><div class="line">    <span class="string">"files.associations"</span>: &#123;</div><div class="line">        <span class="string">"*.wxml"</span>: <span class="string">"html"</span>,</div><div class="line">        <span class="string">"*.wxss"</span>: <span class="string">"css"</span></div><div class="line">    &#125;,</div><div class="line">    <span class="string">"editor.tabSize"</span>: <span class="number">2</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="Vscode插件"><a href="#Vscode插件" class="headerlink" title="Vscode插件"></a>Vscode插件</h2><ul>
+<li>vscode-icon  icon美化</li>
+<li>vscode-wechat  支持小程序语法</li>
+<li>js-css-html formatter  格式化工具</li>
+<li>git history git历史记录的查看</li>
+<li>eslint  代码检查</li>
+<li>vetur vue语法支持，可以配合eslint做代码检查，同时支持.vue文件中的scss，less语法</li>
+<li>eslint-config-vue vue文件代码检查插件，在编辑器首选项中配置<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="string">"eslint.validate"</span>: [</div><div class="line">     <span class="string">"javascript"</span>,</div><div class="line">     <span class="string">"javascriptreact"</span>,</div><div class="line">     <span class="string">"html"</span>,</div><div class="line">     <span class="string">"vue"</span></div><div class="line">]</div></pre></td></tr></table></figure>
+</li>
 </ul>
 <p>ctrl-shift-p  呼出命令行 输入path 将code命令添加进shell</p>
 <h2 id="homebrew"><a href="#homebrew" class="headerlink" title="homebrew"></a>homebrew</h2><p>安装命令：<code>/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</code><br>安装失败的话：把/usr/local/.git 目录删了即可，就是执行rm -rf /usr/local/.git</p>
@@ -183,7 +176,7 @@ Chsh -s /bin/zsh     // 修改登录的shell, chsh -s其实修改的就是/etc/p
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/02/10/我的开发环境/" data-id="cj0uda2v3000l7svgo54g53qa" class="article-share-link">Delen</a>
+      <a data-url="https://github.com/pavelShen/2017/02/10/我的开发环境/" data-id="cj0z2i12g000d8dvgwbjub4sz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -193,7 +186,7 @@ Chsh -s /bin/zsh     // 修改登录的shell, chsh -s其实修改的就是/etc/p
 <nav id="article-nav">
   
     <a href="/2017/02/27/数组去重/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Nieuwer</strong>
+      <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
           数组去重
@@ -203,7 +196,7 @@ Chsh -s /bin/zsh     // 修改登录的shell, chsh -s其实修改的就是/etc/p
   
   
     <a href="/2017/02/10/npm命令/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Ouder</strong>
+      <strong class="article-nav-caption">Older</strong>
       <div class="article-nav-title">npm命令</div>
     </a>
   
@@ -241,7 +234,7 @@ Chsh -s /bin/zsh     // 修改登录的shell, chsh -s其实修改的就是/etc/p
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Labels</h3>
+    <h3 class="widget-title">Tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/koa/">koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/weixin/">weixin</a></li></ul>
     </div>
@@ -260,7 +253,7 @@ Chsh -s /bin/zsh     // 修改登录的shell, chsh -s其实修改的就是/etc/p
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archieven</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li></ul>
     </div>
@@ -270,7 +263,7 @@ Chsh -s /bin/zsh     // 修改登录的shell, chsh -s其实修改的就是/etc/p
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recente berichten</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
         
