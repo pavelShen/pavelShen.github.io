@@ -15,7 +15,7 @@
 <meta property="og:description" content="原文线上地址：http://www.infoq.com/cn/es6-in-depth/
 解构注意点当你解构对象并赋值给变量时，如果你已经声明或不打算声明这些变量（亦即赋值语句前没有let、const或var关键字），你应该注意这样一个潜在的语法错误：12&amp;#123; blowUp &amp;#125; = &amp;#123; blowUp: 10 &amp;#125;;// Syntax error 语法错误
 因为J">
-<meta property="og:updated_time" content="2017-04-14T03:14:30.000Z">
+<meta property="og:updated_time" content="2017-04-14T09:17:13.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="读书笔记：深入浅出ES6（06）解构">
 <meta name="twitter:description" content="原文线上地址：http://www.infoq.com/cn/es6-in-depth/
@@ -65,9 +65,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/pavelShen"></form>
@@ -101,6 +101,7 @@
         <p>原文线上地址：<a href="http://www.infoq.com/cn/es6-in-depth/" target="_blank" rel="external">http://www.infoq.com/cn/es6-in-depth/</a></p>
 <h2 id="解构"><a href="#解构" class="headerlink" title="解构"></a>解构</h2><h4 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h4><p>当你解构对象并赋值给变量时，如果你已经声明或不打算声明这些变量（亦即赋值语句前没有let、const或var关键字），你应该注意这样一个潜在的语法错误：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&#123; blowUp &#125; = &#123; <span class="attr">blowUp</span>: <span class="number">10</span> &#125;;</div><div class="line"><span class="comment">// Syntax error 语法错误</span></div></pre></td></tr></table></figure></p>
 <p>因为JavaScript语法通知解析引擎将任何以{开始的语句解析为一个块语句<br>解决方案:将整个表达式用一对小括号包裹<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">(&#123; safe &#125; = &#123; <span class="attr">safe</span>:<span class="number">19</span> &#125;);</div><div class="line"><span class="comment">// No errors 没有语法错误</span></div></pre></td></tr></table></figure></p>
+<p><strong>需要解构的值必须放在最后,不然报错</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Uncaught SyntaxError: Rest parameter must be last formal parameter</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">a,...b,c</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(a);</div><div class="line">    <span class="built_in">console</span>.warn(b);</div><div class="line">    <span class="built_in">console</span>.warn(c);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <h4 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h4><ul>
 <li>当使用对象赋值模式时，被解构的值需要被强制转换为对象。大多数类型都可以被转换为对象，但null和undefined却无法进行转换。</li>
 <li>当使用数组赋值模式时，被解构的值一定要包含一个迭代器。</li>
@@ -117,7 +118,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（06）解构/" data-id="cj1hczorm000w4avg7j8et3xv" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（06）解构/" data-id="cj1hmfc05000ty8vgnhs8wpuy" class="article-share-link">Partager</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -128,18 +129,18 @@
     
 <nav id="article-nav">
   
-    <a href="/2017/04/14/读书笔记：深入浅出ES6（07）箭头函数/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
+    <a href="/2017/04/14/读书笔记：深入浅出ES6（08）Symbols/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Récent</strong>
       <div class="article-nav-title">
         
-          读书笔记：深入浅出ES6（07）箭头函数
+          读书笔记：深入浅出ES6（08）Symbols
         
       </div>
     </a>
   
   
     <a href="/2017/04/14/读书笔记：深入浅出ES6（04）模板字符串/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
+      <strong class="article-nav-caption">Ancien</strong>
       <div class="article-nav-title">读书笔记：深入浅出ES6（04）模板字符串</div>
     </a>
   
@@ -177,7 +178,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Mot-clés</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/koa/">koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/weixin/">weixin</a></li></ul>
     </div>
@@ -187,7 +188,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tag Cloud</h3>
+    <h3 class="widget-title">Nuage de mot-clés</h3>
     <div class="widget tagcloud">
       <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/es6/" style="font-size: 16.67px;">es6</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/koa/" style="font-size: 10px;">koa</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/nodejs/" style="font-size: 13.33px;">nodejs</a> <a href="/tags/tools/" style="font-size: 13.33px;">tools</a> <a href="/tags/weixin/" style="font-size: 13.33px;">weixin</a>
     </div>
@@ -206,16 +207,16 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recent Posts</h3>
+    <h3 class="widget-title">Articles récents</h3>
     <div class="widget">
       <ul>
         
           <li>
-            <a href="/2017/04/14/读书笔记：深入浅出ES6（08）Symbols/">读书笔记：深入浅出ES6（08）Symbols</a>
+            <a href="/2017/04/14/读书笔记：深入浅出ES6（07）箭头函数/">读书笔记：深入浅出ES6（07）箭头函数</a>
           </li>
         
           <li>
-            <a href="/2017/04/14/读书笔记：深入浅出ES6（07）箭头函数/">读书笔记：深入浅出ES6（07）箭头函数</a>
+            <a href="/2017/04/14/读书笔记：深入浅出ES6（08）Symbols/">读书笔记：深入浅出ES6（08）Symbols</a>
           </li>
         
           <li>
@@ -243,7 +244,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 pavelShen<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
