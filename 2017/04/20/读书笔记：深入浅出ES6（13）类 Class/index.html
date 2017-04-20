@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>读书笔记：深入浅出ES6（13）类 Class | pavelShen的个人博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="参考地址：http://es6.ruanyifeng.com/#docs/classhttps://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Classes
+类 Classstaticstatic 关键字用来定义类的静态方法。静态方法是指那些不需要对类进行实例化，使用类名就可以直接访问的方法，需要注意的是静态方法不能被实例化">
+<meta property="og:type" content="article">
+<meta property="og:title" content="读书笔记：深入浅出ES6（13）类 Class">
+<meta property="og:url" content="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（13）类 Class/index.html">
+<meta property="og:site_name" content="pavelShen的个人博客">
+<meta property="og:description" content="参考地址：http://es6.ruanyifeng.com/#docs/classhttps://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Classes
+类 Classstaticstatic 关键字用来定义类的静态方法。静态方法是指那些不需要对类进行实例化，使用类名就可以直接访问的方法，需要注意的是静态方法不能被实例化">
+<meta property="og:updated_time" content="2017-04-20T07:41:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="读书笔记：深入浅出ES6（13）类 Class">
+<meta name="twitter:description" content="参考地址：http://es6.ruanyifeng.com/#docs/classhttps://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Classes
+类 Classstaticstatic 关键字用来定义类的静态方法。静态方法是指那些不需要对类进行实例化，使用类名就可以直接访问的方法，需要注意的是静态方法不能被实例化">
+  
+    <link rel="alternate" href="/atom.xml" title="pavelShen的个人博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  
+    <div id="container">
+      <div id="wrap">
+        <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">pavelShen的个人博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">JUST FOR FUN</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/demo">Demo</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Søk"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/pavelShen"></form>
+      </div>
+    </div>
+  </div>
+</header>
+        <div class="outer">
+          <section id="main"><article id="post-读书笔记：深入浅出ES6（13）类 Class" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/20/读书笔记：深入浅出ES6（13）类 Class/" class="article-date">
+  <time datetime="2017-04-20T02:54:52.000Z" itemprop="datePublished">2017-04-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      读书笔记：深入浅出ES6（13）类 Class
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>参考地址：<br><a href="http://es6.ruanyifeng.com/#docs/class" target="_blank" rel="external">http://es6.ruanyifeng.com/#docs/class</a><br><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Classes" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Classes</a></p>
+<h2 id="类-Class"><a href="#类-Class" class="headerlink" title="类 Class"></a>类 Class</h2><h4 id="static"><a href="#static" class="headerlink" title="static"></a>static</h4><p>static 关键字用来定义类的静态方法。静态方法是指那些不需要对类进行实例化，使用类名就可以直接访问的方法，需要注意的是<strong>静态方法不能被实例化的对象调用</strong>。静态方法经常用来作为工具函数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point</span> </span>&#123;</div><div class="line">    <span class="keyword">constructor</span>(x, y) &#123;</div><div class="line">        <span class="keyword">this</span>.x = x;</div><div class="line">        <span class="keyword">this</span>.y = y;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">static</span> distance(a, b) &#123;</div><div class="line">        <span class="keyword">const</span> dx = a.x - b.x;</div><div class="line">        <span class="keyword">const</span> dy = a.y - b.y;</div><div class="line">        <span class="keyword">return</span> <span class="built_in">Math</span>.sqrt(dx*dx + dy*dy);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">const</span> p1 = <span class="keyword">new</span> Point(<span class="number">5</span>, <span class="number">5</span>);</div><div class="line"><span class="keyword">const</span> p2 = <span class="keyword">new</span> Point(<span class="number">10</span>, <span class="number">10</span>);</div><div class="line"><span class="built_in">console</span>.log(Point.distance(p1, p2));</div></pre></td></tr></table></figure>
+<h4 id="extends-amp-super"><a href="#extends-amp-super" class="headerlink" title="extends &amp; super"></a>extends &amp; super</h4><ul>
+<li>extends 关键字在类声明或类表达式中用于创建一个类作为另一个类的一个子类。</li>
+<li>如果子类中存在构造函数，则需要在使用“this”之前首先调用super（）。</li>
+<li>ES6 要求，子类的构造函数必须执行一次super函数。否则在调用的时候会报错</li>
+<li>由于super指向父类的原型对象，所以定义在父类实例上的方法或属性，是无法通过super调用的，super.haha()就相当于调用Point.prototype.haha()。</li>
+<li>如果不希望创建出来的实例继承自Object.prototype，你甚至可以在extends后使用null来进行声明。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point</span> </span>&#123;</div><div class="line">  <span class="keyword">constructor</span>(x, y) &#123;</div><div class="line">    <span class="keyword">this</span>.x = x;</div><div class="line">    <span class="keyword">this</span>.y = y;</div><div class="line">    <span class="keyword">this</span>.hehe = <span class="string">'hehe'</span></div><div class="line">  &#125;</div><div class="line">  haha()&#123;</div><div class="line">    <span class="keyword">return</span> <span class="string">'haha'</span></div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ColorPoint</span> <span class="keyword">extends</span> <span class="title">Point</span> </span>&#123;</div><div class="line">  <span class="keyword">constructor</span>(x, y, color) &#123;</div><div class="line">    <span class="keyword">super</span>(x, y);</div><div class="line">    <span class="keyword">this</span>.color = color; <span class="comment">// 正确</span></div><div class="line">  &#125;</div><div class="line">  hello()&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'haha:'</span> + <span class="keyword">super</span>.haha());</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'hehe:'</span> + <span class="keyword">super</span>.hehe);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> cp = <span class="keyword">new</span> ColorPoint()</div><div class="line">cp.hello();</div><div class="line"><span class="comment">// haha:haha</span></div><div class="line"><span class="comment">// hehe:undefined</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（13）类 Class/" data-id="cj1q3w48900164wvg6d2vldoo" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/04/20/读书笔记：深入浅出ES6（14）let & const/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          读书笔记：深入浅出ES6（14）let &amp; const
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/04/20/读书笔记：深入浅出ES6（12）代理 Proxies/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">读书笔记：深入浅出ES6（12）代理 Proxies</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+  <section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-读书笔记：深入浅出ES6（13）类 Class" data-title="读书笔记：深入浅出ES6（13）类 Class" data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（13）类 Class/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'pavelShen'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+  </section>
+  
+</section>
+          
+            <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/koa/">koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/weixin/">weixin</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/es6/" style="font-size: 16.67px;">es6</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/koa/" style="font-size: 10px;">koa</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/nodejs/" style="font-size: 13.33px;">nodejs</a> <a href="/tags/tools/" style="font-size: 13.33px;">tools</a> <a href="/tags/weixin/" style="font-size: 13.33px;">weixin</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Arkiv</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Siste innlegg</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/04/20/js函数队列/">js函数队列</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/20/读书笔记：深入浅出ES6（16）模块 Modules/">读书笔记：深入浅出ES6（16）模块 Modules</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/20/读书笔记：深入浅出ES6（14）let & const/">读书笔记：深入浅出ES6（14）let &amp; const</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/20/读书笔记：深入浅出ES6（13）类 Class/">读书笔记：深入浅出ES6（13）类 Class</a>
+          </li>
+        
+          <li>
+            <a href="/2017/04/20/读书笔记：深入浅出ES6（12）代理 Proxies/">读书笔记：深入浅出ES6（12）代理 Proxies</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+          
+        </div>
+        <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 pavelShen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+      </div>
+      <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/demo" class="mobile-nav-link">Demo</a>
+  
+</nav>
+      
+
+<script src="//libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+    </div>
+  
+</body>
+</html>

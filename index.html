@@ -58,9 +58,9 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Søk"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/pavelShen"></form>
@@ -71,10 +71,10 @@
         <div class="outer">
           <section id="main">
   
-    <article id="post-读书笔记：深入浅出ES6（07）箭头函数" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-js函数队列" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/04/14/读书笔记：深入浅出ES6（07）箭头函数/" class="article-date">
-  <time datetime="2017-04-14T02:54:48.000Z" itemprop="datePublished">2017-04-14</time>
+    <a href="/2017/04/20/js函数队列/" class="article-date">
+  <time datetime="2017-04-20T07:42:39.000Z" itemprop="datePublished">2017-04-20</time>
 </a>
     
   </div>
@@ -85,7 +85,53 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/14/读书笔记：深入浅出ES6（07）箭头函数/">读书笔记：深入浅出ES6（07）箭头函数</a>
+      <a class="article-title" href="/2017/04/20/js函数队列/">js函数队列</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>参考地址</p>
+<ul>
+<li><a href="https://segmentfault.com/a/1190000008320677" target="_blank" rel="external">https://segmentfault.com/a/1190000008320677</a></li>
+<li><a href="https://segmentfault.com/a/1190000008195180" target="_blank" rel="external">https://segmentfault.com/a/1190000008195180</a></li>
+</ul>
+<p>代码一多，光看还是很容易头疼的，建议在答案代码中多打几个断点来看（智商不足的苦啊 TAT ）</p>
+<h2 id="函数队列的实现"><a href="#函数队列的实现" class="headerlink" title="函数队列的实现"></a>函数队列的实现</h2><h3 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> index = <span class="number">0</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">next</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> fn = stack[index];</div><div class="line">    index = index + <span class="number">1</span>; <span class="comment">// 其实也可以用shift 把fn 拿出来</span></div><div class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> fn === <span class="string">'function'</span>) fn();</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> stack = [];</div><div class="line"><span class="comment">// 定义index 和next</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn1</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'第一个调用'</span>);</div><div class="line">    next(); <span class="comment">// stack 中每一个函数都必须调用`next`</span></div><div class="line">&#125;;</div><div class="line">stack.push(fn1);</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn2</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    setTimeout(<span class="function"><span class="keyword">function</span> <span class="title">fn2Timeout</span>(<span class="params"></span>) </span>&#123;</div><div class="line">         <span class="built_in">console</span>.log(<span class="string">'第二个调用'</span>);</div><div class="line">         next(); <span class="comment">// 调用`next`</span></div><div class="line">    &#125;, <span class="number">0</span>);</div><div class="line">&#125;</div><div class="line">stack.push(fn2, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'第三个调用'</span>);</div><div class="line">    next(); <span class="comment">// 最后一个可以不调用，调用也没用。</span></div><div class="line">&#125;);</div><div class="line">next(); <span class="comment">// 调用next，最终按顺序输出'第一个调用'、'第二个调用'、'第三个调用'。</span></div></pre></td></tr></table></figure>
+<h3 id="尝试题目：Lazyman"><a href="#尝试题目：Lazyman" class="headerlink" title="尝试题目：Lazyman"></a>尝试题目：Lazyman</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 实现一个LazyMan，可以按照以下方式调用:</span></div><div class="line">LazyMan(“Hank”)</div><div class="line"><span class="comment">/* 输出:</span></div><div class="line">Hi! This is Hank!</div><div class="line">*/</div><div class="line">LazyMan(“Hank”).sleep(<span class="number">10</span>).eat(“dinner”)输出</div><div class="line"><span class="comment">/* 输出:</span></div><div class="line">Hi! This is Hank!</div><div class="line">// 等待10秒..</div><div class="line">Wake up after 10</div><div class="line">Eat dinner~</div><div class="line">*/</div><div class="line">LazyMan(“Hank”).eat(“dinner”).eat(“supper”)</div><div class="line"><span class="comment">/* 输出:</span></div><div class="line">Hi This is Hank!</div><div class="line">Eat dinner~</div><div class="line">Eat supper~</div><div class="line">*/</div><div class="line">LazyMan(“Hank”).sleepFirst(<span class="number">5</span>).eat(“supper”)</div><div class="line"><span class="comment">/* 等待5秒，输出</span></div><div class="line">Wake up after 5</div><div class="line">Hi This is Hank!</div><div class="line">Eat supper</div><div class="line">*/</div></pre></td></tr></table></figure>
+<h3 id="答案"><a href="#答案" class="headerlink" title="答案"></a>答案</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">_LazyMan</span>(<span class="params">name</span>) </span>&#123;</div><div class="line">    <span class="comment">// 事件存储队列</span></div><div class="line">    <span class="keyword">this</span>.tasks = [];</div><div class="line">    <span class="comment">// 绑定this指向</span></div><div class="line">    <span class="keyword">var</span> _this = <span class="keyword">this</span>;</div><div class="line">    <span class="comment">// 使用闭包</span></div><div class="line">    <span class="keyword">var</span> fn = (<span class="function"><span class="keyword">function</span>(<span class="params">n</span>) </span>&#123;</div><div class="line">        <span class="comment">// 绑定作用域</span></div><div class="line">        <span class="keyword">var</span> name = n;</div><div class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="built_in">console</span>.log(<span class="string">"my name is "</span>+ name);</div><div class="line">            _this.next();</div><div class="line">        &#125;</div><div class="line">    &#125;)(name);</div><div class="line">    <span class="keyword">this</span>.tasks.push(fn);</div><div class="line">    <span class="comment">// 启动任务</span></div><div class="line">    setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        _this.next();</div><div class="line">    &#125;, <span class="number">0</span>)</div><div class="line">&#125;</div><div class="line">_LazyMan.prototype.next = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> fn = <span class="keyword">this</span>.tasks.shift();</div><div class="line">  fn &amp;&amp; fn();</div><div class="line">&#125;</div><div class="line">_LazyMan.prototype.wakeup = <span class="function"><span class="keyword">function</span>(<span class="params">times</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> _this = <span class="keyword">this</span>;</div><div class="line">  <span class="keyword">var</span> fn = (<span class="function"><span class="keyword">function</span>(<span class="params">time</span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">      setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">          <span class="built_in">console</span>.log(<span class="string">"getup after "</span>+time+<span class="string">"s !"</span>)</div><div class="line">          _this.next();</div><div class="line">      &#125;, time*<span class="number">1000</span>)</div><div class="line">    &#125;</div><div class="line">  &#125;)(times)</div><div class="line">  <span class="comment">// 从队列头部插入</span></div><div class="line">  _this.tasks.unshift(fn);</div><div class="line">  <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">&#125;</div><div class="line">_LazyMan.prototype.eat = <span class="function"><span class="keyword">function</span>(<span class="params">sth</span>)</span>&#123;</div><div class="line">  <span class="keyword">var</span> _this = <span class="keyword">this</span>;</div><div class="line">  <span class="keyword">var</span> fn = (<span class="function"><span class="keyword">function</span>(<span class="params">sth</span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">'Eat '</span>+ sth +<span class="string">'~'</span>)</div><div class="line">      _this.next();</div><div class="line">    &#125;</div><div class="line">  &#125;)(sth);</div><div class="line">  _this.tasks.push(fn);</div><div class="line">  <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">LazyMan</span>(<span class="params">name</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="keyword">new</span> _LazyMan(name)</div><div class="line">&#125;</div><div class="line">LazyMan(<span class="string">'Hank'</span>).wakeup(<span class="number">3</span>).eat(<span class="string">'haha'</span>).eat(<span class="string">'hehe'</span>);</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/pavelShen/2017/04/20/js函数队列/" data-id="cj1q3w47500064wvgpb0ana7g" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-读书笔记：深入浅出ES6（16）模块 Modules" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/20/读书笔记：深入浅出ES6（16）模块 Modules/" class="article-date">
+  <time datetime="2017-04-20T02:54:55.000Z" itemprop="datePublished">2017-04-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/20/读书笔记：深入浅出ES6（16）模块 Modules/">读书笔记：深入浅出ES6（16）模块 Modules</a>
     </h1>
   
 
@@ -94,21 +140,316 @@
     <div class="article-entry" itemprop="articleBody">
       
         <p>原文线上地址：<a href="http://www.infoq.com/cn/es6-in-depth/" target="_blank" rel="external">http://www.infoq.com/cn/es6-in-depth/</a></p>
-<h2 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h2><h4 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// ES5</span></div><div class="line"><span class="keyword">var</span> total = values.reduce(<span class="function"><span class="keyword">function</span> (<span class="params">a, b</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> a + b;</div><div class="line"> &#125;, <span class="number">0</span>);</div><div class="line"> <span class="comment">// ES6</span></div><div class="line"> <span class="keyword">var</span> total = values.reduce(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a + b, <span class="number">0</span>);</div></pre></td></tr></table></figure>
-<h4 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h4><ul>
-<li>使用了块语句的箭头函数不会自动返回值，你需要使用return语句将所需值返回。</li>
-<li>当使用箭头函数创建普通对象时，你总是需要将对象包裹在小括号里。</li>
+<h2 id="模块-Modules"><a href="#模块-Modules" class="headerlink" title="模块 Modules"></a>模块 Modules</h2><h4 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h4><ul>
+<li>在ES6模块中，无论你是否加入“use strict;”语句，默认情况下模块都是在严格模式下运行。</li>
+<li>你可以导出所有的最外层函数、类以及var、let或const声明的变量。</li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 为与你玩耍的每一个小狗创建一个新的空对象</span></div><div class="line"><span class="keyword">var</span> chewToys = puppies.map(<span class="function"><span class="params">puppy</span> =&gt;</span> &#123;&#125;); <span class="comment">// 这样写会报Bug！</span></div><div class="line"><span class="keyword">var</span> chewToys = puppies.map(<span class="function"><span class="params">puppy</span> =&gt;</span> (&#123;&#125;)); <span class="comment">//</span></div></pre></td></tr></table></figure>
-<h4 id="和非箭头函数的区别"><a href="#和非箭头函数的区别" class="headerlink" title="和非箭头函数的区别"></a>和非箭头函数的区别</h4><ul>
-<li>箭头函数没有它自己的this值，箭头函数内的this值继承自外围作用域</li>
-<li>箭头函数不会获取它们自己的arguments对象（通过解构来处理参数）</li>
+<h4 id="Export-amp-Import"><a href="#Export-amp-Import" class="headerlink" title="Export &amp; Import"></a>Export &amp; Import</h4><p><strong>要导出请直接用 module.exports 或者 export default</strong><br>exports 是 module.exports 的一个引用，如果 module.exports 改了，exports 就是失去意义了。</p>
+<h6 id="Export列表"><a href="#Export列表" class="headerlink" title="Export列表"></a>Export列表</h6><p>语法<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">detectCats</span>(<span class="params">canvas, options</span>) </span>&#123; ... &#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Kittydar</span> </span>&#123; ... &#125;</div><div class="line"><span class="built_in">module</span>.exports = &#123;detectCats, Kittydar&#125;;</div></pre></td></tr></table></figure></p>
+<h6 id="重命名import"><a href="#重命名import" class="headerlink" title="重命名import"></a>重命名import</h6><p>语法<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// suburbia.js</span></div><div class="line"><span class="comment">// 这两个模块都会导出以`flip`命名的东西。</span></div><div class="line"><span class="comment">// 要同时导入两者，我们至少要将其中一个的名称改掉。</span></div><div class="line"><span class="keyword">import</span> &#123;flip <span class="keyword">as</span> flipOmelet&#125; <span class="keyword">from</span> <span class="string">"eggs.js"</span>;</div><div class="line"><span class="keyword">import</span> &#123;flip <span class="keyword">as</span> flipHouse&#125; <span class="keyword">from</span> <span class="string">"real-estate.js"</span>;</div></pre></td></tr></table></figure></p>
+<h6 id="Default-exports"><a href="#Default-exports" class="headerlink" title="Default exports"></a>Default exports</h6><p><code>import _ from &quot;lodash&quot;;</code> 等价于 <code>import {default as _} from &quot;lodash&quot;;</code></p>
+<p>语法<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">      <span class="attr">field1</span>: value1,</div><div class="line">      <span class="attr">field2</span>: value2</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>关键字export default后可跟随任何值：一个函数、一个类、一个对象字面量，只要你能想到的都可以。</p>
+<h6 id="导入所有并重命名"><a href="#导入所有并重命名" class="headerlink" title="导入所有并重命名"></a>导入所有并重命名</h6><p><code>import * as cows from &quot;cows&quot;;</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（16）模块 Modules/" data-id="cj1q3w48d001b4wvgvrtur0c7" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-读书笔记：深入浅出ES6（14）let &amp; const" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/20/读书笔记：深入浅出ES6（14）let & const/" class="article-date">
+  <time datetime="2017-04-20T02:54:53.000Z" itemprop="datePublished">2017-04-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/20/读书笔记：深入浅出ES6（14）let & const/">读书笔记：深入浅出ES6（14）let &amp; const</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>原文线上地址：<a href="http://www.infoq.com/cn/es6-in-depth/" target="_blank" rel="external">http://www.infoq.com/cn/es6-in-depth/</a></p>
+<h2 id="let-amp-const"><a href="#let-amp-const" class="headerlink" title="let &amp; const"></a>let &amp; const</h2><h4 id="var的缺陷"><a href="#var的缺陷" class="headerlink" title="var的缺陷"></a>var的缺陷</h4><ul>
+<li>JS没有块级作用域</li>
+<li>循环内变量过度共享</li>
+</ul>
+<h4 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h4><ul>
+<li>变量提升：JS引擎将所有var声明和function函数声明都提升到函数内的最高处。</li>
+<li>let声明的全局变量不是全局对象的属性。这就意味着，你不可以通过window.变量名的方式访问这些变量。它们只存在于一个不可见的块的作用域中，这个块理论上是Web页面中运行的所有JS代码的外层块。</li>
+<li>TDZ临时死区（Temporal Dead Zone<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> x = <span class="string">'outer value'</span></div><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="comment">// 这里会产生 TDZ for x</span></div><div class="line">  <span class="built_in">console</span>.log(x) <span class="comment">// TDZ期间访问，产生ReferenceError错误</span></div><div class="line">  <span class="keyword">let</span> x = <span class="string">'inner value'</span> <span class="comment">// 对x的声明语句，这里结束 TDZ for x</span></div><div class="line">&#125;())</div></pre></td></tr></table></figure>
+</li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（07）箭头函数/" data-id="cj1hmfc0i0012y8vgcmt69dum" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（14）let & const/" data-id="cj1q3w48b00194wvgum0tg5hy" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-读书笔记：深入浅出ES6（13）类 Class" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/20/读书笔记：深入浅出ES6（13）类 Class/" class="article-date">
+  <time datetime="2017-04-20T02:54:52.000Z" itemprop="datePublished">2017-04-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/20/读书笔记：深入浅出ES6（13）类 Class/">读书笔记：深入浅出ES6（13）类 Class</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>参考地址：<br><a href="http://es6.ruanyifeng.com/#docs/class" target="_blank" rel="external">http://es6.ruanyifeng.com/#docs/class</a><br><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Classes" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Classes</a></p>
+<h2 id="类-Class"><a href="#类-Class" class="headerlink" title="类 Class"></a>类 Class</h2><h4 id="static"><a href="#static" class="headerlink" title="static"></a>static</h4><p>static 关键字用来定义类的静态方法。静态方法是指那些不需要对类进行实例化，使用类名就可以直接访问的方法，需要注意的是<strong>静态方法不能被实例化的对象调用</strong>。静态方法经常用来作为工具函数。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point</span> </span>&#123;</div><div class="line">    <span class="keyword">constructor</span>(x, y) &#123;</div><div class="line">        <span class="keyword">this</span>.x = x;</div><div class="line">        <span class="keyword">this</span>.y = y;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">static</span> distance(a, b) &#123;</div><div class="line">        <span class="keyword">const</span> dx = a.x - b.x;</div><div class="line">        <span class="keyword">const</span> dy = a.y - b.y;</div><div class="line">        <span class="keyword">return</span> <span class="built_in">Math</span>.sqrt(dx*dx + dy*dy);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">const</span> p1 = <span class="keyword">new</span> Point(<span class="number">5</span>, <span class="number">5</span>);</div><div class="line"><span class="keyword">const</span> p2 = <span class="keyword">new</span> Point(<span class="number">10</span>, <span class="number">10</span>);</div><div class="line"><span class="built_in">console</span>.log(Point.distance(p1, p2));</div></pre></td></tr></table></figure>
+<h4 id="extends-amp-super"><a href="#extends-amp-super" class="headerlink" title="extends &amp; super"></a>extends &amp; super</h4><ul>
+<li>extends 关键字在类声明或类表达式中用于创建一个类作为另一个类的一个子类。</li>
+<li>如果子类中存在构造函数，则需要在使用“this”之前首先调用super（）。</li>
+<li>ES6 要求，子类的构造函数必须执行一次super函数。否则在调用的时候会报错</li>
+<li>由于super指向父类的原型对象，所以定义在父类实例上的方法或属性，是无法通过super调用的，super.haha()就相当于调用Point.prototype.haha()。</li>
+<li>如果不希望创建出来的实例继承自Object.prototype，你甚至可以在extends后使用null来进行声明。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point</span> </span>&#123;</div><div class="line">  <span class="keyword">constructor</span>(x, y) &#123;</div><div class="line">    <span class="keyword">this</span>.x = x;</div><div class="line">    <span class="keyword">this</span>.y = y;</div><div class="line">    <span class="keyword">this</span>.hehe = <span class="string">'hehe'</span></div><div class="line">  &#125;</div><div class="line">  haha()&#123;</div><div class="line">    <span class="keyword">return</span> <span class="string">'haha'</span></div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ColorPoint</span> <span class="keyword">extends</span> <span class="title">Point</span> </span>&#123;</div><div class="line">  <span class="keyword">constructor</span>(x, y, color) &#123;</div><div class="line">    <span class="keyword">super</span>(x, y);</div><div class="line">    <span class="keyword">this</span>.color = color; <span class="comment">// 正确</span></div><div class="line">  &#125;</div><div class="line">  hello()&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'haha:'</span> + <span class="keyword">super</span>.haha());</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'hehe:'</span> + <span class="keyword">super</span>.hehe);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> cp = <span class="keyword">new</span> ColorPoint()</div><div class="line">cp.hello();</div><div class="line"><span class="comment">// haha:haha</span></div><div class="line"><span class="comment">// hehe:undefined</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（13）类 Class/" data-id="cj1q3w48900164wvg6d2vldoo" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-读书笔记：深入浅出ES6（12）代理 Proxies" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/20/读书笔记：深入浅出ES6（12）代理 Proxies/" class="article-date">
+  <time datetime="2017-04-20T02:54:51.000Z" itemprop="datePublished">2017-04-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/20/读书笔记：深入浅出ES6（12）代理 Proxies/">读书笔记：深入浅出ES6（12）代理 Proxies</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>原文线上地址：<a href="http://www.infoq.com/cn/es6-in-depth/" target="_blank" rel="external">http://www.infoq.com/cn/es6-in-depth/</a></p>
+<h2 id="代理-Proxies"><a href="#代理-Proxies" class="headerlink" title="代理 Proxies"></a>代理 Proxies</h2><p><strong>警告：该功能现在无法通过polyfill进行降级处理，所以不要在浏览器端使用，在Node.js或io.js环境中使用代理，首先你需要添加名为harmony-reflect的polyfill，然后在执行时启用一个非默认的选项（–harmony_proxies）</strong></p>
+<h4 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h4><p>ES6规范定义了一个全新的全局构造函数：代理（Proxy）。它可以接受两个参数：目标对象（target）与句柄对象（handler）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> target = &#123;&#125;, handler = &#123;&#125;;</div><div class="line"><span class="keyword">var</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(target, handler);</div><div class="line"></div><div class="line">proxy.color = <span class="string">"pink"</span>;</div><div class="line">target.color <span class="comment">//pink</span></div></pre></td></tr></table></figure>
+<p>代理的行为很简单：将代理的所有内部方法转发至目标。简单来说，如果调用proxy.[<a href="">Enumerate]</a>，就会返回target.[<a href="">Enumerate]</a>。</p>
+<h4 id="内部方法"><a href="#内部方法" class="headerlink" title="内部方法"></a>内部方法</h4><p>我们可以在<a href="http://www.ecma-international.org/ecma-262/6.0/index.html#sec-proxy-object-internal-methods-and-internal-slots" target="_blank" rel="external">ES6标准列表5和6</a>中找到全部的14种方法。双方括号[[ ]]代表内部方法，在一般的JS代码中不可见，你可以调用、删除或覆写普通方法，但是无法操作内部方法。</p>
+<p>在整个ES6标准中，只要有可能，任何语法或对象相关的内建函数都是基于这14种内部方法构建的。ES6在对象的中枢系统周围划分了一个清晰的界限，你可以借助代理特性用任意JS代码替换标准中枢系统的内部方法。</p>
+<h4 id="代理句柄"><a href="#代理句柄" class="headerlink" title="代理句柄"></a>代理句柄</h4><p>句柄对象的方法可以覆写任意代理的内部方法。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> target = &#123;&#125;;</div><div class="line"><span class="keyword">var</span> handler = &#123;</div><div class="line">      <span class="attr">set</span>: <span class="function"><span class="keyword">function</span> (<span class="params">target, key, value, receiver</span>) </span>&#123;</div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">"请不要为这个对象设置属性。"</span>);</div><div class="line">      &#125;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">var</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(target, handler);</div><div class="line">proxy.name = <span class="string">"angelina"</span>; <span class="comment">//Error: 请不要为这个对象设置属性。</span></div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（12）代理 Proxies/" data-id="cj1q3w48700144wvgpwhfz5xe" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-读书笔记：深入浅出ES6（11）生成器 Generators，续篇" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/20/读书笔记：深入浅出ES6（11）生成器 Generators，续篇/" class="article-date">
+  <time datetime="2017-04-20T02:54:49.000Z" itemprop="datePublished">2017-04-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/20/读书笔记：深入浅出ES6（11）生成器 Generators，续篇/">读书笔记：深入浅出ES6（11）生成器 Generators，续篇</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>原文线上地址：<a href="http://www.infoq.com/cn/es6-in-depth/" target="_blank" rel="external">http://www.infoq.com/cn/es6-in-depth/</a></p>
+<h2 id="Generators"><a href="#Generators" class="headerlink" title="Generators"></a>Generators</h2><h4 id="如何关停生成器"><a href="#如何关停生成器" class="headerlink" title="如何关停生成器"></a>如何关停生成器</h4><ul>
+<li>generator.next()</li>
+<li>generator.return()</li>
+<li>generator.throw(error)</li>
+<li>yield*</li>
+</ul>
+<p><strong>当生成器执行到一个yield表达式并暂停后可以实现以下功能：</strong></p>
+<ul>
+<li>调用generator.next(value)，生成器从离开的地方恢复执行。</li>
+<li>调用generator.return()，传递一个可选值，生成器只执行finally代码块并不再恢复执行。</li>
+<li>调用generator.throw(error)，生成器表现得像是yield表达式调用一个函数并抛出错误。</li>
+<li>或者，什么也不做，生成器永远保持冻结状态。（是的，对于一个生成器来说，很可能执行到一个try代码块，永不执行finally代码块。这种状态下的生成器可以被垃圾收集器回收。）</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> generator = <span class="function"><span class="keyword">function</span>* (<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">      <span class="keyword">var</span> value = <span class="keyword">yield</span> i;</div><div class="line">      <span class="built_in">console</span>.log(i);</div><div class="line">    &#125; <span class="keyword">catch</span>(e) &#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">"catch exception..."</span>);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">var</span> g = generator();</div><div class="line">g.next();</div><div class="line">g.throw();</div></pre></td></tr></table></figure>
+<h4 id="next参数"><a href="#next参数" class="headerlink" title=".next参数"></a>.next参数</h4><p>生成器的.next()方法接受一个可选参数，参数稍后会作为yield表达式的返回值出现在生成器中。那就是说，yield语句与return语句不同，它是一个只有当生成器恢复时才会有值的表达式。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span>* <span class="title">gen</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">while</span>(<span class="literal">true</span>) &#123;</div><div class="line">    <span class="keyword">var</span> value = <span class="keyword">yield</span> <span class="string">'abc'</span>;</div><div class="line">    <span class="built_in">console</span>.log(value);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> g = gen();</div><div class="line">g.next(<span class="number">1</span>);   <span class="comment">// "&#123; value: null, done: false &#125;"</span></div><div class="line">g.next(<span class="number">2</span>);   <span class="comment">// "&#123; value: null, done: false &#125;"</span></div><div class="line"><span class="comment">// 2</span></div></pre></td></tr></table></figure>
+<ul>
+<li>在该示例中，调用 next 方法并传入了参数，请注意，首次调用 next 方法时没有出任何输出, 这是因为初始状态时生成器通过yield 返回了’abc’.</li>
+<li>暂停生成器，生成字符串值。</li>
+<li>此时可以暂停任意长的时间。</li>
+<li>最终，直到有人调用.next(2)，我们将这个对象(这里是数字2)存储在本地变量value中并继续执行下一行代码（输出console.log）。</li>
+</ul>
+<h4 id="语法糖"><a href="#语法糖" class="headerlink" title="语法糖"></a>语法糖</h4><p>普通yield表达式只生成一个值，而yield*表达式可以通过迭代器进行迭代生成所有的值。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span>* <span class="title">concat</span>(<span class="params">iter1, iter2</span>) </span>&#123;</div><div class="line">      <span class="keyword">for</span> (<span class="keyword">var</span> value <span class="keyword">of</span> iter1) &#123;</div><div class="line">        <span class="keyword">yield</span> value;</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">for</span> (<span class="keyword">var</span> value <span class="keyword">of</span> iter2) &#123;</div><div class="line">        <span class="keyword">yield</span> value;</div><div class="line">      &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>等效于</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span>* <span class="title">concat</span>(<span class="params">iter1, iter2</span>) </span>&#123;</div><div class="line">  <span class="keyword">yield</span>* iter1;</div><div class="line">  <span class="keyword">yield</span>* iter2;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（11）生成器 Generators，续篇/" data-id="cj1q3w48600124wvg047r32jj" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-读书笔记：深入浅出ES6（10）集合" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/20/读书笔记：深入浅出ES6（10）集合/" class="article-date">
+  <time datetime="2017-04-20T02:54:48.000Z" itemprop="datePublished">2017-04-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/20/读书笔记：深入浅出ES6（10）集合/">读书笔记：深入浅出ES6（10）集合</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>原文线上地址：<a href="http://www.infoq.com/cn/es6-in-depth/" target="_blank" rel="external">http://www.infoq.com/cn/es6-in-depth/</a></p>
+<h2 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h2><h4 id="集合与对象的区别"><a href="#集合与对象的区别" class="headerlink" title="集合与对象的区别"></a>集合与对象的区别</h4><ul>
+<li>对象的键名总是字符串（当然，ES6 中也可以是Symbol）而不能是另一个对象。</li>
+<li>对象没有有效的获知属性个数的方法。</li>
+<li>ES6中，纯粹的对象不能配合for-of循环或…操作符等语法。</li>
+<li>集合不会把数据作为属性暴露出来。也就是说，obj.key或obj[key]不能再用来访问数据了</li>
+<li>同时，不像属性，哈希表的键值不能通过原型链来继承了。</li>
+</ul>
+<h4 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h4><ul>
+<li>遍历Map或Set的顺序就是其中元素的插入顺序</li>
+</ul>
+<h4 id="自我实验"><a href="#自我实验" class="headerlink" title="自我实验"></a>自我实验</h4><ul>
+<li>在集合的key或value中使用Symbol后，虽然集合的值还能获取，但是在console.log中集合的值会被隐藏,所以用的时候调试貌似会不方便</li>
+</ul>
+<h4 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h4><p><strong>语法</strong></p>
+<ul>
+<li>new Set：创建一个新的、空的Set。</li>
+<li>new Set(iterable)：从任何可遍历数据中提取元素，构造出一个新的集合。</li>
+<li>set.size：获取集合的大小，即其中元素的个数。</li>
+<li>set.has(value)：判定集合中是否含有指定元素，返回一个布尔值。</li>
+<li>set.add(value)：添加元素。如果与已有重复，则不产生效果。</li>
+<li>set.delete(value)：删除元素。如果并不存在，则不产生效果。.add()和.delete()都会返回集合自身，所以我们可以用链式语法。</li>
+<li>set[Symbol.iterator]()：返回一个新的遍历整个集合的迭代器。一般这个方法不会被直接调用，因为实际上就是它使集合能够被遍历，也就是说，我们可以直接写for (v of set) {…}等等。</li>
+<li>set.forEach(f)：直接用代码来解释好了，它就像是for (let value of set) { f(value, value, set); }的简写，类似于数组的.forEach()方法。</li>
+<li>set.clear()：清空集合。</li>
+<li>set.keys()、set.values()和set.entries()返回各种迭代器，它们是为了兼容Map而提供的，所以我们待会儿再来看。</li>
+</ul>
+<h4 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h4><p><strong>语法</strong></p>
+<ul>
+<li>new Map：返回一个新的、空的Map。</li>
+<li>new Map(pairs)：根据所含元素形如[key, value]的数组pairs来创建一个新的Map。这里提供的pairs可以是一个已有的Map 对象，可以是一个由二元数组组成的数组，也可以是逐个生成二元数组的一个生成器，等等。</li>
+<li>map.size：返回Map中项目的个数。</li>
+<li>map.has(key)：测试一个键名是否存在，类似key in obj。</li>
+<li>map.get(key)：返回一个键名对应的值，若键名不存在则返回undefined，类似obj[key]。</li>
+<li>map.set(key, value)：添加一对新的键值对，如果键名已存在就覆盖。</li>
+<li>map.delete(key)：按键名删除一项，类似delete obj[key]。</li>
+<li>map.clear()：清空Map。</li>
+<li>map<a href="">Symbol.iterator</a>：返回遍历所有项的迭代器，每项用一个键和值组成的二元数组表示。</li>
+<li>map.forEach(f) 类似for (let [key, value] of map) { f(value, key, map); }。这里诡异的参数顺序，和Set中一样，是对应着Array.prototype.forEach()。</li>
+<li>map.keys()：返回遍历所有键的迭代器。</li>
+<li>map.values()：返回遍历所有值的迭代器。</li>
+<li>map.entries()：返回遍历所有项的迭代器，就像map<a href="">Symbol.iterator</a>。实际上，它们就是同一个方法，不同名字。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（10）集合/" data-id="cj1q3w48300114wvg7wey6c5a" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -174,7 +515,57 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（08）Symbols/" data-id="cj1hmfc0f0010y8vg811dy9xq" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（08）Symbols/" data-id="cj1q3w48f001f4wvgz2r98xnj" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-读书笔记：深入浅出ES6（07）箭头函数" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/14/读书笔记：深入浅出ES6（07）箭头函数/" class="article-date">
+  <time datetime="2017-04-14T02:54:48.000Z" itemprop="datePublished">2017-04-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/14/读书笔记：深入浅出ES6（07）箭头函数/">读书笔记：深入浅出ES6（07）箭头函数</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>原文线上地址：<a href="http://www.infoq.com/cn/es6-in-depth/" target="_blank" rel="external">http://www.infoq.com/cn/es6-in-depth/</a></p>
+<h2 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h2><h4 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// ES5</span></div><div class="line"><span class="keyword">var</span> total = values.reduce(<span class="function"><span class="keyword">function</span> (<span class="params">a, b</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> a + b;</div><div class="line"> &#125;, <span class="number">0</span>);</div><div class="line"> <span class="comment">// ES6</span></div><div class="line"> <span class="keyword">var</span> total = values.reduce(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a + b, <span class="number">0</span>);</div></pre></td></tr></table></figure>
+<h4 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h4><ul>
+<li>使用了块语句的箭头函数不会自动返回值，你需要使用return语句将所需值返回。</li>
+<li>当使用箭头函数创建普通对象时，你总是需要将对象包裹在小括号里。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 为与你玩耍的每一个小狗创建一个新的空对象</span></div><div class="line"><span class="keyword">var</span> chewToys = puppies.map(<span class="function"><span class="params">puppy</span> =&gt;</span> &#123;&#125;); <span class="comment">// 这样写会报Bug！</span></div><div class="line"><span class="keyword">var</span> chewToys = puppies.map(<span class="function"><span class="params">puppy</span> =&gt;</span> (&#123;&#125;)); <span class="comment">//</span></div></pre></td></tr></table></figure>
+<h4 id="和非箭头函数的区别"><a href="#和非箭头函数的区别" class="headerlink" title="和非箭头函数的区别"></a>和非箭头函数的区别</h4><ul>
+<li>箭头函数没有它自己的this值，箭头函数内的this值继承自外围作用域</li>
+<li>箭头函数不会获取它们自己的arguments对象（通过解构来处理参数）</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（07）箭头函数/" data-id="cj1q3w48g001h4wvgz1e2mle8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -229,415 +620,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（06）解构/" data-id="cj1hmfc05000ty8vgnhs8wpuy" class="article-share-link">Partager</a>
+      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（06）解构/" data-id="cj1q3w481000z4wvg7m94egxy" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-读书笔记：深入浅出ES6（04）模板字符串" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/04/14/读书笔记：深入浅出ES6（04）模板字符串/" class="article-date">
-  <time datetime="2017-04-14T02:54:46.000Z" itemprop="datePublished">2017-04-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/14/读书笔记：深入浅出ES6（04）模板字符串/">读书笔记：深入浅出ES6（04）模板字符串</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>原文线上地址：<a href="http://www.infoq.com/cn/es6-in-depth/" target="_blank" rel="external">http://www.infoq.com/cn/es6-in-depth/</a></p>
-<h2 id="模板字符串"><a href="#模板字符串" class="headerlink" title="模板字符串"></a>模板字符串</h2><h4 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h4><p><code>hello,${user.name}</code></p>
-<h4 id="缺陷"><a href="#缺陷" class="headerlink" title="缺陷"></a>缺陷</h4><ul>
-<li>它们不会为你自动转义特殊字符，为了避免跨站脚本漏洞，你应当像拼接普通字符串时做的那样对非置信数据进行特殊处理。</li>
-<li>它们无法很好地与国际化库（可以帮助你面向不同用户提供不同的语言）相配合，模板字符串不会格式化特定语言的数字和日期，更别提同时使用不同语言的情况了。</li>
-<li>它们不能替代模板引擎的地位，例如：Mustache、Nunjucks。（没有循环语法，不支持条件语句）</li>
-</ul>
-<h4 id="标签模板"><a href="#标签模板" class="headerlink" title="标签模板"></a>标签模板</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> message = SaferHTML<span class="string">`&lt;p&gt;<span class="subst">$&#123;bonk.sender&#125;</span> 向你示好。&lt;/p&gt;`</span>;</div></pre></td></tr></table></figure>
-<p>等效于<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> message = SaferHTML(templateData, bonk.sender);</div></pre></td></tr></table></figure></p>
-<p>SaferHTML是一个标识符，并不是ES6标准库的功能，templateData是一个不可变数组，存储着模板所有的字符串部分，由JS引擎为我们创建。</p>
-<p><strong>定义SaferHTML</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">SaferHTML</span>(<span class="params">templateData</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> s = templateData[<span class="number">0</span>];</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">1</span>; i &lt; <span class="built_in">arguments</span>.length; i++) &#123;</div><div class="line">    <span class="keyword">var</span> arg = <span class="built_in">String</span>(<span class="built_in">arguments</span>[i]);</div><div class="line">    <span class="comment">// 转义占位符中的特殊字符。</span></div><div class="line">    s += arg.replace(<span class="regexp">/&amp;/g</span>, <span class="string">"&amp;"</span>)</div><div class="line">            .replace(<span class="regexp">/&lt;/g</span>, <span class="string">"&lt;"</span>)</div><div class="line">            .replace(<span class="regexp">/&lt;/g</span>, <span class="string">"&gt;"</span>);</div><div class="line">    <span class="comment">// 不转义模板中的特殊字符。</span></div><div class="line">    s += templateData[i];</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> s;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（04）模板字符串/" data-id="cj1hmfc0d000yy8vgg3rq9o9o" class="article-share-link">Partager</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-读书笔记：深入浅出ES6（03）生成器 Generators" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/04/14/读书笔记：深入浅出ES6（03）生成器 Generators/" class="article-date">
-  <time datetime="2017-04-14T02:54:45.000Z" itemprop="datePublished">2017-04-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/14/读书笔记：深入浅出ES6（03）生成器 Generators/">读书笔记：深入浅出ES6（03）生成器 Generators</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>原文线上地址：<a href="http://www.infoq.com/cn/es6-in-depth/" target="_blank" rel="external">http://www.infoq.com/cn/es6-in-depth/</a></p>
-<h2 id="生成器-Generators"><a href="#生成器-Generators" class="headerlink" title="生成器 Generators"></a>生成器 Generators</h2><h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span>* <span class="title">quips</span>(<span class="params">name</span>) </span>&#123;</div><div class="line">  <span class="keyword">yield</span> <span class="string">"你好 "</span> + name + <span class="string">"!"</span>;</div><div class="line">  <span class="keyword">yield</span> <span class="string">"希望你能喜欢这篇介绍ES6的译文"</span>;</div><div class="line">  <span class="keyword">yield</span> <span class="string">"我们下次再见！"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> iter = quips(<span class="string">"jorendorff"</span>);    <span class="comment">//[object Generator]</span></div><div class="line">iter.next()     <span class="comment">//&#123; value: "你好 jorendorff!", done: false &#125;</span></div><div class="line">iter.next()     <span class="comment">//&#123; value: "希望你能喜欢这篇介绍ES6的译文", done: false &#125;</span></div><div class="line">iter.next()     <span class="comment">//&#123; value: "我们下次再见！", done: false &#125;</span></div><div class="line">iter.next()      <span class="comment">//&#123; value: undefined, done: true &#125;</span></div></pre></td></tr></table></figure>
-<h3 id="普通函数和生成器函数区别"><a href="#普通函数和生成器函数区别" class="headerlink" title="普通函数和生成器函数区别"></a>普通函数和生成器函数区别</h3><ul>
-<li>普通函数使用function声明，而生成器函数使用function*声明。</li>
-<li>在生成器函数内部，有一种类似return的语法：关键字yield。二者的区别是，普通函数只可以return一次，而生成器函数可以yield多次（当然也可以只yield一次）。在生成器的执行过程中，遇到yield表达式立即暂停，后续可恢复执行状态。</li>
-</ul>
-<h3 id="How-it-work"><a href="#How-it-work" class="headerlink" title="How it work"></a>How it work</h3><ol>
-<li>当你调用一个生成器函数时，它并非立即执行，而是返回一个已暂停的生成器对象。你可将这个生成器对象视为一次函数调用，只不过立即冻结了，它恰好在生成器函数的最顶端的第一行代码之前冻结了。</li>
-<li>每当你调用生成器对象的.next()方法时，函数调用将其自身解冻并一直运行到下一个yield表达式，再次暂停。</li>
-<li>调用最后一个iter.next()时，我们最终抵达生成器函数的末尾，所以返回结果中done的值为true。抵达函数的末尾意味着没有返回值，所以返回结果中value的值为undefined。</li>
-</ol>
-<h3 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h3><ul>
-<li><strong>生成器不是线程</strong> 当生成器运行时，它和调用者处于同一线程中，拥有确定的连续执行顺序，永不并发</li>
-<li><strong>生成器是迭代器</strong> 所有的生成器都有内建.next()和[Symbol.iterator]()方法的实现。你只须编写循环部分的行为。</li>
-</ul>
-<h3 id="前一章的例子用生成器改写："><a href="#前一章的例子用生成器改写：" class="headerlink" title="前一章的例子用生成器改写："></a>前一章的例子用生成器改写：</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span>* <span class="title">students</span>(<span class="params">index</span>)</span>&#123;</div><div class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">1</span>;i&lt;=index;i++)&#123;</div><div class="line">    <span class="keyword">yield</span> i</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> g = students(<span class="number">5</span>);</div><div class="line"><span class="built_in">console</span>.log(g.next());</div><div class="line"><span class="built_in">console</span>.log(g.next());</div><div class="line"><span class="built_in">console</span>.log(g.next());</div><div class="line"><span class="built_in">console</span>.log(g.next());</div><div class="line"><span class="built_in">console</span>.log(g.next());</div><div class="line"><span class="built_in">console</span>.log(g.next());</div></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（03）生成器 Generators/" data-id="cj1hmfc0c000xy8vgjhw4jqjh" class="article-share-link">Partager</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-读书笔记：深入浅出ES6（02）迭代器和for-of循环" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/04/14/读书笔记：深入浅出ES6（02）迭代器和for-of循环/" class="article-date">
-  <time datetime="2017-04-14T02:54:44.000Z" itemprop="datePublished">2017-04-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/14/读书笔记：深入浅出ES6（02）迭代器和for-of循环/">读书笔记：深入浅出ES6（02）迭代器和for-of循环</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>原文线上地址：<a href="http://www.infoq.com/cn/es6-in-depth/">http://www.infoq.com/cn/es6-in-depth/</a></p>
-<h2 id="迭代器和for-of循环"><a href="#迭代器和for-of循环" class="headerlink" title="迭代器和for-of循环"></a>迭代器和for-of循环</h2><h3 id="forEach缺点"><a href="#forEach缺点" class="headerlink" title="forEach缺点:"></a>forEach缺点:</h3><ul>
-<li>ES5的forEach无法break中断，也不能通过return语句返回到外层函数</li>
-</ul>
-<h3 id="for-in-缺点："><a href="#for-in-缺点：" class="headerlink" title="for-in 缺点："></a>for-in 缺点：</h3><ul>
-<li>index的值是字符串的’0’,’1’,’2’</li>
-<li>会遍历到<strong>自定义</strong>的属性（包括原型链上的自定义属性）<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>];</div><div class="line">arr.name = <span class="string">"fff"</span>;</div><div class="line"></div><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> index <span class="keyword">in</span> arr)&#123;</div><div class="line">  <span class="built_in">console</span>.log(arr[index]) <span class="comment">//a,b,c,fff</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<ul>
-<li>无法保证遍历顺序</li>
-</ul>
-<h3 id="for-of-优势"><a href="#for-of-优势" class="headerlink" title="for-of 优势"></a>for-of 优势</h3><ul>
-<li>支持大多数类数组对象，如DOM NodeList对象</li>
-<li>支持字符串遍历</li>
-<li>支持Map和Set对象<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (<span class="keyword">var</span> [key, value] <span class="keyword">of</span> phoneBookMap) &#123;</div><div class="line">   <span class="built_in">console</span>.log(key + <span class="string">"'s phone number is: "</span> + value);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><ul>
-<li>使jquery支持for-of循环<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">jQuery.prototype[<span class="built_in">Symbol</span>.iterator] = <span class="built_in">Array</span>.prototype[<span class="built_in">Symbol</span>.iterator];</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>for-of循环首先调用集合的[Symbol.iterator]()方法，紧接着返回一个新的迭代器对象。迭代器对象可以是任意具有next()方法的对象；for-of循环将重复调用这个方法，每次循环调用一次。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> students = &#123;&#125;</div><div class="line">students[<span class="built_in">Symbol</span>.iterator] = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">let</span> index = <span class="number">1</span>;</div><div class="line">  <span class="keyword">return</span> &#123;</div><div class="line">    next() &#123;</div><div class="line">      <span class="keyword">return</span> &#123;<span class="attr">done</span>: index&gt;<span class="number">100</span>, <span class="attr">value</span>: index++&#125;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> i <span class="keyword">of</span> students) &#123;</div><div class="line">  <span class="built_in">console</span>.log(i);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-        
-          <p class="article-more-link">
-            <a href="/2017/04/14/读书笔记：深入浅出ES6（02）迭代器和for-of循环/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（02）迭代器和for-of循环/" data-id="cj1hmfc09000vy8vgdcbj9cnj" class="article-share-link">Partager</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-js片段2" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/04/01/js片段2/" class="article-date">
-  <time datetime="2017-04-01T09:56:51.000Z" itemprop="datePublished">2017-04-01</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/01/js片段2/">js片段2</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="获取伪类的样式"><a href="#获取伪类的样式" class="headerlink" title="获取伪类的样式"></a>获取伪类的样式</h2><p>参考文章：<a href="http://www.cnblogs.com/libin-1/p/6339978.html" target="_blank" rel="external">http://www.cnblogs.com/libin-1/p/6339978.html</a><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> pEle = <span class="built_in">document</span>.getElementsByTagName(<span class="string">'div'</span>)[<span class="number">0</span>];</div><div class="line"><span class="built_in">console</span>.log(<span class="built_in">window</span>.getComputedStyle(pEle,<span class="string">':after'</span>).color)</div></pre></td></tr></table></figure></p>
-<hr>
-<h2 id="encodeHTML-amp-decodeHTML"><a href="#encodeHTML-amp-decodeHTML" class="headerlink" title="encodeHTML &amp; decodeHTML"></a>encodeHTML &amp; decodeHTML</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> HtmlUtil = &#123;</div><div class="line">    <span class="comment">/*1.用浏览器内部转换器实现html转码*/</span></div><div class="line">    htmlEncode:<span class="function"><span class="keyword">function</span> (<span class="params">html</span>)</span>&#123;</div><div class="line">        <span class="comment">//1.首先动态创建一个容器标签元素，如DIV</span></div><div class="line">        <span class="keyword">var</span> temp = <span class="built_in">document</span>.createElement (<span class="string">"div"</span>);</div><div class="line">        <span class="comment">//2.然后将要转换的字符串设置为这个元素的innerText(ie支持)或者textContent(火狐，google支持)</span></div><div class="line">        (temp.textContent != <span class="literal">undefined</span> ) ? (temp.textContent = html) : (temp.innerText = html);</div><div class="line">        <span class="comment">//3.最后返回这个元素的innerHTML，即得到经过HTML编码转换的字符串了</span></div><div class="line">        <span class="keyword">var</span> output = temp.innerHTML;</div><div class="line">        temp = <span class="literal">null</span>;</div><div class="line">        <span class="keyword">return</span> output;</div><div class="line">    &#125;,</div><div class="line">    <span class="comment">/*2.用浏览器内部转换器实现html解码*/</span></div><div class="line">    htmlDecode:<span class="function"><span class="keyword">function</span> (<span class="params">text</span>)</span>&#123;</div><div class="line">        <span class="comment">//1.首先动态创建一个容器标签元素，如DIV</span></div><div class="line">        <span class="keyword">var</span> temp = <span class="built_in">document</span>.createElement(<span class="string">"div"</span>);</div><div class="line">        <span class="comment">//2.然后将要转换的字符串设置为这个元素的innerHTML(ie，火狐，google都支持)</span></div><div class="line">        temp.innerHTML = text;</div><div class="line">        <span class="comment">//3.最后返回这个元素的innerText(ie支持)或者textContent(火狐，google支持)，即得到经过HTML解码的字符串了。</span></div><div class="line">        <span class="keyword">var</span> output = temp.innerText || temp.textContent;</div><div class="line">        temp = <span class="literal">null</span>;</div><div class="line">        <span class="keyword">return</span> output;</div><div class="line">    &#125;,</div><div class="line">    <span class="comment">/*3.用正则表达式实现html转码*/</span></div><div class="line">    htmlEncodeByRegExp:<span class="function"><span class="keyword">function</span> (<span class="params">str</span>)</span>&#123;  </div><div class="line">         <span class="keyword">var</span> s = <span class="string">""</span>;</div><div class="line">         <span class="keyword">if</span>(str.length == <span class="number">0</span>) <span class="keyword">return</span> <span class="string">""</span>;</div><div class="line">         s = str.replace(<span class="regexp">/&amp;/g</span>,<span class="string">"&amp;amp;"</span>);</div><div class="line">         s = s.replace(<span class="regexp">/&lt;/g</span>,<span class="string">"&amp;lt;"</span>);</div><div class="line">         s = s.replace(<span class="regexp">/&gt;/g</span>,<span class="string">"&amp;gt;"</span>);</div><div class="line">         s = s.replace(<span class="regexp">/ /g</span>,<span class="string">"&amp;nbsp;"</span>);</div><div class="line">         s = s.replace(<span class="regexp">/\'/g</span>,<span class="string">"&amp;#39;"</span>);</div><div class="line">         s = s.replace(<span class="regexp">/\"/g</span>,<span class="string">"&amp;quot;"</span>);</div><div class="line">         <span class="keyword">return</span> s;  </div><div class="line">   &#125;,</div><div class="line">   <span class="comment">/*4.用正则表达式实现html解码*/</span></div><div class="line">   htmlDecodeByRegExp:<span class="function"><span class="keyword">function</span> (<span class="params">str</span>)</span>&#123;  </div><div class="line">         <span class="keyword">var</span> s = <span class="string">""</span>;</div><div class="line">         <span class="keyword">if</span>(str.length == <span class="number">0</span>) <span class="keyword">return</span> <span class="string">""</span>;</div><div class="line">         s = str.replace(<span class="regexp">/&amp;amp;/g</span>,<span class="string">"&amp;"</span>);</div><div class="line">         s = s.replace(<span class="regexp">/&amp;lt;/g</span>,<span class="string">"&lt;"</span>);</div><div class="line">         s = s.replace(<span class="regexp">/&amp;gt;/g</span>,<span class="string">"&gt;"</span>);</div><div class="line">         s = s.replace(<span class="regexp">/&amp;nbsp;/g</span>,<span class="string">" "</span>);</div><div class="line">         s = s.replace(<span class="regexp">/&amp;#39;/g</span>,<span class="string">"\'"</span>);</div><div class="line">         s = s.replace(<span class="regexp">/&amp;quot;/g</span>,<span class="string">"\""</span>);</div><div class="line">         <span class="keyword">return</span> s;  </div><div class="line">   &#125;</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
-<hr>
-<h2 id="replace-参数"><a href="#replace-参数" class="headerlink" title="replace 参数"></a>replace 参数</h2><p>语法：str.replace( regexp|substr , newSubStr|function )</p>
-<p>当第二个参数为一个function时，function的第一个参数为正则匹配到的值，第二个参数是第一个子表达式所匹配的值，依次类推</p>
-<h2 id="数组扁平化"><a href="#数组扁平化" class="headerlink" title="数组扁平化"></a>数组扁平化</h2><h4 id="es5-reduce"><a href="#es5-reduce" class="headerlink" title="es5 reduce"></a>es5 reduce</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> list1 = [[<span class="number">0</span>, <span class="number">1</span>], [<span class="number">2</span>, <span class="number">3</span>], [<span class="number">4</span>, <span class="number">5</span>]];</div><div class="line"><span class="keyword">var</span> list2 = [<span class="number">0</span>, [<span class="number">1</span>, [<span class="number">2</span>, [<span class="number">3</span>, [<span class="number">4</span>, [<span class="number">5</span>]]]]]];</div><div class="line"></div><div class="line"><span class="keyword">const</span> flatten = <span class="function"><span class="params">arr</span> =&gt;</span> arr.reduce(</div><div class="line">  <span class="function">(<span class="params">acc, val</span>) =&gt;</span> acc.concat(</div><div class="line">    <span class="built_in">Array</span>.isArray(val) ? flatten(val) : val</div><div class="line">  ),</div><div class="line">  []</div><div class="line">);</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">flatten2</span>(<span class="params">arr</span>)</span>&#123;</div><div class="line">  <span class="keyword">return</span> arr.reduce(<span class="function"><span class="keyword">function</span>(<span class="params">acc,val</span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> acc.concat(<span class="built_in">Array</span>.isArray(val) ? flatten2(val) : val);</div><div class="line">  &#125;,[])</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="built_in">console</span>.log(flatten2(list2));</div></pre></td></tr></table></figure>
-<h4 id="es3"><a href="#es3" class="headerlink" title="es3"></a>es3</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> list1 = [[<span class="number">0</span>, <span class="number">1</span>], [<span class="number">2</span>, <span class="number">3</span>], [<span class="number">4</span>, <span class="number">5</span>]];</div><div class="line"><span class="keyword">var</span> list2 = [<span class="number">0</span>, [<span class="number">1</span>, [<span class="number">2</span>,<span class="number">9</span>, [<span class="number">3</span>, [<span class="number">4</span>, [<span class="number">5</span>]]]]]];</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">isArray</span>(<span class="params">arr</span>)</span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="built_in">Object</span>.prototype.toString.call(arr)===<span class="string">'[object Array]'</span>;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">flatten</span>(<span class="params">arr,temp</span>)</span>&#123;</div><div class="line">    temp = temp || [];</div><div class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">0</span>;i&lt;arr.length;i++)&#123;</div><div class="line">        <span class="keyword">if</span>( !isArray(arr[i]) )&#123;</div><div class="line">        temp.push(arr[i])</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span>&#123;</div><div class="line">        flatten(arr[i],temp)</div><div class="line">    &#125;</div><div class="line">    &#125;</div><div class="line">  <span class="keyword">return</span> temp</div><div class="line">&#125;</div><div class="line"><span class="built_in">console</span>.log(flatten(list1));</div></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/01/js片段2/" data-id="cj1hmfbzn0006y8vg3fvsdzjk" class="article-share-link">Partager</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-数组去重" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/02/27/数组去重/" class="article-date">
-  <time datetime="2017-02-27T10:47:14.000Z" itemprop="datePublished">2017-02-27</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/27/数组去重/">数组去重</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>参考地址：<a href="https://www.toobug.net/article/array_unique_in_javascript.html">https://www.toobug.net/article/array_unique_in_javascript.html</a></p>
-<p>先说结论：includes，Map，Set  能正确处理去重</p>
-<h3 id="测试数据："><a href="#测试数据：" class="headerlink" title="测试数据："></a>测试数据：</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">1</span>,<span class="string">'1'</span>,<span class="string">'1'</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="string">'0'</span>,<span class="string">'0'</span>,<span class="literal">undefined</span>,<span class="literal">undefined</span>,<span class="literal">null</span>,<span class="literal">null</span>,<span class="literal">NaN</span>,<span class="literal">NaN</span>,&#123;&#125;,&#123;&#125;,[],[],/a/,/a/]</div><div class="line"><span class="built_in">console</span>.log(unique(arr));</div></pre></td></tr></table></figure>
-<p>测试中没有定义对象的比较方法，因此默认情况下，对象不去重是正确的结果，去重是不正确的结果。</p>
-<h3 id="坑："><a href="#坑：" class="headerlink" title="坑："></a>坑：</h3><ul>
-<li><code>===</code>不能处理<code>NaN</code>的相等性判断</li>
-<li>对象之间的相等判断</li>
-</ul>
-<h3 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// number</span></div><div class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> <span class="literal">NaN</span>);</div><div class="line"></div><div class="line"><span class="comment">// 全都是false</span></div><div class="line"><span class="number">0</span> &lt; <span class="literal">NaN</span>;</div><div class="line"><span class="number">0</span> &gt; <span class="literal">NaN</span>;</div><div class="line"><span class="number">0</span> == <span class="literal">NaN</span>;</div><div class="line"><span class="number">0</span> === <span class="literal">NaN</span>;</div><div class="line"><span class="literal">NaN</span>==<span class="literal">NaN</span></div><div class="line"><span class="literal">NaN</span>===<span class="literal">NaN</span></div></pre></td></tr></table></figure>
-<h3 id="处理方案："><a href="#处理方案：" class="headerlink" title="处理方案："></a>处理方案：</h3><p>NaN通过isNaN(a) 方法进行比较<br>对象可以通过JSON.stringify()对对象进行序列化之后再比较字符串（可能有坑）<br>发现的坑：</p>
-<ul>
-<li>如果对象的值为undefined，则该键值对会被忽略<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> f = &#123;<span class="attr">d</span>:<span class="literal">undefined</span>,<span class="attr">f</span>:<span class="string">'ss'</span>&#125;</div><div class="line"><span class="built_in">JSON</span>.stringify(f) <span class="comment">//"&#123;"f":"ss"&#125;"</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-<hr>
-<p>通过规范（<a href="http://www.ecma-international.org/ecma-262/6.0/#sec-array.prototype.indexof">http://www.ecma-international.org/ecma-262/6.0/#sec-array.prototype.indexof</a> ）<br>我们知道了indexOf()使用的是严格比较，也就是===。</p>
-<p>includes()又是用什么方法来比较的呢？如果想当然的话，会觉得肯定跟indexOf()一样喽。但是，程序员的世界里最怕想当然。翻一翻规范，发现它其实是使用的另一种比较方法，叫作“SameValueZero”比较（<a href="https://tc39.github.io/ecma262/2016/#sec-samevaluezero）。">https://tc39.github.io/ecma262/2016/#sec-samevaluezero）。</a></p>
-<blockquote>
-<p>If Type(x) is different from Type(y), return false.<br>If Type(x) is Number, then<br>a. If x is NaN and y is NaN, return true.<br>b. If x is +0 and y is -0, return true.<br>c. If x is -0 and y is +0, return true.<br>d. If x is the same Number value as y, return true.<br>e. Return false.<br>Return SameValueNonNumber(x, y).</p>
-</blockquote>
-        
-          <p class="article-more-link">
-            <a href="/2017/02/27/数组去重/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/02/27/数组去重/" data-id="cj1hmfc04000ry8vg3dz2kd7j" class="article-share-link">Partager</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-我的开发环境" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/02/10/我的开发环境/" class="article-date">
-  <time datetime="2017-02-10T10:29:53.000Z" itemprop="datePublished">2017-02-10</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/10/我的开发环境/">我的开发环境</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong> 听过 &lt; demo过 &lt; 实际工作用过 &lt; 实际工作中被坑过 &lt; 实际工作中被多次坑过或者深入研究总结过 </strong></p>
-<h2 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h2><ul>
-<li>为知笔记</li>
-<li>alfred （文件查找）</li>
-<li>shiftlt（窗口定位）</li>
-<li>lantern （懂得）</li>
-<li>vscode （编辑器）</li>
-<li>charles （mac下的代理工具）</li>
-<li>iterm （命令行强化）</li>
-<li>zsh （命令行强化）</li>
-<li>cheetsheet （快捷键查看工具）</li>
-</ul>
-<h2 id="chrome插件"><a href="#chrome插件" class="headerlink" title="chrome插件"></a>chrome插件</h2><ul>
-<li>Adblock Plus （广告屏蔽）</li>
-<li>JSON Formatter （JSON格式化）</li>
-<li>Octotree （GITHUB树形菜单）</li>
-<li>Postman （接口测试工具）</li>
-<li>Postman Interceptor （postman插件，用于在请求中带Cookie登录信息）</li>
-<li>Quick QR Code Generator （生成二维码插件）</li>
-<li>Vue.js devtools （vue开发工具）</li>
-<li>掘金 （文章浏览）</li>
-</ul>
-<h2 id="使用zsh"><a href="#使用zsh" class="headerlink" title="使用zsh"></a>使用zsh</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Cat /etc/shells         //查看安装的shell列表</div><div class="line">Chsh -s /bin/zsh     // 修改登录的shell, chsh -s其实修改的就是/etc/passwd文件里和你的用户名相对应的那一行</div><div class="line">重启shell</div></pre></td></tr></table></figure>
-<h2 id="Vscode-配置"><a href="#Vscode-配置" class="headerlink" title="Vscode 配置"></a>Vscode 配置</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="string">"terminal.integrated.shell.osx"</span>: <span class="string">"/bin/zsh"</span>,</div><div class="line">    <span class="string">"editor.wordSeparators"</span>: <span class="string">"`~!@#$%^&amp;*()=+[&#123;]&#125;\\|;:'\",.&lt;&gt;/?"</span>,</div><div class="line">    <span class="string">"files.associations"</span>: &#123;</div><div class="line">        <span class="string">"*.wxml"</span>: <span class="string">"html"</span>,</div><div class="line">        <span class="string">"*.wxss"</span>: <span class="string">"css"</span></div><div class="line">    &#125;,</div><div class="line">    <span class="string">"editor.tabSize"</span>: <span class="number">2</span>,</div><div class="line">    <span class="string">"editor.renderWhitespace"</span>: <span class="string">"all"</span>,</div><div class="line">    <span class="string">"workbench.colorTheme"</span>: <span class="string">"Material Theme"</span>,</div><div class="line">    <span class="string">"files.autoSave"</span>: <span class="string">"afterDelay"</span>,</div><div class="line">    <span class="string">"workbench.iconTheme"</span>: <span class="string">"vscode-icons"</span>,</div><div class="line">    <span class="string">"emmet.syntaxProfiles"</span>: &#123;</div><div class="line">        <span class="string">"vue-html"</span>: <span class="string">"html"</span>,</div><div class="line">        <span class="string">"vue"</span>: <span class="string">"html"</span></div><div class="line">    &#125;,</div><div class="line">    <span class="string">"eslint.validate"</span>: [</div><div class="line">        <span class="string">"javascript"</span>,</div><div class="line">        <span class="string">"javascriptreact"</span>,</div><div class="line">        <span class="string">"html"</span>,</div><div class="line">        <span class="string">"vue"</span></div><div class="line">    ]</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
-<h2 id="Vscode插件"><a href="#Vscode插件" class="headerlink" title="Vscode插件"></a>Vscode插件</h2><ul>
-<li>vscode-icon  icon美化</li>
-<li>vscode-wechat  支持小程序语法</li>
-<li>js-css-html formatter  格式化工具</li>
-<li>git history git历史记录的查看</li>
-<li>vetur vue语法支持，可以配合eslint做代码检查，同时支持.vue文件中的scss，less语法</li>
-<li>eslint 配合npm包<strong> eslint-config-vue </strong> 对vue文件代码进行检查</li>
-</ul>
-<p>ctrl-shift-p  呼出命令行 输入path 将code命令添加进shell</p>
-<h2 id="homebrew"><a href="#homebrew" class="headerlink" title="homebrew"></a>homebrew</h2><p>安装命令：<code>/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</code><br>安装失败的话：把/usr/local/.git 目录删了即可，就是执行rm -rf /usr/local/.git</p>
-<h2 id="nvm-node包管理工具"><a href="#nvm-node包管理工具" class="headerlink" title="nvm node包管理工具"></a>nvm node包管理工具</h2><ol>
-<li><code>curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash</code></li>
-<li><code>export NVM_DIR=&quot;$HOME/.nvm&quot; [ -s &quot;$NVM_DIR/nvm.sh&quot; ] &amp;&amp; . &quot;$NVM_DIR/nvm.sh&quot; # This loads nvm</code></li>
-<li><code>nvm ls-remote</code></li>
-<li><code>nvm alias default node</code></li>
-</ol>
-<h2 id="node包"><a href="#node包" class="headerlink" title="node包"></a>node包</h2><p>vue-cli:需要安装node-sass <code>npm i sass-loader node-sass -D</code><br>node-sass : npm run dev 失败 -&gt; npm rebuild node-sass</p>
-<h2 id="允许第三方来源软件"><a href="#允许第三方来源软件" class="headerlink" title="允许第三方来源软件"></a>允许第三方来源软件</h2><p><code>sudo spctl --master-disable</code></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/02/10/我的开发环境/" data-id="cj1hmfc02000oy8vgfbqo4lvk" class="article-share-link">Partager</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-npm命令" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/02/10/npm命令/" class="article-date">
-  <time datetime="2017-02-10T10:29:01.000Z" itemprop="datePublished">2017-02-10</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/10/npm命令/">npm命令</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>cnpm 设置：<br>alias cnpm=”npm –registry=<a href="https://registry.npm.taobao.org" target="_blank" rel="external">https://registry.npm.taobao.org</a> \<br>–cache=$HOME/.npm/.cache/cnpm \<br>–disturl=<a href="https://npm.taobao.org/dist" target="_blank" rel="external">https://npm.taobao.org/dist</a> \<br>–userconfig=$HOME/.cnpmrc”</p>
-<p>npm help 查看帮助<br>npm ls  显示安装的包</p>
-<p>命令配置：   不带值默认设置true<br>会查看到安装包所包含的所有依赖文件； npm ls –global<br>只查看顶级安装包； npm ls –global –depth=0</p>
-<p>npm bin -g :包的安装路径<br>npm cache clean:删除安装包缓存<br>npm dedupe 包去重</p>
-<p>npm install 不同版本<br>npm install aa@latest<br>npm install aa@0.1.1<br>npm install aa@”&gt;=0.1.0 &lt;0.2.0”<br>npm install aa –force 强制拉取远程包</p>
-<p>npm outdated 包过期检查</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/02/10/npm命令/" data-id="cj1hmfbzt000fy8vgej5yig5k" class="article-share-link">Partager</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li></ul>
 
     </footer>
   </div>
@@ -650,7 +636,7 @@
 
 
   <nav id="page-nav">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">__('next') &raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">__('next') &raquo;</a>
   </nav>
 </section>
           
@@ -661,7 +647,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Mot-clés</h3>
+    <h3 class="widget-title">Tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/koa/">koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/weixin/">weixin</a></li></ul>
     </div>
@@ -671,7 +657,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Nuage de mot-clés</h3>
+    <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
       <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/es6/" style="font-size: 16.67px;">es6</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/koa/" style="font-size: 10px;">koa</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/nodejs/" style="font-size: 13.33px;">nodejs</a> <a href="/tags/tools/" style="font-size: 13.33px;">tools</a> <a href="/tags/weixin/" style="font-size: 13.33px;">weixin</a>
     </div>
@@ -680,7 +666,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archives</h3>
+    <h3 class="widget-title">Arkiv</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li></ul>
     </div>
@@ -690,28 +676,28 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Articles récents</h3>
+    <h3 class="widget-title">Siste innlegg</h3>
     <div class="widget">
       <ul>
         
           <li>
-            <a href="/2017/04/14/读书笔记：深入浅出ES6（07）箭头函数/">读书笔记：深入浅出ES6（07）箭头函数</a>
+            <a href="/2017/04/20/js函数队列/">js函数队列</a>
           </li>
         
           <li>
-            <a href="/2017/04/14/读书笔记：深入浅出ES6（08）Symbols/">读书笔记：深入浅出ES6（08）Symbols</a>
+            <a href="/2017/04/20/读书笔记：深入浅出ES6（16）模块 Modules/">读书笔记：深入浅出ES6（16）模块 Modules</a>
           </li>
         
           <li>
-            <a href="/2017/04/14/读书笔记：深入浅出ES6（06）解构/">读书笔记：深入浅出ES6（06）解构</a>
+            <a href="/2017/04/20/读书笔记：深入浅出ES6（14）let & const/">读书笔记：深入浅出ES6（14）let &amp; const</a>
           </li>
         
           <li>
-            <a href="/2017/04/14/读书笔记：深入浅出ES6（04）模板字符串/">读书笔记：深入浅出ES6（04）模板字符串</a>
+            <a href="/2017/04/20/读书笔记：深入浅出ES6（13）类 Class/">读书笔记：深入浅出ES6（13）类 Class</a>
           </li>
         
           <li>
-            <a href="/2017/04/14/读书笔记：深入浅出ES6（03）生成器 Generators/">读书笔记：深入浅出ES6（03）生成器 Generators</a>
+            <a href="/2017/04/20/读书笔记：深入浅出ES6（12）代理 Proxies/">读书笔记：深入浅出ES6（12）代理 Proxies</a>
           </li>
         
       </ul>
@@ -727,7 +713,7 @@
   <div class="outer">
     <div id="footer-info" class="inner">
       &copy; 2017 pavelShen<br>
-      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
 </footer>
