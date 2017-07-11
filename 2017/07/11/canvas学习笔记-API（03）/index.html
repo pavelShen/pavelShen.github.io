@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>canvas学习笔记 - API（03） | pavelShen的个人博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="图片引入图像到canvas里需要以下两步基本操作：
+获得一个指向HTMLImageElement的对象或者另一个canvas元素的引用作为源，也可以通过提供一个URL的方式来使用图片
+使用drawImage()函数将图片绘制到画布上
+
+drawImage绘制drawImage(image, x, y) 其中 image 是 image 或者 canvas 对象，x 和 y 是其在目标 canvas">
+<meta property="og:type" content="article">
+<meta property="og:title" content="canvas学习笔记 - API（03）">
+<meta property="og:url" content="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（03）/index.html">
+<meta property="og:site_name" content="pavelShen的个人博客">
+<meta property="og:description" content="图片引入图像到canvas里需要以下两步基本操作：
+获得一个指向HTMLImageElement的对象或者另一个canvas元素的引用作为源，也可以通过提供一个URL的方式来使用图片
+使用drawImage()函数将图片绘制到画布上
+
+drawImage绘制drawImage(image, x, y) 其中 image 是 image 或者 canvas 对象，x 和 y 是其在目标 canvas">
+<meta property="og:updated_time" content="2017-07-11T06:41:10.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="canvas学习笔记 - API（03）">
+<meta name="twitter:description" content="图片引入图像到canvas里需要以下两步基本操作：
+获得一个指向HTMLImageElement的对象或者另一个canvas元素的引用作为源，也可以通过提供一个URL的方式来使用图片
+使用drawImage()函数将图片绘制到画布上
+
+drawImage绘制drawImage(image, x, y) 其中 image 是 image 或者 canvas 对象，x 和 y 是其在目标 canvas">
+  
+    <link rel="alternate" href="/atom.xml" title="pavelShen的个人博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  
+    <div id="container">
+      <div id="wrap">
+        <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">pavelShen的个人博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">JUST FOR FUN</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/demo">Demo</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/pavelShen"></form>
+      </div>
+    </div>
+  </div>
+</header>
+        <div class="outer">
+          <section id="main"><article id="post-canvas学习笔记-API（03）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/11/canvas学习笔记-API（03）/" class="article-date">
+  <time datetime="2017-07-11T06:27:31.000Z" itemprop="datePublished">2017-07-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      canvas学习笔记 - API（03）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h2><h3 id="引入图像到canvas里需要以下两步基本操作："><a href="#引入图像到canvas里需要以下两步基本操作：" class="headerlink" title="引入图像到canvas里需要以下两步基本操作："></a>引入图像到canvas里需要以下两步基本操作：</h3><ol>
+<li>获得一个指向HTMLImageElement的对象或者另一个canvas元素的引用作为源，也可以通过提供一个URL的方式来使用图片</li>
+<li>使用drawImage()函数将图片绘制到画布上</li>
+</ol>
+<h3 id="drawImage"><a href="#drawImage" class="headerlink" title="drawImage"></a>drawImage</h3><h5 id="绘制"><a href="#绘制" class="headerlink" title="绘制"></a>绘制</h5><p>drawImage(image, x, y) 其中 image 是 image 或者 canvas 对象，x 和 y 是其在目标 canvas 里的起始坐标。</p>
+<h5 id="缩放"><a href="#缩放" class="headerlink" title="缩放"></a>缩放</h5><p>drawImage(image, x, y, width, height)  这个方法多了2个参数：width 和 height，这两个参数用来控制 当像canvas画入时应该缩放的大小</p>
+<h5 id="切片"><a href="#切片" class="headerlink" title="切片"></a>切片</h5><p>drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)<br>第一个参数和其它的是相同的，都是一个图像或者另一个 canvas 的引用。其它8个参数最好是参照右边的图解，前4个是定义图像源的切片位置和大小，后4个则是定义切片的目标显示位置和大小。</p>
+<h3 id="源"><a href="#源" class="headerlink" title="源"></a>源</h3><ul>
+<li>HTMLImageElement  这些图片是由Image()函数构造出来的，或者任何的<code>&lt;img&gt;</code>元素</li>
+<li>HTMLVideoElement   用一个HTML的 <code>&lt;video&gt;</code>元素作为你的图片源，可以从视频中抓取当前帧作为一个图像</li>
+<li>HTMLCanvasElement  可以使用另一个 <code>&lt;canvas&gt;</code> 元素作为你的图片源。</li>
+<li>ImageBitmap    这是一个高性能的位图，可以低延迟地绘制，它可以从上述的所有源以及其它几种源中生成。</li>
+</ul>
+<h3 id="使用相同页面内的图片"><a href="#使用相同页面内的图片" class="headerlink" title="使用相同页面内的图片"></a>使用相同页面内的图片</h3><ul>
+<li>document.images集合</li>
+<li>document.getElementsByTagName()方法</li>
+<li>如果你知道你想使用的指定图片的ID，你可以用document.getElementById()获得这个图片</li>
+</ul>
+<h3 id="使用其它域名下的图片"><a href="#使用其它域名下的图片" class="headerlink" title="使用其它域名下的图片"></a>使用其它域名下的图片</h3><p>在 HTMLImageElement上使用crossOrigin属性，你可以请求加载其它域名上的图片。如果图片的服务器允许跨域访问这个图片，那么你可以使用这个图片而不污染canvas，否则，使用这个图片将会污染canvas。</p>
+<p>示例代码<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&lt;img src="http://n1image.hjfile.cn/mh/2016/09/02/a0c9ca472e8ae8e26e34a31d98c074ce.jpg" id="a" crossorigin="anonymous"&gt;&lt;/img&gt;</div><div class="line">&lt;canvas id="myCanvas" width="500" height="550" style="border:1px solid #d3d3d3;"&gt;&lt;/canvas&gt;</div><div class="line">&lt;script&gt;</div><div class="line">var c=document.getElementById("myCanvas");</div><div class="line">var ctx=c.getContext("2d");</div><div class="line">var img = document.getElementById('a')</div><div class="line">img.onload = function()&#123;</div><div class="line">  ctx.drawImage(img,0,0)</div><div class="line">&#125;</div><div class="line">function copy()</div><div class="line">&#123;</div><div class="line">var imgData=ctx.getImageData(20,20,150,150);</div><div class="line">ctx.putImageData(imgData,150,70);</div><div class="line">&#125;</div><div class="line">&lt;/script&gt;</div><div class="line">&lt;button onclick="copy()"&gt;复制&lt;/button&gt;</div></pre></td></tr></table></figure></p>
+<h5 id="设置crossOrigin属性"><a href="#设置crossOrigin属性" class="headerlink" title="设置crossOrigin属性"></a>设置crossOrigin属性</h5><p>在HTML5中，一些 HTML 元素提供了对 CORS 的支持， 例如 <code>&lt;img&gt;</code> 和 <code>&lt;video&gt;</code> 均有一个跨域属性 (crossOrigin property)，它允许你配置元素获取数据的 CORS 请求。</p>
+<p>可选值：</p>
+<ul>
+<li>anonymous    对此元素的CORS请求将不设置凭据标志。</li>
+<li>use-credentials    对此元素的CORS请求将设置凭证标志; 这意味着请求将提供凭据。<br>无效的关键字和空字符串也会被当作 anonymous 关键字使用</li>
+</ul>
+<p>示例<br><code>&lt;script src=&quot;https://example.com/example-framework.js&quot;  crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;</code></p>
+<h5 id="污染canvas"><a href="#污染canvas" class="headerlink" title="污染canvas"></a>污染canvas</h5><p>尽管不通过 CORS 就可以在画布中使用图片，但是这会污染画布。一旦画布被污染，你就无法读取其数据。例如，你不能再使用画布的 toBlob(), toDataURL() 或 getImageData() 方法，调用它们会抛出安全错误。<br>这种机制可以避免未经许可拉取远程网站信息而导致的用户隐私泄露。</p>
+<h3 id="使用其它-canvas-元素"><a href="#使用其它-canvas-元素" class="headerlink" title="使用其它 canvas 元素"></a>使用其它 canvas 元素</h3><p>和引用页面内的图片类似地，用 document.getElementsByTagName 或 document.getElementById 方法来获取其它 canvas 元素。但你引入的应该是已经准备好的 canvas。<br><strong>一个常用的应用就是将第二个canvas作为另一个大的 canvas 的缩略图。</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（03）/" data-id="cj4z7to3b0001y7vgw4fn6myr" class="article-share-link">Delen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/07/11/canvas学习笔记-API（04）/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Nieuwer</strong>
+      <div class="article-nav-title">
+        
+          canvas学习笔记 - API（04）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/07/11/canvas学习笔记-API（02）/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ouder</strong>
+      <div class="article-nav-title">canvas学习笔记 - API（02）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+  <section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-canvas学习笔记-API（03）" data-title="canvas学习笔记 - API（03）" data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（03）/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'pavelShen'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+  </section>
+  
+</section>
+          
+            <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Labels</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/canvas/">canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/koa/">koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/weixin/">weixin</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/canvas/" style="font-size: 15px;">canvas</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/es6/" style="font-size: 17.5px;">es6</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/koa/" style="font-size: 10px;">koa</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/nodejs/" style="font-size: 12.5px;">nodejs</a> <a href="/tags/tools/" style="font-size: 12.5px;">tools</a> <a href="/tags/weixin/" style="font-size: 12.5px;">weixin</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archieven</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recente berichten</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/07/11/canvas链式操作/">canvas链式操作</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/11/canvas学习笔记-API（07）/">canvas学习笔记 - API（07）</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/11/canvas学习笔记-API（06）/">canvas学习笔记 - API（06）</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/11/canvas学习笔记-API（05）/">canvas学习笔记 - API（05）</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/11/canvas学习笔记-API（04）/">canvas学习笔记 - API（04）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+          
+        </div>
+        <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 pavelShen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+      </div>
+      <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/demo" class="mobile-nav-link">Demo</a>
+  
+</nav>
+      
+
+<script src="//libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+    </div>
+  
+</body>
+</html>

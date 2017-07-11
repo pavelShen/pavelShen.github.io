@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>canvas学习笔记 - API（05） | pavelShen的个人博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="组合
+globalCompositeOperation = type注意：下面所有例子中，蓝色方块是先绘制的，即“已有的 canvas 内容”，红色圆形是后面绘制，即“新图形”。
+
+type值source-over (default)这是默认设置，新图形会覆盖在原有内容之上。
+
+destination-over会在原有内容之下绘制新图形。
+
+source-in新图形会仅仅出现与原有内容重叠的部分。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="canvas学习笔记 - API（05）">
+<meta property="og:url" content="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（05）/index.html">
+<meta property="og:site_name" content="pavelShen的个人博客">
+<meta property="og:description" content="组合
+globalCompositeOperation = type注意：下面所有例子中，蓝色方块是先绘制的，即“已有的 canvas 内容”，红色圆形是后面绘制，即“新图形”。
+
+type值source-over (default)这是默认设置，新图形会覆盖在原有内容之上。
+
+destination-over会在原有内容之下绘制新图形。
+
+source-in新图形会仅仅出现与原有内容重叠的部分。">
+<meta property="og:image" content="https://mdn.mozillademos.org/files/220/Canvas_composite_srcovr.png">
+<meta property="og:image" content="https://mdn.mozillademos.org/files/215/Canvas_composite_destovr.png">
+<meta property="og:image" content="https://mdn.mozillademos.org/files/218/Canvas_composite_srcin.png">
+<meta property="og:image" content="https://mdn.mozillademos.org/files/213/Canvas_composite_destin.png">
+<meta property="og:image" content="https://mdn.mozillademos.org/files/219/Canvas_composite_srcout.png">
+<meta property="og:image" content="https://mdn.mozillademos.org/files/214/Canvas_composite_destout.png">
+<meta property="og:image" content="https://mdn.mozillademos.org/files/217/Canvas_composite_srcatop.png">
+<meta property="og:image" content="https://mdn.mozillademos.org/files/212/Canvas_composite_destatop.png">
+<meta property="og:image" content="https://mdn.mozillademos.org/files/216/Canvas_composite_lighten.png">
+<meta property="og:image" content="https://mdn.mozillademos.org/files/211/Canvas_composite_darken.png">
+<meta property="og:image" content="https://mdn.mozillademos.org/files/221/Canvas_composite_xor.png">
+<meta property="og:image" content="https://mdn.mozillademos.org/files/210/Canvas_composite_copy.png">
+<meta property="og:updated_time" content="2017-07-11T06:41:18.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="canvas学习笔记 - API（05）">
+<meta name="twitter:description" content="组合
+globalCompositeOperation = type注意：下面所有例子中，蓝色方块是先绘制的，即“已有的 canvas 内容”，红色圆形是后面绘制，即“新图形”。
+
+type值source-over (default)这是默认设置，新图形会覆盖在原有内容之上。
+
+destination-over会在原有内容之下绘制新图形。
+
+source-in新图形会仅仅出现与原有内容重叠的部分。">
+<meta name="twitter:image" content="https://mdn.mozillademos.org/files/220/Canvas_composite_srcovr.png">
+  
+    <link rel="alternate" href="/atom.xml" title="pavelShen的个人博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  
+    <div id="container">
+      <div id="wrap">
+        <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">pavelShen的个人博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">JUST FOR FUN</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/demo">Demo</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/pavelShen"></form>
+      </div>
+    </div>
+  </div>
+</header>
+        <div class="outer">
+          <section id="main"><article id="post-canvas学习笔记-API（05）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/11/canvas学习笔记-API（05）/" class="article-date">
+  <time datetime="2017-07-11T06:27:41.000Z" itemprop="datePublished">2017-07-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      canvas学习笔记 - API（05）
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="组合"><a href="#组合" class="headerlink" title="组合"></a>组合</h2><ul>
+<li>globalCompositeOperation = type<br>注意：下面所有例子中，蓝色方块是先绘制的，即“已有的 canvas 内容”，红色圆形是后面绘制，即“新图形”。</li>
+</ul>
+<h3 id="type值"><a href="#type值" class="headerlink" title="type值"></a>type值</h3><h4 id="source-over-default"><a href="#source-over-default" class="headerlink" title="source-over (default)"></a>source-over (default)</h4><p>这是默认设置，新图形会覆盖在原有内容之上。<br><img src="https://mdn.mozillademos.org/files/220/Canvas_composite_srcovr.png" alt="pic"></p>
+<hr>
+<h4 id="destination-over"><a href="#destination-over" class="headerlink" title="destination-over"></a>destination-over</h4><p>会在原有内容之下绘制新图形。<br><img src="https://mdn.mozillademos.org/files/215/Canvas_composite_destovr.png" alt="pic"></p>
+<hr>
+<h4 id="source-in"><a href="#source-in" class="headerlink" title="source-in"></a>source-in</h4><p>新图形会仅仅出现与原有内容重叠的部分。其它区域都变成透明的。<br><img src="https://mdn.mozillademos.org/files/218/Canvas_composite_srcin.png" alt="pic"></p>
+<hr>
+<h4 id="destination-in"><a href="#destination-in" class="headerlink" title="destination-in"></a>destination-in</h4><p>原有内容中与新图形重叠的部分会被保留，其它区域都变成透明的。<br><img src="https://mdn.mozillademos.org/files/213/Canvas_composite_destin.png" alt="pic"></p>
+<hr>
+<h4 id="source-out"><a href="#source-out" class="headerlink" title="source-out"></a>source-out</h4><p>结果是只有新图形中与原有内容不重叠的部分会被绘制出来。<br><img src="https://mdn.mozillademos.org/files/219/Canvas_composite_srcout.png" alt="pic"></p>
+<hr>
+<h4 id="destination-out"><a href="#destination-out" class="headerlink" title="destination-out"></a>destination-out</h4><p>原有内容中与新图形不重叠的部分会被保留。<br><img src="https://mdn.mozillademos.org/files/214/Canvas_composite_destout.png" alt="pic"></p>
+<hr>
+<h4 id="source-atop"><a href="#source-atop" class="headerlink" title="source-atop"></a>source-atop</h4><p>新图形中与原有内容重叠的部分会被绘制，并覆盖于原有内容之上。<br><img src="https://mdn.mozillademos.org/files/217/Canvas_composite_srcatop.png" alt="pic"></p>
+<hr>
+<h4 id="destination-atop"><a href="#destination-atop" class="headerlink" title="destination-atop"></a>destination-atop</h4><p>原有内容中与新内容重叠的部分会被保留，并会在原有内容之下绘制新图形<br><img src="https://mdn.mozillademos.org/files/212/Canvas_composite_destatop.png" alt="pic"></p>
+<hr>
+<h4 id="lighter"><a href="#lighter" class="headerlink" title="lighter"></a>lighter</h4><p>两图形中重叠部分作加色处理。<br><img src="https://mdn.mozillademos.org/files/216/Canvas_composite_lighten.png" alt="pic"></p>
+<hr>
+<h4 id="darken"><a href="#darken" class="headerlink" title="darken"></a>darken</h4><p>两图形中重叠的部分作减色处理。<br><img src="https://mdn.mozillademos.org/files/211/Canvas_composite_darken.png" alt="pic"></p>
+<hr>
+<h4 id="xor"><a href="#xor" class="headerlink" title="xor"></a>xor</h4><p>重叠的部分会变成透明。<br><img src="https://mdn.mozillademos.org/files/221/Canvas_composite_xor.png" alt="pic"></p>
+<hr>
+<h4 id="copy"><a href="#copy" class="headerlink" title="copy"></a>copy</h4><p>只有新图形会被保留，其它都被清除掉。<br><img src="https://mdn.mozillademos.org/files/210/Canvas_composite_copy.png" alt="pic"></p>
+<hr>
+<h2 id="裁切"><a href="#裁切" class="headerlink" title="裁切"></a>裁切</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ctx.beginPath();</div><div class="line">ctx.arc(<span class="number">0</span>,<span class="number">0</span>,<span class="number">60</span>,<span class="number">0</span>,<span class="built_in">Math</span>.PI*<span class="number">2</span>,<span class="literal">true</span>);</div><div class="line">ctx.clip();</div></pre></td></tr></table></figure>
+<p>裁切路径不会在 canvas 上绘制东西，而且它永远不受新图形的影响。这些特性使得它在特定区域里绘制图形时相当好用。( 可以把它理解成PS里面的选择工具 )</p>
+<p><strong>裁切区域需要通过save&amp;restore方法去还原，因为是路径方法，所以要记得beginPath</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（05）/" data-id="cj4z7to3i0004y7vgq4lixvnr" class="article-share-link">Delen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2017/07/11/canvas学习笔记-API（06）/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Nieuwer</strong>
+      <div class="article-nav-title">
+        
+          canvas学习笔记 - API（06）
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/07/11/canvas学习笔记-API（04）/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ouder</strong>
+      <div class="article-nav-title">canvas学习笔记 - API（04）</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+  <section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-canvas学习笔记-API（05）" data-title="canvas学习笔记 - API（05）" data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（05）/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'pavelShen'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+  </section>
+  
+</section>
+          
+            <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Labels</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/canvas/">canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/koa/">koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/weixin/">weixin</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/canvas/" style="font-size: 15px;">canvas</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/es6/" style="font-size: 17.5px;">es6</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/koa/" style="font-size: 10px;">koa</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/nodejs/" style="font-size: 12.5px;">nodejs</a> <a href="/tags/tools/" style="font-size: 12.5px;">tools</a> <a href="/tags/weixin/" style="font-size: 12.5px;">weixin</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archieven</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recente berichten</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/07/11/canvas链式操作/">canvas链式操作</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/11/canvas学习笔记-API（07）/">canvas学习笔记 - API（07）</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/11/canvas学习笔记-API（06）/">canvas学习笔记 - API（06）</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/11/canvas学习笔记-API（05）/">canvas学习笔记 - API（05）</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/11/canvas学习笔记-API（04）/">canvas学习笔记 - API（04）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+          
+        </div>
+        <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 pavelShen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+      </div>
+      <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/demo" class="mobile-nav-link">Demo</a>
+  
+</nav>
+      
+
+<script src="//libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+    </div>
+  
+</body>
+</html>

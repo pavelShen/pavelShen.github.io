@@ -60,7 +60,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Søk"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/pavelShen"></form>
@@ -70,6 +70,500 @@
 </header>
         <div class="outer">
           <section id="main">
+  
+    <article id="post-canvas链式操作" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/11/canvas链式操作/" class="article-date">
+  <time datetime="2017-07-11T06:45:04.000Z" itemprop="datePublished">2017-07-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/11/canvas链式操作/">canvas链式操作</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="链式操作"><a href="#链式操作" class="headerlink" title="链式操作"></a>链式操作</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">Canvas2DContext</span>(<span class="params">canvas</span>) </span>&#123;</div><div class="line">  <span class="keyword">if</span> (<span class="keyword">typeof</span> canvas === <span class="string">'string'</span>) &#123;</div><div class="line">    canvas = <span class="built_in">document</span>.getElementById(canvas);</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">if</span> (!(<span class="keyword">this</span> <span class="keyword">instanceof</span> Canvas2DContext)) &#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Canvas2DContext(canvas);</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">this</span>.context = <span class="keyword">this</span>.ctx = canvas.getContext(<span class="string">'2d'</span>);</div><div class="line">  <span class="keyword">if</span> (!Canvas2DContext.prototype.arc) &#123;</div><div class="line">    Canvas2DContext.setup.call(<span class="keyword">this</span>, <span class="keyword">this</span>.ctx);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line">Canvas2DContext.setup = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> methods = [<span class="string">'arc'</span>, <span class="string">'arcTo'</span>, <span class="string">'beginPath'</span>, <span class="string">'bezierCurveTo'</span>, <span class="string">'clearRect'</span>, <span class="string">'clip'</span>,</div><div class="line">    <span class="string">'closePath'</span>, <span class="string">'drawImage'</span>, <span class="string">'fill'</span>, <span class="string">'fillRect'</span>, <span class="string">'fillText'</span>, <span class="string">'lineTo'</span>, <span class="string">'moveTo'</span>,</div><div class="line">    <span class="string">'quadraticCurveTo'</span>, <span class="string">'rect'</span>, <span class="string">'restore'</span>, <span class="string">'rotate'</span>, <span class="string">'save'</span>, <span class="string">'scale'</span>, <span class="string">'setTransform'</span>,</div><div class="line">    <span class="string">'stroke'</span>, <span class="string">'strokeRect'</span>, <span class="string">'strokeText'</span>, <span class="string">'transform'</span>, <span class="string">'translate'</span>];</div><div class="line">  <span class="keyword">var</span> getterMethods = [<span class="string">'createPattern'</span>, <span class="string">'drawFocusRing'</span>, <span class="string">'isPointInPath'</span>, <span class="string">'measureText'</span>, <span class="comment">// drawFocusRing not currently supported</span></div><div class="line">    <span class="comment">// The following might instead be wrapped to be able to chain their child objects</span></div><div class="line">    <span class="string">'createImageData'</span>, <span class="string">'createLinearGradient'</span>,</div><div class="line">    <span class="string">'createRadialGradient'</span>, <span class="string">'getImageData'</span>, <span class="string">'putImageData'</span></div><div class="line">  ];</div><div class="line">  <span class="keyword">var</span> props = [<span class="string">'canvas'</span>, <span class="string">'fillStyle'</span>, <span class="string">'font'</span>, <span class="string">'globalAlpha'</span>, <span class="string">'globalCompositeOperation'</span>,</div><div class="line">    <span class="string">'lineCap'</span>, <span class="string">'lineJoin'</span>, <span class="string">'lineWidth'</span>, <span class="string">'miterLimit'</span>, <span class="string">'shadowOffsetX'</span>, <span class="string">'shadowOffsetY'</span>,</div><div class="line">    <span class="string">'shadowBlur'</span>, <span class="string">'shadowColor'</span>, <span class="string">'strokeStyle'</span>, <span class="string">'textAlign'</span>, <span class="string">'textBaseline'</span>];</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> m <span class="keyword">of</span> methods) &#123;</div><div class="line">    <span class="keyword">let</span> method = m;</div><div class="line">    Canvas2DContext.prototype[method] = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">      <span class="keyword">this</span>.ctx[method].apply(<span class="keyword">this</span>.ctx, <span class="built_in">arguments</span>);</div><div class="line">      <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">    &#125;;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> m <span class="keyword">of</span> getterMethods) &#123;</div><div class="line">    <span class="keyword">let</span> method = m;</div><div class="line">    Canvas2DContext.prototype[method] = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">      <span class="keyword">return</span> <span class="keyword">this</span>.ctx[method].apply(<span class="keyword">this</span>.ctx, <span class="built_in">arguments</span>);</div><div class="line">    &#125;;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">let</span> p <span class="keyword">of</span> props) &#123;</div><div class="line">    <span class="keyword">let</span> prop = p;</div><div class="line">    Canvas2DContext.prototype[prop] = <span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>&#123;</div><div class="line">      <span class="keyword">if</span> (value === <span class="literal">undefined</span>)</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.ctx[prop];</div><div class="line">      <span class="keyword">this</span>.ctx[prop] = value;</div><div class="line">      <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">    &#125;;</div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>);</div><div class="line"><span class="comment">// Use context to get access to underlying context</span></div><div class="line"><span class="keyword">var</span> ctx = Canvas2DContext(canvas)</div><div class="line">  .strokeStyle(<span class="string">'rgb(30, 110, 210)'</span>)</div><div class="line">  .transform(<span class="number">10</span>, <span class="number">3</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">1</span>, <span class="number">0</span>)</div><div class="line">  .strokeRect(<span class="number">2</span>, <span class="number">10</span>, <span class="number">15</span>, <span class="number">20</span>)</div><div class="line">  .context;</div><div class="line"><span class="comment">// Use property name as a function (but without arguments) to get the value</span></div><div class="line"><span class="keyword">var</span> strokeStyle = Canvas2DContext(canvas)</div><div class="line">  .strokeStyle(<span class="string">'rgb(50, 110, 210)'</span>)</div><div class="line">  .strokeStyle();</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/pavelShen/2017/07/11/canvas链式操作/" data-id="cj4z7to4s000sy7vgq6r69hal" class="article-share-link">Delen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-canvas学习笔记-API（07）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/11/canvas学习笔记-API（07）/" class="article-date">
+  <time datetime="2017-07-11T06:27:50.000Z" itemprop="datePublished">2017-07-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/11/canvas学习笔记-API（07）/">canvas学习笔记 - API（07）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="像素操作"><a href="#像素操作" class="headerlink" title="像素操作"></a>像素操作</h2><h4 id="ImageData-对象"><a href="#ImageData-对象" class="headerlink" title="ImageData 对象"></a>ImageData 对象</h4><p><strong>ImageData对象中存储着canvas对象真实的像素数据，它包含以下几个只读属性：</strong></p>
+<ul>
+<li>width 图片宽度，单位是像素</li>
+<li>height 图片高度，单位是像素</li>
+<li>data<br>Uint8ClampedArray类型的一维数组，包含着RGBA格式的整型数据，范围在0至255之间（包括255）。<br>data属性返回一个 Uint8ClampedArray，它可以被使用作为查看初始像素数据。每个像素用4个1bytes值(按照红，绿，蓝和透明值的顺序; 这就是”RGBA”格式) 来代表。每个颜色值部份用0至255来代表。每个部份被分配到一个在数组内连续的索引，左上角像素的红色部份在数组的索引0位置。像素从左到右被处理，然后往下，遍历整个数组。</li>
+</ul>
+<h4 id="创建一个ImageData对象"><a href="#创建一个ImageData对象" class="headerlink" title="创建一个ImageData对象"></a>创建一个ImageData对象</h4><p>去创建一个新的，空白的ImageData对象，你应该会使用createImageData() 方法。有2个版本的createImageData()方法。</p>
+<ol>
+<li><p><code>var myImageData = ctx.createImageData(width, height);</code><br>上面代码创建了一个新的具体特定尺寸的ImageData对象。所有像素被预设为透明黑。</p>
+</li>
+<li><p><code>var myImageData = ctx.createImageData(anotherImageData);</code><br>你也可以创建一个被anotherImageData对象指定的相同像素的ImageData对象。这个新的对象像素全部被预设为透明黑。这个并非复制了图片数据。</p>
+</li>
+</ol>
+<h4 id="得到场景像素数据"><a href="#得到场景像素数据" class="headerlink" title="得到场景像素数据"></a>得到场景像素数据</h4><p><code>var myImageData = ctx.getImageData(left, top, width, height);</code><br>注：任何在画布以外的元素都会被返回成一个透明黑的ImageData对像。</p>
+<h4 id="demo取色器"><a href="#demo取色器" class="headerlink" title="demo取色器"></a>demo取色器</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> img = <span class="keyword">new</span> Image();</div><div class="line">img.src = <span class="string">'https://mdn.mozillademos.org/files/5397/rhino.jpg'</span>;</div><div class="line"><span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>);</div><div class="line"><span class="keyword">var</span> ctx = canvas.getContext(<span class="string">'2d'</span>);</div><div class="line">img.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  ctx.drawImage(img, <span class="number">0</span>, <span class="number">0</span>);</div><div class="line">  img.style.display = <span class="string">'none'</span>;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">var</span> color = <span class="built_in">document</span>.getElementById(<span class="string">'color'</span>);</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">pick</span>(<span class="params">event</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> x = event.layerX;</div><div class="line">  <span class="keyword">var</span> y = event.layerY;</div><div class="line">  <span class="keyword">var</span> pixel = ctx.getImageData(x, y, <span class="number">1</span>, <span class="number">1</span>);</div><div class="line">  <span class="keyword">var</span> data = pixel.data;</div><div class="line">  <span class="keyword">var</span> rgba = <span class="string">'rgba('</span> + data[<span class="number">0</span>] + <span class="string">','</span> + data[<span class="number">1</span>] +</div><div class="line">             <span class="string">','</span> + data[<span class="number">2</span>] + <span class="string">','</span> + (data[<span class="number">3</span>] / <span class="number">255</span>) + <span class="string">')'</span>;</div><div class="line">  color.style.background = rgba;</div><div class="line">  color.textContent = rgba;</div><div class="line">&#125;</div><div class="line">canvas.addEventListener(<span class="string">'mousemove'</span>, pick);</div></pre></td></tr></table></figure>
+<h4 id="在场景中写入像素数据"><a href="#在场景中写入像素数据" class="headerlink" title="在场景中写入像素数据"></a>在场景中写入像素数据</h4><p><code>ctx.putImageData(myImageData, dx, dy);</code> dx和dy参数表示你希望在场景内左上角绘制的像素数据所得到的设备坐标。</p>
+<h4 id="反锯齿"><a href="#反锯齿" class="headerlink" title="反锯齿"></a>反锯齿</h4><p>反锯齿默认开启，手动关闭可以看清放大后的图片的具体像素<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">zoomctx.imageSmoothingEnabled = <span class="keyword">this</span>.checked;</div><div class="line">zoomctx.mozImageSmoothingEnabled = <span class="keyword">this</span>.checked;</div><div class="line">zoomctx.webkitImageSmoothingEnabled = <span class="keyword">this</span>.checked;</div><div class="line">zoomctx.msImageSmoothingEnabled = <span class="keyword">this</span>.checked;</div></pre></td></tr></table></figure></p>
+<h4 id="保存图片"><a href="#保存图片" class="headerlink" title="保存图片"></a>保存图片</h4><ul>
+<li>canvas.toDataURL(‘image/png’)  默认设定。创建一个PNG图片。</li>
+<li>canvas.toDataURL(‘image/jpeg’, quality)<br>创建一个JPG图片。你可以有选择地提供从0到1的品质量，1表示最好品质，0基本不被辨析但有比较小的文件大小。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（07）/" data-id="cj4z7to3n0008y7vgsijua6jx" class="article-share-link">Delen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-canvas学习笔记-API（06）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/11/canvas学习笔记-API（06）/" class="article-date">
+  <time datetime="2017-07-11T06:27:46.000Z" itemprop="datePublished">2017-07-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/11/canvas学习笔记-API（06）/">canvas学习笔记 - API（06）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="动画"><a href="#动画" class="headerlink" title="动画"></a>动画</h2><h3 id="动画的基本"><a href="#动画的基本" class="headerlink" title="动画的基本"></a>动画的基本</h3><ul>
+<li>清空 canvas<br>除非接下来要画的内容会完全充满 canvas （例如背景图），否则你需要清空所有。最简单的做法就是用 clearRect 方法。</li>
+<li>保存 canvas 状态<br>如果你要改变一些会改变 canvas 状态的设置（样式，变形之类的），又要在每画一帧之时都是原始状态的话，你需要先保存一下。</li>
+<li>绘制动画图形（animated shapes）<br>这一步才是重绘动画帧。</li>
+<li>恢复 canvas 状态<br>如果已经保存了 canvas 的状态，可以先恢复它，然后重绘下一帧。</li>
+</ul>
+<h3 id="有安排的更新画布-Scheduled-updates"><a href="#有安排的更新画布-Scheduled-updates" class="headerlink" title="有安排的更新画布 Scheduled updates"></a>有安排的更新画布 Scheduled updates</h3><p>可以用window.setInterval(), window.setTimeout(),和window.requestAnimationFrame()来设定定期执行一个指定函数。</p>
+<h3 id="长尾效果"><a href="#长尾效果" class="headerlink" title="长尾效果"></a>长尾效果</h3><p>直到现在，我们已经使用clearRect 函数当我们清除前一帧动画。当你用一个半透明的fillRect函数取代这个函数的时候，你可以轻松获得长尾效果。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ctx.fillStyle = <span class="string">'rgba(255,255,255,0.3)'</span>;</div><div class="line">ctx.fillRect(<span class="number">0</span>,<span class="number">0</span>,canvas.width,canvas.height);</div></pre></td></tr></table></figure></p>
+<h3 id="demo"><a href="#demo" class="headerlink" title="demo"></a>demo</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>);</div><div class="line"><span class="keyword">var</span> ctx = canvas.getContext(<span class="string">'2d'</span>);</div><div class="line"><span class="keyword">var</span> raf;</div><div class="line"><span class="keyword">var</span> ball = &#123;</div><div class="line">  <span class="attr">x</span>: <span class="number">100</span>,</div><div class="line">  <span class="attr">y</span>: <span class="number">100</span>,</div><div class="line">  <span class="attr">vx</span>: <span class="number">5</span>,</div><div class="line">  <span class="attr">vy</span>: <span class="number">2</span>,</div><div class="line">  <span class="attr">radius</span>: <span class="number">25</span>,</div><div class="line">  <span class="attr">color</span>: <span class="string">'blue'</span>,</div><div class="line">  <span class="attr">draw</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    ctx.beginPath();</div><div class="line">    ctx.arc(<span class="keyword">this</span>.x, <span class="keyword">this</span>.y, <span class="keyword">this</span>.radius, <span class="number">0</span>, <span class="built_in">Math</span>.PI*<span class="number">2</span>, <span class="literal">true</span>);</div><div class="line">    ctx.closePath();</div><div class="line">    ctx.fillStyle = <span class="keyword">this</span>.color;</div><div class="line">    ctx.fill();</div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="comment">// 长尾效果</span></div><div class="line">  <span class="comment">//ctx.clearRect(0,0, canvas.width, canvas.height);</span></div><div class="line">  ctx.fillStyle = <span class="string">'rgba(255,255,255,0.3)'</span>;</div><div class="line">  ctx.fillRect(<span class="number">0</span>,<span class="number">0</span>,canvas.width,canvas.height);</div><div class="line">  <span class="comment">// 加速减速</span></div><div class="line">  <span class="comment">// ball.vy *= .99;</span></div><div class="line">  <span class="comment">// ball.vy += .25;</span></div><div class="line"></div><div class="line">  <span class="comment">//边界</span></div><div class="line">  <span class="keyword">if</span> (ball.y + ball.vy &gt; canvas.height || ball.y + ball.vy &lt; <span class="number">0</span>) &#123;</div><div class="line">    ball.vy = -ball.vy;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">if</span> (ball.x + ball.vx &gt; canvas.width || ball.x + ball.vx &lt; <span class="number">0</span>) &#123;</div><div class="line">    ball.vx = -ball.vx;</div><div class="line">  &#125;</div><div class="line">  ball.x += ball.vx;</div><div class="line">  ball.y += ball.vy;</div><div class="line">  ball.draw();</div><div class="line">  raf = <span class="built_in">window</span>.requestAnimationFrame(draw);</div><div class="line">&#125;</div><div class="line">canvas.addEventListener(<span class="string">'mouseover'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</div><div class="line">  raf = <span class="built_in">window</span>.requestAnimationFrame(draw);</div><div class="line">&#125;);</div><div class="line">canvas.addEventListener(<span class="string">"mouseout"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</div><div class="line">  <span class="built_in">window</span>.cancelAnimationFrame(raf);</div><div class="line">&#125;);</div><div class="line">ball.draw();</div></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（06）/" data-id="cj4z7to3k0005y7vgkr6s62vu" class="article-share-link">Delen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-canvas学习笔记-API（05）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/11/canvas学习笔记-API（05）/" class="article-date">
+  <time datetime="2017-07-11T06:27:41.000Z" itemprop="datePublished">2017-07-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/11/canvas学习笔记-API（05）/">canvas学习笔记 - API（05）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="组合"><a href="#组合" class="headerlink" title="组合"></a>组合</h2><ul>
+<li>globalCompositeOperation = type<br>注意：下面所有例子中，蓝色方块是先绘制的，即“已有的 canvas 内容”，红色圆形是后面绘制，即“新图形”。</li>
+</ul>
+<h3 id="type值"><a href="#type值" class="headerlink" title="type值"></a>type值</h3><h4 id="source-over-default"><a href="#source-over-default" class="headerlink" title="source-over (default)"></a>source-over (default)</h4><p>这是默认设置，新图形会覆盖在原有内容之上。<br><img src="https://mdn.mozillademos.org/files/220/Canvas_composite_srcovr.png" alt="pic"></p>
+<hr>
+<h4 id="destination-over"><a href="#destination-over" class="headerlink" title="destination-over"></a>destination-over</h4><p>会在原有内容之下绘制新图形。<br><img src="https://mdn.mozillademos.org/files/215/Canvas_composite_destovr.png" alt="pic"></p>
+<hr>
+<h4 id="source-in"><a href="#source-in" class="headerlink" title="source-in"></a>source-in</h4><p>新图形会仅仅出现与原有内容重叠的部分。其它区域都变成透明的。<br><img src="https://mdn.mozillademos.org/files/218/Canvas_composite_srcin.png" alt="pic"></p>
+<hr>
+<h4 id="destination-in"><a href="#destination-in" class="headerlink" title="destination-in"></a>destination-in</h4><p>原有内容中与新图形重叠的部分会被保留，其它区域都变成透明的。<br><img src="https://mdn.mozillademos.org/files/213/Canvas_composite_destin.png" alt="pic"></p>
+<hr>
+<h4 id="source-out"><a href="#source-out" class="headerlink" title="source-out"></a>source-out</h4><p>结果是只有新图形中与原有内容不重叠的部分会被绘制出来。<br><img src="https://mdn.mozillademos.org/files/219/Canvas_composite_srcout.png" alt="pic"></p>
+<hr>
+<h4 id="destination-out"><a href="#destination-out" class="headerlink" title="destination-out"></a>destination-out</h4><p>原有内容中与新图形不重叠的部分会被保留。<br><img src="https://mdn.mozillademos.org/files/214/Canvas_composite_destout.png" alt="pic"></p>
+<hr>
+<h4 id="source-atop"><a href="#source-atop" class="headerlink" title="source-atop"></a>source-atop</h4><p>新图形中与原有内容重叠的部分会被绘制，并覆盖于原有内容之上。<br><img src="https://mdn.mozillademos.org/files/217/Canvas_composite_srcatop.png" alt="pic"></p>
+<hr>
+<h4 id="destination-atop"><a href="#destination-atop" class="headerlink" title="destination-atop"></a>destination-atop</h4><p>原有内容中与新内容重叠的部分会被保留，并会在原有内容之下绘制新图形<br><img src="https://mdn.mozillademos.org/files/212/Canvas_composite_destatop.png" alt="pic"></p>
+<hr>
+<h4 id="lighter"><a href="#lighter" class="headerlink" title="lighter"></a>lighter</h4><p>两图形中重叠部分作加色处理。<br><img src="https://mdn.mozillademos.org/files/216/Canvas_composite_lighten.png" alt="pic"></p>
+<hr>
+<h4 id="darken"><a href="#darken" class="headerlink" title="darken"></a>darken</h4><p>两图形中重叠的部分作减色处理。<br><img src="https://mdn.mozillademos.org/files/211/Canvas_composite_darken.png" alt="pic"></p>
+<hr>
+<h4 id="xor"><a href="#xor" class="headerlink" title="xor"></a>xor</h4><p>重叠的部分会变成透明。<br><img src="https://mdn.mozillademos.org/files/221/Canvas_composite_xor.png" alt="pic"></p>
+<hr>
+<h4 id="copy"><a href="#copy" class="headerlink" title="copy"></a>copy</h4><p>只有新图形会被保留，其它都被清除掉。<br><img src="https://mdn.mozillademos.org/files/210/Canvas_composite_copy.png" alt="pic"></p>
+<hr>
+<h2 id="裁切"><a href="#裁切" class="headerlink" title="裁切"></a>裁切</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ctx.beginPath();</div><div class="line">ctx.arc(<span class="number">0</span>,<span class="number">0</span>,<span class="number">60</span>,<span class="number">0</span>,<span class="built_in">Math</span>.PI*<span class="number">2</span>,<span class="literal">true</span>);</div><div class="line">ctx.clip();</div></pre></td></tr></table></figure>
+<p>裁切路径不会在 canvas 上绘制东西，而且它永远不受新图形的影响。这些特性使得它在特定区域里绘制图形时相当好用。( 可以把它理解成PS里面的选择工具 )</p>
+<p><strong>裁切区域需要通过save&amp;restore方法去还原，因为是路径方法，所以要记得beginPath</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（05）/" data-id="cj4z7to3i0004y7vgq4lixvnr" class="article-share-link">Delen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-canvas学习笔记-API（04）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/11/canvas学习笔记-API（04）/" class="article-date">
+  <time datetime="2017-07-11T06:27:35.000Z" itemprop="datePublished">2017-07-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/11/canvas学习笔记-API（04）/">canvas学习笔记 - API（04）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="变形"><a href="#变形" class="headerlink" title="变形"></a>变形</h2><ul>
+<li>save()restore()<br>save 和 restore 方法是用来保存和恢复 canvas 状态的，都没有参数。Canvas 的状态就是当前画面应用的所有样式和变形的一个快照。</li>
+</ul>
+<p>Canvas状态存储在栈中，每当save()方法被调用后，当前的状态就被推送到栈中保存。一个绘画状态包括：</p>
+<ul>
+<li>当前应用的变形（即移动，旋转和缩放，见下）</li>
+<li>strokeStyle, fillStyle, globalAlpha, lineWidth, lineCap, lineJoin, miterLimit, shadowOffsetX, shadowOffsetY, shadowBlur, shadowColor, globalCompositeOperation 的值</li>
+<li>当前的裁切路径（clipping path）</li>
+</ul>
+<p>你可以调用任意多次 save 方法。<br>每一次调用 restore 方法，上一个保存的状态就从栈中弹出，所有设定都恢复。</p>
+<h4 id="移动Translating"><a href="#移动Translating" class="headerlink" title="移动Translating"></a>移动Translating</h4><p>translate(x, y)<br>translate 方法接受两个参数。x 是左右偏移量，y 是上下偏移量，<strong>它用来移动 canvas 和它的原点到一个不同的位置</strong>。<br><img src="https://mdn.mozillademos.org/files/234/Canvas_grid_translate.png" alt="图片" title="title"></p>
+<h4 id="旋转-Rotating"><a href="#旋转-Rotating" class="headerlink" title="旋转 Rotating"></a>旋转 Rotating</h4><p>rotate(angle)<br>这个方法只接受一个参数：旋转的角度(angle)，它是顺时针方向的，以弧度为单位的值。<br>旋转的中心点始终是 canvas 的原点，如果要改变它，我们需要用到 translate 方法。<br><img src="https://mdn.mozillademos.org/files/233/Canvas_grid_rotate.png" alt="图片" title="title"></p>
+<h4 id="缩放-Scaling"><a href="#缩放-Scaling" class="headerlink" title="缩放 Scaling"></a>缩放 Scaling</h4><p>scale(x, y)<br>scale 方法接受两个参数。x,y 分别是横轴和纵轴的缩放因子，它们都必须是正值。值比 1.0 小表示缩小，比 1.0 大则表示放大，值为 1.0 时什么效果都没有。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（04）/" data-id="cj4z7to4n000ry7vgljbdp1ja" class="article-share-link">Delen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-canvas学习笔记-API（03）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/11/canvas学习笔记-API（03）/" class="article-date">
+  <time datetime="2017-07-11T06:27:31.000Z" itemprop="datePublished">2017-07-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/11/canvas学习笔记-API（03）/">canvas学习笔记 - API（03）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h2><h3 id="引入图像到canvas里需要以下两步基本操作："><a href="#引入图像到canvas里需要以下两步基本操作：" class="headerlink" title="引入图像到canvas里需要以下两步基本操作："></a>引入图像到canvas里需要以下两步基本操作：</h3><ol>
+<li>获得一个指向HTMLImageElement的对象或者另一个canvas元素的引用作为源，也可以通过提供一个URL的方式来使用图片</li>
+<li>使用drawImage()函数将图片绘制到画布上</li>
+</ol>
+<h3 id="drawImage"><a href="#drawImage" class="headerlink" title="drawImage"></a>drawImage</h3><h5 id="绘制"><a href="#绘制" class="headerlink" title="绘制"></a>绘制</h5><p>drawImage(image, x, y) 其中 image 是 image 或者 canvas 对象，x 和 y 是其在目标 canvas 里的起始坐标。</p>
+<h5 id="缩放"><a href="#缩放" class="headerlink" title="缩放"></a>缩放</h5><p>drawImage(image, x, y, width, height)  这个方法多了2个参数：width 和 height，这两个参数用来控制 当像canvas画入时应该缩放的大小</p>
+<h5 id="切片"><a href="#切片" class="headerlink" title="切片"></a>切片</h5><p>drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)<br>第一个参数和其它的是相同的，都是一个图像或者另一个 canvas 的引用。其它8个参数最好是参照右边的图解，前4个是定义图像源的切片位置和大小，后4个则是定义切片的目标显示位置和大小。</p>
+<h3 id="源"><a href="#源" class="headerlink" title="源"></a>源</h3><ul>
+<li>HTMLImageElement  这些图片是由Image()函数构造出来的，或者任何的<code>&lt;img&gt;</code>元素</li>
+<li>HTMLVideoElement   用一个HTML的 <code>&lt;video&gt;</code>元素作为你的图片源，可以从视频中抓取当前帧作为一个图像</li>
+<li>HTMLCanvasElement  可以使用另一个 <code>&lt;canvas&gt;</code> 元素作为你的图片源。</li>
+<li>ImageBitmap    这是一个高性能的位图，可以低延迟地绘制，它可以从上述的所有源以及其它几种源中生成。</li>
+</ul>
+<h3 id="使用相同页面内的图片"><a href="#使用相同页面内的图片" class="headerlink" title="使用相同页面内的图片"></a>使用相同页面内的图片</h3><ul>
+<li>document.images集合</li>
+<li>document.getElementsByTagName()方法</li>
+<li>如果你知道你想使用的指定图片的ID，你可以用document.getElementById()获得这个图片</li>
+</ul>
+<h3 id="使用其它域名下的图片"><a href="#使用其它域名下的图片" class="headerlink" title="使用其它域名下的图片"></a>使用其它域名下的图片</h3><p>在 HTMLImageElement上使用crossOrigin属性，你可以请求加载其它域名上的图片。如果图片的服务器允许跨域访问这个图片，那么你可以使用这个图片而不污染canvas，否则，使用这个图片将会污染canvas。</p>
+<p>示例代码<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&lt;img src="http://n1image.hjfile.cn/mh/2016/09/02/a0c9ca472e8ae8e26e34a31d98c074ce.jpg" id="a" crossorigin="anonymous"&gt;&lt;/img&gt;</div><div class="line">&lt;canvas id="myCanvas" width="500" height="550" style="border:1px solid #d3d3d3;"&gt;&lt;/canvas&gt;</div><div class="line">&lt;script&gt;</div><div class="line">var c=document.getElementById("myCanvas");</div><div class="line">var ctx=c.getContext("2d");</div><div class="line">var img = document.getElementById('a')</div><div class="line">img.onload = function()&#123;</div><div class="line">  ctx.drawImage(img,0,0)</div><div class="line">&#125;</div><div class="line">function copy()</div><div class="line">&#123;</div><div class="line">var imgData=ctx.getImageData(20,20,150,150);</div><div class="line">ctx.putImageData(imgData,150,70);</div><div class="line">&#125;</div><div class="line">&lt;/script&gt;</div><div class="line">&lt;button onclick="copy()"&gt;复制&lt;/button&gt;</div></pre></td></tr></table></figure></p>
+<h5 id="设置crossOrigin属性"><a href="#设置crossOrigin属性" class="headerlink" title="设置crossOrigin属性"></a>设置crossOrigin属性</h5><p>在HTML5中，一些 HTML 元素提供了对 CORS 的支持， 例如 <code>&lt;img&gt;</code> 和 <code>&lt;video&gt;</code> 均有一个跨域属性 (crossOrigin property)，它允许你配置元素获取数据的 CORS 请求。</p>
+<p>可选值：</p>
+<ul>
+<li>anonymous    对此元素的CORS请求将不设置凭据标志。</li>
+<li>use-credentials    对此元素的CORS请求将设置凭证标志; 这意味着请求将提供凭据。<br>无效的关键字和空字符串也会被当作 anonymous 关键字使用</li>
+</ul>
+<p>示例<br><code>&lt;script src=&quot;https://example.com/example-framework.js&quot;  crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;</code></p>
+<h5 id="污染canvas"><a href="#污染canvas" class="headerlink" title="污染canvas"></a>污染canvas</h5><p>尽管不通过 CORS 就可以在画布中使用图片，但是这会污染画布。一旦画布被污染，你就无法读取其数据。例如，你不能再使用画布的 toBlob(), toDataURL() 或 getImageData() 方法，调用它们会抛出安全错误。<br>这种机制可以避免未经许可拉取远程网站信息而导致的用户隐私泄露。</p>
+<h3 id="使用其它-canvas-元素"><a href="#使用其它-canvas-元素" class="headerlink" title="使用其它 canvas 元素"></a>使用其它 canvas 元素</h3><p>和引用页面内的图片类似地，用 document.getElementsByTagName 或 document.getElementById 方法来获取其它 canvas 元素。但你引入的应该是已经准备好的 canvas。<br><strong>一个常用的应用就是将第二个canvas作为另一个大的 canvas 的缩略图。</strong></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（03）/" data-id="cj4z7to3b0001y7vgw4fn6myr" class="article-share-link">Delen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-canvas学习笔记-API（02）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/11/canvas学习笔记-API（02）/" class="article-date">
+  <time datetime="2017-07-11T06:27:21.000Z" itemprop="datePublished">2017-07-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/11/canvas学习笔记-API（02）/">canvas学习笔记 - API（02）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="色彩"><a href="#色彩" class="headerlink" title="色彩"></a>色彩</h2><ul>
+<li>fillStyle = color               设置图形的填充颜色。</li>
+<li>strokeStyle = color         设置图形轮廓的颜色。</li>
+<li>globalAlpha = transparencyValue  这个属性影响到 canvas 里所有图形的透明度，有效的值范围是 0.0 （完全透明）到 1.0（完全不透明），默认是 1.0。</li>
+</ul>
+<h2 id="线型-Line-styles"><a href="#线型-Line-styles" class="headerlink" title="线型 Line styles"></a>线型 Line styles</h2><ul>
+<li>lineWidth = value 设置线条宽度。</li>
+<li>lineCap = type     设置线条末端样式。</li>
+<li>lineJoin = type     设定线条与线条间接合处的样式。</li>
+<li>miterLimit = value  限制当两条线相交时交接处最大长度；所谓交接处长度（斜接长度）是指线条交接处内角顶点到外角顶点的长度。</li>
+<li>getLineDash()       返回一个包含当前虚线样式，长度为非负偶数的数组。</li>
+<li>setLineDash(segments)   设置当前虚线样式。</li>
+<li>lineDashOffset = value      设置虚线样式的起始偏移量。</li>
+</ul>
+<p>线条的一些细节<br><img src="https://mdn.mozillademos.org/files/201/canvas-grid.png" alt="图片" title="title"></p>
+<h2 id="渐变"><a href="#渐变" class="headerlink" title="渐变"></a>渐变</h2><p>我们用下面的方法新建一个 canvasGradient 对象，并且赋给图形的 fillStyle 或 strokeStyle 属性。</p>
+<ul>
+<li>createLinearGradient(x1, y1, x2, y2)             createLinearGradient 方法接受 4 个参数，表示渐变的起点 (x1,y1) 与终点 (x2,y2)。</li>
+<li>createRadialGradient(x1, y1, r1, x2, y2, r2)   createRadialGradient 方法接受 6 个参数，前三个定义一个以 (x1,y1) 为原点，半径为 r1 的圆，后三个参数则定义另一个以 (x2,y2) 为原点，半径为 r2 的圆。</li>
+<li>gradient.addColorStop(position, color)         addColorStop 方法接受 2 个参数，position 参数必须是一个 0.0 与 1.0 之间的数值，表示渐变中颜色所在的相对位置。例如，0.5 表示颜色会出现在正中间。color 参数必须是一个有效的 CSS 颜色值（如 #FFF， rgba(0,0,0,1)，等等）</li>
+</ul>
+<h2 id="图案"><a href="#图案" class="headerlink" title="图案"></a>图案</h2><ul>
+<li>createPattern(image, type)  该方法接受两个参数。Image 可以是一个 Image 对象的引用，或者另一个 canvas 对象。Type 必须是下面的字符串值之一：repeat，repeat-x，repeat-y 和 no-repeat。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> ctx = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>).getContext(<span class="string">'2d'</span>);</div><div class="line">  <span class="comment">// 创建新 image 对象，用作图案</span></div><div class="line">  <span class="keyword">var</span> img = <span class="keyword">new</span> Image();</div><div class="line">  img.src = <span class="string">'images/wallpaper.png'</span>;</div><div class="line">  img.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="comment">// 创建图案</span></div><div class="line">    <span class="keyword">var</span> ptrn = ctx.createPattern(img,<span class="string">'repeat'</span>);</div><div class="line">    ctx.fillStyle = ptrn;</div><div class="line">    ctx.fillRect(<span class="number">0</span>,<span class="number">0</span>,<span class="number">150</span>,<span class="number">150</span>);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="文字"><a href="#文字" class="headerlink" title="文字"></a>文字</h2><ul>
+<li>fillText(text, x, y [, maxWidth])       <strong>实心</strong>文字，参数为文字内容，x坐标，y坐标，最大宽度</li>
+<li>strokeText(text, x, y [, maxWidth]) <strong>空心</strong>文字，参数为文字内容，x坐标，y坐标，最大宽度</li>
+<li>font = value  当前文字的样式，和css文字样式的属性相同，默认值为10px sans-serif。</li>
+<li>textAlign = value  文字对齐方式，可选值: start, end, left, right or center. 默认值 start。</li>
+<li>textBaseline = value 文字基线设置 ，可选值: top, hanging, middle, alphabetic, ideographic, bottom。默认值 alphabetic。</li>
+<li>direction = value  方向，可选值: ltr, rtl, inherit. 默认值 inherit。</li>
+<li>measureText() 返回一个TextMetrics对象，包含将被画在画布上的指定文字的像素级宽度<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> ctx = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>).getContext(<span class="string">'2d'</span>);</div><div class="line">  <span class="keyword">var</span> text = ctx.measureText(<span class="string">'foo'</span>); <span class="comment">// TextMetrics object</span></div><div class="line">  text.width; <span class="comment">// 16;</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="阴影"><a href="#阴影" class="headerlink" title="阴影"></a>阴影</h2><ul>
+<li>shadowOffsetX = float<br>shadowOffsetX 和 shadowOffsetY 用来设定阴影在 X 和 Y 轴的延伸距离，它们是不受变换矩阵所影响的。负值表示阴影会往上或左延伸，正值则表示会往下或右延伸，它们默认都为 0。</li>
+<li>shadowOffsetY = float<br>shadowOffsetX 和 shadowOffsetY 用来设定阴影在 X 和 Y 轴的延伸距离，它们是不受变换矩阵所影响的。负值表示阴影会往上或左延伸，正值则表示会往下或右延伸，它们默认都为 0。</li>
+<li>shadowBlur = float<br>shadowBlur 用于设定阴影的模糊程度，其数值并不跟像素数量挂钩，也不受变换矩阵的影响，默认为 0。</li>
+<li>shadowColor = color<br>shadowColor 是标准的 CSS 颜色值，用于设定阴影颜色效果，默认是全透明的黑色。</li>
+</ul>
+<h2 id="Canvas-填充规则"><a href="#Canvas-填充规则" class="headerlink" title="Canvas 填充规则"></a>Canvas 填充规则</h2><p>设置fill的填充规则，以下为2个可选值</p>
+<ul>
+<li>nonzero (默认)<br>这个值确定了某点属于该形状的“内部”还是“外部”。从点向任意方向的无限远处绘制射线，然后检测形状与射线相交的位置。开始于0数，射线上每次从左向右相交就加1，每次从右向左相交就减1。数一下相交次数，如果结果是0，点就在路径外面，如果结果大于0，点在路径里面。</li>
+<li>evenodd<br>这个值用确定了某点属于该形状的“内部”还是“外部”。从点向任意方向的无限远处绘制射线，并数一数给定形状与射线相交的路径段的数目，如果数目是奇数的，点在内部，如果数目是偶数的，点在外部。</li>
+</ul>
+<p>代码示例<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> ctx = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>).getContext(<span class="string">'2d'</span>); </div><div class="line">  ctx.beginPath(); </div><div class="line">  ctx.arc(<span class="number">50</span>, <span class="number">50</span>, <span class="number">30</span>, <span class="number">0</span>, <span class="built_in">Math</span>.PI*<span class="number">2</span>, <span class="literal">true</span>);</div><div class="line">  ctx.arc(<span class="number">50</span>, <span class="number">50</span>, <span class="number">15</span>, <span class="number">0</span>, <span class="built_in">Math</span>.PI*<span class="number">2</span>, <span class="literal">true</span>);</div><div class="line">  ctx.fill(<span class="string">"evenodd"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（02）/" data-id="cj4z7to3g0003y7vg51cz4k0f" class="article-share-link">Delen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-canvas学习笔记-API（01）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/11/canvas学习笔记-API（01）/" class="article-date">
+  <time datetime="2017-07-11T06:25:13.000Z" itemprop="datePublished">2017-07-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/11/canvas学习笔记-API（01）/">canvas学习笔记 - API（01）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h4><ul>
+<li>ctx = canvas.getContext(‘2d’) 获取上下文</li>
+<li><code>ctx.canvas.height</code> <code>ctx.canvas.width</code>获取画布宽高</li>
+</ul>
+<h4 id="矩形"><a href="#矩形" class="headerlink" title="矩形"></a>矩形</h4><ul>
+<li>fillStyle = “rgb(200,0,0)”; 设置填充色</li>
+<li>fillRect(x, y, width, height) 绘制一个填充的矩形</li>
+<li>strokeRect(x, y, width, height) 绘制一个矩形的边框</li>
+<li>clearRect(x, y, width, height) 清除指定矩形区域，让清除部分完全透明。</li>
+<li>rect(x, y, width, height)<br>绘制一个左上角坐标为（x,y），宽高为width以及height的矩形<strong>路径</strong>。<br>当该方法执行的时候，moveTo()方法自动设置坐标参数（0,0）。也就是说，当前笔触自动重置会默认坐标。 </li>
+</ul>
+<h4 id="路径"><a href="#路径" class="headerlink" title="路径"></a>路径</h4><ul>
+<li>beginPath()   新建一条路径，生成之后，图形绘制命令被指向到路径上生成路径。</li>
+<li>closePath()   闭合路径之后图形绘制命令又重新指向到上下文中。</li>
+<li>stroke()   通过线条来绘制图形轮廓。</li>
+<li>fill() 通过填充路径的内容区域生成实心的图形。</li>
+</ul>
+<h4 id="移动笔触"><a href="#移动笔触" class="headerlink" title="移动笔触"></a>移动笔触</h4><ul>
+<li>moveTo(x, y) 将笔触移动到指定的坐标x以及y上。</li>
+</ul>
+<h4 id="线"><a href="#线" class="headerlink" title="线"></a>线</h4><ul>
+<li>lineTo(x, y)  绘制一条从当前位置到指定x以及y位置的直线。</li>
+</ul>
+<h4 id="圆弧"><a href="#圆弧" class="headerlink" title="圆弧"></a>圆弧</h4><p>当然可以使用arcTo()，不过这个的实现并不是那么的可靠，所以我们这里不作介绍</p>
+<ul>
+<li>arc(x, y, radius, startAngle, endAngle, anticlockwise)<br>这里详细介绍一下arc方法，该方法有六个参数：x,y为绘制圆弧所在圆上的圆心坐标。radius为半径。startAngle以及endAngle参数用弧度定义了开始以及结束的弧度。这些都是以x轴为基准。参数anticlockwise 为一个布尔值。为true时，是逆时针方向，否则顺时针方向。</li>
+</ul>
+<h4 id="Path2D对象"><a href="#Path2D对象" class="headerlink" title="Path2D对象"></a>Path2D对象</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">new</span> Path2D(); <span class="comment">// 空的Path对象</span></div><div class="line"><span class="keyword">new</span> Path2D(path); <span class="comment">// 克隆Path对象</span></div></pre></td></tr></table></figure>
+<p>Path2D()会返回一个新初始化的Path2D对象（可能将某一个路径作为变量——创建一个它的副本，或者将一个包含SVG path数据的字符串作为变量）。</p>
+<ul>
+<li>Path2D.addPath(path [, transform])  <strong>浏览器支持较差</strong> 添加了一条路径到当前路径（可能添加了一个变换矩阵）。</li>
+</ul>
+<p>代码示例<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>);</div><div class="line">  <span class="keyword">if</span> (canvas.getContext)&#123;</div><div class="line">    <span class="keyword">var</span> ctx = canvas.getContext(<span class="string">'2d'</span>);</div><div class="line">    <span class="keyword">var</span> rectangle = <span class="keyword">new</span> Path2D();</div><div class="line">    rectangle.rect(<span class="number">10</span>, <span class="number">10</span>, <span class="number">50</span>, <span class="number">50</span>);</div><div class="line">    <span class="keyword">var</span> circle = <span class="keyword">new</span> Path2D();</div><div class="line">    circle.moveTo(<span class="number">125</span>, <span class="number">35</span>);</div><div class="line">    circle.arc(<span class="number">100</span>, <span class="number">35</span>, <span class="number">25</span>, <span class="number">0</span>, <span class="number">2</span> * <span class="built_in">Math</span>.PI);</div><div class="line">    ctx.stroke(rectangle);</div><div class="line">    ctx.fill(circle);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（01）/" data-id="cj4z7to370000y7vg1ceusoxp" class="article-share-link">Delen</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
   
     <article id="post-js函数队列" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -106,7 +600,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/20/js函数队列/" data-id="cj1q3w47500064wvgpb0ana7g" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/04/20/js函数队列/" data-id="cj4z7to4g000ny7vgj6a6kiv0" class="article-share-link">Delen</a>
       
       
     </footer>
@@ -155,472 +649,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（16）模块 Modules/" data-id="cj1q3w48d001b4wvgvrtur0c7" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-读书笔记：深入浅出ES6（14）let &amp; const" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/04/20/读书笔记：深入浅出ES6（14）let & const/" class="article-date">
-  <time datetime="2017-04-20T02:54:53.000Z" itemprop="datePublished">2017-04-20</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/20/读书笔记：深入浅出ES6（14）let & const/">读书笔记：深入浅出ES6（14）let &amp; const</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>原文线上地址：<a href="http://www.infoq.com/cn/es6-in-depth/" target="_blank" rel="external">http://www.infoq.com/cn/es6-in-depth/</a></p>
-<h2 id="let-amp-const"><a href="#let-amp-const" class="headerlink" title="let &amp; const"></a>let &amp; const</h2><h4 id="var的缺陷"><a href="#var的缺陷" class="headerlink" title="var的缺陷"></a>var的缺陷</h4><ul>
-<li>JS没有块级作用域</li>
-<li>循环内变量过度共享</li>
-</ul>
-<h4 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h4><ul>
-<li>变量提升：JS引擎将所有var声明和function函数声明都提升到函数内的最高处。</li>
-<li>let声明的全局变量不是全局对象的属性。这就意味着，你不可以通过window.变量名的方式访问这些变量。它们只存在于一个不可见的块的作用域中，这个块理论上是Web页面中运行的所有JS代码的外层块。</li>
-<li>TDZ临时死区（Temporal Dead Zone<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> x = <span class="string">'outer value'</span></div><div class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="comment">// 这里会产生 TDZ for x</span></div><div class="line">  <span class="built_in">console</span>.log(x) <span class="comment">// TDZ期间访问，产生ReferenceError错误</span></div><div class="line">  <span class="keyword">let</span> x = <span class="string">'inner value'</span> <span class="comment">// 对x的声明语句，这里结束 TDZ for x</span></div><div class="line">&#125;())</div></pre></td></tr></table></figure>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（14）let & const/" data-id="cj1q3w48b00194wvgum0tg5hy" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-读书笔记：深入浅出ES6（13）类 Class" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/04/20/读书笔记：深入浅出ES6（13）类 Class/" class="article-date">
-  <time datetime="2017-04-20T02:54:52.000Z" itemprop="datePublished">2017-04-20</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/20/读书笔记：深入浅出ES6（13）类 Class/">读书笔记：深入浅出ES6（13）类 Class</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>参考地址：<br><a href="http://es6.ruanyifeng.com/#docs/class" target="_blank" rel="external">http://es6.ruanyifeng.com/#docs/class</a><br><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Classes" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Classes</a></p>
-<h2 id="类-Class"><a href="#类-Class" class="headerlink" title="类 Class"></a>类 Class</h2><h4 id="static"><a href="#static" class="headerlink" title="static"></a>static</h4><p>static 关键字用来定义类的静态方法。静态方法是指那些不需要对类进行实例化，使用类名就可以直接访问的方法，需要注意的是<strong>静态方法不能被实例化的对象调用</strong>。静态方法经常用来作为工具函数。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point</span> </span>&#123;</div><div class="line">    <span class="keyword">constructor</span>(x, y) &#123;</div><div class="line">        <span class="keyword">this</span>.x = x;</div><div class="line">        <span class="keyword">this</span>.y = y;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">static</span> distance(a, b) &#123;</div><div class="line">        <span class="keyword">const</span> dx = a.x - b.x;</div><div class="line">        <span class="keyword">const</span> dy = a.y - b.y;</div><div class="line">        <span class="keyword">return</span> <span class="built_in">Math</span>.sqrt(dx*dx + dy*dy);</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">const</span> p1 = <span class="keyword">new</span> Point(<span class="number">5</span>, <span class="number">5</span>);</div><div class="line"><span class="keyword">const</span> p2 = <span class="keyword">new</span> Point(<span class="number">10</span>, <span class="number">10</span>);</div><div class="line"><span class="built_in">console</span>.log(Point.distance(p1, p2));</div></pre></td></tr></table></figure>
-<h4 id="extends-amp-super"><a href="#extends-amp-super" class="headerlink" title="extends &amp; super"></a>extends &amp; super</h4><ul>
-<li>extends 关键字在类声明或类表达式中用于创建一个类作为另一个类的一个子类。</li>
-<li>如果子类中存在构造函数，则需要在使用“this”之前首先调用super（）。</li>
-<li>ES6 要求，子类的构造函数必须执行一次super函数。否则在调用的时候会报错</li>
-<li>由于super指向父类的原型对象，所以定义在父类实例上的方法或属性，是无法通过super调用的，super.haha()就相当于调用Point.prototype.haha()。</li>
-<li>如果不希望创建出来的实例继承自Object.prototype，你甚至可以在extends后使用null来进行声明。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Point</span> </span>&#123;</div><div class="line">  <span class="keyword">constructor</span>(x, y) &#123;</div><div class="line">    <span class="keyword">this</span>.x = x;</div><div class="line">    <span class="keyword">this</span>.y = y;</div><div class="line">    <span class="keyword">this</span>.hehe = <span class="string">'hehe'</span></div><div class="line">  &#125;</div><div class="line">  haha()&#123;</div><div class="line">    <span class="keyword">return</span> <span class="string">'haha'</span></div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ColorPoint</span> <span class="keyword">extends</span> <span class="title">Point</span> </span>&#123;</div><div class="line">  <span class="keyword">constructor</span>(x, y, color) &#123;</div><div class="line">    <span class="keyword">super</span>(x, y);</div><div class="line">    <span class="keyword">this</span>.color = color; <span class="comment">// 正确</span></div><div class="line">  &#125;</div><div class="line">  hello()&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'haha:'</span> + <span class="keyword">super</span>.haha());</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'hehe:'</span> + <span class="keyword">super</span>.hehe);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> cp = <span class="keyword">new</span> ColorPoint()</div><div class="line">cp.hello();</div><div class="line"><span class="comment">// haha:haha</span></div><div class="line"><span class="comment">// hehe:undefined</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（13）类 Class/" data-id="cj1q3w48900164wvg6d2vldoo" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-读书笔记：深入浅出ES6（12）代理 Proxies" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/04/20/读书笔记：深入浅出ES6（12）代理 Proxies/" class="article-date">
-  <time datetime="2017-04-20T02:54:51.000Z" itemprop="datePublished">2017-04-20</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/20/读书笔记：深入浅出ES6（12）代理 Proxies/">读书笔记：深入浅出ES6（12）代理 Proxies</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>原文线上地址：<a href="http://www.infoq.com/cn/es6-in-depth/" target="_blank" rel="external">http://www.infoq.com/cn/es6-in-depth/</a></p>
-<h2 id="代理-Proxies"><a href="#代理-Proxies" class="headerlink" title="代理 Proxies"></a>代理 Proxies</h2><p><strong>警告：该功能现在无法通过polyfill进行降级处理，所以不要在浏览器端使用，在Node.js或io.js环境中使用代理，首先你需要添加名为harmony-reflect的polyfill，然后在执行时启用一个非默认的选项（–harmony_proxies）</strong></p>
-<h4 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h4><p>ES6规范定义了一个全新的全局构造函数：代理（Proxy）。它可以接受两个参数：目标对象（target）与句柄对象（handler）</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> target = &#123;&#125;, handler = &#123;&#125;;</div><div class="line"><span class="keyword">var</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(target, handler);</div><div class="line"></div><div class="line">proxy.color = <span class="string">"pink"</span>;</div><div class="line">target.color <span class="comment">//pink</span></div></pre></td></tr></table></figure>
-<p>代理的行为很简单：将代理的所有内部方法转发至目标。简单来说，如果调用proxy.[<a href="">Enumerate]</a>，就会返回target.[<a href="">Enumerate]</a>。</p>
-<h4 id="内部方法"><a href="#内部方法" class="headerlink" title="内部方法"></a>内部方法</h4><p>我们可以在<a href="http://www.ecma-international.org/ecma-262/6.0/index.html#sec-proxy-object-internal-methods-and-internal-slots" target="_blank" rel="external">ES6标准列表5和6</a>中找到全部的14种方法。双方括号[[ ]]代表内部方法，在一般的JS代码中不可见，你可以调用、删除或覆写普通方法，但是无法操作内部方法。</p>
-<p>在整个ES6标准中，只要有可能，任何语法或对象相关的内建函数都是基于这14种内部方法构建的。ES6在对象的中枢系统周围划分了一个清晰的界限，你可以借助代理特性用任意JS代码替换标准中枢系统的内部方法。</p>
-<h4 id="代理句柄"><a href="#代理句柄" class="headerlink" title="代理句柄"></a>代理句柄</h4><p>句柄对象的方法可以覆写任意代理的内部方法。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> target = &#123;&#125;;</div><div class="line"><span class="keyword">var</span> handler = &#123;</div><div class="line">      <span class="attr">set</span>: <span class="function"><span class="keyword">function</span> (<span class="params">target, key, value, receiver</span>) </span>&#123;</div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">"请不要为这个对象设置属性。"</span>);</div><div class="line">      &#125;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">var</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(target, handler);</div><div class="line">proxy.name = <span class="string">"angelina"</span>; <span class="comment">//Error: 请不要为这个对象设置属性。</span></div></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（12）代理 Proxies/" data-id="cj1q3w48700144wvgpwhfz5xe" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-读书笔记：深入浅出ES6（11）生成器 Generators，续篇" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/04/20/读书笔记：深入浅出ES6（11）生成器 Generators，续篇/" class="article-date">
-  <time datetime="2017-04-20T02:54:49.000Z" itemprop="datePublished">2017-04-20</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/20/读书笔记：深入浅出ES6（11）生成器 Generators，续篇/">读书笔记：深入浅出ES6（11）生成器 Generators，续篇</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>原文线上地址：<a href="http://www.infoq.com/cn/es6-in-depth/" target="_blank" rel="external">http://www.infoq.com/cn/es6-in-depth/</a></p>
-<h2 id="Generators"><a href="#Generators" class="headerlink" title="Generators"></a>Generators</h2><h4 id="如何关停生成器"><a href="#如何关停生成器" class="headerlink" title="如何关停生成器"></a>如何关停生成器</h4><ul>
-<li>generator.next()</li>
-<li>generator.return()</li>
-<li>generator.throw(error)</li>
-<li>yield*</li>
-</ul>
-<p><strong>当生成器执行到一个yield表达式并暂停后可以实现以下功能：</strong></p>
-<ul>
-<li>调用generator.next(value)，生成器从离开的地方恢复执行。</li>
-<li>调用generator.return()，传递一个可选值，生成器只执行finally代码块并不再恢复执行。</li>
-<li>调用generator.throw(error)，生成器表现得像是yield表达式调用一个函数并抛出错误。</li>
-<li>或者，什么也不做，生成器永远保持冻结状态。（是的，对于一个生成器来说，很可能执行到一个try代码块，永不执行finally代码块。这种状态下的生成器可以被垃圾收集器回收。）</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> generator = <span class="function"><span class="keyword">function</span>* (<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">      <span class="keyword">var</span> value = <span class="keyword">yield</span> i;</div><div class="line">      <span class="built_in">console</span>.log(i);</div><div class="line">    &#125; <span class="keyword">catch</span>(e) &#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">"catch exception..."</span>);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">var</span> g = generator();</div><div class="line">g.next();</div><div class="line">g.throw();</div></pre></td></tr></table></figure>
-<h4 id="next参数"><a href="#next参数" class="headerlink" title=".next参数"></a>.next参数</h4><p>生成器的.next()方法接受一个可选参数，参数稍后会作为yield表达式的返回值出现在生成器中。那就是说，yield语句与return语句不同，它是一个只有当生成器恢复时才会有值的表达式。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span>* <span class="title">gen</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">while</span>(<span class="literal">true</span>) &#123;</div><div class="line">    <span class="keyword">var</span> value = <span class="keyword">yield</span> <span class="string">'abc'</span>;</div><div class="line">    <span class="built_in">console</span>.log(value);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> g = gen();</div><div class="line">g.next(<span class="number">1</span>);   <span class="comment">// "&#123; value: null, done: false &#125;"</span></div><div class="line">g.next(<span class="number">2</span>);   <span class="comment">// "&#123; value: null, done: false &#125;"</span></div><div class="line"><span class="comment">// 2</span></div></pre></td></tr></table></figure>
-<ul>
-<li>在该示例中，调用 next 方法并传入了参数，请注意，首次调用 next 方法时没有出任何输出, 这是因为初始状态时生成器通过yield 返回了’abc’.</li>
-<li>暂停生成器，生成字符串值。</li>
-<li>此时可以暂停任意长的时间。</li>
-<li>最终，直到有人调用.next(2)，我们将这个对象(这里是数字2)存储在本地变量value中并继续执行下一行代码（输出console.log）。</li>
-</ul>
-<h4 id="语法糖"><a href="#语法糖" class="headerlink" title="语法糖"></a>语法糖</h4><p>普通yield表达式只生成一个值，而yield*表达式可以通过迭代器进行迭代生成所有的值。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span>* <span class="title">concat</span>(<span class="params">iter1, iter2</span>) </span>&#123;</div><div class="line">      <span class="keyword">for</span> (<span class="keyword">var</span> value <span class="keyword">of</span> iter1) &#123;</div><div class="line">        <span class="keyword">yield</span> value;</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">for</span> (<span class="keyword">var</span> value <span class="keyword">of</span> iter2) &#123;</div><div class="line">        <span class="keyword">yield</span> value;</div><div class="line">      &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
-<p>等效于</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span>* <span class="title">concat</span>(<span class="params">iter1, iter2</span>) </span>&#123;</div><div class="line">  <span class="keyword">yield</span>* iter1;</div><div class="line">  <span class="keyword">yield</span>* iter2;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（11）生成器 Generators，续篇/" data-id="cj1q3w48600124wvg047r32jj" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-读书笔记：深入浅出ES6（10）集合" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/04/20/读书笔记：深入浅出ES6（10）集合/" class="article-date">
-  <time datetime="2017-04-20T02:54:48.000Z" itemprop="datePublished">2017-04-20</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/20/读书笔记：深入浅出ES6（10）集合/">读书笔记：深入浅出ES6（10）集合</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>原文线上地址：<a href="http://www.infoq.com/cn/es6-in-depth/" target="_blank" rel="external">http://www.infoq.com/cn/es6-in-depth/</a></p>
-<h2 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h2><h4 id="集合与对象的区别"><a href="#集合与对象的区别" class="headerlink" title="集合与对象的区别"></a>集合与对象的区别</h4><ul>
-<li>对象的键名总是字符串（当然，ES6 中也可以是Symbol）而不能是另一个对象。</li>
-<li>对象没有有效的获知属性个数的方法。</li>
-<li>ES6中，纯粹的对象不能配合for-of循环或…操作符等语法。</li>
-<li>集合不会把数据作为属性暴露出来。也就是说，obj.key或obj[key]不能再用来访问数据了</li>
-<li>同时，不像属性，哈希表的键值不能通过原型链来继承了。</li>
-</ul>
-<h4 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h4><ul>
-<li>遍历Map或Set的顺序就是其中元素的插入顺序</li>
-</ul>
-<h4 id="自我实验"><a href="#自我实验" class="headerlink" title="自我实验"></a>自我实验</h4><ul>
-<li>在集合的key或value中使用Symbol后，虽然集合的值还能获取，但是在console.log中集合的值会被隐藏,所以用的时候调试貌似会不方便</li>
-</ul>
-<h4 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h4><p><strong>语法</strong></p>
-<ul>
-<li>new Set：创建一个新的、空的Set。</li>
-<li>new Set(iterable)：从任何可遍历数据中提取元素，构造出一个新的集合。</li>
-<li>set.size：获取集合的大小，即其中元素的个数。</li>
-<li>set.has(value)：判定集合中是否含有指定元素，返回一个布尔值。</li>
-<li>set.add(value)：添加元素。如果与已有重复，则不产生效果。</li>
-<li>set.delete(value)：删除元素。如果并不存在，则不产生效果。.add()和.delete()都会返回集合自身，所以我们可以用链式语法。</li>
-<li>set[Symbol.iterator]()：返回一个新的遍历整个集合的迭代器。一般这个方法不会被直接调用，因为实际上就是它使集合能够被遍历，也就是说，我们可以直接写for (v of set) {…}等等。</li>
-<li>set.forEach(f)：直接用代码来解释好了，它就像是for (let value of set) { f(value, value, set); }的简写，类似于数组的.forEach()方法。</li>
-<li>set.clear()：清空集合。</li>
-<li>set.keys()、set.values()和set.entries()返回各种迭代器，它们是为了兼容Map而提供的，所以我们待会儿再来看。</li>
-</ul>
-<h4 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h4><p><strong>语法</strong></p>
-<ul>
-<li>new Map：返回一个新的、空的Map。</li>
-<li>new Map(pairs)：根据所含元素形如[key, value]的数组pairs来创建一个新的Map。这里提供的pairs可以是一个已有的Map 对象，可以是一个由二元数组组成的数组，也可以是逐个生成二元数组的一个生成器，等等。</li>
-<li>map.size：返回Map中项目的个数。</li>
-<li>map.has(key)：测试一个键名是否存在，类似key in obj。</li>
-<li>map.get(key)：返回一个键名对应的值，若键名不存在则返回undefined，类似obj[key]。</li>
-<li>map.set(key, value)：添加一对新的键值对，如果键名已存在就覆盖。</li>
-<li>map.delete(key)：按键名删除一项，类似delete obj[key]。</li>
-<li>map.clear()：清空Map。</li>
-<li>map<a href="">Symbol.iterator</a>：返回遍历所有项的迭代器，每项用一个键和值组成的二元数组表示。</li>
-<li>map.forEach(f) 类似for (let [key, value] of map) { f(value, key, map); }。这里诡异的参数顺序，和Set中一样，是对应着Array.prototype.forEach()。</li>
-<li>map.keys()：返回遍历所有键的迭代器。</li>
-<li>map.values()：返回遍历所有值的迭代器。</li>
-<li>map.entries()：返回遍历所有项的迭代器，就像map<a href="">Symbol.iterator</a>。实际上，它们就是同一个方法，不同名字。</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（10）集合/" data-id="cj1q3w48300114wvg7wey6c5a" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-读书笔记：深入浅出ES6（08）Symbols" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/04/14/读书笔记：深入浅出ES6（08）Symbols/" class="article-date">
-  <time datetime="2017-04-14T02:54:48.000Z" itemprop="datePublished">2017-04-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/14/读书笔记：深入浅出ES6（08）Symbols/">读书笔记：深入浅出ES6（08）Symbols</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>原文线上地址：<a href="http://www.infoq.com/cn/es6-in-depth/" target="_blank" rel="external">http://www.infoq.com/cn/es6-in-depth/</a></p>
-<h2 id="Symbols"><a href="#Symbols" class="headerlink" title="Symbols"></a>Symbols</h2><h4 id="第七种原始类型"><a href="#第七种原始类型" class="headerlink" title="第七种原始类型"></a>第七种原始类型</h4><p>原来的六种类型：</p>
-<ol>
-<li>Undefined 未定义</li>
-<li>Null 空值</li>
-<li>Boolean 布尔类型</li>
-<li>Number 数字类型</li>
-<li>String 字符串类型</li>
-<li>Object 对象类型</li>
-</ol>
-<h4 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h4><ul>
-<li>symbol是程序创建并且可以用作属性键的值，并且它能避免命名冲突的风险。</li>
-<li>调用Symbol()创建一个新的symbol，它的值与其它任何值皆不相等。</li>
-<li>创建的变量类型为symbol，而不是一个字符串。除此之外，它与一个普通的属性没有什么区别。</li>
-<li>不能被类似obj.name的点号法访问，你必须使用方括号访问这些属性</li>
-<li>不能被for-in 遍历出来（ Object.getOwnPropertySymbols(obj)就可以列出对象的symbol键 ）</li>
-<li>symbol被创建后就不可变更，你不能为它设置属性</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> mySymbol = <span class="built_in">Symbol</span>(<span class="string">'abc'</span>);</div><div class="line"><span class="keyword">var</span> mySymbol2 = <span class="built_in">Symbol</span>(<span class="string">'abc'</span>);</div><div class="line"><span class="built_in">console</span>.log(mySymbol==mySymbol2); <span class="comment">//false</span></div><div class="line"><span class="keyword">var</span> obj = &#123;&#125;;</div><div class="line">obj[mySymbol] = <span class="string">"ok!"</span>;</div><div class="line">obj[mySymbol2] = <span class="string">"xxx"</span>;</div><div class="line"><span class="built_in">console</span>.log(obj[mySymbol]); <span class="comment">// ok!</span></div><div class="line"><span class="built_in">console</span>.log(obj) <span class="comment">//Object &#123;Symbol(abc): "ok!", Symbol(abc): "xxx"&#125;</span></div></pre></td></tr></table></figure>
-<h4 id="获取symbol的三种方法"><a href="#获取symbol的三种方法" class="headerlink" title="获取symbol的三种方法"></a>获取symbol的三种方法</h4><ul>
-<li>调用Symbol()。正如我们上文中所讨论的，这种方式每次调用都会返回一个新的唯一symbol。</li>
-<li><p>调用Symbol.for(string)。这种方式会访问symbol注册表，其中存储了已经存在的一系列symbol。这种方式与通过Symbol()定义的独立symbol不同，symbol注册表中的symbol是共享的。注册表非常有用，在多个web页面或同一个web页面的多个模块中经常需要共享一个symbol。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> d = <span class="built_in">Symbol</span>.for(<span class="string">"cat"</span>);</div><div class="line"><span class="keyword">var</span> e = <span class="built_in">Symbol</span>.for(<span class="string">"cat"</span>);</div><div class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> d) <span class="comment">// symbol</span></div><div class="line"><span class="built_in">console</span>.warn(d===e) <span class="comment">// true</span></div></pre></td></tr></table></figure>
-</li>
-<li><p>使用标准定义的symbol，例如：Symbol.iterator。标准根据一些特殊用途定义了少许的几个symbol。</p>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（08）Symbols/" data-id="cj1q3w48f001f4wvgz2r98xnj" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-读书笔记：深入浅出ES6（07）箭头函数" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/04/14/读书笔记：深入浅出ES6（07）箭头函数/" class="article-date">
-  <time datetime="2017-04-14T02:54:48.000Z" itemprop="datePublished">2017-04-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/14/读书笔记：深入浅出ES6（07）箭头函数/">读书笔记：深入浅出ES6（07）箭头函数</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>原文线上地址：<a href="http://www.infoq.com/cn/es6-in-depth/" target="_blank" rel="external">http://www.infoq.com/cn/es6-in-depth/</a></p>
-<h2 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h2><h4 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// ES5</span></div><div class="line"><span class="keyword">var</span> total = values.reduce(<span class="function"><span class="keyword">function</span> (<span class="params">a, b</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> a + b;</div><div class="line"> &#125;, <span class="number">0</span>);</div><div class="line"> <span class="comment">// ES6</span></div><div class="line"> <span class="keyword">var</span> total = values.reduce(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a + b, <span class="number">0</span>);</div></pre></td></tr></table></figure>
-<h4 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h4><ul>
-<li>使用了块语句的箭头函数不会自动返回值，你需要使用return语句将所需值返回。</li>
-<li>当使用箭头函数创建普通对象时，你总是需要将对象包裹在小括号里。</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 为与你玩耍的每一个小狗创建一个新的空对象</span></div><div class="line"><span class="keyword">var</span> chewToys = puppies.map(<span class="function"><span class="params">puppy</span> =&gt;</span> &#123;&#125;); <span class="comment">// 这样写会报Bug！</span></div><div class="line"><span class="keyword">var</span> chewToys = puppies.map(<span class="function"><span class="params">puppy</span> =&gt;</span> (&#123;&#125;)); <span class="comment">//</span></div></pre></td></tr></table></figure>
-<h4 id="和非箭头函数的区别"><a href="#和非箭头函数的区别" class="headerlink" title="和非箭头函数的区别"></a>和非箭头函数的区别</h4><ul>
-<li>箭头函数没有它自己的this值，箭头函数内的this值继承自外围作用域</li>
-<li>箭头函数不会获取它们自己的arguments对象（通过解构来处理参数）</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（07）箭头函数/" data-id="cj1q3w48g001h4wvgz1e2mle8" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-读书笔记：深入浅出ES6（06）解构" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/04/14/读书笔记：深入浅出ES6（06）解构/" class="article-date">
-  <time datetime="2017-04-14T02:54:47.000Z" itemprop="datePublished">2017-04-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/14/读书笔记：深入浅出ES6（06）解构/">读书笔记：深入浅出ES6（06）解构</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>原文线上地址：<a href="http://www.infoq.com/cn/es6-in-depth/" target="_blank" rel="external">http://www.infoq.com/cn/es6-in-depth/</a></p>
-<h2 id="解构"><a href="#解构" class="headerlink" title="解构"></a>解构</h2><h4 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h4><p>当你解构对象并赋值给变量时，如果你已经声明或不打算声明这些变量（亦即赋值语句前没有let、const或var关键字），你应该注意这样一个潜在的语法错误：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&#123; blowUp &#125; = &#123; <span class="attr">blowUp</span>: <span class="number">10</span> &#125;;</div><div class="line"><span class="comment">// Syntax error 语法错误</span></div></pre></td></tr></table></figure></p>
-<p>因为JavaScript语法通知解析引擎将任何以{开始的语句解析为一个块语句<br>解决方案:将整个表达式用一对小括号包裹<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">(&#123; safe &#125; = &#123; <span class="attr">safe</span>:<span class="number">19</span> &#125;);</div><div class="line"><span class="comment">// No errors 没有语法错误</span></div></pre></td></tr></table></figure></p>
-<p><strong>需要解构的值必须放在最后,不然报错</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Uncaught SyntaxError: Rest parameter must be last formal parameter</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">a,...b,c</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(a);</div><div class="line">    <span class="built_in">console</span>.warn(b);</div><div class="line">    <span class="built_in">console</span>.warn(c);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h4 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h4><ul>
-<li>当使用对象赋值模式时，被解构的值需要被强制转换为对象。大多数类型都可以被转换为对象，但null和undefined却无法进行转换。</li>
-<li>当使用数组赋值模式时，被解构的值一定要包含一个迭代器。</li>
-</ul>
-<h4 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h4><ul>
-<li><p>多重返回值</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">returnMultipleValues</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> [<span class="number">1</span>, <span class="number">2</span>];</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> [foo, bar] = returnMultipleValues();</div></pre></td></tr></table></figure>
-</li>
-<li><p>导入部分模块</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123; Server &#125; <span class="keyword">from</span> <span class="string">'http'</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（06）解构/" data-id="cj1q3w481000z4wvg7m94egxy" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（16）模块 Modules/" data-id="cj4z7to6a001yy7vggiqp9wel" class="article-share-link">Delen</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -636,7 +665,7 @@
 
 
   <nav id="page-nav">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">__('next') &raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">__('next') &raquo;</a>
   </nav>
 </section>
           
@@ -647,9 +676,9 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Tags</h3>
+    <h3 class="widget-title">Labels</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/koa/">koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/weixin/">weixin</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/canvas/">canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/koa/">koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/weixin/">weixin</a></li></ul>
     </div>
   </div>
 
@@ -659,16 +688,16 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/es6/" style="font-size: 16.67px;">es6</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/koa/" style="font-size: 10px;">koa</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/nodejs/" style="font-size: 13.33px;">nodejs</a> <a href="/tags/tools/" style="font-size: 13.33px;">tools</a> <a href="/tags/weixin/" style="font-size: 13.33px;">weixin</a>
+      <a href="/tags/canvas/" style="font-size: 15px;">canvas</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/es6/" style="font-size: 17.5px;">es6</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/koa/" style="font-size: 10px;">koa</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/nodejs/" style="font-size: 12.5px;">nodejs</a> <a href="/tags/tools/" style="font-size: 12.5px;">tools</a> <a href="/tags/weixin/" style="font-size: 12.5px;">weixin</a>
     </div>
   </div>
 
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Arkiv</h3>
+    <h3 class="widget-title">Archieven</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li></ul>
     </div>
   </div>
 
@@ -676,28 +705,28 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Siste innlegg</h3>
+    <h3 class="widget-title">Recente berichten</h3>
     <div class="widget">
       <ul>
         
           <li>
-            <a href="/2017/04/20/js函数队列/">js函数队列</a>
+            <a href="/2017/07/11/canvas链式操作/">canvas链式操作</a>
           </li>
         
           <li>
-            <a href="/2017/04/20/读书笔记：深入浅出ES6（16）模块 Modules/">读书笔记：深入浅出ES6（16）模块 Modules</a>
+            <a href="/2017/07/11/canvas学习笔记-API（07）/">canvas学习笔记 - API（07）</a>
           </li>
         
           <li>
-            <a href="/2017/04/20/读书笔记：深入浅出ES6（14）let & const/">读书笔记：深入浅出ES6（14）let &amp; const</a>
+            <a href="/2017/07/11/canvas学习笔记-API（06）/">canvas学习笔记 - API（06）</a>
           </li>
         
           <li>
-            <a href="/2017/04/20/读书笔记：深入浅出ES6（13）类 Class/">读书笔记：深入浅出ES6（13）类 Class</a>
+            <a href="/2017/07/11/canvas学习笔记-API（05）/">canvas学习笔记 - API（05）</a>
           </li>
         
           <li>
-            <a href="/2017/04/20/读书笔记：深入浅出ES6（12）代理 Proxies/">读书笔记：深入浅出ES6（12）代理 Proxies</a>
+            <a href="/2017/07/11/canvas学习笔记-API（04）/">canvas学习笔记 - API（04）</a>
           </li>
         
       </ul>
