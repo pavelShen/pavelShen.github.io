@@ -60,7 +60,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/pavelShen"></form>
@@ -70,6 +70,57 @@
 </header>
         <div class="outer">
           <section id="main">
+  
+    <article id="post-读书笔记：深入浅出ES6（16）模块 Modules" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/20/读书笔记：深入浅出ES6（16）模块 Modules/" class="article-date">
+  <time datetime="2017-04-20T02:54:55.000Z" itemprop="datePublished">2017-04-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/20/读书笔记：深入浅出ES6（16）模块 Modules/">读书笔记：深入浅出ES6（16）模块 Modules</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>原文线上地址：<a href="http://www.infoq.com/cn/es6-in-depth/" target="_blank" rel="external">http://www.infoq.com/cn/es6-in-depth/</a></p>
+<h2 id="模块-Modules"><a href="#模块-Modules" class="headerlink" title="模块 Modules"></a>模块 Modules</h2><h4 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h4><ul>
+<li>在ES6模块中，无论你是否加入“use strict;”语句，默认情况下模块都是在严格模式下运行。</li>
+<li>你可以导出所有的最外层函数、类以及var、let或const声明的变量。</li>
+</ul>
+<h4 id="Export-amp-Import"><a href="#Export-amp-Import" class="headerlink" title="Export &amp; Import"></a>Export &amp; Import</h4><p><strong>要导出请直接用 module.exports 或者 export default</strong><br>exports 是 module.exports 的一个引用，如果 module.exports 改了，exports 就是失去意义了。</p>
+<h6 id="Export列表"><a href="#Export列表" class="headerlink" title="Export列表"></a>Export列表</h6><p>语法<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">detectCats</span>(<span class="params">canvas, options</span>) </span>&#123; ... &#125;</div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Kittydar</span> </span>&#123; ... &#125;</div><div class="line"><span class="built_in">module</span>.exports = &#123;detectCats, Kittydar&#125;;</div></pre></td></tr></table></figure></p>
+<h6 id="重命名import"><a href="#重命名import" class="headerlink" title="重命名import"></a>重命名import</h6><p>语法<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// suburbia.js</span></div><div class="line"><span class="comment">// 这两个模块都会导出以`flip`命名的东西。</span></div><div class="line"><span class="comment">// 要同时导入两者，我们至少要将其中一个的名称改掉。</span></div><div class="line"><span class="keyword">import</span> &#123;flip <span class="keyword">as</span> flipOmelet&#125; <span class="keyword">from</span> <span class="string">"eggs.js"</span>;</div><div class="line"><span class="keyword">import</span> &#123;flip <span class="keyword">as</span> flipHouse&#125; <span class="keyword">from</span> <span class="string">"real-estate.js"</span>;</div></pre></td></tr></table></figure></p>
+<h6 id="Default-exports"><a href="#Default-exports" class="headerlink" title="Default exports"></a>Default exports</h6><p><code>import _ from &quot;lodash&quot;;</code> 等价于 <code>import {default as _} from &quot;lodash&quot;;</code></p>
+<p>语法<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</div><div class="line">      <span class="attr">field1</span>: value1,</div><div class="line">      <span class="attr">field2</span>: value2</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+<p>关键字export default后可跟随任何值：一个函数、一个类、一个对象字面量，只要你能想到的都可以。</p>
+<h6 id="导入所有并重命名"><a href="#导入所有并重命名" class="headerlink" title="导入所有并重命名"></a>导入所有并重命名</h6><p><code>import * as cows from &quot;cows&quot;;</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（16）模块 Modules/" data-id="cj581gsn40022olvgm9laqekw" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
   
     <article id="post-读书笔记：深入浅出ES6（14）let &amp; const" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -108,7 +159,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（14）let & const/" data-id="cj4z7to69001wy7vg0uru14vl" class="article-share-link">Delen</a>
+      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（14）let & const/" data-id="cj581gsn30021olvgi4wj463b" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -158,7 +209,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（13）类 Class/" data-id="cj4z7to65001uy7vg5vlggoqr" class="article-share-link">Delen</a>
+      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（13）类 Class/" data-id="cj581gsn3001zolvgavymtydr" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -205,7 +256,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（12）代理 Proxies/" data-id="cj4z7to64001sy7vg8zf7ztir" class="article-share-link">Delen</a>
+      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（12）代理 Proxies/" data-id="cj581gsmy001tolvgbtghdjn1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -270,7 +321,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（11）生成器 Generators，续篇/" data-id="cj4z7to5z001qy7vgi5qnpyu4" class="article-share-link">Delen</a>
+      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（11）生成器 Generators，续篇/" data-id="cj581gsn1001volvgtchkbrwn" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -352,57 +403,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（10）集合/" data-id="cj4z7to5u001ny7vgges89l67" class="article-share-link">Delen</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-读书笔记：深入浅出ES6（07）箭头函数" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/04/14/读书笔记：深入浅出ES6（07）箭头函数/" class="article-date">
-  <time datetime="2017-04-14T02:54:48.000Z" itemprop="datePublished">2017-04-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/14/读书笔记：深入浅出ES6（07）箭头函数/">读书笔记：深入浅出ES6（07）箭头函数</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>原文线上地址：<a href="http://www.infoq.com/cn/es6-in-depth/" target="_blank" rel="external">http://www.infoq.com/cn/es6-in-depth/</a></p>
-<h2 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h2><h4 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// ES5</span></div><div class="line"><span class="keyword">var</span> total = values.reduce(<span class="function"><span class="keyword">function</span> (<span class="params">a, b</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> a + b;</div><div class="line"> &#125;, <span class="number">0</span>);</div><div class="line"> <span class="comment">// ES6</span></div><div class="line"> <span class="keyword">var</span> total = values.reduce(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a + b, <span class="number">0</span>);</div></pre></td></tr></table></figure>
-<h4 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h4><ul>
-<li>使用了块语句的箭头函数不会自动返回值，你需要使用return语句将所需值返回。</li>
-<li>当使用箭头函数创建普通对象时，你总是需要将对象包裹在小括号里。</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 为与你玩耍的每一个小狗创建一个新的空对象</span></div><div class="line"><span class="keyword">var</span> chewToys = puppies.map(<span class="function"><span class="params">puppy</span> =&gt;</span> &#123;&#125;); <span class="comment">// 这样写会报Bug！</span></div><div class="line"><span class="keyword">var</span> chewToys = puppies.map(<span class="function"><span class="params">puppy</span> =&gt;</span> (&#123;&#125;)); <span class="comment">//</span></div></pre></td></tr></table></figure>
-<h4 id="和非箭头函数的区别"><a href="#和非箭头函数的区别" class="headerlink" title="和非箭头函数的区别"></a>和非箭头函数的区别</h4><ul>
-<li>箭头函数没有它自己的this值，箭头函数内的this值继承自外围作用域</li>
-<li>箭头函数不会获取它们自己的arguments对象（通过解构来处理参数）</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（07）箭头函数/" data-id="cj4z7to5s001ly7vgdbb54qkh" class="article-share-link">Delen</a>
+      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（10）集合/" data-id="cj581gsms001oolvg58fh1kbw" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -468,7 +469,57 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（08）Symbols/" data-id="cj4z7to5m001hy7vgy5s4kdby" class="article-share-link">Delen</a>
+      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（08）Symbols/" data-id="cj581gsms001molvgry016pov" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-读书笔记：深入浅出ES6（07）箭头函数" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/14/读书笔记：深入浅出ES6（07）箭头函数/" class="article-date">
+  <time datetime="2017-04-14T02:54:48.000Z" itemprop="datePublished">2017-04-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/14/读书笔记：深入浅出ES6（07）箭头函数/">读书笔记：深入浅出ES6（07）箭头函数</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>原文线上地址：<a href="http://www.infoq.com/cn/es6-in-depth/" target="_blank" rel="external">http://www.infoq.com/cn/es6-in-depth/</a></p>
+<h2 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h2><h4 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// ES5</span></div><div class="line"><span class="keyword">var</span> total = values.reduce(<span class="function"><span class="keyword">function</span> (<span class="params">a, b</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> a + b;</div><div class="line"> &#125;, <span class="number">0</span>);</div><div class="line"> <span class="comment">// ES6</span></div><div class="line"> <span class="keyword">var</span> total = values.reduce(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a + b, <span class="number">0</span>);</div></pre></td></tr></table></figure>
+<h4 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h4><ul>
+<li>使用了块语句的箭头函数不会自动返回值，你需要使用return语句将所需值返回。</li>
+<li>当使用箭头函数创建普通对象时，你总是需要将对象包裹在小括号里。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 为与你玩耍的每一个小狗创建一个新的空对象</span></div><div class="line"><span class="keyword">var</span> chewToys = puppies.map(<span class="function"><span class="params">puppy</span> =&gt;</span> &#123;&#125;); <span class="comment">// 这样写会报Bug！</span></div><div class="line"><span class="keyword">var</span> chewToys = puppies.map(<span class="function"><span class="params">puppy</span> =&gt;</span> (&#123;&#125;)); <span class="comment">//</span></div></pre></td></tr></table></figure>
+<h4 id="和非箭头函数的区别"><a href="#和非箭头函数的区别" class="headerlink" title="和非箭头函数的区别"></a>和非箭头函数的区别</h4><ul>
+<li>箭头函数没有它自己的this值，箭头函数内的this值继承自外围作用域</li>
+<li>箭头函数不会获取它们自己的arguments对象（通过解构来处理参数）</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（07）箭头函数/" data-id="cj581gsmp001kolvgatqlwikq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -523,7 +574,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（06）解构/" data-id="cj4z7to5o001iy7vg1c5c0x59" class="article-share-link">Delen</a>
+      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（06）解构/" data-id="cj581gsmu001rolvg09xlxx81" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -573,62 +624,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（04）模板字符串/" data-id="cj4z7to5l001gy7vgn2ua7c3l" class="article-share-link">Delen</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-读书笔记：深入浅出ES6（03）生成器 Generators" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/04/14/读书笔记：深入浅出ES6（03）生成器 Generators/" class="article-date">
-  <time datetime="2017-04-14T02:54:45.000Z" itemprop="datePublished">2017-04-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/14/读书笔记：深入浅出ES6（03）生成器 Generators/">读书笔记：深入浅出ES6（03）生成器 Generators</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>原文线上地址：<a href="http://www.infoq.com/cn/es6-in-depth/" target="_blank" rel="external">http://www.infoq.com/cn/es6-in-depth/</a></p>
-<h2 id="生成器-Generators"><a href="#生成器-Generators" class="headerlink" title="生成器 Generators"></a>生成器 Generators</h2><h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span>* <span class="title">quips</span>(<span class="params">name</span>) </span>&#123;</div><div class="line">  <span class="keyword">yield</span> <span class="string">"你好 "</span> + name + <span class="string">"!"</span>;</div><div class="line">  <span class="keyword">yield</span> <span class="string">"希望你能喜欢这篇介绍ES6的译文"</span>;</div><div class="line">  <span class="keyword">yield</span> <span class="string">"我们下次再见！"</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> iter = quips(<span class="string">"jorendorff"</span>);    <span class="comment">//[object Generator]</span></div><div class="line">iter.next()     <span class="comment">//&#123; value: "你好 jorendorff!", done: false &#125;</span></div><div class="line">iter.next()     <span class="comment">//&#123; value: "希望你能喜欢这篇介绍ES6的译文", done: false &#125;</span></div><div class="line">iter.next()     <span class="comment">//&#123; value: "我们下次再见！", done: false &#125;</span></div><div class="line">iter.next()      <span class="comment">//&#123; value: undefined, done: true &#125;</span></div></pre></td></tr></table></figure>
-<h3 id="普通函数和生成器函数区别"><a href="#普通函数和生成器函数区别" class="headerlink" title="普通函数和生成器函数区别"></a>普通函数和生成器函数区别</h3><ul>
-<li>普通函数使用function声明，而生成器函数使用function*声明。</li>
-<li>在生成器函数内部，有一种类似return的语法：关键字yield。二者的区别是，普通函数只可以return一次，而生成器函数可以yield多次（当然也可以只yield一次）。在生成器的执行过程中，遇到yield表达式立即暂停，后续可恢复执行状态。</li>
-</ul>
-<h3 id="How-it-work"><a href="#How-it-work" class="headerlink" title="How it work"></a>How it work</h3><ol>
-<li>当你调用一个生成器函数时，它并非立即执行，而是返回一个已暂停的生成器对象。你可将这个生成器对象视为一次函数调用，只不过立即冻结了，它恰好在生成器函数的最顶端的第一行代码之前冻结了。</li>
-<li>每当你调用生成器对象的.next()方法时，函数调用将其自身解冻并一直运行到下一个yield表达式，再次暂停。</li>
-<li>调用最后一个iter.next()时，我们最终抵达生成器函数的末尾，所以返回结果中done的值为true。抵达函数的末尾意味着没有返回值，所以返回结果中value的值为undefined。</li>
-</ol>
-<h3 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h3><ul>
-<li><strong>生成器不是线程</strong> 当生成器运行时，它和调用者处于同一线程中，拥有确定的连续执行顺序，永不并发</li>
-<li><strong>生成器是迭代器</strong> 所有的生成器都有内建.next()和[Symbol.iterator]()方法的实现。你只须编写循环部分的行为。</li>
-</ul>
-<h3 id="前一章的例子用生成器改写："><a href="#前一章的例子用生成器改写：" class="headerlink" title="前一章的例子用生成器改写："></a>前一章的例子用生成器改写：</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span>* <span class="title">students</span>(<span class="params">index</span>)</span>&#123;</div><div class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i=<span class="number">1</span>;i&lt;=index;i++)&#123;</div><div class="line">    <span class="keyword">yield</span> i</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> g = students(<span class="number">5</span>);</div><div class="line"><span class="built_in">console</span>.log(g.next());</div><div class="line"><span class="built_in">console</span>.log(g.next());</div><div class="line"><span class="built_in">console</span>.log(g.next());</div><div class="line"><span class="built_in">console</span>.log(g.next());</div><div class="line"><span class="built_in">console</span>.log(g.next());</div><div class="line"><span class="built_in">console</span>.log(g.next());</div></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（03）生成器 Generators/" data-id="cj4z7to5h001by7vgy781osq1" class="article-share-link">Delen</a>
+      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（04）模板字符串/" data-id="cj581gsmn001iolvg8sbn060e" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -655,7 +651,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Labels</h3>
+    <h3 class="widget-title">Tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/canvas/">canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/koa/">koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/weixin/">weixin</a></li></ul>
     </div>
@@ -674,7 +670,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archieven</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li></ul>
     </div>
@@ -684,9 +680,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recente berichten</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/07/17/canvas学习总结/">canvas学习总结</a>
+          </li>
         
           <li>
             <a href="/2017/07/11/canvas链式操作/">canvas链式操作</a>
@@ -702,10 +702,6 @@
         
           <li>
             <a href="/2017/07/11/canvas学习笔记-API（05）/">canvas学习笔记 - API（05）</a>
-          </li>
-        
-          <li>
-            <a href="/2017/07/11/canvas学习笔记-API（04）/">canvas学习笔记 - API（04）</a>
           </li>
         
       </ul>

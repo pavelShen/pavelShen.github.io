@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>canvas学习总结 | pavelShen的个人博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="常用APIctx = canvas.getContext(‘2d’) 获取上下文ctx.canvas.height ctx.canvas.width 获取画布宽高beginPath() 清空子路径列表开始一个新路径的方法closePath() 将笔点返回到当前子路径起始点的方法。它尝试从当前点到起始点绘制一条直线。 如果图形已经是封闭的或者只有一个点，那么此方法不会做任何操作globalCompo">
+<meta property="og:type" content="article">
+<meta property="og:title" content="canvas学习总结">
+<meta property="og:url" content="https://github.com/pavelShen/2017/07/17/canvas学习总结/index.html">
+<meta property="og:site_name" content="pavelShen的个人博客">
+<meta property="og:description" content="常用APIctx = canvas.getContext(‘2d’) 获取上下文ctx.canvas.height ctx.canvas.width 获取画布宽高beginPath() 清空子路径列表开始一个新路径的方法closePath() 将笔点返回到当前子路径起始点的方法。它尝试从当前点到起始点绘制一条直线。 如果图形已经是封闭的或者只有一个点，那么此方法不会做任何操作globalCompo">
+<meta property="og:image" content="https://mdn.mozillademos.org/files/201/canvas-grid.png">
+<meta property="og:updated_time" content="2017-07-17T06:13:45.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="canvas学习总结">
+<meta name="twitter:description" content="常用APIctx = canvas.getContext(‘2d’) 获取上下文ctx.canvas.height ctx.canvas.width 获取画布宽高beginPath() 清空子路径列表开始一个新路径的方法closePath() 将笔点返回到当前子路径起始点的方法。它尝试从当前点到起始点绘制一条直线。 如果图形已经是封闭的或者只有一个点，那么此方法不会做任何操作globalCompo">
+<meta name="twitter:image" content="https://mdn.mozillademos.org/files/201/canvas-grid.png">
+  
+    <link rel="alternate" href="/atom.xml" title="pavelShen的个人博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  
+    <div id="container">
+      <div id="wrap">
+        <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">pavelShen的个人博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">JUST FOR FUN</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/demo">Demo</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/pavelShen"></form>
+      </div>
+    </div>
+  </div>
+</header>
+        <div class="outer">
+          <section id="main"><article id="post-canvas学习总结" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/17/canvas学习总结/" class="article-date">
+  <time datetime="2017-07-17T06:12:29.000Z" itemprop="datePublished">2017-07-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      canvas学习总结
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="常用API"><a href="#常用API" class="headerlink" title="常用API"></a>常用API</h2><p><code>ctx = canvas.getContext(‘2d’)</code> 获取上下文<br><code>ctx.canvas.height ctx.canvas.width</code> 获取画布宽高<br><code>beginPath()</code> 清空子路径列表开始一个新路径的方法<br><code>closePath()</code> 将笔点返回到当前子路径起始点的方法。它尝试从当前点到起始点绘制一条直线。 如果图形已经是封闭的或者只有一个点，那么此方法不会做任何操作<br><code>globalCompositeOperation = type</code>   我们不仅可以在已有图形后面再画新图形，还可以用来遮盖指定区域，清除画布中的某些部分（清除区域不仅限于矩形，像clearRect()方法做的那样 ）以及更多其他操作。</p>
+<h4 id="状态快照"><a href="#状态快照" class="headerlink" title="状态快照"></a>状态快照</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">save()</div><div class="line">restore()</div></pre></td></tr></table></figure>
+<p>save 和 restore 方法是用来保存和恢复 canvas 状态的，都没有参数。Canvas 的状态就是当前画面应用的所有样式和变形的一个快照。<br>Canvas状态存储在栈中，每当save()方法被调用后，当前的状态就被推送到栈中保存。一个绘画状态包括：</p>
+<ul>
+<li>当前应用的变形（即移动，旋转和缩放，见下）</li>
+<li>strokeStyle, fillStyle, globalAlpha, lineWidth, lineCap, lineJoin, miterLimit, shadowOffsetX, shadowOffsetY, shadowBlur, shadowColor, globalCompositeOperation 的值</li>
+<li>当前的裁切路径（clipping path）</li>
+</ul>
+<p>你可以调用任意多次 save 方法。<br>每一次调用 restore 方法，上一个保存的状态就从栈中弹出，所有设定都恢复。</p>
+<h4 id="tip"><a href="#tip" class="headerlink" title="tip:"></a>tip:</h4><ul>
+<li>调用beginPath()之后（或者canvas刚建的时候）第一条路径构造命令通常被视为是moveTo，所以这里最好使用moveTo命令显示声明起始点</li>
+<li>当你调用fill()函数时，所有没有闭合的形状都会自动闭合，所以你不需要调用closePath()函数。但是调用stroke()时不会自动闭合。</li>
+</ul>
+<hr>
+<h2 id="绘画步骤"><a href="#绘画步骤" class="headerlink" title="绘画步骤"></a>绘画步骤</h2><h4 id="路径绘制"><a href="#路径绘制" class="headerlink" title="路径绘制"></a>路径绘制</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">rect(x, y, width, height)</div><div class="line">arc(x, y, radius, startAngle, endAngle, anticlockwise)</div><div class="line">lineTo(x,y)</div><div class="line"></div><div class="line"><span class="keyword">var</span> rectangle = <span class="keyword">new</span> Path2D();  <span class="comment">// 将某一个路径作为变量——创建一个它的副本</span></div><div class="line">rectangle.rect(<span class="number">10</span>, <span class="number">10</span>, <span class="number">50</span>, <span class="number">50</span>);</div><div class="line">ctx.stroke(rectangle);</div></pre></td></tr></table></figure>
+<h4 id="设置样式"><a href="#设置样式" class="headerlink" title="设置样式"></a>设置样式</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// color  DOMString 字符串，可以转换成 CSS &lt;color&gt; 值。</span></div><div class="line"><span class="comment">// gradient  CanvasGradient 对象（线性渐变或放射性渐变）。</span></div><div class="line"><span class="comment">// pattern   CanvasPattern 对象（可重复的图片）。</span></div><div class="line">ctx.fillStyle = color;</div><div class="line">ctx.fillStyle = gradient;</div><div class="line">ctx.fillStyle = pattern;</div><div class="line"></div><div class="line"><span class="comment">//strokeStyle 参考fillStyle</span></div></pre></td></tr></table></figure>
+<p>最后通过 <code>ctx.fill()</code> 或者 <code>ctx.stroke()</code>进行绘制</p>
+<hr>
+<h2 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h2><h4 id="引入图像到canvas里需要以下两步基本操作："><a href="#引入图像到canvas里需要以下两步基本操作：" class="headerlink" title="引入图像到canvas里需要以下两步基本操作："></a>引入图像到canvas里需要以下两步基本操作：</h4><ol>
+<li>获得一个指向HTMLImageElement的对象或者另一个canvas元素的引用作为源，也可以通过提供一个URL的方式来使用图片</li>
+<li>使用drawImage()函数将图片绘制到画布上</li>
+</ol>
+<h4 id="drawImage"><a href="#drawImage" class="headerlink" title="drawImage"></a>drawImage</h4><ul>
+<li>绘制<br>drawImage(image, x, y) 其中 image 是 image 或者 canvas 对象，x 和 y 是其在目标 canvas 里的起始坐标。</li>
+<li>缩放<br>drawImage(image, x, y, width, height) 这个方法多了2个参数：width 和 height，这两个参数用来控制 当像canvas画入时应该缩放的大小</li>
+<li>切片<br>drawImage(image, sx, sy, sWidth, sHeight, dx, dy, dWidth, dHeight)<br>第一个参数和其它的是相同的，都是一个图像或者另一个 canvas 的引用。其它8个参数最好是参照右边的图解，前4个是定义图像源的切片位置和大小，后4个则是定义切片的目标显示位置和大小。</li>
+</ul>
+<h4 id="源"><a href="#源" class="headerlink" title="源"></a>源</h4><ul>
+<li>HTMLImageElement 这些图片是由Image()函数构造出来的，或者任何的<code>&lt;img&gt;</code>元素</li>
+<li>HTMLVideoElement 用一个HTML的 <code>&lt;video&gt;</code>元素作为你的图片源，可以从视频中抓取当前帧作为一个图像</li>
+<li>HTMLCanvasElement 可以使用另一个 <code>&lt;canvas&gt;</code> 元素作为你的图片源。</li>
+<li>ImageBitmap 这是一个高性能的位图，可以低延迟地绘制，它可以从上述的所有源以及其它几种源中生成。</li>
+</ul>
+<h4 id="使用其它域名下的图片"><a href="#使用其它域名下的图片" class="headerlink" title="使用其它域名下的图片"></a>使用其它域名下的图片</h4><p>在 HTMLImageElement上使用crossOrigin属性，你可以请求加载其它域名上的图片。如果图片的服务器允许跨域访问这个图片，那么你可以使用这个图片而不污染canvas，否则，使用这个图片将会污染canvas。<br>示例代码<br><figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line">&lt;img src="http://n1image.hjfile.cn/mh/2016/09/02/a0c9ca472e8ae8e26e34a31d98c074ce.jpg" id="a" crossorigin="anonymous"&gt;&lt;/img&gt;</div><div class="line">&lt;canvas id="myCanvas" width="500" height="550" style="border:1px solid #d3d3d3;"&gt;&lt;/canvas&gt;</div><div class="line">&lt;script&gt;</div><div class="line">var c=document.getElementById("myCanvas");</div><div class="line">var ctx=c.getContext("2d");</div><div class="line">var img = document.getElementById('a')</div><div class="line">img.onload = function()&#123;</div><div class="line">  ctx.drawImage(img,0,0)</div><div class="line">&#125;</div><div class="line">function copy()</div><div class="line">&#123;</div><div class="line">var imgData=ctx.getImageData(20,20,150,150);</div><div class="line">ctx.putImageData(imgData,150,70);</div><div class="line">&#125;</div><div class="line">&lt;/script&gt;</div><div class="line">&lt;button onclick="copy()"&gt;复制&lt;/button&gt;</div></pre></td></tr></table></figure></p>
+<h4 id="设置crossOrigin属性"><a href="#设置crossOrigin属性" class="headerlink" title="设置crossOrigin属性"></a>设置crossOrigin属性</h4><p>在HTML5中，一些 HTML 元素提供了对 CORS 的支持， 例如 <code>&lt;img&gt;</code> 和 <code>&lt;video&gt;</code> 均有一个跨域属性 (crossOrigin property)，它允许你配置元素获取数据的 CORS 请求。<br>可选值：</p>
+<ul>
+<li>anonymous 对此元素的CORS请求将不设置凭据标志。</li>
+<li>use-credentials 对此元素的CORS请求将设置凭证标志; 这意味着请求将提供凭据。<br>无效的关键字和空字符串也会被当作 anonymous 关键字使用<br>示例<br><code>&lt;script src=&quot;https://example.com/example-framework.js&quot; crossorigin=&quot;anonymous&quot;&gt;&lt;/script&gt;</code></li>
+</ul>
+<h4 id="污染canvas"><a href="#污染canvas" class="headerlink" title="污染canvas"></a>污染canvas</h4><p>尽管不通过 CORS 就可以在画布中使用图片，但是这会污染画布。一旦画布被污染，你就无法读取其数据。例如，你不能再使用画布的 toBlob(), toDataURL() 或 getImageData() 方法，调用它们会抛出安全错误。<br>这种机制可以避免未经许可拉取远程网站信息而导致的用户隐私泄露。</p>
+<h4 id="使用其它-canvas-元素"><a href="#使用其它-canvas-元素" class="headerlink" title="使用其它 canvas 元素"></a>使用其它 canvas 元素</h4><p>和引用页面内的图片类似地，用 document.getElementsByTagName 或 document.getElementById 方法来获取其它 canvas 元素。但你引入的应该是已经准备好的 canvas。<br><strong>一个常用的应用就是将第二个canvas作为另一个大的 canvas 的缩略图。</strong></p>
+<hr>
+<h2 id="像素操作"><a href="#像素操作" class="headerlink" title="像素操作"></a>像素操作</h2><h4 id="ImageData-对象"><a href="#ImageData-对象" class="headerlink" title="ImageData 对象"></a>ImageData 对象</h4><p><strong>ImageData对象中存储着canvas对象真实的像素数据，它包含以下几个只读属性：</strong></p>
+<ul>
+<li>width 图片宽度，单位是像素</li>
+<li>height 图片高度，单位是像素</li>
+<li>data<br>Uint8ClampedArray类型的一维数组，包含着RGBA格式的整型数据，范围在0至255之间（包括255）。<br>data属性返回一个 Uint8ClampedArray，它可以被使用作为查看初始像素数据。每个像素用4个1bytes值(按照红，绿，蓝和透明值的顺序; 这就是”RGBA”格式) 来代表。每个颜色值部份用0至255来代表。每个部份被分配到一个在数组内连续的索引，左上角像素的红色部份在数组的索引0位置。像素从左到右被处理，然后往下，遍历整个数组。</li>
+</ul>
+<h4 id="得到场景像素数据"><a href="#得到场景像素数据" class="headerlink" title="得到场景像素数据"></a>得到场景像素数据</h4><p><code>var myImageData = ctx.getImageData(left, top, width, height);</code><br>注：任何在画布以外的元素都会被返回成一个透明黑的ImageData对像。</p>
+<h4 id="demo取色器"><a href="#demo取色器" class="headerlink" title="demo取色器"></a>demo取色器</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> img = <span class="keyword">new</span> Image();</div><div class="line">img.src = <span class="string">'https://mdn.mozillademos.org/files/5397/rhino.jpg'</span>;</div><div class="line"><span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>);</div><div class="line"><span class="keyword">var</span> ctx = canvas.getContext(<span class="string">'2d'</span>);</div><div class="line">img.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  ctx.drawImage(img, <span class="number">0</span>, <span class="number">0</span>);</div><div class="line">  img.style.display = <span class="string">'none'</span>;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">var</span> color = <span class="built_in">document</span>.getElementById(<span class="string">'color'</span>);</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">pick</span>(<span class="params">event</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> x = event.layerX;</div><div class="line">  <span class="keyword">var</span> y = event.layerY;</div><div class="line">  <span class="keyword">var</span> pixel = ctx.getImageData(x, y, <span class="number">1</span>, <span class="number">1</span>);</div><div class="line">  <span class="keyword">var</span> data = pixel.data;</div><div class="line">  <span class="keyword">var</span> rgba = <span class="string">'rgba('</span> + data[<span class="number">0</span>] + <span class="string">','</span> + data[<span class="number">1</span>] +</div><div class="line">             <span class="string">','</span> + data[<span class="number">2</span>] + <span class="string">','</span> + (data[<span class="number">3</span>] / <span class="number">255</span>) + <span class="string">')'</span>;</div><div class="line">  color.style.background = rgba;</div><div class="line">  color.textContent = rgba;</div><div class="line">&#125;</div><div class="line">canvas.addEventListener(<span class="string">'mousemove'</span>, pick);</div></pre></td></tr></table></figure>
+<h4 id="在场景中写入像素数据"><a href="#在场景中写入像素数据" class="headerlink" title="在场景中写入像素数据"></a>在场景中写入像素数据</h4><p><code>ctx.putImageData(myImageData, dx, dy);</code> dx和dy参数表示你希望在场景内左上角绘制的像素数据所得到的设备坐标。</p>
+<h4 id="保存图片"><a href="#保存图片" class="headerlink" title="保存图片"></a>保存图片</h4><ul>
+<li>canvas.toDataURL(‘image/png’) 默认设定。</li>
+<li>canvas.toDataURL(‘image/jpeg’, quality)<br>创建一个JPG图片。你可以有选择地提供从0到1的品质量，1表示最好品质，0基本不被辨析但有比较小的文件大小。</li>
+</ul>
+<hr>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h4 id="线条"><a href="#线条" class="headerlink" title="线条"></a>线条</h4><p>宽度为奇数的线并不能精确呈现，这就是因为路径的定位问题<br><img src="https://mdn.mozillademos.org/files/201/canvas-grid.png" alt="图片" title="title"></p>
+<h4 id="clip裁切"><a href="#clip裁切" class="headerlink" title="clip裁切"></a>clip裁切</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ctx.beginPath();</div><div class="line">ctx.arc(<span class="number">0</span>,<span class="number">0</span>,<span class="number">60</span>,<span class="number">0</span>,<span class="built_in">Math</span>.PI*<span class="number">2</span>,<span class="literal">true</span>);</div><div class="line">ctx.clip();</div></pre></td></tr></table></figure>
+<p>裁切路径不会在 canvas 上绘制东西，而且它永远不受新图形的影响。这些特性使得它在特定区域里绘制图形时相当好用。( 可以把它理解成PS里面的选择工具 )<br><strong>裁切区域需要通过save&amp;restore方法去还原，因为是路径方法，所以要记得beginPath</strong></p>
+<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p>MDN:<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial</a></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/pavelShen/2017/07/17/canvas学习总结/" data-id="cj581gsku0001olvgmnh3kore" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/07/11/canvas链式操作/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">canvas链式操作</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+  <section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-canvas学习总结" data-title="canvas学习总结" data-url="https://github.com/pavelShen/2017/07/17/canvas学习总结/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'pavelShen'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+  </section>
+  
+</section>
+          
+            <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/canvas/">canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/koa/">koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/weixin/">weixin</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/canvas/" style="font-size: 15px;">canvas</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/es6/" style="font-size: 17.5px;">es6</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/koa/" style="font-size: 10px;">koa</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/nodejs/" style="font-size: 12.5px;">nodejs</a> <a href="/tags/tools/" style="font-size: 12.5px;">tools</a> <a href="/tags/weixin/" style="font-size: 12.5px;">weixin</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/07/17/canvas学习总结/">canvas学习总结</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/11/canvas链式操作/">canvas链式操作</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/11/canvas学习笔记-API（07）/">canvas学习笔记 - API（07）</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/11/canvas学习笔记-API（06）/">canvas学习笔记 - API（06）</a>
+          </li>
+        
+          <li>
+            <a href="/2017/07/11/canvas学习笔记-API（05）/">canvas学习笔记 - API（05）</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+          
+        </div>
+        <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 pavelShen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+      </div>
+      <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/demo" class="mobile-nav-link">Demo</a>
+  
+</nav>
+      
+
+<script src="//libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+    </div>
+  
+</body>
+</html>
