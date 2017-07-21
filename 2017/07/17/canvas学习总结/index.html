@@ -12,7 +12,7 @@
 <meta property="og:site_name" content="pavelShen的个人博客">
 <meta property="og:description" content="常用APIctx = canvas.getContext(‘2d’) 获取上下文ctx.canvas.height ctx.canvas.width 获取画布宽高beginPath() 清空子路径列表开始一个新路径的方法closePath() 将笔点返回到当前子路径起始点的方法。它尝试从当前点到起始点绘制一条直线。 如果图形已经是封闭的或者只有一个点，那么此方法不会做任何操作globalCompo">
 <meta property="og:image" content="https://mdn.mozillademos.org/files/201/canvas-grid.png">
-<meta property="og:updated_time" content="2017-07-17T06:13:45.000Z">
+<meta property="og:updated_time" content="2017-07-20T02:31:44.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="canvas学习总结">
 <meta name="twitter:description" content="常用APIctx = canvas.getContext(‘2d’) 获取上下文ctx.canvas.height ctx.canvas.width 获取画布宽高beginPath() 清空子路径列表开始一个新路径的方法closePath() 将笔点返回到当前子路径起始点的方法。它尝试从当前点到起始点绘制一条直线。 如果图形已经是封闭的或者只有一个点，那么此方法不会做任何操作globalCompo">
@@ -153,12 +153,12 @@
 <h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h4 id="线条"><a href="#线条" class="headerlink" title="线条"></a>线条</h4><p>宽度为奇数的线并不能精确呈现，这就是因为路径的定位问题<br><img src="https://mdn.mozillademos.org/files/201/canvas-grid.png" alt="图片" title="title"></p>
 <h4 id="clip裁切"><a href="#clip裁切" class="headerlink" title="clip裁切"></a>clip裁切</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ctx.beginPath();</div><div class="line">ctx.arc(<span class="number">0</span>,<span class="number">0</span>,<span class="number">60</span>,<span class="number">0</span>,<span class="built_in">Math</span>.PI*<span class="number">2</span>,<span class="literal">true</span>);</div><div class="line">ctx.clip();</div></pre></td></tr></table></figure>
 <p>裁切路径不会在 canvas 上绘制东西，而且它永远不受新图形的影响。这些特性使得它在特定区域里绘制图形时相当好用。( 可以把它理解成PS里面的选择工具 )<br><strong>裁切区域需要通过save&amp;restore方法去还原，因为是路径方法，所以要记得beginPath</strong></p>
-<h2 id="参考文档"><a href="#参考文档" class="headerlink" title="参考文档"></a>参考文档</h2><p>MDN:<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial</a></p>
+<h2 id="相关文档"><a href="#相关文档" class="headerlink" title="相关文档"></a>相关文档</h2><p>MDN:<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial" target="_blank" rel="external">https://developer.mozilla.org/zh-CN/docs/Web/API/Canvas_API/Tutorial</a><br>canvas动画：<a href="http://www.zhangxinxu.com/wordpress/2017/03/canvas-2d-cool-affect-skills-technology/" target="_blank" rel="external">http://www.zhangxinxu.com/wordpress/2017/03/canvas-2d-cool-affect-skills-technology/</a><br>canvas圆角：<a href="http://www.zhangxinxu.com/wordpress/2014/06/svg-canvas-image-border-radius/" target="_blank" rel="external">http://www.zhangxinxu.com/wordpress/2014/06/svg-canvas-image-border-radius/</a></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/07/17/canvas学习总结/" data-id="cj581gsku0001olvgmnh3kore" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/07/17/canvas学习总结/" data-id="cj5dfg31i0005rsvgfnu270ii" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
