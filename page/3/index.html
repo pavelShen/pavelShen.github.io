@@ -71,6 +71,56 @@
         <div class="outer">
           <section id="main">
   
+    <article id="post-读书笔记：深入浅出ES6（04）模板字符串" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/14/读书笔记：深入浅出ES6（04）模板字符串/" class="article-date">
+  <time datetime="2017-04-14T02:54:46.000Z" itemprop="datePublished">2017-04-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/14/读书笔记：深入浅出ES6（04）模板字符串/">读书笔记：深入浅出ES6（04）模板字符串</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>原文线上地址：<a href="http://www.infoq.com/cn/es6-in-depth/" target="_blank" rel="external">http://www.infoq.com/cn/es6-in-depth/</a></p>
+<h2 id="模板字符串"><a href="#模板字符串" class="headerlink" title="模板字符串"></a>模板字符串</h2><h4 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h4><p><code>hello,${user.name}</code></p>
+<h4 id="缺陷"><a href="#缺陷" class="headerlink" title="缺陷"></a>缺陷</h4><ul>
+<li>它们不会为你自动转义特殊字符，为了避免跨站脚本漏洞，你应当像拼接普通字符串时做的那样对非置信数据进行特殊处理。</li>
+<li>它们无法很好地与国际化库（可以帮助你面向不同用户提供不同的语言）相配合，模板字符串不会格式化特定语言的数字和日期，更别提同时使用不同语言的情况了。</li>
+<li>它们不能替代模板引擎的地位，例如：Mustache、Nunjucks。（没有循环语法，不支持条件语句）</li>
+</ul>
+<h4 id="标签模板"><a href="#标签模板" class="headerlink" title="标签模板"></a>标签模板</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> message = SaferHTML<span class="string">`&lt;p&gt;<span class="subst">$&#123;bonk.sender&#125;</span> 向你示好。&lt;/p&gt;`</span>;</div></pre></td></tr></table></figure>
+<p>等效于<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> message = SaferHTML(templateData, bonk.sender);</div></pre></td></tr></table></figure></p>
+<p>SaferHTML是一个标识符，并不是ES6标准库的功能，templateData是一个不可变数组，存储着模板所有的字符串部分，由JS引擎为我们创建。</p>
+<p><strong>定义SaferHTML</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">SaferHTML</span>(<span class="params">templateData</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> s = templateData[<span class="number">0</span>];</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">1</span>; i &lt; <span class="built_in">arguments</span>.length; i++) &#123;</div><div class="line">    <span class="keyword">var</span> arg = <span class="built_in">String</span>(<span class="built_in">arguments</span>[i]);</div><div class="line">    <span class="comment">// 转义占位符中的特殊字符。</span></div><div class="line">    s += arg.replace(<span class="regexp">/&amp;/g</span>, <span class="string">"&amp;"</span>)</div><div class="line">            .replace(<span class="regexp">/&lt;/g</span>, <span class="string">"&lt;"</span>)</div><div class="line">            .replace(<span class="regexp">/&lt;/g</span>, <span class="string">"&gt;"</span>);</div><div class="line">    <span class="comment">// 不转义模板中的特殊字符。</span></div><div class="line">    s += templateData[i];</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">return</span> s;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（04）模板字符串/" data-id="cj5z35llz001joivgsex09ith" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-读书笔记：深入浅出ES6（03）生成器 Generators" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/04/14/读书笔记：深入浅出ES6（03）生成器 Generators/" class="article-date">
@@ -113,7 +163,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（03）生成器 Generators/" data-id="cj5dfg32y001krsvgqmb7nrxj" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（03）生成器 Generators/" data-id="cj5z35lm1001moivgleiprh2x" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -179,7 +229,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（02）迭代器和for-of循环/" data-id="cj5dfg32u001frsvgbbwf60xx" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（02）迭代器和for-of循环/" data-id="cj5z35llv001eoivgpht7mml8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -226,7 +276,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/01/js片段2/" data-id="cj5dfg32h000wrsvgge12o9rr" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/04/01/js片段2/" data-id="cj5z35lli000yoivg38nv2h0v" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -289,7 +339,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/02/27/数组去重/" data-id="cj5dfg32r0019rsvg0zfonhwo" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/02/27/数组去重/" data-id="cj5z35llx001hoivgtlq8vbyl" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -370,7 +420,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/02/10/我的开发环境/" data-id="cj5dfg32s001arsvga6y7ps1k" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/02/10/我的开发环境/" data-id="cj5z35llt001aoivgiyx2wwjj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -413,7 +463,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/02/10/npm命令/" data-id="cj5dfg32l0012rsvgqz1zffxl" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/02/10/npm命令/" data-id="cj5z35llo0016oivg9wofnlfc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li></ul>
@@ -477,7 +527,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/02/10/charles入门/" data-id="cj5dfg31z000jrsvgf28s7ss5" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/02/10/charles入门/" data-id="cj5z35ll2000joivgnhhxt3s8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tools/">tools</a></li></ul>
@@ -539,7 +589,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/02/10/css片段1/" data-id="cj5dfg321000lrsvg32zgrbch" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/02/10/css片段1/" data-id="cj5z35ll6000loivgtgnq4kd2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li></ul>
@@ -593,68 +643,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/02/10/视频全屏播放-开发总结/" data-id="cj5dfg32t001drsvg0362pj3p" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-js片段1" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/01/17/js片段1/" class="article-date">
-  <time datetime="2017-01-17T05:12:33.000Z" itemprop="datePublished">2017-01-17</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/01/17/js片段1/">js片段1</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="获取url中的参数"><a href="#获取url中的参数" class="headerlink" title="获取url中的参数"></a>获取url中的参数</h2><pre><code>function getUrlParam(key){
-    var obj = {};
-    var str = location.search.substring(1);
-    var arr = str.split(&quot;&amp;&quot;);
-    var name,value;
-    if(str.length&gt;0){
-        for(var i=0,length=arr.length;i&lt;length;i++){
-            var num = arr[i].indexOf(&quot;=&quot;);
-            if(num&gt;0){
-                name =arr[i].substring(0,num);
-                value=arr[i].substring(num+1);
-            }
-            obj[name] = value;
-        }
-    }
-    return obj[key];
-}
-</code></pre><hr>
-        
-          <p class="article-more-link">
-            <a href="/2017/01/17/js片段1/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/01/17/js片段1/" data-id="cj5dfg32f000srsvgnflfkp1p" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/02/10/视频全屏播放-开发总结/" data-id="cj5z35llu001doivgi19g0rj0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -702,7 +691,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li></ul>
     </div>
   </div>
 
@@ -713,6 +702,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/08/05/javascript设计模式学习-01/">javascript设计模式学习-01</a>
+          </li>
         
           <li>
             <a href="/2017/07/17/canvas学习总结/">canvas学习总结</a>
@@ -728,10 +721,6 @@
         
           <li>
             <a href="/2017/07/11/canvas学习笔记-API（06）/">canvas学习笔记 - API（06）</a>
-          </li>
-        
-          <li>
-            <a href="/2017/07/11/canvas学习笔记-API（05）/">canvas学习笔记 - API（05）</a>
           </li>
         
       </ul>

@@ -71,6 +71,49 @@
         <div class="outer">
           <section id="main">
   
+    <article id="post-javascript设计模式学习-01" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/05/javascript设计模式学习-01/" class="article-date">
+  <time datetime="2017-08-05T09:13:35.000Z" itemprop="datePublished">2017-08-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/05/javascript设计模式学习-01/">javascript设计模式学习-01</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>原文：<a href="http://www.cnblogs.com/tugenhua0707/p/5198407.html" target="_blank" rel="external">http://www.cnblogs.com/tugenhua0707/p/5198407.html</a></p>
+<h2 id="工场模式"><a href="#工场模式" class="headerlink" title="工场模式"></a>工场模式</h2><p>类的继承<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 定义自行车的构造函数</span></div><div class="line"><span class="keyword">var</span> BicycleShop = <span class="function"><span class="keyword">function</span>(<span class="params">name</span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.name = name;</div><div class="line">    <span class="keyword">this</span>.method = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.name;</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line">BicycleShop.prototype = &#123;</div><div class="line">    <span class="attr">constructor</span>: BicycleShop,</div><div class="line">    <span class="comment">/*</span></div><div class="line">     * 买自行车这个方法</div><div class="line">     * @param &#123;model&#125; 自行车型号</div><div class="line">    */</div><div class="line">    sellBicycle: <span class="function"><span class="keyword">function</span>(<span class="params">model</span>)</span>&#123;</div><div class="line">            <span class="keyword">var</span> bicycle = <span class="keyword">this</span>.createBicycle(model);</div><div class="line">            <span class="comment">// 执行A业务逻辑</span></div><div class="line">            bicycle.A();</div><div class="line">            <span class="comment">// 执行B业务逻辑</span></div><div class="line">            bicycle.B();</div><div class="line">            <span class="keyword">return</span> bicycle;</div><div class="line">        &#125;,</div><div class="line">        <span class="attr">createBicycle</span>: <span class="function"><span class="keyword">function</span>(<span class="params">model</span>)</span>&#123;</div><div class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">"父类是抽象类不能直接调用，需要子类重写该方法"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;;</div><div class="line">    <span class="comment">// 实现原型继承</span></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">extend</span>(<span class="params">Sub,Sup</span>) </span>&#123;</div><div class="line">        <span class="comment">//Sub表示子类，Sup表示超类</span></div><div class="line">        <span class="comment">// 首先定义一个空函数</span></div><div class="line">        <span class="keyword">var</span> F = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;&#125;;</div><div class="line">        <span class="comment">// 设置空函数的原型为超类的原型</span></div><div class="line">        F.prototype = Sup.prototype; </div><div class="line">        <span class="comment">// 实例化空函数，并把超类原型引用传递给子类</span></div><div class="line">        Sub.prototype = <span class="keyword">new</span> F();</div><div class="line"></div><div class="line">        <span class="comment">// 重置子类原型的构造器为子类自身</span></div><div class="line">        Sub.prototype.constructor = Sub;</div><div class="line"></div><div class="line">        <span class="comment">// 在子类中保存超类的原型,避免子类与超类耦合</span></div><div class="line">        Sub.sup = Sup.prototype;</div><div class="line">        <span class="keyword">if</span>(Sup.prototype.constructor === <span class="built_in">Object</span>.prototype.constructor) &#123;</div><div class="line">            <span class="comment">// 检测超类原型的构造器是否为原型自身</span></div><div class="line">            Sup.prototype.constructor = Sup;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">var</span> BicycleChild = <span class="function"><span class="keyword">function</span>(<span class="params">name</span>)</span>&#123;</div><div class="line">        <span class="keyword">this</span>.name = name;</div><div class="line"><span class="comment">// 继承构造函数父类中的属性和方法</span></div><div class="line">        BicycleShop.call(<span class="keyword">this</span>,name);</div><div class="line">    &#125;;</div><div class="line">    <span class="comment">// 子类继承父类原型方法</span></div><div class="line">    extend(BicycleChild,BicycleShop);</div><div class="line"><span class="comment">// BicycleChild 子类重写父类的方法</span></div><div class="line">BicycleChild.prototype.createBicycle = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> A = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">"执行A业务操作"</span>);    </div><div class="line">    &#125;;</div><div class="line">    <span class="keyword">var</span> B = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">"执行B业务操作"</span>);</div><div class="line">    &#125;;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        <span class="attr">A</span>: A,</div><div class="line">        <span class="attr">B</span>: B</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> childClass = <span class="keyword">new</span> BicycleChild(<span class="string">"龙恩"</span>);</div><div class="line"><span class="built_in">console</span>.log(childClass);</div></pre></td></tr></table></figure></p>
+<h2 id="单例模式"><a href="#单例模式" class="headerlink" title="单例模式"></a>单例模式</h2><p>比如我现在页面上需要创建一个div的元素，那么我们肯定需要有一个创建div的函数，而现在我只需要这个函数只负责创建div元素，其他的它不想管，也就是想实现单一职责原则</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 单体模式</span></div><div class="line"><span class="keyword">var</span> Singleton = <span class="function"><span class="keyword">function</span>(<span class="params">name</span>)</span>&#123;</div><div class="line">    <span class="keyword">this</span>.name = name;</div><div class="line">&#125;;</div><div class="line">Singleton.prototype.getName = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.name;</div><div class="line">&#125;</div><div class="line"><span class="comment">// 获取实例对象</span></div><div class="line"><span class="keyword">var</span> getInstance = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> instance = <span class="literal">null</span>;</div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params">name</span>) </span>&#123;</div><div class="line">        <span class="keyword">if</span>(!instance) &#123;</div><div class="line">            instance = <span class="keyword">new</span> Singleton(name);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> instance;</div><div class="line">    &#125;</div><div class="line">&#125;)();</div><div class="line"><span class="comment">// 测试单体模式的实例</span></div><div class="line"><span class="keyword">var</span> a = getInstance(<span class="string">"aa"</span>);</div><div class="line"><span class="keyword">var</span> b = getInstance(<span class="string">"bb"</span>);</div></pre></td></tr></table></figure>
+<p>防止重复生成弹窗实例（减少重绘，提升性能）<br>例子：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 实现单体模式弹窗</span></div><div class="line"><span class="keyword">var</span> createWindow = (<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> div;</div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="keyword">if</span>(!div) &#123;</div><div class="line">            div = <span class="built_in">document</span>.createElement(<span class="string">"div"</span>);</div><div class="line">            div.innerHTML = <span class="string">"我是弹窗内容"</span>;</div><div class="line">            div.style.display = <span class="string">'none'</span>;</div><div class="line">            <span class="built_in">document</span>.body.appendChild(div);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> div;</div><div class="line">    &#125;</div><div class="line">&#125;)();</div><div class="line"><span class="built_in">document</span>.getElementById(<span class="string">"Id"</span>).onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="comment">// 点击后先创建一个div元素</span></div><div class="line">    <span class="keyword">var</span> win = createWindow();</div><div class="line">    win.style.display = <span class="string">"block"</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>封装<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 创建div</span></div><div class="line"><span class="keyword">var</span> createWindow = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> div = <span class="built_in">document</span>.createElement(<span class="string">"div"</span>);</div><div class="line">    div.innerHTML = <span class="string">"我是弹窗内容"</span>;</div><div class="line">    div.style.display = <span class="string">'none'</span>;</div><div class="line">    <span class="built_in">document</span>.body.appendChild(div);</div><div class="line">    <span class="keyword">return</span> div;</div><div class="line">&#125;;</div><div class="line"><span class="comment">// 创建iframe</span></div><div class="line"><span class="keyword">var</span> createIframe = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> iframe = <span class="built_in">document</span>.createElement(<span class="string">"iframe"</span>);</div><div class="line">    <span class="built_in">document</span>.body.appendChild(iframe);</div><div class="line">    <span class="keyword">return</span> iframe;</div><div class="line">&#125;;</div><div class="line"><span class="comment">// 获取实例的封装代码</span></div><div class="line"><span class="keyword">var</span> getInstance = <span class="function"><span class="keyword">function</span>(<span class="params">fn</span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> result;</div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="keyword">return</span> result || (result = fn.call(<span class="keyword">this</span>,<span class="built_in">arguments</span>));</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"><span class="comment">// 测试创建div</span></div><div class="line"><span class="keyword">var</span> createSingleDiv = getInstance(createWindow);</div><div class="line"><span class="built_in">document</span>.getElementById(<span class="string">"Id"</span>).onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> win = createSingleDiv();</div><div class="line">    win.style.display = <span class="string">"block"</span>;</div><div class="line">&#125;;</div><div class="line"><span class="comment">// 测试创建iframe</span></div><div class="line"><span class="keyword">var</span> createSingleIframe = getInstance(createIframe);</div><div class="line"><span class="built_in">document</span>.getElementById(<span class="string">"Id"</span>).onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">var</span> win = createSingleIframe();</div><div class="line">    win.src = <span class="string">"http://cnblogs.com"</span>;</div><div class="line">&#125;;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/pavelShen/2017/08/05/javascript设计模式学习-01/" data-id="cj5z35ll8000ooivg4y57qw2z" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-canvas学习总结" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/07/17/canvas学习总结/" class="article-date">
@@ -157,7 +200,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/07/17/canvas学习总结/" data-id="cj5dfg31i0005rsvgfnu270ii" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/07/17/canvas学习总结/" data-id="cj5z35lkd0003oivg3wb4i3y9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
@@ -197,7 +240,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/07/11/canvas链式操作/" data-id="cj5dfg31w000frsvgwwsewahq" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/07/11/canvas链式操作/" data-id="cj5z35lky000hoivga972dkp5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
@@ -257,7 +300,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（07）/" data-id="cj5dfg31x000hrsvgoserc701" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（07）/" data-id="cj5z35lkx000foivgxkefjbyg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
@@ -304,7 +347,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（06）/" data-id="cj5dfg31r000arsvgq657brzm" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（06）/" data-id="cj5z35lkv000coivgl0gdxxp4" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
@@ -373,7 +416,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（05）/" data-id="cj5dfg31l0007rsvgrvdemwc6" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（05）/" data-id="cj5z35lku000aoivge1mze9xc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
@@ -425,7 +468,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（04）/" data-id="cj5dfg31t000crsvgrmfob4ua" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（04）/" data-id="cj5z35lkk0005oivgfw5jbapi" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
@@ -493,7 +536,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（03）/" data-id="cj5dfg31k0006rsvg2wrg36hf" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（03）/" data-id="cj5z35lkm0006oivgeixsfi8h" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
@@ -579,7 +622,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（02）/" data-id="cj5dfg31c0003rsvg1xh8t5ia" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（02）/" data-id="cj5z35lko0007oivgz6117qe6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
@@ -651,57 +694,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（01）/" data-id="cj5dfg3170001rsvgwypkx7s6" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（01）/" data-id="cj5z35lk70001oivgdbynjrqa" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
 
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-js函数队列" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/04/20/js函数队列/" class="article-date">
-  <time datetime="2017-04-20T07:42:39.000Z" itemprop="datePublished">2017-04-20</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/20/js函数队列/">js函数队列</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>参考地址</p>
-<ul>
-<li><a href="https://segmentfault.com/a/1190000008320677" target="_blank" rel="external">https://segmentfault.com/a/1190000008320677</a></li>
-<li><a href="https://segmentfault.com/a/1190000008195180" target="_blank" rel="external">https://segmentfault.com/a/1190000008195180</a></li>
-</ul>
-<p>代码一多，光看还是很容易头疼的，建议在答案代码中多打几个断点来看（智商不足的苦啊 TAT ）</p>
-<h2 id="函数队列的实现"><a href="#函数队列的实现" class="headerlink" title="函数队列的实现"></a>函数队列的实现</h2><h3 id="基本思路"><a href="#基本思路" class="headerlink" title="基本思路"></a>基本思路</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> index = <span class="number">0</span>;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">next</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> fn = stack[index];</div><div class="line">    index = index + <span class="number">1</span>; <span class="comment">// 其实也可以用shift 把fn 拿出来</span></div><div class="line">    <span class="keyword">if</span> (<span class="keyword">typeof</span> fn === <span class="string">'function'</span>) fn();</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> stack = [];</div><div class="line"><span class="comment">// 定义index 和next</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn1</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'第一个调用'</span>);</div><div class="line">    next(); <span class="comment">// stack 中每一个函数都必须调用`next`</span></div><div class="line">&#125;;</div><div class="line">stack.push(fn1);</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn2</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    setTimeout(<span class="function"><span class="keyword">function</span> <span class="title">fn2Timeout</span>(<span class="params"></span>) </span>&#123;</div><div class="line">         <span class="built_in">console</span>.log(<span class="string">'第二个调用'</span>);</div><div class="line">         next(); <span class="comment">// 调用`next`</span></div><div class="line">    &#125;, <span class="number">0</span>);</div><div class="line">&#125;</div><div class="line">stack.push(fn2, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(<span class="string">'第三个调用'</span>);</div><div class="line">    next(); <span class="comment">// 最后一个可以不调用，调用也没用。</span></div><div class="line">&#125;);</div><div class="line">next(); <span class="comment">// 调用next，最终按顺序输出'第一个调用'、'第二个调用'、'第三个调用'。</span></div></pre></td></tr></table></figure>
-<h3 id="尝试题目：Lazyman"><a href="#尝试题目：Lazyman" class="headerlink" title="尝试题目：Lazyman"></a>尝试题目：Lazyman</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 实现一个LazyMan，可以按照以下方式调用:</span></div><div class="line">LazyMan(“Hank”)</div><div class="line"><span class="comment">/* 输出:</span></div><div class="line">Hi! This is Hank!</div><div class="line">*/</div><div class="line">LazyMan(“Hank”).sleep(<span class="number">10</span>).eat(“dinner”)输出</div><div class="line"><span class="comment">/* 输出:</span></div><div class="line">Hi! This is Hank!</div><div class="line">// 等待10秒..</div><div class="line">Wake up after 10</div><div class="line">Eat dinner~</div><div class="line">*/</div><div class="line">LazyMan(“Hank”).eat(“dinner”).eat(“supper”)</div><div class="line"><span class="comment">/* 输出:</span></div><div class="line">Hi This is Hank!</div><div class="line">Eat dinner~</div><div class="line">Eat supper~</div><div class="line">*/</div><div class="line">LazyMan(“Hank”).sleepFirst(<span class="number">5</span>).eat(“supper”)</div><div class="line"><span class="comment">/* 等待5秒，输出</span></div><div class="line">Wake up after 5</div><div class="line">Hi This is Hank!</div><div class="line">Eat supper</div><div class="line">*/</div></pre></td></tr></table></figure>
-<h3 id="答案"><a href="#答案" class="headerlink" title="答案"></a>答案</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">_LazyMan</span>(<span class="params">name</span>) </span>&#123;</div><div class="line">    <span class="comment">// 事件存储队列</span></div><div class="line">    <span class="keyword">this</span>.tasks = [];</div><div class="line">    <span class="comment">// 绑定this指向</span></div><div class="line">    <span class="keyword">var</span> _this = <span class="keyword">this</span>;</div><div class="line">    <span class="comment">// 使用闭包</span></div><div class="line">    <span class="keyword">var</span> fn = (<span class="function"><span class="keyword">function</span>(<span class="params">n</span>) </span>&#123;</div><div class="line">        <span class="comment">// 绑定作用域</span></div><div class="line">        <span class="keyword">var</span> name = n;</div><div class="line">        <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="built_in">console</span>.log(<span class="string">"my name is "</span>+ name);</div><div class="line">            _this.next();</div><div class="line">        &#125;</div><div class="line">    &#125;)(name);</div><div class="line">    <span class="keyword">this</span>.tasks.push(fn);</div><div class="line">    <span class="comment">// 启动任务</span></div><div class="line">    setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        _this.next();</div><div class="line">    &#125;, <span class="number">0</span>)</div><div class="line">&#125;</div><div class="line">_LazyMan.prototype.next = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> fn = <span class="keyword">this</span>.tasks.shift();</div><div class="line">  fn &amp;&amp; fn();</div><div class="line">&#125;</div><div class="line">_LazyMan.prototype.wakeup = <span class="function"><span class="keyword">function</span>(<span class="params">times</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> _this = <span class="keyword">this</span>;</div><div class="line">  <span class="keyword">var</span> fn = (<span class="function"><span class="keyword">function</span>(<span class="params">time</span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">      setTimeout(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">          <span class="built_in">console</span>.log(<span class="string">"getup after "</span>+time+<span class="string">"s !"</span>)</div><div class="line">          _this.next();</div><div class="line">      &#125;, time*<span class="number">1000</span>)</div><div class="line">    &#125;</div><div class="line">  &#125;)(times)</div><div class="line">  <span class="comment">// 从队列头部插入</span></div><div class="line">  _this.tasks.unshift(fn);</div><div class="line">  <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">&#125;</div><div class="line">_LazyMan.prototype.eat = <span class="function"><span class="keyword">function</span>(<span class="params">sth</span>)</span>&#123;</div><div class="line">  <span class="keyword">var</span> _this = <span class="keyword">this</span>;</div><div class="line">  <span class="keyword">var</span> fn = (<span class="function"><span class="keyword">function</span>(<span class="params">sth</span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">'Eat '</span>+ sth +<span class="string">'~'</span>)</div><div class="line">      _this.next();</div><div class="line">    &#125;</div><div class="line">  &#125;)(sth);</div><div class="line">  _this.tasks.push(fn);</div><div class="line">  <span class="keyword">return</span> <span class="keyword">this</span>;</div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">LazyMan</span>(<span class="params">name</span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> <span class="keyword">new</span> _LazyMan(name)</div><div class="line">&#125;</div><div class="line">LazyMan(<span class="string">'Hank'</span>).wakeup(<span class="number">3</span>).eat(<span class="string">'haha'</span>).eat(<span class="string">'hehe'</span>);</div></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/20/js函数队列/" data-id="cj5dfg328000qrsvgmfygf6qk" class="article-share-link">Share</a>
-      
-      
     </footer>
   </div>
   
@@ -745,7 +742,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li></ul>
     </div>
   </div>
 
@@ -756,6 +753,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/08/05/javascript设计模式学习-01/">javascript设计模式学习-01</a>
+          </li>
         
           <li>
             <a href="/2017/07/17/canvas学习总结/">canvas学习总结</a>
@@ -771,10 +772,6 @@
         
           <li>
             <a href="/2017/07/11/canvas学习笔记-API（06）/">canvas学习笔记 - API（06）</a>
-          </li>
-        
-          <li>
-            <a href="/2017/07/11/canvas学习笔记-API（05）/">canvas学习笔记 - API（05）</a>
           </li>
         
       </ul>
