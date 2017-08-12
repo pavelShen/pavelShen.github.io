@@ -71,6 +71,78 @@
         <div class="outer">
           <section id="main">
   
+    <article id="post-canvas学习笔记-API（01）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/11/canvas学习笔记-API（01）/" class="article-date">
+  <time datetime="2017-07-11T06:25:13.000Z" itemprop="datePublished">2017-07-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/11/canvas学习笔记-API（01）/">canvas学习笔记 - API（01）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h4><ul>
+<li>ctx = canvas.getContext(‘2d’) 获取上下文</li>
+<li><code>ctx.canvas.height</code> <code>ctx.canvas.width</code>获取画布宽高</li>
+</ul>
+<h4 id="矩形"><a href="#矩形" class="headerlink" title="矩形"></a>矩形</h4><ul>
+<li>fillStyle = “rgb(200,0,0)”; 设置填充色</li>
+<li>fillRect(x, y, width, height) 绘制一个填充的矩形</li>
+<li>strokeRect(x, y, width, height) 绘制一个矩形的边框</li>
+<li>clearRect(x, y, width, height) 清除指定矩形区域，让清除部分完全透明。</li>
+<li>rect(x, y, width, height)<br>绘制一个左上角坐标为（x,y），宽高为width以及height的矩形<strong>路径</strong>。<br>当该方法执行的时候，moveTo()方法自动设置坐标参数（0,0）。也就是说，当前笔触自动重置会默认坐标。 </li>
+</ul>
+<h4 id="路径"><a href="#路径" class="headerlink" title="路径"></a>路径</h4><ul>
+<li>beginPath()   新建一条路径，生成之后，图形绘制命令被指向到路径上生成路径。</li>
+<li>closePath()   闭合路径之后图形绘制命令又重新指向到上下文中。</li>
+<li>stroke()   通过线条来绘制图形轮廓。</li>
+<li>fill() 通过填充路径的内容区域生成实心的图形。</li>
+</ul>
+<h4 id="移动笔触"><a href="#移动笔触" class="headerlink" title="移动笔触"></a>移动笔触</h4><ul>
+<li>moveTo(x, y) 将笔触移动到指定的坐标x以及y上。</li>
+</ul>
+<h4 id="线"><a href="#线" class="headerlink" title="线"></a>线</h4><ul>
+<li>lineTo(x, y)  绘制一条从当前位置到指定x以及y位置的直线。</li>
+</ul>
+<h4 id="圆弧"><a href="#圆弧" class="headerlink" title="圆弧"></a>圆弧</h4><p>当然可以使用arcTo()，不过这个的实现并不是那么的可靠，所以我们这里不作介绍</p>
+<ul>
+<li>arc(x, y, radius, startAngle, endAngle, anticlockwise)<br>这里详细介绍一下arc方法，该方法有六个参数：x,y为绘制圆弧所在圆上的圆心坐标。radius为半径。startAngle以及endAngle参数用弧度定义了开始以及结束的弧度。这些都是以x轴为基准。参数anticlockwise 为一个布尔值。为true时，是逆时针方向，否则顺时针方向。</li>
+</ul>
+<h4 id="Path2D对象"><a href="#Path2D对象" class="headerlink" title="Path2D对象"></a>Path2D对象</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">new</span> Path2D(); <span class="comment">// 空的Path对象</span></div><div class="line"><span class="keyword">new</span> Path2D(path); <span class="comment">// 克隆Path对象</span></div></pre></td></tr></table></figure>
+<p>Path2D()会返回一个新初始化的Path2D对象（可能将某一个路径作为变量——创建一个它的副本，或者将一个包含SVG path数据的字符串作为变量）。</p>
+<ul>
+<li>Path2D.addPath(path [, transform])  <strong>浏览器支持较差</strong> 添加了一条路径到当前路径（可能添加了一个变换矩阵）。</li>
+</ul>
+<p>代码示例<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>);</div><div class="line">  <span class="keyword">if</span> (canvas.getContext)&#123;</div><div class="line">    <span class="keyword">var</span> ctx = canvas.getContext(<span class="string">'2d'</span>);</div><div class="line">    <span class="keyword">var</span> rectangle = <span class="keyword">new</span> Path2D();</div><div class="line">    rectangle.rect(<span class="number">10</span>, <span class="number">10</span>, <span class="number">50</span>, <span class="number">50</span>);</div><div class="line">    <span class="keyword">var</span> circle = <span class="keyword">new</span> Path2D();</div><div class="line">    circle.moveTo(<span class="number">125</span>, <span class="number">35</span>);</div><div class="line">    circle.arc(<span class="number">100</span>, <span class="number">35</span>, <span class="number">25</span>, <span class="number">0</span>, <span class="number">2</span> * <span class="built_in">Math</span>.PI);</div><div class="line">    ctx.stroke(rectangle);</div><div class="line">    ctx.fill(circle);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（01）/" data-id="cj69hcoqe0000pcvgrhy1563u" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-js函数队列" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/04/20/js函数队列/" class="article-date">
@@ -106,7 +178,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/20/js函数队列/" data-id="cj5z35ll9000qoivgqrm01bhm" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/04/20/js函数队列/" data-id="cj69hcore000spcvgs41l9ln4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -155,7 +227,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（16）模块 Modules/" data-id="cj5z35lmd0020oivgvunov0oe" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（16）模块 Modules/" data-id="cj69hcosh0025pcvgk8a5otrq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -205,7 +277,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（14）let & const/" data-id="cj5z35lme0022oivgc50fdj8p" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（14）let & const/" data-id="cj69hcosg0023pcvgnupd6zvs" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -255,7 +327,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（13）类 Class/" data-id="cj5z35lmc001yoivg0h8f8fqx" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（13）类 Class/" data-id="cj69hcosf0021pcvgstg8e1hh" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -302,7 +374,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（12）代理 Proxies/" data-id="cj5z35lmf0024oivga0c07wm2" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（12）代理 Proxies/" data-id="cj69hcose001zpcvgk3fflf30" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -367,7 +439,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（11）生成器 Generators，续篇/" data-id="cj5z35lmb001woivgfcafp5lu" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（11）生成器 Generators，续篇/" data-id="cj69hcosb001xpcvgfugettq0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -449,7 +521,57 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（10）集合/" data-id="cj5z35lm9001uoivguy9g75ub" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（10）集合/" data-id="cj69hcos9001vpcvg9gs6zrha" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-读书笔记：深入浅出ES6（07）箭头函数" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/14/读书笔记：深入浅出ES6（07）箭头函数/" class="article-date">
+  <time datetime="2017-04-14T02:54:48.000Z" itemprop="datePublished">2017-04-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/14/读书笔记：深入浅出ES6（07）箭头函数/">读书笔记：深入浅出ES6（07）箭头函数</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>原文线上地址：<a href="http://www.infoq.com/cn/es6-in-depth/" target="_blank" rel="external">http://www.infoq.com/cn/es6-in-depth/</a></p>
+<h2 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h2><h4 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// ES5</span></div><div class="line"><span class="keyword">var</span> total = values.reduce(<span class="function"><span class="keyword">function</span> (<span class="params">a, b</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> a + b;</div><div class="line"> &#125;, <span class="number">0</span>);</div><div class="line"> <span class="comment">// ES6</span></div><div class="line"> <span class="keyword">var</span> total = values.reduce(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a + b, <span class="number">0</span>);</div></pre></td></tr></table></figure>
+<h4 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h4><ul>
+<li>使用了块语句的箭头函数不会自动返回值，你需要使用return语句将所需值返回。</li>
+<li>当使用箭头函数创建普通对象时，你总是需要将对象包裹在小括号里。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 为与你玩耍的每一个小狗创建一个新的空对象</span></div><div class="line"><span class="keyword">var</span> chewToys = puppies.map(<span class="function"><span class="params">puppy</span> =&gt;</span> &#123;&#125;); <span class="comment">// 这样写会报Bug！</span></div><div class="line"><span class="keyword">var</span> chewToys = puppies.map(<span class="function"><span class="params">puppy</span> =&gt;</span> (&#123;&#125;)); <span class="comment">//</span></div></pre></td></tr></table></figure>
+<h4 id="和非箭头函数的区别"><a href="#和非箭头函数的区别" class="headerlink" title="和非箭头函数的区别"></a>和非箭头函数的区别</h4><ul>
+<li>箭头函数没有它自己的this值，箭头函数内的this值继承自外围作用域</li>
+<li>箭头函数不会获取它们自己的arguments对象（通过解构来处理参数）</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（07）箭头函数/" data-id="cj69hcos3001opcvgjm7wnmo6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -515,112 +637,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（08）Symbols/" data-id="cj5z35lm7001roivgxxhst143" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-读书笔记：深入浅出ES6（07）箭头函数" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/04/14/读书笔记：深入浅出ES6（07）箭头函数/" class="article-date">
-  <time datetime="2017-04-14T02:54:48.000Z" itemprop="datePublished">2017-04-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/14/读书笔记：深入浅出ES6（07）箭头函数/">读书笔记：深入浅出ES6（07）箭头函数</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>原文线上地址：<a href="http://www.infoq.com/cn/es6-in-depth/" target="_blank" rel="external">http://www.infoq.com/cn/es6-in-depth/</a></p>
-<h2 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h2><h4 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// ES5</span></div><div class="line"><span class="keyword">var</span> total = values.reduce(<span class="function"><span class="keyword">function</span> (<span class="params">a, b</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> a + b;</div><div class="line"> &#125;, <span class="number">0</span>);</div><div class="line"> <span class="comment">// ES6</span></div><div class="line"> <span class="keyword">var</span> total = values.reduce(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a + b, <span class="number">0</span>);</div></pre></td></tr></table></figure>
-<h4 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h4><ul>
-<li>使用了块语句的箭头函数不会自动返回值，你需要使用return语句将所需值返回。</li>
-<li>当使用箭头函数创建普通对象时，你总是需要将对象包裹在小括号里。</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 为与你玩耍的每一个小狗创建一个新的空对象</span></div><div class="line"><span class="keyword">var</span> chewToys = puppies.map(<span class="function"><span class="params">puppy</span> =&gt;</span> &#123;&#125;); <span class="comment">// 这样写会报Bug！</span></div><div class="line"><span class="keyword">var</span> chewToys = puppies.map(<span class="function"><span class="params">puppy</span> =&gt;</span> (&#123;&#125;)); <span class="comment">//</span></div></pre></td></tr></table></figure>
-<h4 id="和非箭头函数的区别"><a href="#和非箭头函数的区别" class="headerlink" title="和非箭头函数的区别"></a>和非箭头函数的区别</h4><ul>
-<li>箭头函数没有它自己的this值，箭头函数内的this值继承自外围作用域</li>
-<li>箭头函数不会获取它们自己的arguments对象（通过解构来处理参数）</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（07）箭头函数/" data-id="cj5z35lm3001poivgy7ote1aa" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-读书笔记：深入浅出ES6（06）解构" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/04/14/读书笔记：深入浅出ES6（06）解构/" class="article-date">
-  <time datetime="2017-04-14T02:54:47.000Z" itemprop="datePublished">2017-04-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/14/读书笔记：深入浅出ES6（06）解构/">读书笔记：深入浅出ES6（06）解构</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>原文线上地址：<a href="http://www.infoq.com/cn/es6-in-depth/" target="_blank" rel="external">http://www.infoq.com/cn/es6-in-depth/</a></p>
-<h2 id="解构"><a href="#解构" class="headerlink" title="解构"></a>解构</h2><h4 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h4><p>当你解构对象并赋值给变量时，如果你已经声明或不打算声明这些变量（亦即赋值语句前没有let、const或var关键字），你应该注意这样一个潜在的语法错误：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&#123; blowUp &#125; = &#123; <span class="attr">blowUp</span>: <span class="number">10</span> &#125;;</div><div class="line"><span class="comment">// Syntax error 语法错误</span></div></pre></td></tr></table></figure></p>
-<p>因为JavaScript语法通知解析引擎将任何以{开始的语句解析为一个块语句<br>解决方案:将整个表达式用一对小括号包裹<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">(&#123; safe &#125; = &#123; <span class="attr">safe</span>:<span class="number">19</span> &#125;);</div><div class="line"><span class="comment">// No errors 没有语法错误</span></div></pre></td></tr></table></figure></p>
-<p><strong>需要解构的值必须放在最后,不然报错</strong><br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// Uncaught SyntaxError: Rest parameter must be last formal parameter</span></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">a,...b,c</span>)</span>&#123;</div><div class="line">    <span class="built_in">console</span>.log(a);</div><div class="line">    <span class="built_in">console</span>.warn(b);</div><div class="line">    <span class="built_in">console</span>.warn(c);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h4 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h4><ul>
-<li>当使用对象赋值模式时，被解构的值需要被强制转换为对象。大多数类型都可以被转换为对象，但null和undefined却无法进行转换。</li>
-<li>当使用数组赋值模式时，被解构的值一定要包含一个迭代器。</li>
-</ul>
-<h4 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h4><ul>
-<li><p>多重返回值</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">returnMultipleValues</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">return</span> [<span class="number">1</span>, <span class="number">2</span>];</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> [foo, bar] = returnMultipleValues();</div></pre></td></tr></table></figure>
-</li>
-<li><p>导入部分模块</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123; Server &#125; <span class="keyword">from</span> <span class="string">'http'</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（06）解构/" data-id="cj5z35lm2001noivg360vuo91" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（08）Symbols/" data-id="cj69hcos7001qpcvgdawazemu" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -681,6 +698,10 @@
       <ul>
         
           <li>
+            <a href="/2017/08/12/微信小程序跨页面通信解决思路/">微信小程序跨页面通信解决思路</a>
+          </li>
+        
+          <li>
             <a href="/2017/08/05/javascript设计模式学习-01/">javascript设计模式学习-01</a>
           </li>
         
@@ -694,10 +715,6 @@
         
           <li>
             <a href="/2017/07/11/canvas学习笔记-API（07）/">canvas学习笔记 - API（07）</a>
-          </li>
-        
-          <li>
-            <a href="/2017/07/11/canvas学习笔记-API（06）/">canvas学习笔记 - API（06）</a>
           </li>
         
       </ul>

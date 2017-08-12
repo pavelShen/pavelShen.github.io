@@ -71,6 +71,45 @@
         <div class="outer">
           <section id="main">
   
+    <article id="post-微信小程序跨页面通信解决思路" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/08/12/微信小程序跨页面通信解决思路/" class="article-date">
+  <time datetime="2017-08-12T15:49:19.000Z" itemprop="datePublished">2017-08-12</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/08/12/微信小程序跨页面通信解决思路/">微信小程序跨页面通信解决思路</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>来源：<a href="https://aotu.io/notes/2017/01/19/wxapp-event/?o2src=juejin&amp;o2layout=compat" target="_blank" rel="external">https://aotu.io/notes/2017/01/19/wxapp-event/?o2src=juejin&amp;o2layout=compat</a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//event.js</span></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Event</span> </span>&#123;</div><div class="line">    on (event, fn, ctx) &#123;</div><div class="line">        <span class="keyword">if</span> (<span class="keyword">typeof</span> fn != <span class="string">"function"</span>) &#123;</div><div class="line">            <span class="built_in">console</span>.error(<span class="string">'fn must be a function'</span>)</div><div class="line">            <span class="keyword">return</span></div><div class="line">        &#125;</div><div class="line">        </div><div class="line">        <span class="keyword">this</span>._stores = <span class="keyword">this</span>._stores || &#123;&#125;</div><div class="line">        </div><div class="line">        ;(<span class="keyword">this</span>._stores[event] = <span class="keyword">this</span>._stores[event] || []).push(&#123;<span class="attr">cb</span>: fn, <span class="attr">ctx</span>: ctx&#125;)</div><div class="line">    &#125;</div><div class="line">    emit (event) &#123;</div><div class="line">        <span class="keyword">this</span>._stores = <span class="keyword">this</span>._stores || &#123;&#125;</div><div class="line">        <span class="keyword">var</span> store = <span class="keyword">this</span>._stores[event], args</div><div class="line">        <span class="keyword">if</span> (store) &#123;</div><div class="line">            store = store.slice(<span class="number">0</span>)</div><div class="line">            args = [].slice.call(<span class="built_in">arguments</span>, <span class="number">1</span>)</div><div class="line">            <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = store.length; i &lt; len; i++) &#123;</div><div class="line">                store[i].cb.apply(store[i].ctx, args)</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">    off (event, fn) &#123;</div><div class="line">        <span class="keyword">this</span>._stores = <span class="keyword">this</span>._stores || &#123;&#125;</div><div class="line">        <span class="comment">// all</span></div><div class="line">        <span class="keyword">if</span> (!<span class="built_in">arguments</span>.length) &#123;</div><div class="line">            <span class="keyword">this</span>._stores = &#123;&#125;</div><div class="line">            <span class="keyword">return</span></div><div class="line">        &#125;</div><div class="line">        <span class="comment">// specific event</span></div><div class="line">        <span class="keyword">var</span> store = <span class="keyword">this</span>._stores[event]</div><div class="line">        <span class="keyword">if</span> (!store) <span class="keyword">return</span></div><div class="line">        <span class="comment">// remove all handlers</span></div><div class="line">        <span class="keyword">if</span> (<span class="built_in">arguments</span>.length === <span class="number">1</span>) &#123;</div><div class="line">            <span class="keyword">delete</span> <span class="keyword">this</span>._stores[event]</div><div class="line">            <span class="keyword">return</span> </div><div class="line">        &#125;</div><div class="line">        <span class="comment">// remove specific handler</span></div><div class="line">        <span class="keyword">var</span> cb</div><div class="line">        <span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>, len = store.length; i &lt; len; i++) &#123;</div><div class="line">            cb = store[i].cb</div><div class="line">            <span class="keyword">if</span> (cb === fn) &#123;</div><div class="line">                store.splice(i, <span class="number">1</span>)</div><div class="line">                <span class="keyword">break</span></div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span></div><div class="line">    &#125;   </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/pavelShen/2017/08/12/微信小程序跨页面通信解决思路/" data-id="cj69hcors0017pcvgetg2grxj" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-javascript设计模式学习-01" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/08/05/javascript设计模式学习-01/" class="article-date">
@@ -103,7 +142,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/08/05/javascript设计模式学习-01/" data-id="cj5z35ll8000ooivg4y57qw2z" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/08/05/javascript设计模式学习-01/" data-id="cj69hcor4000jpcvg3ni3ybny" class="article-share-link">Share</a>
       
       
     </footer>
@@ -200,7 +239,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/07/17/canvas学习总结/" data-id="cj5z35lkd0003oivg3wb4i3y9" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/07/17/canvas学习总结/" data-id="cj69hcoqk0002pcvgnp31gaav" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
@@ -240,7 +279,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/07/11/canvas链式操作/" data-id="cj5z35lky000hoivga972dkp5" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/07/11/canvas链式操作/" data-id="cj69hcor1000fpcvgc0kcfs5i" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
@@ -300,7 +339,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（07）/" data-id="cj5z35lkx000foivgxkefjbyg" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（07）/" data-id="cj69hcor3000hpcvgy0xvu9yc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
@@ -347,7 +386,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（06）/" data-id="cj5z35lkv000coivgl0gdxxp4" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（06）/" data-id="cj69hcoqz000cpcvg1k0cgu1c" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
@@ -416,7 +455,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（05）/" data-id="cj5z35lku000aoivge1mze9xc" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（05）/" data-id="cj69hcoqy000apcvgw0t1pcwb" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
@@ -468,7 +507,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（04）/" data-id="cj5z35lkk0005oivgfw5jbapi" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（04）/" data-id="cj69hcoqt0007pcvguqr52d4l" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
@@ -536,7 +575,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（03）/" data-id="cj5z35lkm0006oivgeixsfi8h" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（03）/" data-id="cj69hcoqq0005pcvgxs2f68n0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
@@ -622,79 +661,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（02）/" data-id="cj5z35lko0007oivgz6117qe6" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-canvas学习笔记-API（01）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/07/11/canvas学习笔记-API（01）/" class="article-date">
-  <time datetime="2017-07-11T06:25:13.000Z" itemprop="datePublished">2017-07-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/11/canvas学习笔记-API（01）/">canvas学习笔记 - API（01）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="基础"><a href="#基础" class="headerlink" title="基础"></a>基础</h4><ul>
-<li>ctx = canvas.getContext(‘2d’) 获取上下文</li>
-<li><code>ctx.canvas.height</code> <code>ctx.canvas.width</code>获取画布宽高</li>
-</ul>
-<h4 id="矩形"><a href="#矩形" class="headerlink" title="矩形"></a>矩形</h4><ul>
-<li>fillStyle = “rgb(200,0,0)”; 设置填充色</li>
-<li>fillRect(x, y, width, height) 绘制一个填充的矩形</li>
-<li>strokeRect(x, y, width, height) 绘制一个矩形的边框</li>
-<li>clearRect(x, y, width, height) 清除指定矩形区域，让清除部分完全透明。</li>
-<li>rect(x, y, width, height)<br>绘制一个左上角坐标为（x,y），宽高为width以及height的矩形<strong>路径</strong>。<br>当该方法执行的时候，moveTo()方法自动设置坐标参数（0,0）。也就是说，当前笔触自动重置会默认坐标。 </li>
-</ul>
-<h4 id="路径"><a href="#路径" class="headerlink" title="路径"></a>路径</h4><ul>
-<li>beginPath()   新建一条路径，生成之后，图形绘制命令被指向到路径上生成路径。</li>
-<li>closePath()   闭合路径之后图形绘制命令又重新指向到上下文中。</li>
-<li>stroke()   通过线条来绘制图形轮廓。</li>
-<li>fill() 通过填充路径的内容区域生成实心的图形。</li>
-</ul>
-<h4 id="移动笔触"><a href="#移动笔触" class="headerlink" title="移动笔触"></a>移动笔触</h4><ul>
-<li>moveTo(x, y) 将笔触移动到指定的坐标x以及y上。</li>
-</ul>
-<h4 id="线"><a href="#线" class="headerlink" title="线"></a>线</h4><ul>
-<li>lineTo(x, y)  绘制一条从当前位置到指定x以及y位置的直线。</li>
-</ul>
-<h4 id="圆弧"><a href="#圆弧" class="headerlink" title="圆弧"></a>圆弧</h4><p>当然可以使用arcTo()，不过这个的实现并不是那么的可靠，所以我们这里不作介绍</p>
-<ul>
-<li>arc(x, y, radius, startAngle, endAngle, anticlockwise)<br>这里详细介绍一下arc方法，该方法有六个参数：x,y为绘制圆弧所在圆上的圆心坐标。radius为半径。startAngle以及endAngle参数用弧度定义了开始以及结束的弧度。这些都是以x轴为基准。参数anticlockwise 为一个布尔值。为true时，是逆时针方向，否则顺时针方向。</li>
-</ul>
-<h4 id="Path2D对象"><a href="#Path2D对象" class="headerlink" title="Path2D对象"></a>Path2D对象</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">new</span> Path2D(); <span class="comment">// 空的Path对象</span></div><div class="line"><span class="keyword">new</span> Path2D(path); <span class="comment">// 克隆Path对象</span></div></pre></td></tr></table></figure>
-<p>Path2D()会返回一个新初始化的Path2D对象（可能将某一个路径作为变量——创建一个它的副本，或者将一个包含SVG path数据的字符串作为变量）。</p>
-<ul>
-<li>Path2D.addPath(path [, transform])  <strong>浏览器支持较差</strong> 添加了一条路径到当前路径（可能添加了一个变换矩阵）。</li>
-</ul>
-<p>代码示例<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>);</div><div class="line">  <span class="keyword">if</span> (canvas.getContext)&#123;</div><div class="line">    <span class="keyword">var</span> ctx = canvas.getContext(<span class="string">'2d'</span>);</div><div class="line">    <span class="keyword">var</span> rectangle = <span class="keyword">new</span> Path2D();</div><div class="line">    rectangle.rect(<span class="number">10</span>, <span class="number">10</span>, <span class="number">50</span>, <span class="number">50</span>);</div><div class="line">    <span class="keyword">var</span> circle = <span class="keyword">new</span> Path2D();</div><div class="line">    circle.moveTo(<span class="number">125</span>, <span class="number">35</span>);</div><div class="line">    circle.arc(<span class="number">100</span>, <span class="number">35</span>, <span class="number">25</span>, <span class="number">0</span>, <span class="number">2</span> * <span class="built_in">Math</span>.PI);</div><div class="line">    ctx.stroke(rectangle);</div><div class="line">    ctx.fill(circle);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（01）/" data-id="cj5z35lk70001oivgdbynjrqa" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（02）/" data-id="cj69hcoqs0006pcvgts7j8nux" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
@@ -755,6 +722,10 @@
       <ul>
         
           <li>
+            <a href="/2017/08/12/微信小程序跨页面通信解决思路/">微信小程序跨页面通信解决思路</a>
+          </li>
+        
+          <li>
             <a href="/2017/08/05/javascript设计模式学习-01/">javascript设计模式学习-01</a>
           </li>
         
@@ -768,10 +739,6 @@
         
           <li>
             <a href="/2017/07/11/canvas学习笔记-API（07）/">canvas学习笔记 - API（07）</a>
-          </li>
-        
-          <li>
-            <a href="/2017/07/11/canvas学习笔记-API（06）/">canvas学习笔记 - API（06）</a>
           </li>
         
       </ul>
