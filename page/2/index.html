@@ -71,6 +71,92 @@
         <div class="outer">
           <section id="main">
   
+    <article id="post-canvas学习笔记-API（02）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/11/canvas学习笔记-API（02）/" class="article-date">
+  <time datetime="2017-07-11T06:27:21.000Z" itemprop="datePublished">2017-07-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/11/canvas学习笔记-API（02）/">canvas学习笔记 - API（02）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="色彩"><a href="#色彩" class="headerlink" title="色彩"></a>色彩</h2><ul>
+<li>fillStyle = color               设置图形的填充颜色。</li>
+<li>strokeStyle = color         设置图形轮廓的颜色。</li>
+<li>globalAlpha = transparencyValue  这个属性影响到 canvas 里所有图形的透明度，有效的值范围是 0.0 （完全透明）到 1.0（完全不透明），默认是 1.0。</li>
+</ul>
+<h2 id="线型-Line-styles"><a href="#线型-Line-styles" class="headerlink" title="线型 Line styles"></a>线型 Line styles</h2><ul>
+<li>lineWidth = value 设置线条宽度。</li>
+<li>lineCap = type     设置线条末端样式。</li>
+<li>lineJoin = type     设定线条与线条间接合处的样式。</li>
+<li>miterLimit = value  限制当两条线相交时交接处最大长度；所谓交接处长度（斜接长度）是指线条交接处内角顶点到外角顶点的长度。</li>
+<li>getLineDash()       返回一个包含当前虚线样式，长度为非负偶数的数组。</li>
+<li>setLineDash(segments)   设置当前虚线样式。</li>
+<li>lineDashOffset = value      设置虚线样式的起始偏移量。</li>
+</ul>
+<p>线条的一些细节<br><img src="https://mdn.mozillademos.org/files/201/canvas-grid.png" alt="图片" title="title"></p>
+<h2 id="渐变"><a href="#渐变" class="headerlink" title="渐变"></a>渐变</h2><p>我们用下面的方法新建一个 canvasGradient 对象，并且赋给图形的 fillStyle 或 strokeStyle 属性。</p>
+<ul>
+<li>createLinearGradient(x1, y1, x2, y2)             createLinearGradient 方法接受 4 个参数，表示渐变的起点 (x1,y1) 与终点 (x2,y2)。</li>
+<li>createRadialGradient(x1, y1, r1, x2, y2, r2)   createRadialGradient 方法接受 6 个参数，前三个定义一个以 (x1,y1) 为原点，半径为 r1 的圆，后三个参数则定义另一个以 (x2,y2) 为原点，半径为 r2 的圆。</li>
+<li>gradient.addColorStop(position, color)         addColorStop 方法接受 2 个参数，position 参数必须是一个 0.0 与 1.0 之间的数值，表示渐变中颜色所在的相对位置。例如，0.5 表示颜色会出现在正中间。color 参数必须是一个有效的 CSS 颜色值（如 #FFF， rgba(0,0,0,1)，等等）</li>
+</ul>
+<h2 id="图案"><a href="#图案" class="headerlink" title="图案"></a>图案</h2><ul>
+<li>createPattern(image, type)  该方法接受两个参数。Image 可以是一个 Image 对象的引用，或者另一个 canvas 对象。Type 必须是下面的字符串值之一：repeat，repeat-x，repeat-y 和 no-repeat。<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> ctx = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>).getContext(<span class="string">'2d'</span>);</div><div class="line">  <span class="comment">// 创建新 image 对象，用作图案</span></div><div class="line">  <span class="keyword">var</span> img = <span class="keyword">new</span> Image();</div><div class="line">  img.src = <span class="string">'images/wallpaper.png'</span>;</div><div class="line">  img.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="comment">// 创建图案</span></div><div class="line">    <span class="keyword">var</span> ptrn = ctx.createPattern(img,<span class="string">'repeat'</span>);</div><div class="line">    ctx.fillStyle = ptrn;</div><div class="line">    ctx.fillRect(<span class="number">0</span>,<span class="number">0</span>,<span class="number">150</span>,<span class="number">150</span>);</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="文字"><a href="#文字" class="headerlink" title="文字"></a>文字</h2><ul>
+<li>fillText(text, x, y [, maxWidth])       <strong>实心</strong>文字，参数为文字内容，x坐标，y坐标，最大宽度</li>
+<li>strokeText(text, x, y [, maxWidth]) <strong>空心</strong>文字，参数为文字内容，x坐标，y坐标，最大宽度</li>
+<li>font = value  当前文字的样式，和css文字样式的属性相同，默认值为10px sans-serif。</li>
+<li>textAlign = value  文字对齐方式，可选值: start, end, left, right or center. 默认值 start。</li>
+<li>textBaseline = value 文字基线设置 ，可选值: top, hanging, middle, alphabetic, ideographic, bottom。默认值 alphabetic。</li>
+<li>direction = value  方向，可选值: ltr, rtl, inherit. 默认值 inherit。</li>
+<li>measureText() 返回一个TextMetrics对象，包含将被画在画布上的指定文字的像素级宽度<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> ctx = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>).getContext(<span class="string">'2d'</span>);</div><div class="line">  <span class="keyword">var</span> text = ctx.measureText(<span class="string">'foo'</span>); <span class="comment">// TextMetrics object</span></div><div class="line">  text.width; <span class="comment">// 16;</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="阴影"><a href="#阴影" class="headerlink" title="阴影"></a>阴影</h2><ul>
+<li>shadowOffsetX = float<br>shadowOffsetX 和 shadowOffsetY 用来设定阴影在 X 和 Y 轴的延伸距离，它们是不受变换矩阵所影响的。负值表示阴影会往上或左延伸，正值则表示会往下或右延伸，它们默认都为 0。</li>
+<li>shadowOffsetY = float<br>shadowOffsetX 和 shadowOffsetY 用来设定阴影在 X 和 Y 轴的延伸距离，它们是不受变换矩阵所影响的。负值表示阴影会往上或左延伸，正值则表示会往下或右延伸，它们默认都为 0。</li>
+<li>shadowBlur = float<br>shadowBlur 用于设定阴影的模糊程度，其数值并不跟像素数量挂钩，也不受变换矩阵的影响，默认为 0。</li>
+<li>shadowColor = color<br>shadowColor 是标准的 CSS 颜色值，用于设定阴影颜色效果，默认是全透明的黑色。</li>
+</ul>
+<h2 id="Canvas-填充规则"><a href="#Canvas-填充规则" class="headerlink" title="Canvas 填充规则"></a>Canvas 填充规则</h2><p>设置fill的填充规则，以下为2个可选值</p>
+<ul>
+<li>nonzero (默认)<br>这个值确定了某点属于该形状的“内部”还是“外部”。从点向任意方向的无限远处绘制射线，然后检测形状与射线相交的位置。开始于0数，射线上每次从左向右相交就加1，每次从右向左相交就减1。数一下相交次数，如果结果是0，点就在路径外面，如果结果大于0，点在路径里面。</li>
+<li>evenodd<br>这个值用确定了某点属于该形状的“内部”还是“外部”。从点向任意方向的无限远处绘制射线，并数一数给定形状与射线相交的路径段的数目，如果数目是奇数的，点在内部，如果数目是偶数的，点在外部。</li>
+</ul>
+<p>代码示例<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> ctx = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>).getContext(<span class="string">'2d'</span>); </div><div class="line">  ctx.beginPath(); </div><div class="line">  ctx.arc(<span class="number">50</span>, <span class="number">50</span>, <span class="number">30</span>, <span class="number">0</span>, <span class="built_in">Math</span>.PI*<span class="number">2</span>, <span class="literal">true</span>);</div><div class="line">  ctx.arc(<span class="number">50</span>, <span class="number">50</span>, <span class="number">15</span>, <span class="number">0</span>, <span class="built_in">Math</span>.PI*<span class="number">2</span>, <span class="literal">true</span>);</div><div class="line">  ctx.fill(<span class="string">"evenodd"</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（02）/" data-id="cj74voc370005guvgm11h8mue" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-canvas学习笔记-API（01）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/07/11/canvas学习笔记-API（01）/" class="article-date">
@@ -130,7 +216,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（01）/" data-id="cj69hcoqe0000pcvgrhy1563u" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（01）/" data-id="cj74voc320003guvgas1ut85r" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
@@ -178,7 +264,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/20/js函数队列/" data-id="cj69hcore000spcvgs41l9ln4" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/04/20/js函数队列/" data-id="cj74voc3v000tguvgs37sx7ce" class="article-share-link">Share</a>
       
       
     </footer>
@@ -227,7 +313,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（16）模块 Modules/" data-id="cj69hcosh0025pcvgk8a5otrq" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（16）模块 Modules/" data-id="cj74voc560028guvgfkr0jai2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -277,7 +363,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（14）let & const/" data-id="cj69hcosg0023pcvgnupd6zvs" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（14）let & const/" data-id="cj74voc550027guvgnqzf4sfo" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -327,7 +413,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（13）类 Class/" data-id="cj69hcosf0021pcvgstg8e1hh" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（13）类 Class/" data-id="cj74voc530023guvgkshfwcff" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -374,7 +460,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（12）代理 Proxies/" data-id="cj69hcose001zpcvgk3fflf30" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（12）代理 Proxies/" data-id="cj74voc540025guvgma8qf6t0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -439,7 +525,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（11）生成器 Generators，续篇/" data-id="cj69hcosb001xpcvgfugettq0" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（11）生成器 Generators，续篇/" data-id="cj74voc520021guvgmq65h9h7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -521,57 +607,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（10）集合/" data-id="cj69hcos9001vpcvg9gs6zrha" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-读书笔记：深入浅出ES6（07）箭头函数" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/04/14/读书笔记：深入浅出ES6（07）箭头函数/" class="article-date">
-  <time datetime="2017-04-14T02:54:48.000Z" itemprop="datePublished">2017-04-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/14/读书笔记：深入浅出ES6（07）箭头函数/">读书笔记：深入浅出ES6（07）箭头函数</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>原文线上地址：<a href="http://www.infoq.com/cn/es6-in-depth/" target="_blank" rel="external">http://www.infoq.com/cn/es6-in-depth/</a></p>
-<h2 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h2><h4 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// ES5</span></div><div class="line"><span class="keyword">var</span> total = values.reduce(<span class="function"><span class="keyword">function</span> (<span class="params">a, b</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> a + b;</div><div class="line"> &#125;, <span class="number">0</span>);</div><div class="line"> <span class="comment">// ES6</span></div><div class="line"> <span class="keyword">var</span> total = values.reduce(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a + b, <span class="number">0</span>);</div></pre></td></tr></table></figure>
-<h4 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h4><ul>
-<li>使用了块语句的箭头函数不会自动返回值，你需要使用return语句将所需值返回。</li>
-<li>当使用箭头函数创建普通对象时，你总是需要将对象包裹在小括号里。</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 为与你玩耍的每一个小狗创建一个新的空对象</span></div><div class="line"><span class="keyword">var</span> chewToys = puppies.map(<span class="function"><span class="params">puppy</span> =&gt;</span> &#123;&#125;); <span class="comment">// 这样写会报Bug！</span></div><div class="line"><span class="keyword">var</span> chewToys = puppies.map(<span class="function"><span class="params">puppy</span> =&gt;</span> (&#123;&#125;)); <span class="comment">//</span></div></pre></td></tr></table></figure>
-<h4 id="和非箭头函数的区别"><a href="#和非箭头函数的区别" class="headerlink" title="和非箭头函数的区别"></a>和非箭头函数的区别</h4><ul>
-<li>箭头函数没有它自己的this值，箭头函数内的this值继承自外围作用域</li>
-<li>箭头函数不会获取它们自己的arguments对象（通过解构来处理参数）</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（07）箭头函数/" data-id="cj69hcos3001opcvgjm7wnmo6" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（10）集合/" data-id="cj74voc51001zguvgsxic63ov" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -637,7 +673,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（08）Symbols/" data-id="cj69hcos7001qpcvgdawazemu" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（08）Symbols/" data-id="cj74voc4z001xguvgietlazzk" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -666,7 +702,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tags</h3>
     <div class="widget">
-      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/canvas/">canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/koa/">koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/weixin/">weixin</a></li></ul>
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/canvas/">canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/codewar/">codewar</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/koa/">koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/weixin/">weixin</a></li></ul>
     </div>
   </div>
 
@@ -676,7 +712,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/canvas/" style="font-size: 15px;">canvas</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/es6/" style="font-size: 17.5px;">es6</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/koa/" style="font-size: 10px;">koa</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/nodejs/" style="font-size: 12.5px;">nodejs</a> <a href="/tags/tools/" style="font-size: 12.5px;">tools</a> <a href="/tags/weixin/" style="font-size: 12.5px;">weixin</a>
+      <a href="/tags/canvas/" style="font-size: 15px;">canvas</a> <a href="/tags/codewar/" style="font-size: 10px;">codewar</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/es6/" style="font-size: 17.5px;">es6</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/koa/" style="font-size: 10px;">koa</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/nodejs/" style="font-size: 12.5px;">nodejs</a> <a href="/tags/tools/" style="font-size: 12.5px;">tools</a> <a href="/tags/weixin/" style="font-size: 12.5px;">weixin</a>
     </div>
   </div>
 
@@ -685,7 +721,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Archives</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li></ul>
     </div>
   </div>
 
@@ -696,6 +732,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/09/03/codewar-01/">codewar-01</a>
+          </li>
         
           <li>
             <a href="/2017/08/12/微信小程序跨页面通信解决思路/">微信小程序跨页面通信解决思路</a>
@@ -711,10 +751,6 @@
         
           <li>
             <a href="/2017/07/11/canvas链式操作/">canvas链式操作</a>
-          </li>
-        
-          <li>
-            <a href="/2017/07/11/canvas学习笔记-API（07）/">canvas学习笔记 - API（07）</a>
           </li>
         
       </ul>
