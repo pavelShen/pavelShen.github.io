@@ -60,7 +60,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/pavelShen"></form>
@@ -70,6 +70,53 @@
 </header>
         <div class="outer">
           <section id="main">
+  
+    <article id="post-codewar-03" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/05/codewar-03/" class="article-date">
+  <time datetime="2017-09-04T16:50:14.000Z" itemprop="datePublished">2017-09-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/05/codewar-03/">codewar-03</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="codewar刷题之旅开始啦"><a href="#codewar刷题之旅开始啦" class="headerlink" title="codewar刷题之旅开始啦~"></a>codewar刷题之旅开始啦~</h1><h2 id="Format-a-string-of-names-like-‘Bart-Lisa-amp-Maggie’"><a href="#Format-a-string-of-names-like-‘Bart-Lisa-amp-Maggie’" class="headerlink" title="Format a string of names like ‘Bart, Lisa &amp; Maggie’."></a>Format a string of names like ‘Bart, Lisa &amp; Maggie’.</h2><h4 id="自己写的"><a href="#自己写的" class="headerlink" title="自己写的"></a>自己写的</h4><p>偷鸡的使用了replace的分组，如何用正则获取最后一次出现的指定字符可以研究下<br><code>/,(?!.*,)/</code>  逻辑：匹配后面没有逗号的逗号</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">list</span>(<span class="params">names</span>)</span>&#123;</div><div class="line">  <span class="keyword">let</span> result</div><div class="line">  <span class="keyword">let</span> nameArr = names.map(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> item.name</div><div class="line">  &#125;)</div><div class="line">  </div><div class="line">  result = nameArr.join(<span class="string">', '</span>)</div><div class="line">  <span class="keyword">return</span> result.replace(<span class="regexp">/(.*)(,\s)/</span>,<span class="function"><span class="keyword">function</span>(<span class="params">match,p1,p2</span>)</span>&#123;</div><div class="line">		  <span class="keyword">return</span> p1 + <span class="string">' &amp; '</span></div><div class="line">		&#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="reduce-感觉这题就是给reduce打造的。。。"><a href="#reduce-感觉这题就是给reduce打造的。。。" class="headerlink" title="reduce 感觉这题就是给reduce打造的。。。"></a>reduce 感觉这题就是给reduce打造的。。。</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">list</span>(<span class="params">names</span>)</span>&#123;</div><div class="line">  <span class="keyword">return</span> names.reduce(<span class="function"><span class="keyword">function</span>(<span class="params">prev, current, index, array</span>)</span>&#123;</div><div class="line">    <span class="keyword">if</span> (index === <span class="number">0</span>)&#123;</div><div class="line">      <span class="keyword">return</span> current.name;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (index === array.length - <span class="number">1</span>)&#123;</div><div class="line">      <span class="keyword">return</span> prev + <span class="string">' &amp; '</span> + current.name;</div><div class="line">    &#125; </div><div class="line">    <span class="keyword">else</span> &#123;</div><div class="line">      <span class="keyword">return</span> prev + <span class="string">', '</span> + current.name;</div><div class="line">    &#125;</div><div class="line">  &#125;, <span class="string">''</span>);</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<h4 id="把最后一个名字用pop弹出并存起来（不错的想法）"><a href="#把最后一个名字用pop弹出并存起来（不错的想法）" class="headerlink" title="把最后一个名字用pop弹出并存起来（不错的想法）"></a>把最后一个名字用pop弹出并存起来（不错的想法）</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">list</span>(<span class="params">names</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> xs = names.map(<span class="function"><span class="params">p</span> =&gt;</span> p.name)</div><div class="line">  <span class="keyword">var</span> x = xs.pop()</div><div class="line">  <span class="keyword">return</span> xs.length ? xs.join(<span class="string">", "</span>) + <span class="string">" &amp; "</span> + x : x || <span class="string">""</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="Sum-of-two-lowest-positive-integers-（数组最小的2个值相加）"><a href="#Sum-of-two-lowest-positive-integers-（数组最小的2个值相加）" class="headerlink" title="Sum of two lowest positive integers （数组最小的2个值相加）"></a>Sum of two lowest positive integers （数组最小的2个值相加）</h2><h4 id="先排序再求和，但是按照算法复杂度来说，复杂了"><a href="#先排序再求和，但是按照算法复杂度来说，复杂了" class="headerlink" title="先排序再求和，但是按照算法复杂度来说，复杂了"></a>先排序再求和，但是按照算法复杂度来说，复杂了</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sumTwoSmallestNumbers</span>(<span class="params">numbers</span>) </span>&#123;  </div><div class="line">  <span class="comment">//Code here</span></div><div class="line">  <span class="keyword">let</span> temp = numbers.slice()</div><div class="line">  <span class="keyword">let</span> sortedNum = temp.sort(<span class="function">(<span class="params">a,b</span>) =&gt;</span> a-b)</div><div class="line">  <span class="keyword">return</span> sortedNum[<span class="number">0</span>] + sortedNum[<span class="number">1</span>]</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h4 id="设置2个变量获取最小的2个值，和自己写的demo中获取最大的2个值-是一个思路"><a href="#设置2个变量获取最小的2个值，和自己写的demo中获取最大的2个值-是一个思路" class="headerlink" title="设置2个变量获取最小的2个值，和自己写的demo中获取最大的2个值 是一个思路"></a>设置2个变量获取最小的2个值，和自己写的demo中获取最大的2个值 是一个思路</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sumTwoSmallestNumbers</span>(<span class="params">numbers</span>) </span>&#123;  </div><div class="line">  <span class="keyword">var</span> min = <span class="built_in">Number</span>.MAX_SAFE_INTEGER;</div><div class="line">  <span class="keyword">var</span> secondMin = <span class="built_in">Number</span>.MAX_SAFE_INTEGER;</div><div class="line">  </div><div class="line">  <span class="keyword">var</span> n;</div><div class="line">  <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; numbers.length; i++) &#123;</div><div class="line">    n = numbers[i];</div><div class="line">    <span class="keyword">if</span>(n &lt; min) &#123;</div><div class="line">      secondMin = min;</div><div class="line">      min = n;</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span>( n &lt; secondMin ) &#123;</div><div class="line">      secondMin = n;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  <span class="keyword">return</span> min + secondMin;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="Get-the-Middle-Character-获取字符串中间的部分，长度奇数返回1个字符，偶数返回2个"><a href="#Get-the-Middle-Character-获取字符串中间的部分，长度奇数返回1个字符，偶数返回2个" class="headerlink" title="Get the Middle Character(获取字符串中间的部分，长度奇数返回1个字符，偶数返回2个)"></a>Get the Middle Character(获取字符串中间的部分，长度奇数返回1个字符，偶数返回2个)</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getMiddle</span>(<span class="params">s</span>)</span>&#123;</div><div class="line">  <span class="comment">//Code goes here!</span></div><div class="line">  <span class="keyword">let</span> result</div><div class="line">  <span class="keyword">let</span> length = s.length</div><div class="line">  <span class="keyword">let</span> halfIndex = <span class="built_in">Math</span>.floor(length / <span class="number">2</span>)</div><div class="line">  <span class="keyword">let</span> isEven = length % <span class="number">2</span> === <span class="number">0</span></div><div class="line">  <span class="keyword">if</span>(isEven)&#123;</div><div class="line">    result = s.slice(halfIndex<span class="number">-1</span>,halfIndex+<span class="number">1</span>)</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">else</span>&#123;</div><div class="line">    result = s.charAt(halfIndex)</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  <span class="keyword">return</span> result</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/pavelShen/2017/09/05/codewar-03/" data-id="cj77rf1zk000mj5vgqlm06w87" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codewar/">codewar</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
   
     <article id="post-codewar-02" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -105,7 +152,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/09/04/codewar-02/" data-id="cj76b9fep000jamvg3mzte0uh" class="article-share-link">Delen</a>
+      <a data-url="https://github.com/pavelShen/2017/09/04/codewar-02/" data-id="cj77rf1zg000jj5vg0whrdooa" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codewar/">codewar</a></li></ul>
@@ -158,7 +205,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/09/03/codewar-01/" data-id="cj76b9fen000hamvgb0bh5b7c" class="article-share-link">Delen</a>
+      <a data-url="https://github.com/pavelShen/2017/09/03/codewar-01/" data-id="cj77rf1ze000hj5vg3yrzr9qb" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codewar/">codewar</a></li></ul>
@@ -199,7 +246,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/08/12/微信小程序跨页面通信解决思路/" data-id="cj76b9ffk001gamvgzcyvxrkq" class="article-share-link">Delen</a>
+      <a data-url="https://github.com/pavelShen/2017/08/12/微信小程序跨页面通信解决思路/" data-id="cj77rf206001fj5vg2mzwoahr" class="article-share-link">Share</a>
       
       
     </footer>
@@ -242,7 +289,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/08/05/javascript设计模式学习-01/" data-id="cj76b9ff0000vamvgkwopf1we" class="article-share-link">Delen</a>
+      <a data-url="https://github.com/pavelShen/2017/08/05/javascript设计模式学习-01/" data-id="cj77rf1zn000qj5vgf7ehbm4r" class="article-share-link">Share</a>
       
       
     </footer>
@@ -339,7 +386,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/07/17/canvas学习总结/" data-id="cj76b9fdu0000amvgge0aw8od" class="article-share-link">Delen</a>
+      <a data-url="https://github.com/pavelShen/2017/07/17/canvas学习总结/" data-id="cj77rf1yv0003j5vgejk1z2hb" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
@@ -379,7 +426,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/07/11/canvas链式操作/" data-id="cj76b9fek000famvgnyfiz5iw" class="article-share-link">Delen</a>
+      <a data-url="https://github.com/pavelShen/2017/07/11/canvas链式操作/" data-id="cj77rf1zl000oj5vgttel479x" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
@@ -439,7 +486,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（07）/" data-id="cj76b9fej000camvgmhhajgwa" class="article-share-link">Delen</a>
+      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（07）/" data-id="cj77rf1zd000fj5vgwh1qixpk" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
@@ -486,7 +533,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（06）/" data-id="cj76b9fes000mamvg10b1g1xd" class="article-share-link">Delen</a>
+      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（06）/" data-id="cj77rf1zc000cj5vgidb9jgwi" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
@@ -555,59 +602,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（05）/" data-id="cj76b9feh000aamvgr43ucycz" class="article-share-link">Delen</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-canvas学习笔记-API（04）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/07/11/canvas学习笔记-API（04）/" class="article-date">
-  <time datetime="2017-07-11T06:27:35.000Z" itemprop="datePublished">2017-07-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/11/canvas学习笔记-API（04）/">canvas学习笔记 - API（04）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="变形"><a href="#变形" class="headerlink" title="变形"></a>变形</h2><ul>
-<li>save()restore()<br>save 和 restore 方法是用来保存和恢复 canvas 状态的，都没有参数。Canvas 的状态就是当前画面应用的所有样式和变形的一个快照。</li>
-</ul>
-<p>Canvas状态存储在栈中，每当save()方法被调用后，当前的状态就被推送到栈中保存。一个绘画状态包括：</p>
-<ul>
-<li>当前应用的变形（即移动，旋转和缩放，见下）</li>
-<li>strokeStyle, fillStyle, globalAlpha, lineWidth, lineCap, lineJoin, miterLimit, shadowOffsetX, shadowOffsetY, shadowBlur, shadowColor, globalCompositeOperation 的值</li>
-<li>当前的裁切路径（clipping path）</li>
-</ul>
-<p>你可以调用任意多次 save 方法。<br>每一次调用 restore 方法，上一个保存的状态就从栈中弹出，所有设定都恢复。</p>
-<h4 id="移动Translating"><a href="#移动Translating" class="headerlink" title="移动Translating"></a>移动Translating</h4><p>translate(x, y)<br>translate 方法接受两个参数。x 是左右偏移量，y 是上下偏移量，<strong>它用来移动 canvas 和它的原点到一个不同的位置</strong>。<br><img src="https://mdn.mozillademos.org/files/234/Canvas_grid_translate.png" alt="图片" title="title"></p>
-<h4 id="旋转-Rotating"><a href="#旋转-Rotating" class="headerlink" title="旋转 Rotating"></a>旋转 Rotating</h4><p>rotate(angle)<br>这个方法只接受一个参数：旋转的角度(angle)，它是顺时针方向的，以弧度为单位的值。<br>旋转的中心点始终是 canvas 的原点，如果要改变它，我们需要用到 translate 方法。<br><img src="https://mdn.mozillademos.org/files/233/Canvas_grid_rotate.png" alt="图片" title="title"></p>
-<h4 id="缩放-Scaling"><a href="#缩放-Scaling" class="headerlink" title="缩放 Scaling"></a>缩放 Scaling</h4><p>scale(x, y)<br>scale 方法接受两个参数。x,y 分别是横轴和纵轴的缩放因子，它们都必须是正值。值比 1.0 小表示缩小，比 1.0 大则表示放大，值为 1.0 时什么效果都没有。</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（04）/" data-id="cj76b9fef0007amvgujpaa4av" class="article-share-link">Delen</a>
+      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（05）/" data-id="cj77rf1z9000aj5vg4paytphr" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
@@ -623,7 +618,7 @@
 
 
   <nav id="page-nav">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">__('next') &raquo;</a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/2/">__('next') &raquo;</a>
   </nav>
 </section>
           
@@ -634,7 +629,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Labels</h3>
+    <h3 class="widget-title">Tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/canvas/">canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/codewar/">codewar</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/koa/">koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/weixin/">weixin</a></li></ul>
     </div>
@@ -646,14 +641,14 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/canvas/" style="font-size: 15px;">canvas</a> <a href="/tags/codewar/" style="font-size: 12.5px;">codewar</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/es6/" style="font-size: 17.5px;">es6</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/koa/" style="font-size: 10px;">koa</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/nodejs/" style="font-size: 12.5px;">nodejs</a> <a href="/tags/tools/" style="font-size: 12.5px;">tools</a> <a href="/tags/weixin/" style="font-size: 12.5px;">weixin</a>
+      <a href="/tags/canvas/" style="font-size: 16px;">canvas</a> <a href="/tags/codewar/" style="font-size: 14px;">codewar</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/es6/" style="font-size: 18px;">es6</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/koa/" style="font-size: 10px;">koa</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/nodejs/" style="font-size: 12px;">nodejs</a> <a href="/tags/tools/" style="font-size: 12px;">tools</a> <a href="/tags/weixin/" style="font-size: 12px;">weixin</a>
     </div>
   </div>
 
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archieven</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li></ul>
     </div>
@@ -663,9 +658,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recente berichten</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/09/05/codewar-03/">codewar-03</a>
+          </li>
         
           <li>
             <a href="/2017/09/04/codewar-02/">codewar-02</a>
@@ -681,10 +680,6 @@
         
           <li>
             <a href="/2017/08/05/javascript设计模式学习-01/">javascript设计模式学习-01</a>
-          </li>
-        
-          <li>
-            <a href="/2017/07/17/canvas学习总结/">canvas学习总结</a>
           </li>
         
       </ul>

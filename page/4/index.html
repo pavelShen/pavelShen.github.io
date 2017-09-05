@@ -60,7 +60,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/pavelShen"></form>
@@ -71,10 +71,10 @@
         <div class="outer">
           <section id="main">
   
-    <article id="post-charles入门" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-npm命令" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2017/02/10/charles入门/" class="article-date">
-  <time datetime="2017-02-10T10:25:10.000Z" itemprop="datePublished">2017-02-10</time>
+    <a href="/2017/02/10/npm命令/" class="article-date">
+  <time datetime="2017-02-10T10:29:01.000Z" itemprop="datePublished">2017-02-10</time>
 </a>
     
   </div>
@@ -85,7 +85,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/10/charles入门/">charles入门</a>
+      <a class="article-title" href="/2017/02/10/npm命令/">npm命令</a>
     </h1>
   
 
@@ -93,39 +93,20 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>参考文章 <a href="http://blog.devtang.com/2015/11/14/charles-introduction/" target="_blank" rel="external">http://blog.devtang.com/2015/11/14/charles-introduction/</a></p>
-<ol>
-<li>选择菜单中的 “Proxy” -&gt; “Mac OS X Proxy” 来将 Charles 设置成系统代理</li>
-</ol>
-<h4 id="http抓包"><a href="#http抓包" class="headerlink" title="http抓包"></a>http抓包</h4><ol>
-<li>在 Charles 的菜单栏上选择 “Proxy”-&gt;”Proxy Settings”，填入代理端口 8888，并且勾上 “Enable transparent HTTP proxying” 就完成了在 Charles 上的设置。</li>
-<li>手机 WIFI 设置手动代理，HELP -》 LOCAL ADDRESS 查看本地ip -》 端口填入设置里的端口号</li>
-</ol>
-<h4 id="https抓包"><a href="#https抓包" class="headerlink" title="https抓包"></a>https抓包</h4><ol>
-<li>完成http抓包设置</li>
-<li>选择 “Help” -&gt; “SSL Proxying” -&gt; “Install Charles Root Certificate”，然后输入系统的帐号密码，即可在 KeyChain 看到添加好的证书。</li>
-<li>在证书菜单信任该证书（可能需要重启电脑，不然我这里就莫名的上不了网了）</li>
-<li>在 Charles 的菜单栏上选择 “Proxy”-&gt;”SSL Proxying Settings” 勾选enable，添加需要捕获的https的url</li>
-<li>选择 “Help” -&gt; “SSL Proxying” -&gt; “Save Charles Root Certificate” 保存为cer格式，传输给手机放入SD卡根目录（试了下不用放根目录也行），在安卓（小米）手机中搜索  从SD卡安装（证书）选择该证书文件，终于安装成功</li>
-</ol>
-<h4 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h4><ol>
-<li>模拟慢速网络：”Proxy”-&gt;”Throttle Setting”</li>
-<li>修改网络请求内容：选中请求，右击选择compose，编辑请求参数，点击execute按钮</li>
-<li>修改服务器返回内容  </li>
-</ol>
-<ul>
-<li>Map功能：请求重定向</li>
-<li>Rewrite功能： 对请求，响应进行正则替换，适合长期批量替换</li>
-<li>Breakpoints功能：和Rewrite一样，但是只会修改一次</li>
-</ul>
+        <p>cnpm 设置：<br>alias cnpm=”npm –registry=<a href="https://registry.npm.taobao.org" target="_blank" rel="external">https://registry.npm.taobao.org</a> \<br>–cache=$HOME/.npm/.cache/cnpm \<br>–disturl=<a href="https://npm.taobao.org/dist" target="_blank" rel="external">https://npm.taobao.org/dist</a> \<br>–userconfig=$HOME/.cnpmrc”</p>
+<p>npm help 查看帮助<br>npm ls  显示安装的包</p>
+<p>命令配置：   不带值默认设置true<br>会查看到安装包所包含的所有依赖文件； npm ls –global<br>只查看顶级安装包； npm ls –global –depth=0</p>
+<p>npm bin -g :包的安装路径<br>npm cache clean:删除安装包缓存<br>npm dedupe 包去重</p>
+<p>npm install 不同版本<br>npm install aa@latest<br>npm install aa@0.1.1<br>npm install aa@”&gt;=0.1.0 &lt;0.2.0”<br>npm install aa –force 强制拉取远程包</p>
+<p>npm outdated 包过期检查</p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/02/10/charles入门/" data-id="cj76b9fev000oamvgnnj274du" class="article-share-link">Delen</a>
+      <a data-url="https://github.com/pavelShen/2017/02/10/npm命令/" data-id="cj77rf2030019j5vgrnwzz248" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tools/">tools</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li></ul>
 
     </footer>
   </div>
@@ -184,10 +165,74 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/02/10/css片段1/" data-id="cj76b9ff0000tamvg4df253t4" class="article-share-link">Delen</a>
+      <a data-url="https://github.com/pavelShen/2017/02/10/css片段1/" data-id="cj77rf1zt000yj5vg26htkbdp" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-charles入门" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/02/10/charles入门/" class="article-date">
+  <time datetime="2017-02-10T10:25:10.000Z" itemprop="datePublished">2017-02-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/02/10/charles入门/">charles入门</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>参考文章 <a href="http://blog.devtang.com/2015/11/14/charles-introduction/" target="_blank" rel="external">http://blog.devtang.com/2015/11/14/charles-introduction/</a></p>
+<ol>
+<li>选择菜单中的 “Proxy” -&gt; “Mac OS X Proxy” 来将 Charles 设置成系统代理</li>
+</ol>
+<h4 id="http抓包"><a href="#http抓包" class="headerlink" title="http抓包"></a>http抓包</h4><ol>
+<li>在 Charles 的菜单栏上选择 “Proxy”-&gt;”Proxy Settings”，填入代理端口 8888，并且勾上 “Enable transparent HTTP proxying” 就完成了在 Charles 上的设置。</li>
+<li>手机 WIFI 设置手动代理，HELP -》 LOCAL ADDRESS 查看本地ip -》 端口填入设置里的端口号</li>
+</ol>
+<h4 id="https抓包"><a href="#https抓包" class="headerlink" title="https抓包"></a>https抓包</h4><ol>
+<li>完成http抓包设置</li>
+<li>选择 “Help” -&gt; “SSL Proxying” -&gt; “Install Charles Root Certificate”，然后输入系统的帐号密码，即可在 KeyChain 看到添加好的证书。</li>
+<li>在证书菜单信任该证书（可能需要重启电脑，不然我这里就莫名的上不了网了）</li>
+<li>在 Charles 的菜单栏上选择 “Proxy”-&gt;”SSL Proxying Settings” 勾选enable，添加需要捕获的https的url</li>
+<li>选择 “Help” -&gt; “SSL Proxying” -&gt; “Save Charles Root Certificate” 保存为cer格式，传输给手机放入SD卡根目录（试了下不用放根目录也行），在安卓（小米）手机中搜索  从SD卡安装（证书）选择该证书文件，终于安装成功</li>
+</ol>
+<h4 id="功能"><a href="#功能" class="headerlink" title="功能"></a>功能</h4><ol>
+<li>模拟慢速网络：”Proxy”-&gt;”Throttle Setting”</li>
+<li>修改网络请求内容：选中请求，右击选择compose，编辑请求参数，点击execute按钮</li>
+<li>修改服务器返回内容  </li>
+</ol>
+<ul>
+<li>Map功能：请求重定向</li>
+<li>Rewrite功能： 对请求，响应进行正则替换，适合长期批量替换</li>
+<li>Breakpoints功能：和Rewrite一样，但是只会修改一次</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/pavelShen/2017/02/10/charles入门/" data-id="cj77rf1zq000tj5vgekxrda3l" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tools/">tools</a></li></ul>
 
     </footer>
   </div>
@@ -238,7 +283,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/02/10/视频全屏播放-开发总结/" data-id="cj76b9ffl001hamvgnk5oszd3" class="article-share-link">Delen</a>
+      <a data-url="https://github.com/pavelShen/2017/02/10/视频全屏播放-开发总结/" data-id="cj77rf20a001lj5vg2gvm0tk0" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -299,7 +344,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/01/17/js片段1/" data-id="cj76b9ff8000zamvg5vjs4w7x" class="article-share-link">Delen</a>
+      <a data-url="https://github.com/pavelShen/2017/01/17/js片段1/" data-id="cj77rf1zz0013j5vg0nt0hwhw" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -347,7 +392,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2016/12/16/hello-world/" data-id="cj76b9fex000qamvg0xrq6sd5" class="article-share-link">Delen</a>
+      <a data-url="https://github.com/pavelShen/2016/12/16/hello-world/" data-id="cj77rf1zr000vj5vgmbjc9ysd" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
@@ -387,7 +432,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2016/09/26/小程序新建页面脚本/" data-id="cj76b9ffi001damvguu3gjb0y" class="article-share-link">Delen</a>
+      <a data-url="https://github.com/pavelShen/2016/09/26/小程序新建页面脚本/" data-id="cj77rf207001hj5vgpotvissj" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/weixin/">weixin</a></li></ul>
@@ -457,7 +502,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2016/09/26/weixin小程序/" data-id="cj76b9ffd0017amvgkmygnloy" class="article-share-link">Delen</a>
+      <a data-url="https://github.com/pavelShen/2016/09/26/weixin小程序/" data-id="cj77rf204001dj5vg6l7lyi4h" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/weixin/">weixin</a></li></ul>
@@ -540,7 +585,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2016/08/09/use-fiddler/" data-id="cj76b9fff0019amvg5tyn840v" class="article-share-link">Delen</a>
+      <a data-url="https://github.com/pavelShen/2016/08/09/use-fiddler/" data-id="cj77rf203001bj5vgjoscj7ek" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tools/">tools</a></li></ul>
@@ -646,7 +691,7 @@ app.listen(3000);
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2016/08/09/learn-koa/" data-id="cj76b9ffa0011amvg6rnon7ca" class="article-share-link">Delen</a>
+      <a data-url="https://github.com/pavelShen/2016/08/09/learn-koa/" data-id="cj77rf2020017j5vgxgvosehq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/koa/">koa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li></ul>
@@ -659,72 +704,10 @@ app.listen(3000);
 
 
   
-    <article id="post-markdown" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/06/markdown/" class="article-date">
-  <time datetime="2016-08-06T06:30:55.000Z" itemprop="datePublished">2016-08-06</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/06/markdown/">markdown 常用语法</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="相关插件"><a href="#相关插件" class="headerlink" title="相关插件"></a>相关插件</h1><p>markdown-preview 插件<br>  ctrl-shift-m 预览</p>
-<h1 id="常用语法（对应例子在最底部）"><a href="#常用语法（对应例子在最底部）" class="headerlink" title="常用语法（对应例子在最底部）"></a>常用语法（对应例子在最底部）</h1><ol>
-<li>使用#，可表示1-6级标题。</li>
-<li>使用-，可表示无序列表。</li>
-<li>在段落的每行或者只在第一行使用符号&gt;</li>
-<li>每行加上4个空格为代码块</li>
-<li>在强调内容两侧分别加上* 一个为斜体，两个为粗体</li>
-<li>有序列表（数字+空格+.）</li>
-<li>分割线最常使用就是三个或以上-</li>
-<li><p>链接</p>
-<blockquote>
-<p>[显示的文字](url “title”)</p>
-</blockquote>
-</li>
-<li><p>添加图片的形式和链接相似，只需在链接的基础上前方加一个！</p>
-</li>
-<li>\ 转义字符</li>
-<li>标记 `a` <code>a</code></li>
-</ol>
-        
-          <p class="article-more-link">
-            <a href="/2016/08/06/markdown/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2016/08/06/markdown/" data-id="cj76b9ffd0015amvg6glbba5l" class="article-share-link">Delen</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/markdown/">markdown</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/page/3/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span>
+    <a class="extend prev" rel="prev" href="/page/3/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/5/">__('next') &raquo;</a>
   </nav>
 </section>
           
@@ -735,7 +718,7 @@ app.listen(3000);
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Labels</h3>
+    <h3 class="widget-title">Tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/canvas/">canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/codewar/">codewar</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/koa/">koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/weixin/">weixin</a></li></ul>
     </div>
@@ -747,14 +730,14 @@ app.listen(3000);
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/canvas/" style="font-size: 15px;">canvas</a> <a href="/tags/codewar/" style="font-size: 12.5px;">codewar</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/es6/" style="font-size: 17.5px;">es6</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/koa/" style="font-size: 10px;">koa</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/nodejs/" style="font-size: 12.5px;">nodejs</a> <a href="/tags/tools/" style="font-size: 12.5px;">tools</a> <a href="/tags/weixin/" style="font-size: 12.5px;">weixin</a>
+      <a href="/tags/canvas/" style="font-size: 16px;">canvas</a> <a href="/tags/codewar/" style="font-size: 14px;">codewar</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/es6/" style="font-size: 18px;">es6</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/koa/" style="font-size: 10px;">koa</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/nodejs/" style="font-size: 12px;">nodejs</a> <a href="/tags/tools/" style="font-size: 12px;">tools</a> <a href="/tags/weixin/" style="font-size: 12px;">weixin</a>
     </div>
   </div>
 
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archieven</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li></ul>
     </div>
@@ -764,9 +747,13 @@ app.listen(3000);
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recente berichten</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/09/05/codewar-03/">codewar-03</a>
+          </li>
         
           <li>
             <a href="/2017/09/04/codewar-02/">codewar-02</a>
@@ -782,10 +769,6 @@ app.listen(3000);
         
           <li>
             <a href="/2017/08/05/javascript设计模式学习-01/">javascript设计模式学习-01</a>
-          </li>
-        
-          <li>
-            <a href="/2017/07/17/canvas学习总结/">canvas学习总结</a>
           </li>
         
       </ul>

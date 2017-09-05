@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>codewar-03 | pavelShen的个人博客</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="codewar刷题之旅开始啦~Format a string of names like ‘Bart, Lisa &amp;amp; Maggie’.自己写的偷鸡的使用了replace的分组，如何用正则获取最后一次出现的指定字符可以研究下/,(?!.*,)/  逻辑：匹配后面没有逗号的逗号
+1234567891011function list(names)&amp;#123;  let result  let n">
+<meta property="og:type" content="article">
+<meta property="og:title" content="codewar-03">
+<meta property="og:url" content="https://github.com/pavelShen/2017/09/05/codewar-03/index.html">
+<meta property="og:site_name" content="pavelShen的个人博客">
+<meta property="og:description" content="codewar刷题之旅开始啦~Format a string of names like ‘Bart, Lisa &amp;amp; Maggie’.自己写的偷鸡的使用了replace的分组，如何用正则获取最后一次出现的指定字符可以研究下/,(?!.*,)/  逻辑：匹配后面没有逗号的逗号
+1234567891011function list(names)&amp;#123;  let result  let n">
+<meta property="og:updated_time" content="2017-09-05T15:37:29.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="codewar-03">
+<meta name="twitter:description" content="codewar刷题之旅开始啦~Format a string of names like ‘Bart, Lisa &amp;amp; Maggie’.自己写的偷鸡的使用了replace的分组，如何用正则获取最后一次出现的指定字符可以研究下/,(?!.*,)/  逻辑：匹配后面没有逗号的逗号
+1234567891011function list(names)&amp;#123;  let result  let n">
+  
+    <link rel="alternate" href="/atom.xml" title="pavelShen的个人博客" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  
+    <div id="container">
+      <div id="wrap">
+        <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">pavelShen的个人博客</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/" id="subtitle">JUST FOR FUN</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+          <a class="main-nav-link" href="/demo">Demo</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/pavelShen"></form>
+      </div>
+    </div>
+  </div>
+</header>
+        <div class="outer">
+          <section id="main"><article id="post-codewar-03" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/05/codewar-03/" class="article-date">
+  <time datetime="2017-09-04T16:50:14.000Z" itemprop="datePublished">2017-09-05</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      codewar-03
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="codewar刷题之旅开始啦"><a href="#codewar刷题之旅开始啦" class="headerlink" title="codewar刷题之旅开始啦~"></a>codewar刷题之旅开始啦~</h1><h2 id="Format-a-string-of-names-like-‘Bart-Lisa-amp-Maggie’"><a href="#Format-a-string-of-names-like-‘Bart-Lisa-amp-Maggie’" class="headerlink" title="Format a string of names like ‘Bart, Lisa &amp; Maggie’."></a>Format a string of names like ‘Bart, Lisa &amp; Maggie’.</h2><h4 id="自己写的"><a href="#自己写的" class="headerlink" title="自己写的"></a>自己写的</h4><p>偷鸡的使用了replace的分组，如何用正则获取最后一次出现的指定字符可以研究下<br><code>/,(?!.*,)/</code>  逻辑：匹配后面没有逗号的逗号</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">list</span>(<span class="params">names</span>)</span>&#123;</div><div class="line">  <span class="keyword">let</span> result</div><div class="line">  <span class="keyword">let</span> nameArr = names.map(<span class="function"><span class="keyword">function</span>(<span class="params">item</span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> item.name</div><div class="line">  &#125;)</div><div class="line">  </div><div class="line">  result = nameArr.join(<span class="string">', '</span>)</div><div class="line">  <span class="keyword">return</span> result.replace(<span class="regexp">/(.*)(,\s)/</span>,<span class="function"><span class="keyword">function</span>(<span class="params">match,p1,p2</span>)</span>&#123;</div><div class="line">		  <span class="keyword">return</span> p1 + <span class="string">' &amp; '</span></div><div class="line">		&#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="reduce-感觉这题就是给reduce打造的。。。"><a href="#reduce-感觉这题就是给reduce打造的。。。" class="headerlink" title="reduce 感觉这题就是给reduce打造的。。。"></a>reduce 感觉这题就是给reduce打造的。。。</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">list</span>(<span class="params">names</span>)</span>&#123;</div><div class="line">  <span class="keyword">return</span> names.reduce(<span class="function"><span class="keyword">function</span>(<span class="params">prev, current, index, array</span>)</span>&#123;</div><div class="line">    <span class="keyword">if</span> (index === <span class="number">0</span>)&#123;</div><div class="line">      <span class="keyword">return</span> current.name;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span> <span class="keyword">if</span> (index === array.length - <span class="number">1</span>)&#123;</div><div class="line">      <span class="keyword">return</span> prev + <span class="string">' &amp; '</span> + current.name;</div><div class="line">    &#125; </div><div class="line">    <span class="keyword">else</span> &#123;</div><div class="line">      <span class="keyword">return</span> prev + <span class="string">', '</span> + current.name;</div><div class="line">    &#125;</div><div class="line">  &#125;, <span class="string">''</span>);</div><div class="line"> &#125;</div></pre></td></tr></table></figure>
+<h4 id="把最后一个名字用pop弹出并存起来（不错的想法）"><a href="#把最后一个名字用pop弹出并存起来（不错的想法）" class="headerlink" title="把最后一个名字用pop弹出并存起来（不错的想法）"></a>把最后一个名字用pop弹出并存起来（不错的想法）</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">list</span>(<span class="params">names</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> xs = names.map(<span class="function"><span class="params">p</span> =&gt;</span> p.name)</div><div class="line">  <span class="keyword">var</span> x = xs.pop()</div><div class="line">  <span class="keyword">return</span> xs.length ? xs.join(<span class="string">", "</span>) + <span class="string">" &amp; "</span> + x : x || <span class="string">""</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="Sum-of-two-lowest-positive-integers-（数组最小的2个值相加）"><a href="#Sum-of-two-lowest-positive-integers-（数组最小的2个值相加）" class="headerlink" title="Sum of two lowest positive integers （数组最小的2个值相加）"></a>Sum of two lowest positive integers （数组最小的2个值相加）</h2><h4 id="先排序再求和，但是按照算法复杂度来说，复杂了"><a href="#先排序再求和，但是按照算法复杂度来说，复杂了" class="headerlink" title="先排序再求和，但是按照算法复杂度来说，复杂了"></a>先排序再求和，但是按照算法复杂度来说，复杂了</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sumTwoSmallestNumbers</span>(<span class="params">numbers</span>) </span>&#123;  </div><div class="line">  <span class="comment">//Code here</span></div><div class="line">  <span class="keyword">let</span> temp = numbers.slice()</div><div class="line">  <span class="keyword">let</span> sortedNum = temp.sort(<span class="function">(<span class="params">a,b</span>) =&gt;</span> a-b)</div><div class="line">  <span class="keyword">return</span> sortedNum[<span class="number">0</span>] + sortedNum[<span class="number">1</span>]</div><div class="line">&#125;;</div></pre></td></tr></table></figure>
+<h4 id="设置2个变量获取最小的2个值，和自己写的demo中获取最大的2个值-是一个思路"><a href="#设置2个变量获取最小的2个值，和自己写的demo中获取最大的2个值-是一个思路" class="headerlink" title="设置2个变量获取最小的2个值，和自己写的demo中获取最大的2个值 是一个思路"></a>设置2个变量获取最小的2个值，和自己写的demo中获取最大的2个值 是一个思路</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sumTwoSmallestNumbers</span>(<span class="params">numbers</span>) </span>&#123;  </div><div class="line">  <span class="keyword">var</span> min = <span class="built_in">Number</span>.MAX_SAFE_INTEGER;</div><div class="line">  <span class="keyword">var</span> secondMin = <span class="built_in">Number</span>.MAX_SAFE_INTEGER;</div><div class="line">  </div><div class="line">  <span class="keyword">var</span> n;</div><div class="line">  <span class="keyword">for</span> (i = <span class="number">0</span>; i &lt; numbers.length; i++) &#123;</div><div class="line">    n = numbers[i];</div><div class="line">    <span class="keyword">if</span>(n &lt; min) &#123;</div><div class="line">      secondMin = min;</div><div class="line">      min = n;</div><div class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span>( n &lt; secondMin ) &#123;</div><div class="line">      secondMin = n;</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  <span class="keyword">return</span> min + secondMin;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="Get-the-Middle-Character-获取字符串中间的部分，长度奇数返回1个字符，偶数返回2个"><a href="#Get-the-Middle-Character-获取字符串中间的部分，长度奇数返回1个字符，偶数返回2个" class="headerlink" title="Get the Middle Character(获取字符串中间的部分，长度奇数返回1个字符，偶数返回2个)"></a>Get the Middle Character(获取字符串中间的部分，长度奇数返回1个字符，偶数返回2个)</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">getMiddle</span>(<span class="params">s</span>)</span>&#123;</div><div class="line">  <span class="comment">//Code goes here!</span></div><div class="line">  <span class="keyword">let</span> result</div><div class="line">  <span class="keyword">let</span> length = s.length</div><div class="line">  <span class="keyword">let</span> halfIndex = <span class="built_in">Math</span>.floor(length / <span class="number">2</span>)</div><div class="line">  <span class="keyword">let</span> isEven = length % <span class="number">2</span> === <span class="number">0</span></div><div class="line">  <span class="keyword">if</span>(isEven)&#123;</div><div class="line">    result = s.slice(halfIndex<span class="number">-1</span>,halfIndex+<span class="number">1</span>)</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">else</span>&#123;</div><div class="line">    result = s.charAt(halfIndex)</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  <span class="keyword">return</span> result</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/pavelShen/2017/09/05/codewar-03/" data-id="cj77rf1zk000mj5vgqlm06w87" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codewar/">codewar</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/09/04/codewar-02/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">codewar-02</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+  <section id="comments">
+    <!-- 多说评论框 start -->
+    <div class="ds-thread" data-thread-key="post-codewar-03" data-title="codewar-03" data-url="https://github.com/pavelShen/2017/09/05/codewar-03/"></div>
+    <!-- 多说评论框 end -->
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:'pavelShen'};
+      (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+      })();
+      </script>
+    <!-- 多说公共JS代码 end -->
+  </section>
+  
+</section>
+          
+            <aside id="sidebar">
+  
+    
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/canvas/">canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/codewar/">codewar</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/koa/">koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/weixin/">weixin</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/canvas/" style="font-size: 16px;">canvas</a> <a href="/tags/codewar/" style="font-size: 14px;">codewar</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/es6/" style="font-size: 18px;">es6</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/koa/" style="font-size: 10px;">koa</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/nodejs/" style="font-size: 12px;">nodejs</a> <a href="/tags/tools/" style="font-size: 12px;">tools</a> <a href="/tags/weixin/" style="font-size: 12px;">weixin</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/09/05/codewar-03/">codewar-03</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/04/codewar-02/">codewar-02</a>
+          </li>
+        
+          <li>
+            <a href="/2017/09/03/codewar-01/">codewar-01</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/12/微信小程序跨页面通信解决思路/">微信小程序跨页面通信解决思路</a>
+          </li>
+        
+          <li>
+            <a href="/2017/08/05/javascript设计模式学习-01/">javascript设计模式学习-01</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+          
+        </div>
+        <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 pavelShen<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+      </div>
+      <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/demo" class="mobile-nav-link">Demo</a>
+  
+</nav>
+      
+
+<script src="//libs.baidu.com/jquery/1.9.1/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+    </div>
+  
+</body>
+</html>

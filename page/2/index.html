@@ -60,7 +60,7 @@
         
           <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
         
-        <a id="nav-search-btn" class="nav-icon" title="Zoeken"></a>
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
       <div id="search-form-wrap">
         <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://github.com/pavelShen"></form>
@@ -70,6 +70,58 @@
 </header>
         <div class="outer">
           <section id="main">
+  
+    <article id="post-canvas学习笔记-API（04）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/11/canvas学习笔记-API（04）/" class="article-date">
+  <time datetime="2017-07-11T06:27:35.000Z" itemprop="datePublished">2017-07-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/11/canvas学习笔记-API（04）/">canvas学习笔记 - API（04）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="变形"><a href="#变形" class="headerlink" title="变形"></a>变形</h2><ul>
+<li>save()restore()<br>save 和 restore 方法是用来保存和恢复 canvas 状态的，都没有参数。Canvas 的状态就是当前画面应用的所有样式和变形的一个快照。</li>
+</ul>
+<p>Canvas状态存储在栈中，每当save()方法被调用后，当前的状态就被推送到栈中保存。一个绘画状态包括：</p>
+<ul>
+<li>当前应用的变形（即移动，旋转和缩放，见下）</li>
+<li>strokeStyle, fillStyle, globalAlpha, lineWidth, lineCap, lineJoin, miterLimit, shadowOffsetX, shadowOffsetY, shadowBlur, shadowColor, globalCompositeOperation 的值</li>
+<li>当前的裁切路径（clipping path）</li>
+</ul>
+<p>你可以调用任意多次 save 方法。<br>每一次调用 restore 方法，上一个保存的状态就从栈中弹出，所有设定都恢复。</p>
+<h4 id="移动Translating"><a href="#移动Translating" class="headerlink" title="移动Translating"></a>移动Translating</h4><p>translate(x, y)<br>translate 方法接受两个参数。x 是左右偏移量，y 是上下偏移量，<strong>它用来移动 canvas 和它的原点到一个不同的位置</strong>。<br><img src="https://mdn.mozillademos.org/files/234/Canvas_grid_translate.png" alt="图片" title="title"></p>
+<h4 id="旋转-Rotating"><a href="#旋转-Rotating" class="headerlink" title="旋转 Rotating"></a>旋转 Rotating</h4><p>rotate(angle)<br>这个方法只接受一个参数：旋转的角度(angle)，它是顺时针方向的，以弧度为单位的值。<br>旋转的中心点始终是 canvas 的原点，如果要改变它，我们需要用到 translate 方法。<br><img src="https://mdn.mozillademos.org/files/233/Canvas_grid_rotate.png" alt="图片" title="title"></p>
+<h4 id="缩放-Scaling"><a href="#缩放-Scaling" class="headerlink" title="缩放 Scaling"></a>缩放 Scaling</h4><p>scale(x, y)<br>scale 方法接受两个参数。x,y 分别是横轴和纵轴的缩放因子，它们都必须是正值。值比 1.0 小表示缩小，比 1.0 大则表示放大，值为 1.0 时什么效果都没有。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（04）/" data-id="cj77rf1z30006j5vgyan4oqwj" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
   
     <article id="post-canvas学习笔记-API（03）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
@@ -126,7 +178,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（03）/" data-id="cj76b9fe10002amvgjkni1rai" class="article-share-link">Delen</a>
+      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（03）/" data-id="cj77rf1z10005j5vg2dbt1nxd" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
@@ -212,7 +264,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（02）/" data-id="cj76b9fea0006amvg7ajc2h33" class="article-share-link">Delen</a>
+      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（02）/" data-id="cj77rf1z50007j5vgi41kssvc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
@@ -284,7 +336,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（01）/" data-id="cj76b9fe90005amvgwtvecf0q" class="article-share-link">Delen</a>
+      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（01）/" data-id="cj77rf1yq0001j5vgktqtut5q" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
@@ -332,7 +384,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/20/js函数队列/" data-id="cj76b9ff5000yamvgao2podtu" class="article-share-link">Delen</a>
+      <a data-url="https://github.com/pavelShen/2017/04/20/js函数队列/" data-id="cj77rf1zw000zj5vg61b629qo" class="article-share-link">Share</a>
       
       
     </footer>
@@ -381,7 +433,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（16）模块 Modules/" data-id="cj76b9fg6002bamvg4g0l668w" class="article-share-link">Delen</a>
+      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（16）模块 Modules/" data-id="cj77rf20s002cj5vg2z0sv56p" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -431,7 +483,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（14）let & const/" data-id="cj76b9fg50028amvgj8lq0d02" class="article-share-link">Delen</a>
+      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（14）let & const/" data-id="cj77rf20q002bj5vgfk49c3aa" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -481,7 +533,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（13）类 Class/" data-id="cj76b9fg40027amvgpgxm2zzo" class="article-share-link">Delen</a>
+      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（13）类 Class/" data-id="cj77rf20p0027j5vgr9gsvduz" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -528,7 +580,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（12）代理 Proxies/" data-id="cj76b9fg30024amvgu6z4fnm7" class="article-share-link">Delen</a>
+      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（12）代理 Proxies/" data-id="cj77rf20p0028j5vgfb5zdd7g" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -593,89 +645,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（11）生成器 Generators，续篇/" data-id="cj76b9fg20023amvgtyv0ekvd" class="article-share-link">Delen</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-读书笔记：深入浅出ES6（10）集合" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/04/20/读书笔记：深入浅出ES6（10）集合/" class="article-date">
-  <time datetime="2017-04-20T02:54:48.000Z" itemprop="datePublished">2017-04-20</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/20/读书笔记：深入浅出ES6（10）集合/">读书笔记：深入浅出ES6（10）集合</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>原文线上地址：<a href="http://www.infoq.com/cn/es6-in-depth/" target="_blank" rel="external">http://www.infoq.com/cn/es6-in-depth/</a></p>
-<h2 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h2><h4 id="集合与对象的区别"><a href="#集合与对象的区别" class="headerlink" title="集合与对象的区别"></a>集合与对象的区别</h4><ul>
-<li>对象的键名总是字符串（当然，ES6 中也可以是Symbol）而不能是另一个对象。</li>
-<li>对象没有有效的获知属性个数的方法。</li>
-<li>ES6中，纯粹的对象不能配合for-of循环或…操作符等语法。</li>
-<li>集合不会把数据作为属性暴露出来。也就是说，obj.key或obj[key]不能再用来访问数据了</li>
-<li>同时，不像属性，哈希表的键值不能通过原型链来继承了。</li>
-</ul>
-<h4 id="知识点"><a href="#知识点" class="headerlink" title="知识点"></a>知识点</h4><ul>
-<li>遍历Map或Set的顺序就是其中元素的插入顺序</li>
-</ul>
-<h4 id="自我实验"><a href="#自我实验" class="headerlink" title="自我实验"></a>自我实验</h4><ul>
-<li>在集合的key或value中使用Symbol后，虽然集合的值还能获取，但是在console.log中集合的值会被隐藏,所以用的时候调试貌似会不方便</li>
-</ul>
-<h4 id="Set"><a href="#Set" class="headerlink" title="Set"></a>Set</h4><p><strong>语法</strong></p>
-<ul>
-<li>new Set：创建一个新的、空的Set。</li>
-<li>new Set(iterable)：从任何可遍历数据中提取元素，构造出一个新的集合。</li>
-<li>set.size：获取集合的大小，即其中元素的个数。</li>
-<li>set.has(value)：判定集合中是否含有指定元素，返回一个布尔值。</li>
-<li>set.add(value)：添加元素。如果与已有重复，则不产生效果。</li>
-<li>set.delete(value)：删除元素。如果并不存在，则不产生效果。.add()和.delete()都会返回集合自身，所以我们可以用链式语法。</li>
-<li>set[Symbol.iterator]()：返回一个新的遍历整个集合的迭代器。一般这个方法不会被直接调用，因为实际上就是它使集合能够被遍历，也就是说，我们可以直接写for (v of set) {…}等等。</li>
-<li>set.forEach(f)：直接用代码来解释好了，它就像是for (let value of set) { f(value, value, set); }的简写，类似于数组的.forEach()方法。</li>
-<li>set.clear()：清空集合。</li>
-<li>set.keys()、set.values()和set.entries()返回各种迭代器，它们是为了兼容Map而提供的，所以我们待会儿再来看。</li>
-</ul>
-<h4 id="Map"><a href="#Map" class="headerlink" title="Map"></a>Map</h4><p><strong>语法</strong></p>
-<ul>
-<li>new Map：返回一个新的、空的Map。</li>
-<li>new Map(pairs)：根据所含元素形如[key, value]的数组pairs来创建一个新的Map。这里提供的pairs可以是一个已有的Map 对象，可以是一个由二元数组组成的数组，也可以是逐个生成二元数组的一个生成器，等等。</li>
-<li>map.size：返回Map中项目的个数。</li>
-<li>map.has(key)：测试一个键名是否存在，类似key in obj。</li>
-<li>map.get(key)：返回一个键名对应的值，若键名不存在则返回undefined，类似obj[key]。</li>
-<li>map.set(key, value)：添加一对新的键值对，如果键名已存在就覆盖。</li>
-<li>map.delete(key)：按键名删除一项，类似delete obj[key]。</li>
-<li>map.clear()：清空Map。</li>
-<li>map<a href="">Symbol.iterator</a>：返回遍历所有项的迭代器，每项用一个键和值组成的二元数组表示。</li>
-<li>map.forEach(f) 类似for (let [key, value] of map) { f(value, key, map); }。这里诡异的参数顺序，和Set中一样，是对应着Array.prototype.forEach()。</li>
-<li>map.keys()：返回遍历所有键的迭代器。</li>
-<li>map.values()：返回遍历所有值的迭代器。</li>
-<li>map.entries()：返回遍历所有项的迭代器，就像map<a href="">Symbol.iterator</a>。实际上，它们就是同一个方法，不同名字。</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（10）集合/" data-id="cj76b9ffz001zamvgahnr719c" class="article-share-link">Delen</a>
+      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（11）生成器 Generators，续篇/" data-id="cj77rf20o0025j5vgf6cydtlp" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -691,7 +661,7 @@
 
 
   <nav id="page-nav">
-    <a class="extend prev" rel="prev" href="/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">__('next') &raquo;</a>
+    <a class="extend prev" rel="prev" href="/">&laquo; __('prev')</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/3/">__('next') &raquo;</a>
   </nav>
 </section>
           
@@ -702,7 +672,7 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Labels</h3>
+    <h3 class="widget-title">Tags</h3>
     <div class="widget">
       <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/canvas/">canvas</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/codewar/">codewar</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/css/">css</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/es6/">es6</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/hexo/">hexo</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/javascript/">javascript</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/koa/">koa</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/markdown/">markdown</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/nodejs/">nodejs</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/tools/">tools</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/weixin/">weixin</a></li></ul>
     </div>
@@ -714,14 +684,14 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Tag Cloud</h3>
     <div class="widget tagcloud">
-      <a href="/tags/canvas/" style="font-size: 15px;">canvas</a> <a href="/tags/codewar/" style="font-size: 12.5px;">codewar</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/es6/" style="font-size: 17.5px;">es6</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/koa/" style="font-size: 10px;">koa</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/nodejs/" style="font-size: 12.5px;">nodejs</a> <a href="/tags/tools/" style="font-size: 12.5px;">tools</a> <a href="/tags/weixin/" style="font-size: 12.5px;">weixin</a>
+      <a href="/tags/canvas/" style="font-size: 16px;">canvas</a> <a href="/tags/codewar/" style="font-size: 14px;">codewar</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/es6/" style="font-size: 18px;">es6</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/javascript/" style="font-size: 20px;">javascript</a> <a href="/tags/koa/" style="font-size: 10px;">koa</a> <a href="/tags/markdown/" style="font-size: 10px;">markdown</a> <a href="/tags/nodejs/" style="font-size: 12px;">nodejs</a> <a href="/tags/tools/" style="font-size: 12px;">tools</a> <a href="/tags/weixin/" style="font-size: 12px;">weixin</a>
     </div>
   </div>
 
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Archieven</h3>
+    <h3 class="widget-title">Archives</h3>
     <div class="widget">
       <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/09/">September 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/08/">August 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/07/">July 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/04/">April 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/02/">February 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/01/">January 2017</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/12/">December 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">August 2016</a></li></ul>
     </div>
@@ -731,9 +701,13 @@
   
     
   <div class="widget-wrap">
-    <h3 class="widget-title">Recente berichten</h3>
+    <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2017/09/05/codewar-03/">codewar-03</a>
+          </li>
         
           <li>
             <a href="/2017/09/04/codewar-02/">codewar-02</a>
@@ -749,10 +723,6 @@
         
           <li>
             <a href="/2017/08/05/javascript设计模式学习-01/">javascript设计模式学习-01</a>
-          </li>
-        
-          <li>
-            <a href="/2017/07/17/canvas学习总结/">canvas学习总结</a>
           </li>
         
       </ul>
