@@ -123,7 +123,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（11）生成器 Generators，续篇/" data-id="cj77t3e4600262bvgr9hql2xq" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（11）生成器 Generators，续篇/" data-id="cj77t6lbn00267vvg7fby6ajy" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -205,7 +205,57 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（10）集合/" data-id="cj77t3e4500232bvgwi5iin37" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（10）集合/" data-id="cj77t6lbm00237vvgmlbqrxwd" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-读书笔记：深入浅出ES6（07）箭头函数" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/14/读书笔记：深入浅出ES6（07）箭头函数/" class="article-date">
+  <time datetime="2017-04-14T02:54:48.000Z" itemprop="datePublished">2017-04-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/14/读书笔记：深入浅出ES6（07）箭头函数/">读书笔记：深入浅出ES6（07）箭头函数</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>原文线上地址：<a href="http://www.infoq.com/cn/es6-in-depth/" target="_blank" rel="external">http://www.infoq.com/cn/es6-in-depth/</a></p>
+<h2 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h2><h4 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// ES5</span></div><div class="line"><span class="keyword">var</span> total = values.reduce(<span class="function"><span class="keyword">function</span> (<span class="params">a, b</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> a + b;</div><div class="line"> &#125;, <span class="number">0</span>);</div><div class="line"> <span class="comment">// ES6</span></div><div class="line"> <span class="keyword">var</span> total = values.reduce(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a + b, <span class="number">0</span>);</div></pre></td></tr></table></figure>
+<h4 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h4><ul>
+<li>使用了块语句的箭头函数不会自动返回值，你需要使用return语句将所需值返回。</li>
+<li>当使用箭头函数创建普通对象时，你总是需要将对象包裹在小括号里。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 为与你玩耍的每一个小狗创建一个新的空对象</span></div><div class="line"><span class="keyword">var</span> chewToys = puppies.map(<span class="function"><span class="params">puppy</span> =&gt;</span> &#123;&#125;); <span class="comment">// 这样写会报Bug！</span></div><div class="line"><span class="keyword">var</span> chewToys = puppies.map(<span class="function"><span class="params">puppy</span> =&gt;</span> (&#123;&#125;)); <span class="comment">//</span></div></pre></td></tr></table></figure>
+<h4 id="和非箭头函数的区别"><a href="#和非箭头函数的区别" class="headerlink" title="和非箭头函数的区别"></a>和非箭头函数的区别</h4><ul>
+<li>箭头函数没有它自己的this值，箭头函数内的this值继承自外围作用域</li>
+<li>箭头函数不会获取它们自己的arguments对象（通过解构来处理参数）</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（07）箭头函数/" data-id="cj77t6lbk001z7vvgc6te8p33" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -271,57 +321,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（08）Symbols/" data-id="cj77t3e4500212bvgsvtbfnwb" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-读书笔记：深入浅出ES6（07）箭头函数" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/04/14/读书笔记：深入浅出ES6（07）箭头函数/" class="article-date">
-  <time datetime="2017-04-14T02:54:48.000Z" itemprop="datePublished">2017-04-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/14/读书笔记：深入浅出ES6（07）箭头函数/">读书笔记：深入浅出ES6（07）箭头函数</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>原文线上地址：<a href="http://www.infoq.com/cn/es6-in-depth/" target="_blank" rel="external">http://www.infoq.com/cn/es6-in-depth/</a></p>
-<h2 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h2><h4 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// ES5</span></div><div class="line"><span class="keyword">var</span> total = values.reduce(<span class="function"><span class="keyword">function</span> (<span class="params">a, b</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> a + b;</div><div class="line"> &#125;, <span class="number">0</span>);</div><div class="line"> <span class="comment">// ES6</span></div><div class="line"> <span class="keyword">var</span> total = values.reduce(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a + b, <span class="number">0</span>);</div></pre></td></tr></table></figure>
-<h4 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h4><ul>
-<li>使用了块语句的箭头函数不会自动返回值，你需要使用return语句将所需值返回。</li>
-<li>当使用箭头函数创建普通对象时，你总是需要将对象包裹在小括号里。</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 为与你玩耍的每一个小狗创建一个新的空对象</span></div><div class="line"><span class="keyword">var</span> chewToys = puppies.map(<span class="function"><span class="params">puppy</span> =&gt;</span> &#123;&#125;); <span class="comment">// 这样写会报Bug！</span></div><div class="line"><span class="keyword">var</span> chewToys = puppies.map(<span class="function"><span class="params">puppy</span> =&gt;</span> (&#123;&#125;)); <span class="comment">//</span></div></pre></td></tr></table></figure>
-<h4 id="和非箭头函数的区别"><a href="#和非箭头函数的区别" class="headerlink" title="和非箭头函数的区别"></a>和非箭头函数的区别</h4><ul>
-<li>箭头函数没有它自己的this值，箭头函数内的this值继承自外围作用域</li>
-<li>箭头函数不会获取它们自己的arguments对象（通过解构来处理参数）</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（07）箭头函数/" data-id="cj77t3e41001y2bvgburldumb" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（08）Symbols/" data-id="cj77t6lbl00217vvgyk4q8gfc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -376,7 +376,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（06）解构/" data-id="cj77t3e43001z2bvg9oxu9wfu" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（06）解构/" data-id="cj77t6lbi001y7vvg6icomjw7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -426,7 +426,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（04）模板字符串/" data-id="cj77t3e3z001w2bvggucduu8p" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（04）模板字符串/" data-id="cj77t6lbh001w7vvgjc6fwie5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -481,7 +481,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（03）生成器 Generators/" data-id="cj77t3e3y001u2bvgiuq6s9w8" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（03）生成器 Generators/" data-id="cj77t6lbe001u7vvg3htxj9z1" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -547,7 +547,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（02）迭代器和for-of循环/" data-id="cj77t3e3v001r2bvgwe1wrzbm" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（02）迭代器和for-of循环/" data-id="cj77t6lbd001r7vvgw3pany4e" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -594,7 +594,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/01/js片段2/" data-id="cj77t3e3c00142bvguhr3e3od" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/04/01/js片段2/" data-id="cj77t6law00147vvgf4ylouwp" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -657,7 +657,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/02/27/数组去重/" data-id="cj77t3e3r001m2bvgkd85098l" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/02/27/数组去重/" data-id="cj77t6lb9001m7vvgtallsy9z" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -718,11 +718,11 @@
       <ul>
         
           <li>
-            <a href="/2017/09/05/codewar-03/">codewar-03</a>
+            <a href="/2017/09/06/codewar-04/">codewar-04</a>
           </li>
         
           <li>
-            <a href="/2017/09/04/codewar-04/">codewar-02</a>
+            <a href="/2017/09/05/codewar-03/">codewar-03</a>
           </li>
         
           <li>
