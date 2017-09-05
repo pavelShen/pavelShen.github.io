@@ -71,6 +71,71 @@
         <div class="outer">
           <section id="main">
   
+    <article id="post-读书笔记：深入浅出ES6（11）生成器 Generators，续篇" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/20/读书笔记：深入浅出ES6（11）生成器 Generators，续篇/" class="article-date">
+  <time datetime="2017-04-20T02:54:49.000Z" itemprop="datePublished">2017-04-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/20/读书笔记：深入浅出ES6（11）生成器 Generators，续篇/">读书笔记：深入浅出ES6（11）生成器 Generators，续篇</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>原文线上地址：<a href="http://www.infoq.com/cn/es6-in-depth/" target="_blank" rel="external">http://www.infoq.com/cn/es6-in-depth/</a></p>
+<h2 id="Generators"><a href="#Generators" class="headerlink" title="Generators"></a>Generators</h2><h4 id="如何关停生成器"><a href="#如何关停生成器" class="headerlink" title="如何关停生成器"></a>如何关停生成器</h4><ul>
+<li>generator.next()</li>
+<li>generator.return()</li>
+<li>generator.throw(error)</li>
+<li>yield*</li>
+</ul>
+<p><strong>当生成器执行到一个yield表达式并暂停后可以实现以下功能：</strong></p>
+<ul>
+<li>调用generator.next(value)，生成器从离开的地方恢复执行。</li>
+<li>调用generator.return()，传递一个可选值，生成器只执行finally代码块并不再恢复执行。</li>
+<li>调用generator.throw(error)，生成器表现得像是yield表达式调用一个函数并抛出错误。</li>
+<li>或者，什么也不做，生成器永远保持冻结状态。（是的，对于一个生成器来说，很可能执行到一个try代码块，永不执行finally代码块。这种状态下的生成器可以被垃圾收集器回收。）</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> generator = <span class="function"><span class="keyword">function</span>* (<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++) &#123;</div><div class="line">    <span class="keyword">try</span> &#123;</div><div class="line">      <span class="keyword">var</span> value = <span class="keyword">yield</span> i;</div><div class="line">      <span class="built_in">console</span>.log(i);</div><div class="line">    &#125; <span class="keyword">catch</span>(e) &#123;</div><div class="line">      <span class="built_in">console</span>.log(<span class="string">"catch exception..."</span>);</div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">var</span> g = generator();</div><div class="line">g.next();</div><div class="line">g.throw();</div></pre></td></tr></table></figure>
+<h4 id="next参数"><a href="#next参数" class="headerlink" title=".next参数"></a>.next参数</h4><p>生成器的.next()方法接受一个可选参数，参数稍后会作为yield表达式的返回值出现在生成器中。那就是说，yield语句与return语句不同，它是一个只有当生成器恢复时才会有值的表达式。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span>* <span class="title">gen</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="keyword">while</span>(<span class="literal">true</span>) &#123;</div><div class="line">    <span class="keyword">var</span> value = <span class="keyword">yield</span> <span class="string">'abc'</span>;</div><div class="line">    <span class="built_in">console</span>.log(value);</div><div class="line">  &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">var</span> g = gen();</div><div class="line">g.next(<span class="number">1</span>);   <span class="comment">// "&#123; value: null, done: false &#125;"</span></div><div class="line">g.next(<span class="number">2</span>);   <span class="comment">// "&#123; value: null, done: false &#125;"</span></div><div class="line"><span class="comment">// 2</span></div></pre></td></tr></table></figure>
+<ul>
+<li>在该示例中，调用 next 方法并传入了参数，请注意，首次调用 next 方法时没有出任何输出, 这是因为初始状态时生成器通过yield 返回了’abc’.</li>
+<li>暂停生成器，生成字符串值。</li>
+<li>此时可以暂停任意长的时间。</li>
+<li>最终，直到有人调用.next(2)，我们将这个对象(这里是数字2)存储在本地变量value中并继续执行下一行代码（输出console.log）。</li>
+</ul>
+<h4 id="语法糖"><a href="#语法糖" class="headerlink" title="语法糖"></a>语法糖</h4><p>普通yield表达式只生成一个值，而yield*表达式可以通过迭代器进行迭代生成所有的值。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span>* <span class="title">concat</span>(<span class="params">iter1, iter2</span>) </span>&#123;</div><div class="line">      <span class="keyword">for</span> (<span class="keyword">var</span> value <span class="keyword">of</span> iter1) &#123;</div><div class="line">        <span class="keyword">yield</span> value;</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">for</span> (<span class="keyword">var</span> value <span class="keyword">of</span> iter2) &#123;</div><div class="line">        <span class="keyword">yield</span> value;</div><div class="line">      &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure></p>
+<p>等效于</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span>* <span class="title">concat</span>(<span class="params">iter1, iter2</span>) </span>&#123;</div><div class="line">  <span class="keyword">yield</span>* iter1;</div><div class="line">  <span class="keyword">yield</span>* iter2;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（11）生成器 Generators，续篇/" data-id="cj77t3e4600262bvgr9hql2xq" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-读书笔记：深入浅出ES6（10）集合" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/04/20/读书笔记：深入浅出ES6（10）集合/" class="article-date">
@@ -140,57 +205,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（10）集合/" data-id="cj77rf20m0022j5vg6asjask2" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-读书笔记：深入浅出ES6（07）箭头函数" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/04/14/读书笔记：深入浅出ES6（07）箭头函数/" class="article-date">
-  <time datetime="2017-04-14T02:54:48.000Z" itemprop="datePublished">2017-04-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/14/读书笔记：深入浅出ES6（07）箭头函数/">读书笔记：深入浅出ES6（07）箭头函数</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>原文线上地址：<a href="http://www.infoq.com/cn/es6-in-depth/" target="_blank" rel="external">http://www.infoq.com/cn/es6-in-depth/</a></p>
-<h2 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h2><h4 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// ES5</span></div><div class="line"><span class="keyword">var</span> total = values.reduce(<span class="function"><span class="keyword">function</span> (<span class="params">a, b</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> a + b;</div><div class="line"> &#125;, <span class="number">0</span>);</div><div class="line"> <span class="comment">// ES6</span></div><div class="line"> <span class="keyword">var</span> total = values.reduce(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a + b, <span class="number">0</span>);</div></pre></td></tr></table></figure>
-<h4 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h4><ul>
-<li>使用了块语句的箭头函数不会自动返回值，你需要使用return语句将所需值返回。</li>
-<li>当使用箭头函数创建普通对象时，你总是需要将对象包裹在小括号里。</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 为与你玩耍的每一个小狗创建一个新的空对象</span></div><div class="line"><span class="keyword">var</span> chewToys = puppies.map(<span class="function"><span class="params">puppy</span> =&gt;</span> &#123;&#125;); <span class="comment">// 这样写会报Bug！</span></div><div class="line"><span class="keyword">var</span> chewToys = puppies.map(<span class="function"><span class="params">puppy</span> =&gt;</span> (&#123;&#125;)); <span class="comment">//</span></div></pre></td></tr></table></figure>
-<h4 id="和非箭头函数的区别"><a href="#和非箭头函数的区别" class="headerlink" title="和非箭头函数的区别"></a>和非箭头函数的区别</h4><ul>
-<li>箭头函数没有它自己的this值，箭头函数内的this值继承自外围作用域</li>
-<li>箭头函数不会获取它们自己的arguments对象（通过解构来处理参数）</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（07）箭头函数/" data-id="cj77rf20k001yj5vgdg1omv4e" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（10）集合/" data-id="cj77t3e4500232bvgwi5iin37" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -256,7 +271,57 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（08）Symbols/" data-id="cj77rf20l0020j5vgymh0ppe4" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（08）Symbols/" data-id="cj77t3e4500212bvgsvtbfnwb" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-读书笔记：深入浅出ES6（07）箭头函数" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/14/读书笔记：深入浅出ES6（07）箭头函数/" class="article-date">
+  <time datetime="2017-04-14T02:54:48.000Z" itemprop="datePublished">2017-04-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/14/读书笔记：深入浅出ES6（07）箭头函数/">读书笔记：深入浅出ES6（07）箭头函数</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>原文线上地址：<a href="http://www.infoq.com/cn/es6-in-depth/" target="_blank" rel="external">http://www.infoq.com/cn/es6-in-depth/</a></p>
+<h2 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h2><h4 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// ES5</span></div><div class="line"><span class="keyword">var</span> total = values.reduce(<span class="function"><span class="keyword">function</span> (<span class="params">a, b</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> a + b;</div><div class="line"> &#125;, <span class="number">0</span>);</div><div class="line"> <span class="comment">// ES6</span></div><div class="line"> <span class="keyword">var</span> total = values.reduce(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a + b, <span class="number">0</span>);</div></pre></td></tr></table></figure>
+<h4 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h4><ul>
+<li>使用了块语句的箭头函数不会自动返回值，你需要使用return语句将所需值返回。</li>
+<li>当使用箭头函数创建普通对象时，你总是需要将对象包裹在小括号里。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 为与你玩耍的每一个小狗创建一个新的空对象</span></div><div class="line"><span class="keyword">var</span> chewToys = puppies.map(<span class="function"><span class="params">puppy</span> =&gt;</span> &#123;&#125;); <span class="comment">// 这样写会报Bug！</span></div><div class="line"><span class="keyword">var</span> chewToys = puppies.map(<span class="function"><span class="params">puppy</span> =&gt;</span> (&#123;&#125;)); <span class="comment">//</span></div></pre></td></tr></table></figure>
+<h4 id="和非箭头函数的区别"><a href="#和非箭头函数的区别" class="headerlink" title="和非箭头函数的区别"></a>和非箭头函数的区别</h4><ul>
+<li>箭头函数没有它自己的this值，箭头函数内的this值继承自外围作用域</li>
+<li>箭头函数不会获取它们自己的arguments对象（通过解构来处理参数）</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（07）箭头函数/" data-id="cj77t3e41001y2bvgburldumb" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -311,7 +376,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（06）解构/" data-id="cj77rf20i001xj5vgxn1qxegq" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（06）解构/" data-id="cj77t3e43001z2bvg9oxu9wfu" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -361,7 +426,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（04）模板字符串/" data-id="cj77rf20g001uj5vgmt153r6s" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（04）模板字符串/" data-id="cj77t3e3z001w2bvggucduu8p" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -416,7 +481,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（03）生成器 Generators/" data-id="cj77rf20f001sj5vgdj072jbh" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（03）生成器 Generators/" data-id="cj77t3e3y001u2bvgiuq6s9w8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -482,7 +547,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（02）迭代器和for-of循环/" data-id="cj77rf20c001pj5vguamf2447" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（02）迭代器和for-of循环/" data-id="cj77t3e3v001r2bvgwe1wrzbm" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -529,7 +594,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/01/js片段2/" data-id="cj77rf2010015j5vgrtwldl4j" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/04/01/js片段2/" data-id="cj77t3e3c00142bvguhr3e3od" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -592,90 +657,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/02/27/数组去重/" data-id="cj77rf20b001nj5vguagazzk0" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/02/27/数组去重/" data-id="cj77t3e3r001m2bvgkd85098l" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
 
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-我的开发环境" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/02/10/我的开发环境/" class="article-date">
-  <time datetime="2017-02-10T10:29:53.000Z" itemprop="datePublished">2017-02-10</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/10/我的开发环境/">我的开发环境</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><strong> 听过 &lt; demo过 &lt; 实际工作用过 &lt; 实际工作中被坑过 &lt; 实际工作中被多次坑过或者深入研究总结过 </strong></p>
-<h2 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h2><ul>
-<li>为知笔记</li>
-<li>alfred （文件查找）</li>
-<li>shiftlt（窗口定位）</li>
-<li>lantern （懂得）</li>
-<li>vscode （编辑器）</li>
-<li>charles （mac下的代理工具）</li>
-<li>iterm （命令行强化）</li>
-<li>zsh （命令行强化）</li>
-<li>cheetsheet （快捷键查看工具）</li>
-</ul>
-<h2 id="chrome插件"><a href="#chrome插件" class="headerlink" title="chrome插件"></a>chrome插件</h2><ul>
-<li>Adblock Plus （广告屏蔽）</li>
-<li>JSON Formatter （JSON格式化）</li>
-<li>Octotree （GITHUB树形菜单）</li>
-<li>Postman （接口测试工具）</li>
-<li>Postman Interceptor （postman插件，用于在请求中带Cookie登录信息）</li>
-<li>Quick QR Code Generator （生成二维码插件）</li>
-<li>Vue.js devtools （vue开发工具）</li>
-<li>掘金 （文章浏览）</li>
-</ul>
-<h2 id="使用zsh"><a href="#使用zsh" class="headerlink" title="使用zsh"></a>使用zsh</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Cat /etc/shells         //查看安装的shell列表</div><div class="line">Chsh -s /bin/zsh     // 修改登录的shell, chsh -s其实修改的就是/etc/passwd文件里和你的用户名相对应的那一行</div><div class="line">重启shell</div></pre></td></tr></table></figure>
-<h2 id="Vscode-配置"><a href="#Vscode-配置" class="headerlink" title="Vscode 配置"></a>Vscode 配置</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="string">"terminal.integrated.shell.osx"</span>: <span class="string">"/bin/zsh"</span>,</div><div class="line">    <span class="string">"editor.wordSeparators"</span>: <span class="string">"`~!@#$%^&amp;*()=+[&#123;]&#125;\\|;:'\",.&lt;&gt;/?"</span>,</div><div class="line">    <span class="string">"files.associations"</span>: &#123;</div><div class="line">        <span class="string">"*.wxml"</span>: <span class="string">"html"</span>,</div><div class="line">        <span class="string">"*.wxss"</span>: <span class="string">"css"</span></div><div class="line">    &#125;,</div><div class="line">    <span class="string">"editor.tabSize"</span>: <span class="number">2</span>,</div><div class="line">    <span class="string">"editor.renderWhitespace"</span>: <span class="string">"all"</span>,</div><div class="line">    <span class="string">"workbench.colorTheme"</span>: <span class="string">"Material Theme"</span>,</div><div class="line">    <span class="string">"files.autoSave"</span>: <span class="string">"afterDelay"</span>,</div><div class="line">    <span class="string">"workbench.iconTheme"</span>: <span class="string">"vscode-icons"</span>,</div><div class="line">    <span class="string">"emmet.syntaxProfiles"</span>: &#123;</div><div class="line">        <span class="string">"vue-html"</span>: <span class="string">"html"</span>,</div><div class="line">        <span class="string">"vue"</span>: <span class="string">"html"</span></div><div class="line">    &#125;,</div><div class="line">    <span class="string">"eslint.validate"</span>: [</div><div class="line">        <span class="string">"javascript"</span>,</div><div class="line">        <span class="string">"javascriptreact"</span>,</div><div class="line">        <span class="string">"html"</span>,</div><div class="line">        <span class="string">"vue"</span></div><div class="line">    ]</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
-<h2 id="Vscode插件"><a href="#Vscode插件" class="headerlink" title="Vscode插件"></a>Vscode插件</h2><ul>
-<li>vscode-icon  icon美化</li>
-<li>vscode-wechat  支持小程序语法</li>
-<li>js-css-html formatter  格式化工具</li>
-<li>git history git历史记录的查看</li>
-<li>vetur vue语法支持，可以配合eslint做代码检查，同时支持.vue文件中的scss，less语法</li>
-<li>eslint 配合npm包<strong> eslint-config-vue </strong> 对vue文件代码进行检查</li>
-</ul>
-<p>ctrl-shift-p  呼出命令行 输入path 将code命令添加进shell</p>
-<h2 id="homebrew"><a href="#homebrew" class="headerlink" title="homebrew"></a>homebrew</h2><p>安装命令：<code>/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</code><br>安装失败的话：把/usr/local/.git 目录删了即可，就是执行rm -rf /usr/local/.git</p>
-<h2 id="nvm-node包管理工具"><a href="#nvm-node包管理工具" class="headerlink" title="nvm node包管理工具"></a>nvm node包管理工具</h2><ol>
-<li><code>curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash</code></li>
-<li><code>export NVM_DIR=&quot;$HOME/.nvm&quot; [ -s &quot;$NVM_DIR/nvm.sh&quot; ] &amp;&amp; . &quot;$NVM_DIR/nvm.sh&quot; # This loads nvm</code></li>
-<li><code>nvm ls-remote</code></li>
-<li><code>nvm alias default node</code></li>
-</ol>
-<h2 id="node包"><a href="#node包" class="headerlink" title="node包"></a>node包</h2><p>vue-cli:需要安装node-sass <code>npm i sass-loader node-sass -D</code><br>node-sass : npm run dev 失败 -&gt; npm rebuild node-sass</p>
-<h2 id="允许第三方来源软件"><a href="#允许第三方来源软件" class="headerlink" title="允许第三方来源软件"></a>允许第三方来源软件</h2><p><code>sudo spctl --master-disable</code></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/02/10/我的开发环境/" data-id="cj77rf208001kj5vg32mlq3op" class="article-share-link">Share</a>
-      
-      
     </footer>
   </div>
   
@@ -736,6 +722,10 @@
           </li>
         
           <li>
+            <a href="/2017/09/04/codewar-04/">codewar-02</a>
+          </li>
+        
+          <li>
             <a href="/2017/09/04/codewar-02/">codewar-02</a>
           </li>
         
@@ -745,10 +735,6 @@
         
           <li>
             <a href="/2017/08/12/微信小程序跨页面通信解决思路/">微信小程序跨页面通信解决思路</a>
-          </li>
-        
-          <li>
-            <a href="/2017/08/05/javascript设计模式学习-01/">javascript设计模式学习-01</a>
           </li>
         
       </ul>

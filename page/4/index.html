@@ -71,6 +71,85 @@
         <div class="outer">
           <section id="main">
   
+    <article id="post-我的开发环境" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/02/10/我的开发环境/" class="article-date">
+  <time datetime="2017-02-10T10:29:53.000Z" itemprop="datePublished">2017-02-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/02/10/我的开发环境/">我的开发环境</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong> 听过 &lt; demo过 &lt; 实际工作用过 &lt; 实际工作中被坑过 &lt; 实际工作中被多次坑过或者深入研究总结过 </strong></p>
+<h2 id="软件"><a href="#软件" class="headerlink" title="软件"></a>软件</h2><ul>
+<li>为知笔记</li>
+<li>alfred （文件查找）</li>
+<li>shiftlt（窗口定位）</li>
+<li>lantern （懂得）</li>
+<li>vscode （编辑器）</li>
+<li>charles （mac下的代理工具）</li>
+<li>iterm （命令行强化）</li>
+<li>zsh （命令行强化）</li>
+<li>cheetsheet （快捷键查看工具）</li>
+</ul>
+<h2 id="chrome插件"><a href="#chrome插件" class="headerlink" title="chrome插件"></a>chrome插件</h2><ul>
+<li>Adblock Plus （广告屏蔽）</li>
+<li>JSON Formatter （JSON格式化）</li>
+<li>Octotree （GITHUB树形菜单）</li>
+<li>Postman （接口测试工具）</li>
+<li>Postman Interceptor （postman插件，用于在请求中带Cookie登录信息）</li>
+<li>Quick QR Code Generator （生成二维码插件）</li>
+<li>Vue.js devtools （vue开发工具）</li>
+<li>掘金 （文章浏览）</li>
+</ul>
+<h2 id="使用zsh"><a href="#使用zsh" class="headerlink" title="使用zsh"></a>使用zsh</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">Cat /etc/shells         //查看安装的shell列表</div><div class="line">Chsh -s /bin/zsh     // 修改登录的shell, chsh -s其实修改的就是/etc/passwd文件里和你的用户名相对应的那一行</div><div class="line">重启shell</div></pre></td></tr></table></figure>
+<h2 id="Vscode-配置"><a href="#Vscode-配置" class="headerlink" title="Vscode 配置"></a>Vscode 配置</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="string">"terminal.integrated.shell.osx"</span>: <span class="string">"/bin/zsh"</span>,</div><div class="line">    <span class="string">"editor.wordSeparators"</span>: <span class="string">"`~!@#$%^&amp;*()=+[&#123;]&#125;\\|;:'\",.&lt;&gt;/?"</span>,</div><div class="line">    <span class="string">"files.associations"</span>: &#123;</div><div class="line">        <span class="string">"*.wxml"</span>: <span class="string">"html"</span>,</div><div class="line">        <span class="string">"*.wxss"</span>: <span class="string">"css"</span></div><div class="line">    &#125;,</div><div class="line">    <span class="string">"editor.tabSize"</span>: <span class="number">2</span>,</div><div class="line">    <span class="string">"editor.renderWhitespace"</span>: <span class="string">"all"</span>,</div><div class="line">    <span class="string">"workbench.colorTheme"</span>: <span class="string">"Material Theme"</span>,</div><div class="line">    <span class="string">"files.autoSave"</span>: <span class="string">"afterDelay"</span>,</div><div class="line">    <span class="string">"workbench.iconTheme"</span>: <span class="string">"vscode-icons"</span>,</div><div class="line">    <span class="string">"emmet.syntaxProfiles"</span>: &#123;</div><div class="line">        <span class="string">"vue-html"</span>: <span class="string">"html"</span>,</div><div class="line">        <span class="string">"vue"</span>: <span class="string">"html"</span></div><div class="line">    &#125;,</div><div class="line">    <span class="string">"eslint.validate"</span>: [</div><div class="line">        <span class="string">"javascript"</span>,</div><div class="line">        <span class="string">"javascriptreact"</span>,</div><div class="line">        <span class="string">"html"</span>,</div><div class="line">        <span class="string">"vue"</span></div><div class="line">    ]</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<h2 id="Vscode插件"><a href="#Vscode插件" class="headerlink" title="Vscode插件"></a>Vscode插件</h2><ul>
+<li>vscode-icon  icon美化</li>
+<li>vscode-wechat  支持小程序语法</li>
+<li>js-css-html formatter  格式化工具</li>
+<li>git history git历史记录的查看</li>
+<li>vetur vue语法支持，可以配合eslint做代码检查，同时支持.vue文件中的scss，less语法</li>
+<li>eslint 配合npm包<strong> eslint-config-vue </strong> 对vue文件代码进行检查</li>
+</ul>
+<p>ctrl-shift-p  呼出命令行 输入path 将code命令添加进shell</p>
+<h2 id="homebrew"><a href="#homebrew" class="headerlink" title="homebrew"></a>homebrew</h2><p>安装命令：<code>/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</code><br>安装失败的话：把/usr/local/.git 目录删了即可，就是执行rm -rf /usr/local/.git</p>
+<h2 id="nvm-node包管理工具"><a href="#nvm-node包管理工具" class="headerlink" title="nvm node包管理工具"></a>nvm node包管理工具</h2><ol>
+<li><code>curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.0/install.sh | bash</code></li>
+<li><code>export NVM_DIR=&quot;$HOME/.nvm&quot; [ -s &quot;$NVM_DIR/nvm.sh&quot; ] &amp;&amp; . &quot;$NVM_DIR/nvm.sh&quot; # This loads nvm</code></li>
+<li><code>nvm ls-remote</code></li>
+<li><code>nvm alias default node</code></li>
+</ol>
+<h2 id="node包"><a href="#node包" class="headerlink" title="node包"></a>node包</h2><p>vue-cli:需要安装node-sass <code>npm i sass-loader node-sass -D</code><br>node-sass : npm run dev 失败 -&gt; npm rebuild node-sass</p>
+<h2 id="允许第三方来源软件"><a href="#允许第三方来源软件" class="headerlink" title="允许第三方来源软件"></a>允许第三方来源软件</h2><p><code>sudo spctl --master-disable</code></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/pavelShen/2017/02/10/我的开发环境/" data-id="cj77t3e3q001l2bvg2kgdwoya" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-npm命令" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/02/10/npm命令/" class="article-date">
@@ -103,72 +182,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/02/10/npm命令/" data-id="cj77rf2030019j5vgrnwzz248" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/02/10/npm命令/" data-id="cj77t3e3i001a2bvgmhog8qoc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-css片段1" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/02/10/css片段1/" class="article-date">
-  <time datetime="2017-02-10T10:25:10.000Z" itemprop="datePublished">2017-02-10</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/10/css片段1/">css片段1</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="div边框重叠"><a href="#div边框重叠" class="headerlink" title="div边框重叠"></a>div边框重叠</h2><p>设置div的margin值为边框值的相反数：</p>
-<pre><code>.div {width:100px; height:103px; border:1px solid #333; margin-right:-1px; margin-bottom:-1px;}
-</code></pre><hr>
-<h2 id="背景图中间扣出毛玻璃区域（内部背景和外部背景互相契合）"><a href="#背景图中间扣出毛玻璃区域（内部背景和外部背景互相契合）" class="headerlink" title="背景图中间扣出毛玻璃区域（内部背景和外部背景互相契合）"></a>背景图中间扣出毛玻璃区域（内部背景和外部背景互相契合）</h2><p>参考链接：<a href="http://www.cnblogs.com/ghost-xyx/p/5677168.html" target="_blank" rel="external">http://www.cnblogs.com/ghost-xyx/p/5677168.html</a><br><a href="https://darylxyx.github.io/Demo/blur/" target="_blank" rel="external">demo</a></p>
-<p>坑： 该方案是靠 <code>background-attachment:fixed;</code> 来实现，所以不适合有滚动条的页面，如果有滚动条，还是老老实实用background-position来定位</p>
-<h4 id="html"><a href="#html" class="headerlink" title="html"></a>html</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">'content'</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
-<h4 id="css"><a href="#css" class="headerlink" title="css"></a>css</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">*&#123;<span class="attribute">margin</span>:<span class="number">0</span>;<span class="attribute">padding</span>:<span class="number">0</span>&#125;</div><div class="line"><span class="selector-class">.content</span>&#123;</div><div class="line">  <span class="attribute">width</span>:<span class="number">540px</span>;</div><div class="line">  <span class="attribute">height</span>:<span class="number">303px</span>;</div><div class="line">  <span class="attribute">background</span>:<span class="built_in">url</span>(<span class="string">'http://n1image.hjfile.cn/mh/2017/01/12/bcfb0406e08ba59e779316c20c373cf6.jpg'</span>);</div><div class="line">  <span class="attribute">position</span>:relative;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.content</span><span class="selector-pseudo">:after</span>&#123;</div><div class="line">  <span class="attribute">background</span>:<span class="built_in">url</span>(<span class="string">'http://n1image.hjfile.cn/mh/2017/01/12/bcfb0406e08ba59e779316c20c373cf6.jpg'</span>);</div><div class="line">  <span class="attribute">content</span>:<span class="string">''</span>;</div><div class="line">  <span class="attribute">width</span>:<span class="number">250px</span>;</div><div class="line">  <span class="attribute">height</span>:<span class="number">150px</span>;</div><div class="line">  <span class="attribute">position</span>:absolute;</div><div class="line">  <span class="attribute">left</span>:<span class="number">50%</span>;</div><div class="line">  <span class="attribute">TOP</span>:<span class="number">50%</span>;</div><div class="line">  <span class="attribute">margin-top</span>:-<span class="number">75px</span>;</div><div class="line">  <span class="attribute">margin-left</span>:-<span class="number">125px</span>;</div><div class="line">  <span class="attribute">background-attachment</span>:fixed;</div><div class="line">  <span class="attribute">-webkit-filter</span>: <span class="built_in">blur</span>(20px);</div><div class="line">  <span class="attribute">overflow</span>:hidden;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<hr>
-<h2 id="自定义滚动条"><a href="#自定义滚动条" class="headerlink" title="自定义滚动条"></a>自定义滚动条</h2><p>来源 <a href="http://www.xuanfengge.com/css3-webkit-scrollbar.html" target="_blank" rel="external">http://www.xuanfengge.com/css3-webkit-scrollbar.html</a></p>
-<ul>
-<li>::-webkit-scrollbar 滚动条整体部分</li>
-<li>::-webkit-scrollbar-thumb  滚动条里面的小方块，能向上向下移动（或往左往右移动，取决于是垂直滚动条还是水平滚动条）</li>
-<li>::-webkit-scrollbar-track  滚动条的轨道（里面装有Thumb）</li>
-<li>::-webkit-scrollbar-button 滚动条的轨道的两端按钮，允许通过点击微调小方块的位置。</li>
-<li>::-webkit-scrollbar-track-piece 内层轨道，滚动条中间部分（除去）</li>
-<li>::-webkit-scrollbar-corner 边角，即两个滚动条的交汇处</li>
-<li>::-webkit-resizer 两个滚动条的交汇处上用于通过拖动调整元素大小的小控件</li>
-</ul>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/</span></div><div class="line"><span class="selector-pseudo">::-webkit-scrollbar</span></div><div class="line">&#123;</div><div class="line">    <span class="attribute">width</span>: <span class="number">16px</span>;</div><div class="line">    <span class="attribute">height</span>: <span class="number">16px</span>;</div><div class="line">    <span class="attribute">background-color</span>: <span class="number">#F5F5F5</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/*定义滚动条轨道 内阴影+圆角*/</span></div><div class="line"><span class="selector-pseudo">::-webkit-scrollbar-track</span></div><div class="line">&#123;</div><div class="line">    <span class="attribute">-webkit-box-shadow</span>: inset <span class="number">0</span> <span class="number">0</span> <span class="number">6px</span> <span class="built_in">rgba</span>(0,0,0,0.3);</div><div class="line">    <span class="attribute">border-radius</span>: <span class="number">10px</span>;</div><div class="line">    <span class="attribute">background-color</span>: <span class="number">#F5F5F5</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/*定义滑块 内阴影+圆角*/</span></div><div class="line"><span class="selector-pseudo">::-webkit-scrollbar-thumb</span></div><div class="line">&#123;</div><div class="line">    <span class="attribute">border-radius</span>: <span class="number">10px</span>;</div><div class="line">    <span class="attribute">-webkit-box-shadow</span>: inset <span class="number">0</span> <span class="number">0</span> <span class="number">6px</span> <span class="built_in">rgba</span>(0,0,0,.3);</div><div class="line">    <span class="attribute">background-color</span>: <span class="number">#555</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="calc-计算属性"><a href="#calc-计算属性" class="headerlink" title="calc 计算属性"></a>calc 计算属性</h2><p>语法：<code>width: calc(100% - 32px);</code> 计算符左右需要空格</p>
-<p>作用： 适合不同单位之间的计算</p>
-<p>坑： caniuse 上写 UC浏览器不兼容，但是小米下的uc 测下来ok</p>
-<h2 id="last-of-type"><a href="#last-of-type" class="headerlink" title=":last-of-type"></a>:last-of-type</h2><p>语法：<code>p:last-of-type</code> 获取最后一个p元素</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/02/10/css片段1/" data-id="cj77rf1zt000yj5vg26htkbdp" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li></ul>
 
     </footer>
   </div>
@@ -229,10 +246,72 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/02/10/charles入门/" data-id="cj77rf1zq000tj5vgekxrda3l" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/02/10/charles入门/" data-id="cj77t3e2r000j2bvgxfpp95fn" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tools/">tools</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-css片段1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/02/10/css片段1/" class="article-date">
+  <time datetime="2017-02-10T10:25:10.000Z" itemprop="datePublished">2017-02-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/02/10/css片段1/">css片段1</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="div边框重叠"><a href="#div边框重叠" class="headerlink" title="div边框重叠"></a>div边框重叠</h2><p>设置div的margin值为边框值的相反数：</p>
+<pre><code>.div {width:100px; height:103px; border:1px solid #333; margin-right:-1px; margin-bottom:-1px;}
+</code></pre><hr>
+<h2 id="背景图中间扣出毛玻璃区域（内部背景和外部背景互相契合）"><a href="#背景图中间扣出毛玻璃区域（内部背景和外部背景互相契合）" class="headerlink" title="背景图中间扣出毛玻璃区域（内部背景和外部背景互相契合）"></a>背景图中间扣出毛玻璃区域（内部背景和外部背景互相契合）</h2><p>参考链接：<a href="http://www.cnblogs.com/ghost-xyx/p/5677168.html" target="_blank" rel="external">http://www.cnblogs.com/ghost-xyx/p/5677168.html</a><br><a href="https://darylxyx.github.io/Demo/blur/" target="_blank" rel="external">demo</a></p>
+<p>坑： 该方案是靠 <code>background-attachment:fixed;</code> 来实现，所以不适合有滚动条的页面，如果有滚动条，还是老老实实用background-position来定位</p>
+<h4 id="html"><a href="#html" class="headerlink" title="html"></a>html</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">'content'</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<h4 id="css"><a href="#css" class="headerlink" title="css"></a>css</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">*&#123;<span class="attribute">margin</span>:<span class="number">0</span>;<span class="attribute">padding</span>:<span class="number">0</span>&#125;</div><div class="line"><span class="selector-class">.content</span>&#123;</div><div class="line">  <span class="attribute">width</span>:<span class="number">540px</span>;</div><div class="line">  <span class="attribute">height</span>:<span class="number">303px</span>;</div><div class="line">  <span class="attribute">background</span>:<span class="built_in">url</span>(<span class="string">'http://n1image.hjfile.cn/mh/2017/01/12/bcfb0406e08ba59e779316c20c373cf6.jpg'</span>);</div><div class="line">  <span class="attribute">position</span>:relative;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.content</span><span class="selector-pseudo">:after</span>&#123;</div><div class="line">  <span class="attribute">background</span>:<span class="built_in">url</span>(<span class="string">'http://n1image.hjfile.cn/mh/2017/01/12/bcfb0406e08ba59e779316c20c373cf6.jpg'</span>);</div><div class="line">  <span class="attribute">content</span>:<span class="string">''</span>;</div><div class="line">  <span class="attribute">width</span>:<span class="number">250px</span>;</div><div class="line">  <span class="attribute">height</span>:<span class="number">150px</span>;</div><div class="line">  <span class="attribute">position</span>:absolute;</div><div class="line">  <span class="attribute">left</span>:<span class="number">50%</span>;</div><div class="line">  <span class="attribute">TOP</span>:<span class="number">50%</span>;</div><div class="line">  <span class="attribute">margin-top</span>:-<span class="number">75px</span>;</div><div class="line">  <span class="attribute">margin-left</span>:-<span class="number">125px</span>;</div><div class="line">  <span class="attribute">background-attachment</span>:fixed;</div><div class="line">  <span class="attribute">-webkit-filter</span>: <span class="built_in">blur</span>(20px);</div><div class="line">  <span class="attribute">overflow</span>:hidden;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="自定义滚动条"><a href="#自定义滚动条" class="headerlink" title="自定义滚动条"></a>自定义滚动条</h2><p>来源 <a href="http://www.xuanfengge.com/css3-webkit-scrollbar.html" target="_blank" rel="external">http://www.xuanfengge.com/css3-webkit-scrollbar.html</a></p>
+<ul>
+<li>::-webkit-scrollbar 滚动条整体部分</li>
+<li>::-webkit-scrollbar-thumb  滚动条里面的小方块，能向上向下移动（或往左往右移动，取决于是垂直滚动条还是水平滚动条）</li>
+<li>::-webkit-scrollbar-track  滚动条的轨道（里面装有Thumb）</li>
+<li>::-webkit-scrollbar-button 滚动条的轨道的两端按钮，允许通过点击微调小方块的位置。</li>
+<li>::-webkit-scrollbar-track-piece 内层轨道，滚动条中间部分（除去）</li>
+<li>::-webkit-scrollbar-corner 边角，即两个滚动条的交汇处</li>
+<li>::-webkit-resizer 两个滚动条的交汇处上用于通过拖动调整元素大小的小控件</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/</span></div><div class="line"><span class="selector-pseudo">::-webkit-scrollbar</span></div><div class="line">&#123;</div><div class="line">    <span class="attribute">width</span>: <span class="number">16px</span>;</div><div class="line">    <span class="attribute">height</span>: <span class="number">16px</span>;</div><div class="line">    <span class="attribute">background-color</span>: <span class="number">#F5F5F5</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/*定义滚动条轨道 内阴影+圆角*/</span></div><div class="line"><span class="selector-pseudo">::-webkit-scrollbar-track</span></div><div class="line">&#123;</div><div class="line">    <span class="attribute">-webkit-box-shadow</span>: inset <span class="number">0</span> <span class="number">0</span> <span class="number">6px</span> <span class="built_in">rgba</span>(0,0,0,0.3);</div><div class="line">    <span class="attribute">border-radius</span>: <span class="number">10px</span>;</div><div class="line">    <span class="attribute">background-color</span>: <span class="number">#F5F5F5</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/*定义滑块 内阴影+圆角*/</span></div><div class="line"><span class="selector-pseudo">::-webkit-scrollbar-thumb</span></div><div class="line">&#123;</div><div class="line">    <span class="attribute">border-radius</span>: <span class="number">10px</span>;</div><div class="line">    <span class="attribute">-webkit-box-shadow</span>: inset <span class="number">0</span> <span class="number">0</span> <span class="number">6px</span> <span class="built_in">rgba</span>(0,0,0,.3);</div><div class="line">    <span class="attribute">background-color</span>: <span class="number">#555</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="calc-计算属性"><a href="#calc-计算属性" class="headerlink" title="calc 计算属性"></a>calc 计算属性</h2><p>语法：<code>width: calc(100% - 32px);</code> 计算符左右需要空格</p>
+<p>作用： 适合不同单位之间的计算</p>
+<p>坑： caniuse 上写 UC浏览器不兼容，但是小米下的uc 测下来ok</p>
+<h2 id="last-of-type"><a href="#last-of-type" class="headerlink" title=":last-of-type"></a>:last-of-type</h2><p>语法：<code>p:last-of-type</code> 获取最后一个p元素</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/pavelShen/2017/02/10/css片段1/" data-id="cj77t3e32000v2bvgqivlyg9l" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li></ul>
 
     </footer>
   </div>
@@ -283,7 +362,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/02/10/视频全屏播放-开发总结/" data-id="cj77rf20a001lj5vg2gvm0tk0" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/02/10/视频全屏播放-开发总结/" data-id="cj77t3e3s001p2bvgqntoau97" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -344,7 +423,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/01/17/js片段1/" data-id="cj77rf1zz0013j5vg0nt0hwhw" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/01/17/js片段1/" data-id="cj77t3e3900122bvg5p87xpx6" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -392,7 +471,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2016/12/16/hello-world/" data-id="cj77rf1zr000vj5vgmbjc9ysd" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2016/12/16/hello-world/" data-id="cj77t3e34000w2bvg9i7xcnb5" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
@@ -432,7 +511,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2016/09/26/小程序新建页面脚本/" data-id="cj77rf207001hj5vgpotvissj" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2016/09/26/小程序新建页面脚本/" data-id="cj77t3e3n001g2bvgxckr8qfv" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/weixin/">weixin</a></li></ul>
@@ -502,7 +581,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2016/09/26/weixin小程序/" data-id="cj77rf204001dj5vg6l7lyi4h" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2016/09/26/weixin小程序/" data-id="cj77t3e3l001e2bvgqufwyo14" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/weixin/">weixin</a></li></ul>
@@ -585,116 +664,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2016/08/09/use-fiddler/" data-id="cj77rf203001bj5vgjoscj7ek" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2016/08/09/use-fiddler/" data-id="cj77t3e3j001c2bvg0zv83e6h" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tools/">tools</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-learn-koa" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/08/09/learn-koa/" class="article-date">
-  <time datetime="2016-08-09T00:36:08.000Z" itemprop="datePublished">2016-08-09</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/09/learn-koa/">学习koa 1.0</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p>  koa基础：<a href="http://javascript.ruanyifeng.com/nodejs/koa.html">http://javascript.ruanyifeng.com/nodejs/koa.html</a><br>  log4js: <a href="http://qianduan.guru/2016/08/21/nodejs-lesson-1-log4js/">http://qianduan.guru/2016/08/21/nodejs-lesson-1-log4js/</a><br>  单元测试：<a href="http://taobaofed.org/blog/2015/12/29/nodejs-unit-tests-workflow/">http://taobaofed.org/blog/2015/12/29/nodejs-unit-tests-workflow/</a></p>
-<p>具体实际代码参考github库 <a href="https://github.com/pavelShen/koa_project">https://github.com/pavelShen/koa_project</a></p>
-<h2 id="koa基础"><a href="#koa基础" class="headerlink" title="koa基础"></a>koa基础</h2><h3 id="中间件级联"><a href="#中间件级联" class="headerlink" title="中间件级联"></a>中间件级联</h3><pre><code>app.use(function* () {
-  this.body = &quot;header\n&quot;;
-  yield saveResults.call(this);
-  this.body += &quot;footer\n&quot;;}
-);
-
-function* saveResults() {
-  this.body += &quot;Results Saved!\n&quot;;
-}
-</code></pre><h3 id="中间件传参"><a href="#中间件传参" class="headerlink" title="中间件传参"></a>中间件传参</h3><pre><code>function logger(format) {
-  return function* (next){
-    var str = format
-      .replace(&apos;:method&apos;, this.method)
-      .replace(&apos;:url&apos;, this.url);
-
-    console.log(str);
-
-    yield next;
-  }}
-
-app.use(logger(&apos;:method :url&apos;));
-</code></pre><h3 id="多个中间件的合并-完整事例"><a href="#多个中间件的合并-完整事例" class="headerlink" title="多个中间件的合并 完整事例"></a>多个中间件的合并 完整事例</h3><pre><code>var koa = require(&apos;koa&apos;);
-var app = koa();
-
-function* random(next) {
-    console.log(&apos;r&apos;);
-    yield next;
-    console.log(&apos;over&apos;);
-};
-
-function* backwards(next) {
-    console.log(&apos;b&apos;);
-    yield next;
-}
-
-function* pi(next) {
-    console.log(&apos;pi&apos;);
-    yield next;
-}
-
-function test(str){
-    return function* (next){
-        console.log(str);
-        yield next;
-    }
-}
-
-function* all(next) {
-  yield random.call(this, backwards.call(this, pi.call(this, next)));
-}
-
-function* all2(next) {
-  yield random.call(this, backwards.call(this, pi.call(this, test(&apos;aa&apos;).call(this,next))));
-}
-
-app.use(all2);
-app.listen(3000);
-</code></pre><h3 id="错误监听"><a href="#错误监听" class="headerlink" title="错误监听"></a>错误监听</h3><pre><code>app.on(&apos;error&apos;, function(err){
-  log.error(&apos;server error&apos;, err);}
-);
-</code></pre><hr>
-        
-          <p class="article-more-link">
-            <a href="/2016/08/09/learn-koa/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2016/08/09/learn-koa/" data-id="cj77rf2020017j5vgxgvosehq" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/koa/">koa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li></ul>
 
     </footer>
   </div>
@@ -756,6 +729,10 @@ app.listen(3000);
           </li>
         
           <li>
+            <a href="/2017/09/04/codewar-04/">codewar-02</a>
+          </li>
+        
+          <li>
             <a href="/2017/09/04/codewar-02/">codewar-02</a>
           </li>
         
@@ -765,10 +742,6 @@ app.listen(3000);
         
           <li>
             <a href="/2017/08/12/微信小程序跨页面通信解决思路/">微信小程序跨页面通信解决思路</a>
-          </li>
-        
-          <li>
-            <a href="/2017/08/05/javascript设计模式学习-01/">javascript设计模式学习-01</a>
           </li>
         
       </ul>

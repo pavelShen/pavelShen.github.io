@@ -105,7 +105,50 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/09/05/codewar-03/" data-id="cj77rf1zk000mj5vgqlm06w87" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/09/05/codewar-03/" data-id="cj77t3e2x000q2bvg862sxz6w" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codewar/">codewar</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-codewar-04" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/09/04/codewar-04/" class="article-date">
+  <time datetime="2017-09-04T14:50:14.000Z" itemprop="datePublished">2017-09-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/09/04/codewar-04/">codewar-02</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="codewar刷题之旅开始啦"><a href="#codewar刷题之旅开始啦" class="headerlink" title="codewar刷题之旅开始啦~"></a>codewar刷题之旅开始啦~</h1><h2 id="Title-Case-标题风格，传入一个title，首字母大写，如果传入例外的数组，则例外的短字符大小写不变，首字母始终大写"><a href="#Title-Case-标题风格，传入一个title，首字母大写，如果传入例外的数组，则例外的短字符大小写不变，首字母始终大写" class="headerlink" title="Title Case(标题风格，传入一个title，首字母大写，如果传入例外的数组，则例外的短字符大小写不变，首字母始终大写)"></a>Title Case(标题风格，传入一个title，首字母大写，如果传入例外的数组，则例外的短字符大小写不变，首字母始终大写)</h2><p>titleCase(‘a clash of KINGS’, ‘a an the of’) // should return: ‘A Clash of Kings’<br>titleCase(‘THE WIND IN THE WILLOWS’, ‘The In’) // should return: ‘The Wind in the Willows’<br>titleCase(‘the quick brown fox’) // should return: ‘The Quick Brown Fox’</p>
+<h4 id="强写，感觉写复杂了。。。。。看看别人的答案吧"><a href="#强写，感觉写复杂了。。。。。看看别人的答案吧" class="headerlink" title="强写，感觉写复杂了。。。。。看看别人的答案吧"></a>强写，感觉写复杂了。。。。。看看别人的答案吧</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">titleCase</span>(<span class="params">title, minorWords</span>) </span>&#123;</div><div class="line">  <span class="keyword">let</span> result </div><div class="line">  <span class="keyword">let</span> temp = title.toLowerCase().replace(<span class="regexp">/(^|\s)([A-Za-z])/g</span>,(match)=&gt;&#123;</div><div class="line">    <span class="keyword">return</span> match.toUpperCase()</div><div class="line">  &#125;)</div><div class="line">  </div><div class="line">  <span class="keyword">if</span>(minorWords)&#123;</div><div class="line">    <span class="keyword">let</span> arrTitle = temp.split(<span class="string">' '</span>)</div><div class="line">    <span class="keyword">let</span> arrMinor = minorWords.split(<span class="string">' '</span>).map(<span class="function">(<span class="params">item</span>)=&gt;</span>&#123;</div><div class="line">      <span class="keyword">return</span> item.toLowerCase()</div><div class="line">    &#125;)</div><div class="line">    </div><div class="line">    result = arrTitle.map(<span class="function">(<span class="params">item,index</span>)=&gt;</span>&#123;</div><div class="line">      <span class="keyword">if</span>(arrMinor.indexOf(item.toLowerCase())!== <span class="number">-1</span> &amp;&amp; index !== <span class="number">0</span>)&#123;</div><div class="line">        <span class="keyword">return</span> item.toLowerCase()</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">else</span> &#123;</div><div class="line">        <span class="keyword">return</span> item</div><div class="line">      &#125;</div><div class="line">    &#125;)</div><div class="line">    </div><div class="line">    result = result.join(<span class="string">' '</span>)</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">else</span>&#123;</div><div class="line">    result = temp</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  <span class="keyword">return</span> result</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="一个思路，设置一个首字母大写的方法，切分数组后，根据条件决定是否执行该方法"><a href="#一个思路，设置一个首字母大写的方法，切分数组后，根据条件决定是否执行该方法" class="headerlink" title="一个思路，设置一个首字母大写的方法，切分数组后，根据条件决定是否执行该方法"></a>一个思路，设置一个首字母大写的方法，切分数组后，根据条件决定是否执行该方法</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">String</span>.prototype.capitalize = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> <span class="keyword">this</span>.charAt(<span class="number">0</span>).toUpperCase() + <span class="keyword">this</span>.slice(<span class="number">1</span>).toLowerCase();</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">titleCase</span>(<span class="params">title, minorWords</span>) </span>&#123;  </div><div class="line">  <span class="keyword">var</span> titleAr = title.toLowerCase().split(<span class="string">' '</span>),</div><div class="line">      minorWordsAr = minorWords ? minorWords.toLowerCase().split(<span class="string">' '</span>) : [];</div><div class="line">    </div><div class="line">  <span class="keyword">return</span> titleAr.map(<span class="function"><span class="keyword">function</span>(<span class="params">e, i</span>)</span>&#123;<span class="keyword">return</span> minorWordsAr.indexOf(e) === <span class="number">-1</span> || i === <span class="number">0</span> ? e.capitalize() : e &#125;)</div><div class="line">                .join(<span class="string">' '</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/pavelShen/2017/09/04/codewar-04/" data-id="cj77t3e31000s2bvghvkj9ari" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codewar/">codewar</a></li></ul>
@@ -152,7 +195,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/09/04/codewar-02/" data-id="cj77rf1zg000jj5vg0whrdooa" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/09/04/codewar-02/" data-id="cj77t3e2w000o2bvgb5k20a6h" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codewar/">codewar</a></li></ul>
@@ -205,7 +248,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/09/03/codewar-01/" data-id="cj77rf1ze000hj5vg3yrzr9qb" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/09/03/codewar-01/" data-id="cj77t3e2t000l2bvgd360at1r" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codewar/">codewar</a></li></ul>
@@ -246,7 +289,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/08/12/微信小程序跨页面通信解决思路/" data-id="cj77rf206001fj5vg2mzwoahr" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/08/12/微信小程序跨页面通信解决思路/" data-id="cj77t3e3o001j2bvg38a77dfj" class="article-share-link">Share</a>
       
       
     </footer>
@@ -289,7 +332,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/08/05/javascript设计模式学习-01/" data-id="cj77rf1zn000qj5vgf7ehbm4r" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/08/05/javascript设计模式学习-01/" data-id="cj77t3e37000y2bvgjajf0njy" class="article-share-link">Share</a>
       
       
     </footer>
@@ -386,7 +429,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/07/17/canvas学习总结/" data-id="cj77rf1yv0003j5vgejk1z2hb" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/07/17/canvas学习总结/" data-id="cj77t3e2600022bvg26sensoq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
@@ -426,7 +469,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/07/11/canvas链式操作/" data-id="cj77rf1zl000oj5vgttel479x" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/07/11/canvas链式操作/" data-id="cj77t3e2q000h2bvgtfnzirwd" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
@@ -486,7 +529,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（07）/" data-id="cj77rf1zd000fj5vgwh1qixpk" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（07）/" data-id="cj77t3e2p000f2bvg41t9caad" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
@@ -533,76 +576,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（06）/" data-id="cj77rf1zc000cj5vgidb9jgwi" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-canvas学习笔记-API（05）" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/07/11/canvas学习笔记-API（05）/" class="article-date">
-  <time datetime="2017-07-11T06:27:41.000Z" itemprop="datePublished">2017-07-11</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/07/11/canvas学习笔记-API（05）/">canvas学习笔记 - API（05）</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="组合"><a href="#组合" class="headerlink" title="组合"></a>组合</h2><ul>
-<li>globalCompositeOperation = type<br>注意：下面所有例子中，蓝色方块是先绘制的，即“已有的 canvas 内容”，红色圆形是后面绘制，即“新图形”。</li>
-</ul>
-<h3 id="type值"><a href="#type值" class="headerlink" title="type值"></a>type值</h3><h4 id="source-over-default"><a href="#source-over-default" class="headerlink" title="source-over (default)"></a>source-over (default)</h4><p>这是默认设置，新图形会覆盖在原有内容之上。<br><img src="https://mdn.mozillademos.org/files/220/Canvas_composite_srcovr.png" alt="pic"></p>
-<hr>
-<h4 id="destination-over"><a href="#destination-over" class="headerlink" title="destination-over"></a>destination-over</h4><p>会在原有内容之下绘制新图形。<br><img src="https://mdn.mozillademos.org/files/215/Canvas_composite_destovr.png" alt="pic"></p>
-<hr>
-<h4 id="source-in"><a href="#source-in" class="headerlink" title="source-in"></a>source-in</h4><p>新图形会仅仅出现与原有内容重叠的部分。其它区域都变成透明的。<br><img src="https://mdn.mozillademos.org/files/218/Canvas_composite_srcin.png" alt="pic"></p>
-<hr>
-<h4 id="destination-in"><a href="#destination-in" class="headerlink" title="destination-in"></a>destination-in</h4><p>原有内容中与新图形重叠的部分会被保留，其它区域都变成透明的。<br><img src="https://mdn.mozillademos.org/files/213/Canvas_composite_destin.png" alt="pic"></p>
-<hr>
-<h4 id="source-out"><a href="#source-out" class="headerlink" title="source-out"></a>source-out</h4><p>结果是只有新图形中与原有内容不重叠的部分会被绘制出来。<br><img src="https://mdn.mozillademos.org/files/219/Canvas_composite_srcout.png" alt="pic"></p>
-<hr>
-<h4 id="destination-out"><a href="#destination-out" class="headerlink" title="destination-out"></a>destination-out</h4><p>原有内容中与新图形不重叠的部分会被保留。<br><img src="https://mdn.mozillademos.org/files/214/Canvas_composite_destout.png" alt="pic"></p>
-<hr>
-<h4 id="source-atop"><a href="#source-atop" class="headerlink" title="source-atop"></a>source-atop</h4><p>新图形中与原有内容重叠的部分会被绘制，并覆盖于原有内容之上。<br><img src="https://mdn.mozillademos.org/files/217/Canvas_composite_srcatop.png" alt="pic"></p>
-<hr>
-<h4 id="destination-atop"><a href="#destination-atop" class="headerlink" title="destination-atop"></a>destination-atop</h4><p>原有内容中与新内容重叠的部分会被保留，并会在原有内容之下绘制新图形<br><img src="https://mdn.mozillademos.org/files/212/Canvas_composite_destatop.png" alt="pic"></p>
-<hr>
-<h4 id="lighter"><a href="#lighter" class="headerlink" title="lighter"></a>lighter</h4><p>两图形中重叠部分作加色处理。<br><img src="https://mdn.mozillademos.org/files/216/Canvas_composite_lighten.png" alt="pic"></p>
-<hr>
-<h4 id="darken"><a href="#darken" class="headerlink" title="darken"></a>darken</h4><p>两图形中重叠的部分作减色处理。<br><img src="https://mdn.mozillademos.org/files/211/Canvas_composite_darken.png" alt="pic"></p>
-<hr>
-<h4 id="xor"><a href="#xor" class="headerlink" title="xor"></a>xor</h4><p>重叠的部分会变成透明。<br><img src="https://mdn.mozillademos.org/files/221/Canvas_composite_xor.png" alt="pic"></p>
-<hr>
-<h4 id="copy"><a href="#copy" class="headerlink" title="copy"></a>copy</h4><p>只有新图形会被保留，其它都被清除掉。<br><img src="https://mdn.mozillademos.org/files/210/Canvas_composite_copy.png" alt="pic"></p>
-<hr>
-<h2 id="裁切"><a href="#裁切" class="headerlink" title="裁切"></a>裁切</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">ctx.beginPath();</div><div class="line">ctx.arc(<span class="number">0</span>,<span class="number">0</span>,<span class="number">60</span>,<span class="number">0</span>,<span class="built_in">Math</span>.PI*<span class="number">2</span>,<span class="literal">true</span>);</div><div class="line">ctx.clip();</div></pre></td></tr></table></figure>
-<p>裁切路径不会在 canvas 上绘制东西，而且它永远不受新图形的影响。这些特性使得它在特定区域里绘制图形时相当好用。( 可以把它理解成PS里面的选择工具 )</p>
-<p><strong>裁切区域需要通过save&amp;restore方法去还原，因为是路径方法，所以要记得beginPath</strong></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（05）/" data-id="cj77rf1z9000aj5vg4paytphr" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（06）/" data-id="cj77t3e2n000c2bvg2lomdv66" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
@@ -667,6 +641,10 @@
           </li>
         
           <li>
+            <a href="/2017/09/04/codewar-04/">codewar-02</a>
+          </li>
+        
+          <li>
             <a href="/2017/09/04/codewar-02/">codewar-02</a>
           </li>
         
@@ -676,10 +654,6 @@
         
           <li>
             <a href="/2017/08/12/微信小程序跨页面通信解决思路/">微信小程序跨页面通信解决思路</a>
-          </li>
-        
-          <li>
-            <a href="/2017/08/05/javascript设计模式学习-01/">javascript设计模式学习-01</a>
           </li>
         
       </ul>
