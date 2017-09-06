@@ -71,6 +71,53 @@
         <div class="outer">
           <section id="main">
   
+    <article id="post-canvas学习笔记-API（06）" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/07/11/canvas学习笔记-API（06）/" class="article-date">
+  <time datetime="2017-07-11T06:27:46.000Z" itemprop="datePublished">2017-07-11</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/07/11/canvas学习笔记-API（06）/">canvas学习笔记 - API（06）</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="动画"><a href="#动画" class="headerlink" title="动画"></a>动画</h2><h3 id="动画的基本"><a href="#动画的基本" class="headerlink" title="动画的基本"></a>动画的基本</h3><ul>
+<li>清空 canvas<br>除非接下来要画的内容会完全充满 canvas （例如背景图），否则你需要清空所有。最简单的做法就是用 clearRect 方法。</li>
+<li>保存 canvas 状态<br>如果你要改变一些会改变 canvas 状态的设置（样式，变形之类的），又要在每画一帧之时都是原始状态的话，你需要先保存一下。</li>
+<li>绘制动画图形（animated shapes）<br>这一步才是重绘动画帧。</li>
+<li>恢复 canvas 状态<br>如果已经保存了 canvas 的状态，可以先恢复它，然后重绘下一帧。</li>
+</ul>
+<h3 id="有安排的更新画布-Scheduled-updates"><a href="#有安排的更新画布-Scheduled-updates" class="headerlink" title="有安排的更新画布 Scheduled updates"></a>有安排的更新画布 Scheduled updates</h3><p>可以用window.setInterval(), window.setTimeout(),和window.requestAnimationFrame()来设定定期执行一个指定函数。</p>
+<h3 id="长尾效果"><a href="#长尾效果" class="headerlink" title="长尾效果"></a>长尾效果</h3><p>直到现在，我们已经使用clearRect 函数当我们清除前一帧动画。当你用一个半透明的fillRect函数取代这个函数的时候，你可以轻松获得长尾效果。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">ctx.fillStyle = <span class="string">'rgba(255,255,255,0.3)'</span>;</div><div class="line">ctx.fillRect(<span class="number">0</span>,<span class="number">0</span>,canvas.width,canvas.height);</div></pre></td></tr></table></figure></p>
+<h3 id="demo"><a href="#demo" class="headerlink" title="demo"></a>demo</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> canvas = <span class="built_in">document</span>.getElementById(<span class="string">'canvas'</span>);</div><div class="line"><span class="keyword">var</span> ctx = canvas.getContext(<span class="string">'2d'</span>);</div><div class="line"><span class="keyword">var</span> raf;</div><div class="line"><span class="keyword">var</span> ball = &#123;</div><div class="line">  <span class="attr">x</span>: <span class="number">100</span>,</div><div class="line">  <span class="attr">y</span>: <span class="number">100</span>,</div><div class="line">  <span class="attr">vx</span>: <span class="number">5</span>,</div><div class="line">  <span class="attr">vy</span>: <span class="number">2</span>,</div><div class="line">  <span class="attr">radius</span>: <span class="number">25</span>,</div><div class="line">  <span class="attr">color</span>: <span class="string">'blue'</span>,</div><div class="line">  <span class="attr">draw</span>: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    ctx.beginPath();</div><div class="line">    ctx.arc(<span class="keyword">this</span>.x, <span class="keyword">this</span>.y, <span class="keyword">this</span>.radius, <span class="number">0</span>, <span class="built_in">Math</span>.PI*<span class="number">2</span>, <span class="literal">true</span>);</div><div class="line">    ctx.closePath();</div><div class="line">    ctx.fillStyle = <span class="keyword">this</span>.color;</div><div class="line">    ctx.fill();</div><div class="line">  &#125;</div><div class="line">&#125;;</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params"></span>) </span>&#123;</div><div class="line">  <span class="comment">// 长尾效果</span></div><div class="line">  <span class="comment">//ctx.clearRect(0,0, canvas.width, canvas.height);</span></div><div class="line">  ctx.fillStyle = <span class="string">'rgba(255,255,255,0.3)'</span>;</div><div class="line">  ctx.fillRect(<span class="number">0</span>,<span class="number">0</span>,canvas.width,canvas.height);</div><div class="line">  <span class="comment">// 加速减速</span></div><div class="line">  <span class="comment">// ball.vy *= .99;</span></div><div class="line">  <span class="comment">// ball.vy += .25;</span></div><div class="line"></div><div class="line">  <span class="comment">//边界</span></div><div class="line">  <span class="keyword">if</span> (ball.y + ball.vy &gt; canvas.height || ball.y + ball.vy &lt; <span class="number">0</span>) &#123;</div><div class="line">    ball.vy = -ball.vy;</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">if</span> (ball.x + ball.vx &gt; canvas.width || ball.x + ball.vx &lt; <span class="number">0</span>) &#123;</div><div class="line">    ball.vx = -ball.vx;</div><div class="line">  &#125;</div><div class="line">  ball.x += ball.vx;</div><div class="line">  ball.y += ball.vy;</div><div class="line">  ball.draw();</div><div class="line">  raf = <span class="built_in">window</span>.requestAnimationFrame(draw);</div><div class="line">&#125;</div><div class="line">canvas.addEventListener(<span class="string">'mouseover'</span>, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</div><div class="line">  raf = <span class="built_in">window</span>.requestAnimationFrame(draw);</div><div class="line">&#125;);</div><div class="line">canvas.addEventListener(<span class="string">"mouseout"</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</div><div class="line">  <span class="built_in">window</span>.cancelAnimationFrame(raf);</div><div class="line">&#125;);</div><div class="line">ball.draw();</div></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（06）/" data-id="cj798odgv000f28vgzdwqqsr6" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-canvas学习笔记-API（05）" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/07/11/canvas学习笔记-API（05）/" class="article-date">
@@ -127,7 +174,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（05）/" data-id="cj77t6la6000a7vvglwn1yucb" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（05）/" data-id="cj798odgn000728vgjxo4deey" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
@@ -179,7 +226,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（04）/" data-id="cj77t6la100077vvg9tyv5ei4" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（04）/" data-id="cj798odgl000628vga2zru6gi" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
@@ -247,7 +294,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（03）/" data-id="cj77t6l9y00067vvgqupd0crb" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（03）/" data-id="cj798odgd000328vgdm9vbvmm" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
@@ -333,7 +380,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（02）/" data-id="cj77t6l9v00057vvg1wz8y8ub" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（02）/" data-id="cj798odg7000128vgyutkeo0c" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
@@ -405,7 +452,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（01）/" data-id="cj77t6l9q00037vvgin0o66u7" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（01）/" data-id="cj798odhj001228vgrlcfltco" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
@@ -453,7 +500,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/20/js函数队列/" data-id="cj77t6las00107vvge9twbolr" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/04/20/js函数队列/" data-id="cj798odhd000x28vgjkjgg9nc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -502,7 +549,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（16）模块 Modules/" data-id="cj77t6lbr002d7vvgeinh897b" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（16）模块 Modules/" data-id="cj798odio002n28vgmmz54uae" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -552,7 +599,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（14）let & const/" data-id="cj77t6lbq002c7vvga8eodvmf" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（14）let & const/" data-id="cj798odin002k28vg1dphh4y3" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -602,54 +649,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（13）类 Class/" data-id="cj77t6lbp002a7vvg2qxymtm3" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-读书笔记：深入浅出ES6（12）代理 Proxies" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/04/20/读书笔记：深入浅出ES6（12）代理 Proxies/" class="article-date">
-  <time datetime="2017-04-20T02:54:51.000Z" itemprop="datePublished">2017-04-20</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/20/读书笔记：深入浅出ES6（12）代理 Proxies/">读书笔记：深入浅出ES6（12）代理 Proxies</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>原文线上地址：<a href="http://www.infoq.com/cn/es6-in-depth/" target="_blank" rel="external">http://www.infoq.com/cn/es6-in-depth/</a></p>
-<h2 id="代理-Proxies"><a href="#代理-Proxies" class="headerlink" title="代理 Proxies"></a>代理 Proxies</h2><p><strong>警告：该功能现在无法通过polyfill进行降级处理，所以不要在浏览器端使用，在Node.js或io.js环境中使用代理，首先你需要添加名为harmony-reflect的polyfill，然后在执行时启用一个非默认的选项（–harmony_proxies）</strong></p>
-<h4 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h4><p>ES6规范定义了一个全新的全局构造函数：代理（Proxy）。它可以接受两个参数：目标对象（target）与句柄对象（handler）</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> target = &#123;&#125;, handler = &#123;&#125;;</div><div class="line"><span class="keyword">var</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(target, handler);</div><div class="line"></div><div class="line">proxy.color = <span class="string">"pink"</span>;</div><div class="line">target.color <span class="comment">//pink</span></div></pre></td></tr></table></figure>
-<p>代理的行为很简单：将代理的所有内部方法转发至目标。简单来说，如果调用proxy.[<a href="">Enumerate]</a>，就会返回target.[<a href="">Enumerate]</a>。</p>
-<h4 id="内部方法"><a href="#内部方法" class="headerlink" title="内部方法"></a>内部方法</h4><p>我们可以在<a href="http://www.ecma-international.org/ecma-262/6.0/index.html#sec-proxy-object-internal-methods-and-internal-slots" target="_blank" rel="external">ES6标准列表5和6</a>中找到全部的14种方法。双方括号[[ ]]代表内部方法，在一般的JS代码中不可见，你可以调用、删除或覆写普通方法，但是无法操作内部方法。</p>
-<p>在整个ES6标准中，只要有可能，任何语法或对象相关的内建函数都是基于这14种内部方法构建的。ES6在对象的中枢系统周围划分了一个清晰的界限，你可以借助代理特性用任意JS代码替换标准中枢系统的内部方法。</p>
-<h4 id="代理句柄"><a href="#代理句柄" class="headerlink" title="代理句柄"></a>代理句柄</h4><p>句柄对象的方法可以覆写任意代理的内部方法。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> target = &#123;&#125;;</div><div class="line"><span class="keyword">var</span> handler = &#123;</div><div class="line">      <span class="attr">set</span>: <span class="function"><span class="keyword">function</span> (<span class="params">target, key, value, receiver</span>) </span>&#123;</div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">"请不要为这个对象设置属性。"</span>);</div><div class="line">      &#125;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">var</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(target, handler);</div><div class="line">proxy.name = <span class="string">"angelina"</span>; <span class="comment">//Error: 请不要为这个对象设置属性。</span></div></pre></td></tr></table></figure></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（12）代理 Proxies/" data-id="cj77t6lbo00287vvgdyf5ahni" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（13）类 Class/" data-id="cj798odil002i28vgqljilwuc" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -710,6 +710,10 @@
       <ul>
         
           <li>
+            <a href="/2017/09/07/codewar-05/">codewar-05</a>
+          </li>
+        
+          <li>
             <a href="/2017/09/06/codewar-04/">codewar-04</a>
           </li>
         
@@ -723,10 +727,6 @@
         
           <li>
             <a href="/2017/09/03/codewar-01/">codewar-01</a>
-          </li>
-        
-          <li>
-            <a href="/2017/08/12/微信小程序跨页面通信解决思路/">微信小程序跨页面通信解决思路</a>
           </li>
         
       </ul>

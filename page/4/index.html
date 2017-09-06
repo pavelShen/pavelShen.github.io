@@ -71,6 +71,69 @@
         <div class="outer">
           <section id="main">
   
+    <article id="post-数组去重" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/02/27/数组去重/" class="article-date">
+  <time datetime="2017-02-27T10:47:14.000Z" itemprop="datePublished">2017-02-27</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/02/27/数组去重/">数组去重</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>参考地址：<a href="https://www.toobug.net/article/array_unique_in_javascript.html">https://www.toobug.net/article/array_unique_in_javascript.html</a></p>
+<p>先说结论：includes，Map，Set  能正确处理去重</p>
+<h3 id="测试数据："><a href="#测试数据：" class="headerlink" title="测试数据："></a>测试数据：</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">1</span>,<span class="string">'1'</span>,<span class="string">'1'</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="string">'0'</span>,<span class="string">'0'</span>,<span class="literal">undefined</span>,<span class="literal">undefined</span>,<span class="literal">null</span>,<span class="literal">null</span>,<span class="literal">NaN</span>,<span class="literal">NaN</span>,&#123;&#125;,&#123;&#125;,[],[],/a/,/a/]</div><div class="line"><span class="built_in">console</span>.log(unique(arr));</div></pre></td></tr></table></figure>
+<p>测试中没有定义对象的比较方法，因此默认情况下，对象不去重是正确的结果，去重是不正确的结果。</p>
+<h3 id="坑："><a href="#坑：" class="headerlink" title="坑："></a>坑：</h3><ul>
+<li><code>===</code>不能处理<code>NaN</code>的相等性判断</li>
+<li>对象之间的相等判断</li>
+</ul>
+<h3 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// number</span></div><div class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> <span class="literal">NaN</span>);</div><div class="line"></div><div class="line"><span class="comment">// 全都是false</span></div><div class="line"><span class="number">0</span> &lt; <span class="literal">NaN</span>;</div><div class="line"><span class="number">0</span> &gt; <span class="literal">NaN</span>;</div><div class="line"><span class="number">0</span> == <span class="literal">NaN</span>;</div><div class="line"><span class="number">0</span> === <span class="literal">NaN</span>;</div><div class="line"><span class="literal">NaN</span>==<span class="literal">NaN</span></div><div class="line"><span class="literal">NaN</span>===<span class="literal">NaN</span></div></pre></td></tr></table></figure>
+<h3 id="处理方案："><a href="#处理方案：" class="headerlink" title="处理方案："></a>处理方案：</h3><p>NaN通过isNaN(a) 方法进行比较<br>对象可以通过JSON.stringify()对对象进行序列化之后再比较字符串（可能有坑）<br>发现的坑：</p>
+<ul>
+<li>如果对象的值为undefined，则该键值对会被忽略<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> f = &#123;<span class="attr">d</span>:<span class="literal">undefined</span>,<span class="attr">f</span>:<span class="string">'ss'</span>&#125;</div><div class="line"><span class="built_in">JSON</span>.stringify(f) <span class="comment">//"&#123;"f":"ss"&#125;"</span></div></pre></td></tr></table></figure>
+</li>
+</ul>
+<hr>
+<p>通过规范（<a href="http://www.ecma-international.org/ecma-262/6.0/#sec-array.prototype.indexof">http://www.ecma-international.org/ecma-262/6.0/#sec-array.prototype.indexof</a> ）<br>我们知道了indexOf()使用的是严格比较，也就是===。</p>
+<p>includes()又是用什么方法来比较的呢？如果想当然的话，会觉得肯定跟indexOf()一样喽。但是，程序员的世界里最怕想当然。翻一翻规范，发现它其实是使用的另一种比较方法，叫作“SameValueZero”比较（<a href="https://tc39.github.io/ecma262/2016/#sec-samevaluezero）。">https://tc39.github.io/ecma262/2016/#sec-samevaluezero）。</a></p>
+<blockquote>
+<p>If Type(x) is different from Type(y), return false.<br>If Type(x) is Number, then<br>a. If x is NaN and y is NaN, return true.<br>b. If x is +0 and y is -0, return true.<br>c. If x is -0 and y is +0, return true.<br>d. If x is the same Number value as y, return true.<br>e. Return false.<br>Return SameValueNonNumber(x, y).</p>
+</blockquote>
+        
+          <p class="article-more-link">
+            <a href="/2017/02/27/数组去重/#more">Read More</a>
+          </p>
+        
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/pavelShen/2017/02/27/数组去重/" data-id="cj798odi1001t28vgit0ywhx9" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-我的开发环境" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/02/10/我的开发环境/" class="article-date">
@@ -139,7 +202,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/02/10/我的开发环境/" data-id="cj77t6lb8001l7vvgw8vqs5er" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/02/10/我的开发环境/" data-id="cj798odi5001v28vgv8c8udva" class="article-share-link">Share</a>
       
       
     </footer>
@@ -182,10 +245,72 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/02/10/npm命令/" data-id="cj77t6lb1001a7vvgv82cjagk" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/02/10/npm命令/" data-id="cj798odhr001928vg4tppjtdy" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-css片段1" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/02/10/css片段1/" class="article-date">
+  <time datetime="2017-02-10T10:25:10.000Z" itemprop="datePublished">2017-02-10</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/02/10/css片段1/">css片段1</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="div边框重叠"><a href="#div边框重叠" class="headerlink" title="div边框重叠"></a>div边框重叠</h2><p>设置div的margin值为边框值的相反数：</p>
+<pre><code>.div {width:100px; height:103px; border:1px solid #333; margin-right:-1px; margin-bottom:-1px;}
+</code></pre><hr>
+<h2 id="背景图中间扣出毛玻璃区域（内部背景和外部背景互相契合）"><a href="#背景图中间扣出毛玻璃区域（内部背景和外部背景互相契合）" class="headerlink" title="背景图中间扣出毛玻璃区域（内部背景和外部背景互相契合）"></a>背景图中间扣出毛玻璃区域（内部背景和外部背景互相契合）</h2><p>参考链接：<a href="http://www.cnblogs.com/ghost-xyx/p/5677168.html" target="_blank" rel="external">http://www.cnblogs.com/ghost-xyx/p/5677168.html</a><br><a href="https://darylxyx.github.io/Demo/blur/" target="_blank" rel="external">demo</a></p>
+<p>坑： 该方案是靠 <code>background-attachment:fixed;</code> 来实现，所以不适合有滚动条的页面，如果有滚动条，还是老老实实用background-position来定位</p>
+<h4 id="html"><a href="#html" class="headerlink" title="html"></a>html</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">'content'</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
+<h4 id="css"><a href="#css" class="headerlink" title="css"></a>css</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">*&#123;<span class="attribute">margin</span>:<span class="number">0</span>;<span class="attribute">padding</span>:<span class="number">0</span>&#125;</div><div class="line"><span class="selector-class">.content</span>&#123;</div><div class="line">  <span class="attribute">width</span>:<span class="number">540px</span>;</div><div class="line">  <span class="attribute">height</span>:<span class="number">303px</span>;</div><div class="line">  <span class="attribute">background</span>:<span class="built_in">url</span>(<span class="string">'http://n1image.hjfile.cn/mh/2017/01/12/bcfb0406e08ba59e779316c20c373cf6.jpg'</span>);</div><div class="line">  <span class="attribute">position</span>:relative;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.content</span><span class="selector-pseudo">:after</span>&#123;</div><div class="line">  <span class="attribute">background</span>:<span class="built_in">url</span>(<span class="string">'http://n1image.hjfile.cn/mh/2017/01/12/bcfb0406e08ba59e779316c20c373cf6.jpg'</span>);</div><div class="line">  <span class="attribute">content</span>:<span class="string">''</span>;</div><div class="line">  <span class="attribute">width</span>:<span class="number">250px</span>;</div><div class="line">  <span class="attribute">height</span>:<span class="number">150px</span>;</div><div class="line">  <span class="attribute">position</span>:absolute;</div><div class="line">  <span class="attribute">left</span>:<span class="number">50%</span>;</div><div class="line">  <span class="attribute">TOP</span>:<span class="number">50%</span>;</div><div class="line">  <span class="attribute">margin-top</span>:-<span class="number">75px</span>;</div><div class="line">  <span class="attribute">margin-left</span>:-<span class="number">125px</span>;</div><div class="line">  <span class="attribute">background-attachment</span>:fixed;</div><div class="line">  <span class="attribute">-webkit-filter</span>: <span class="built_in">blur</span>(20px);</div><div class="line">  <span class="attribute">overflow</span>:hidden;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="自定义滚动条"><a href="#自定义滚动条" class="headerlink" title="自定义滚动条"></a>自定义滚动条</h2><p>来源 <a href="http://www.xuanfengge.com/css3-webkit-scrollbar.html" target="_blank" rel="external">http://www.xuanfengge.com/css3-webkit-scrollbar.html</a></p>
+<ul>
+<li>::-webkit-scrollbar 滚动条整体部分</li>
+<li>::-webkit-scrollbar-thumb  滚动条里面的小方块，能向上向下移动（或往左往右移动，取决于是垂直滚动条还是水平滚动条）</li>
+<li>::-webkit-scrollbar-track  滚动条的轨道（里面装有Thumb）</li>
+<li>::-webkit-scrollbar-button 滚动条的轨道的两端按钮，允许通过点击微调小方块的位置。</li>
+<li>::-webkit-scrollbar-track-piece 内层轨道，滚动条中间部分（除去）</li>
+<li>::-webkit-scrollbar-corner 边角，即两个滚动条的交汇处</li>
+<li>::-webkit-resizer 两个滚动条的交汇处上用于通过拖动调整元素大小的小控件</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/</span></div><div class="line"><span class="selector-pseudo">::-webkit-scrollbar</span></div><div class="line">&#123;</div><div class="line">    <span class="attribute">width</span>: <span class="number">16px</span>;</div><div class="line">    <span class="attribute">height</span>: <span class="number">16px</span>;</div><div class="line">    <span class="attribute">background-color</span>: <span class="number">#F5F5F5</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/*定义滚动条轨道 内阴影+圆角*/</span></div><div class="line"><span class="selector-pseudo">::-webkit-scrollbar-track</span></div><div class="line">&#123;</div><div class="line">    <span class="attribute">-webkit-box-shadow</span>: inset <span class="number">0</span> <span class="number">0</span> <span class="number">6px</span> <span class="built_in">rgba</span>(0,0,0,0.3);</div><div class="line">    <span class="attribute">border-radius</span>: <span class="number">10px</span>;</div><div class="line">    <span class="attribute">background-color</span>: <span class="number">#F5F5F5</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/*定义滑块 内阴影+圆角*/</span></div><div class="line"><span class="selector-pseudo">::-webkit-scrollbar-thumb</span></div><div class="line">&#123;</div><div class="line">    <span class="attribute">border-radius</span>: <span class="number">10px</span>;</div><div class="line">    <span class="attribute">-webkit-box-shadow</span>: inset <span class="number">0</span> <span class="number">0</span> <span class="number">6px</span> <span class="built_in">rgba</span>(0,0,0,.3);</div><div class="line">    <span class="attribute">background-color</span>: <span class="number">#555</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="calc-计算属性"><a href="#calc-计算属性" class="headerlink" title="calc 计算属性"></a>calc 计算属性</h2><p>语法：<code>width: calc(100% - 32px);</code> 计算符左右需要空格</p>
+<p>作用： 适合不同单位之间的计算</p>
+<p>坑： caniuse 上写 UC浏览器不兼容，但是小米下的uc 测下来ok</p>
+<h2 id="last-of-type"><a href="#last-of-type" class="headerlink" title=":last-of-type"></a>:last-of-type</h2><p>语法：<code>p:last-of-type</code> 获取最后一个p元素</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/pavelShen/2017/02/10/css片段1/" data-id="cj798odhc000v28vgniugpcma" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li></ul>
 
     </footer>
   </div>
@@ -246,72 +371,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/02/10/charles入门/" data-id="cj77t6lae000j7vvgo0nwa0nc" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/02/10/charles入门/" data-id="cj798odh4000o28vgmljv5w2w" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tools/">tools</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-css片段1" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/02/10/css片段1/" class="article-date">
-  <time datetime="2017-02-10T10:25:10.000Z" itemprop="datePublished">2017-02-10</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/10/css片段1/">css片段1</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="div边框重叠"><a href="#div边框重叠" class="headerlink" title="div边框重叠"></a>div边框重叠</h2><p>设置div的margin值为边框值的相反数：</p>
-<pre><code>.div {width:100px; height:103px; border:1px solid #333; margin-right:-1px; margin-bottom:-1px;}
-</code></pre><hr>
-<h2 id="背景图中间扣出毛玻璃区域（内部背景和外部背景互相契合）"><a href="#背景图中间扣出毛玻璃区域（内部背景和外部背景互相契合）" class="headerlink" title="背景图中间扣出毛玻璃区域（内部背景和外部背景互相契合）"></a>背景图中间扣出毛玻璃区域（内部背景和外部背景互相契合）</h2><p>参考链接：<a href="http://www.cnblogs.com/ghost-xyx/p/5677168.html" target="_blank" rel="external">http://www.cnblogs.com/ghost-xyx/p/5677168.html</a><br><a href="https://darylxyx.github.io/Demo/blur/" target="_blank" rel="external">demo</a></p>
-<p>坑： 该方案是靠 <code>background-attachment:fixed;</code> 来实现，所以不适合有滚动条的页面，如果有滚动条，还是老老实实用background-position来定位</p>
-<h4 id="html"><a href="#html" class="headerlink" title="html"></a>html</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">'content'</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
-<h4 id="css"><a href="#css" class="headerlink" title="css"></a>css</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line">*&#123;<span class="attribute">margin</span>:<span class="number">0</span>;<span class="attribute">padding</span>:<span class="number">0</span>&#125;</div><div class="line"><span class="selector-class">.content</span>&#123;</div><div class="line">  <span class="attribute">width</span>:<span class="number">540px</span>;</div><div class="line">  <span class="attribute">height</span>:<span class="number">303px</span>;</div><div class="line">  <span class="attribute">background</span>:<span class="built_in">url</span>(<span class="string">'http://n1image.hjfile.cn/mh/2017/01/12/bcfb0406e08ba59e779316c20c373cf6.jpg'</span>);</div><div class="line">  <span class="attribute">position</span>:relative;</div><div class="line">&#125;</div><div class="line"><span class="selector-class">.content</span><span class="selector-pseudo">:after</span>&#123;</div><div class="line">  <span class="attribute">background</span>:<span class="built_in">url</span>(<span class="string">'http://n1image.hjfile.cn/mh/2017/01/12/bcfb0406e08ba59e779316c20c373cf6.jpg'</span>);</div><div class="line">  <span class="attribute">content</span>:<span class="string">''</span>;</div><div class="line">  <span class="attribute">width</span>:<span class="number">250px</span>;</div><div class="line">  <span class="attribute">height</span>:<span class="number">150px</span>;</div><div class="line">  <span class="attribute">position</span>:absolute;</div><div class="line">  <span class="attribute">left</span>:<span class="number">50%</span>;</div><div class="line">  <span class="attribute">TOP</span>:<span class="number">50%</span>;</div><div class="line">  <span class="attribute">margin-top</span>:-<span class="number">75px</span>;</div><div class="line">  <span class="attribute">margin-left</span>:-<span class="number">125px</span>;</div><div class="line">  <span class="attribute">background-attachment</span>:fixed;</div><div class="line">  <span class="attribute">-webkit-filter</span>: <span class="built_in">blur</span>(20px);</div><div class="line">  <span class="attribute">overflow</span>:hidden;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<hr>
-<h2 id="自定义滚动条"><a href="#自定义滚动条" class="headerlink" title="自定义滚动条"></a>自定义滚动条</h2><p>来源 <a href="http://www.xuanfengge.com/css3-webkit-scrollbar.html" target="_blank" rel="external">http://www.xuanfengge.com/css3-webkit-scrollbar.html</a></p>
-<ul>
-<li>::-webkit-scrollbar 滚动条整体部分</li>
-<li>::-webkit-scrollbar-thumb  滚动条里面的小方块，能向上向下移动（或往左往右移动，取决于是垂直滚动条还是水平滚动条）</li>
-<li>::-webkit-scrollbar-track  滚动条的轨道（里面装有Thumb）</li>
-<li>::-webkit-scrollbar-button 滚动条的轨道的两端按钮，允许通过点击微调小方块的位置。</li>
-<li>::-webkit-scrollbar-track-piece 内层轨道，滚动条中间部分（除去）</li>
-<li>::-webkit-scrollbar-corner 边角，即两个滚动条的交汇处</li>
-<li>::-webkit-resizer 两个滚动条的交汇处上用于通过拖动调整元素大小的小控件</li>
-</ul>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/</span></div><div class="line"><span class="selector-pseudo">::-webkit-scrollbar</span></div><div class="line">&#123;</div><div class="line">    <span class="attribute">width</span>: <span class="number">16px</span>;</div><div class="line">    <span class="attribute">height</span>: <span class="number">16px</span>;</div><div class="line">    <span class="attribute">background-color</span>: <span class="number">#F5F5F5</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/*定义滚动条轨道 内阴影+圆角*/</span></div><div class="line"><span class="selector-pseudo">::-webkit-scrollbar-track</span></div><div class="line">&#123;</div><div class="line">    <span class="attribute">-webkit-box-shadow</span>: inset <span class="number">0</span> <span class="number">0</span> <span class="number">6px</span> <span class="built_in">rgba</span>(0,0,0,0.3);</div><div class="line">    <span class="attribute">border-radius</span>: <span class="number">10px</span>;</div><div class="line">    <span class="attribute">background-color</span>: <span class="number">#F5F5F5</span>;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">/*定义滑块 内阴影+圆角*/</span></div><div class="line"><span class="selector-pseudo">::-webkit-scrollbar-thumb</span></div><div class="line">&#123;</div><div class="line">    <span class="attribute">border-radius</span>: <span class="number">10px</span>;</div><div class="line">    <span class="attribute">-webkit-box-shadow</span>: inset <span class="number">0</span> <span class="number">0</span> <span class="number">6px</span> <span class="built_in">rgba</span>(0,0,0,.3);</div><div class="line">    <span class="attribute">background-color</span>: <span class="number">#555</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="calc-计算属性"><a href="#calc-计算属性" class="headerlink" title="calc 计算属性"></a>calc 计算属性</h2><p>语法：<code>width: calc(100% - 32px);</code> 计算符左右需要空格</p>
-<p>作用： 适合不同单位之间的计算</p>
-<p>坑： caniuse 上写 UC浏览器不兼容，但是小米下的uc 测下来ok</p>
-<h2 id="last-of-type"><a href="#last-of-type" class="headerlink" title=":last-of-type"></a>:last-of-type</h2><p>语法：<code>p:last-of-type</code> 获取最后一个p元素</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/02/10/css片段1/" data-id="cj77t6lao000v7vvgotrwoi4u" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/css/">css</a></li></ul>
 
     </footer>
   </div>
@@ -362,7 +425,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/02/10/视频全屏播放-开发总结/" data-id="cj77t6lba001p7vvg5kjjhfsf" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/02/10/视频全屏播放-开发总结/" data-id="cj798odi0001o28vgk0izkgdi" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -423,7 +486,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/01/17/js片段1/" data-id="cj77t6lat00127vvgeqpw9ngt" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/01/17/js片段1/" data-id="cj798odhl001428vgxvgl4rft" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -471,50 +534,10 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2016/12/16/hello-world/" data-id="cj77t6lao000w7vvgr50rv9fo" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2016/12/16/hello-world/" data-id="cj798odhh001028vgo6jj5k72" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/hexo/">hexo</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-小程序新建页面脚本" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2016/09/26/小程序新建页面脚本/" class="article-date">
-  <time datetime="2016-09-26T00:53:00.000Z" itemprop="datePublished">2016-09-26</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/09/26/小程序新建页面脚本/">小程序新建页面脚本</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 创建命令：node createNewWeappPage pagename</span></div><div class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</div><div class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</div><div class="line"><span class="keyword">let</span> pagesPath = path.join(__dirname, <span class="string">'./pages'</span>);</div><div class="line"><span class="keyword">let</span> pageName = process.argv[<span class="number">2</span>];</div><div class="line"><span class="keyword">if</span>(!!pageName)&#123;</div><div class="line">    <span class="keyword">let</span> targetPath = pagesPath + <span class="string">'/'</span>+pageName;</div><div class="line">    fs.exists(targetPath, <span class="function"><span class="keyword">function</span> (<span class="params">exists</span>) </span>&#123;</div><div class="line">      <span class="keyword">if</span>(!exists)&#123;</div><div class="line">        fs.mkdir(targetPath, <span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</div><div class="line">          <span class="keyword">if</span>(err)</div><div class="line">            <span class="keyword">throw</span> err;</div><div class="line">          <span class="keyword">else</span>&#123;</div><div class="line">            <span class="built_in">console</span>.log(<span class="string">'创建目录'</span>+pageName+<span class="string">'成功'</span>);</div><div class="line">            fs.writeFile(targetPath+<span class="string">'/'</span>+pageName+<span class="string">'.wxml'</span>, <span class="string">''</span>, (err) =&gt; &#123;</div><div class="line">              <span class="keyword">if</span> (err) <span class="keyword">throw</span> err;</div><div class="line">              <span class="built_in">console</span>.log(<span class="string">'wxml文件创建成功'</span>);</div><div class="line">            &#125;);</div><div class="line">            fs.writeFile(targetPath+<span class="string">'/'</span>+pageName+<span class="string">'.wxss'</span>, <span class="string">''</span>, (err) =&gt; &#123;</div><div class="line">              <span class="keyword">if</span> (err) <span class="keyword">throw</span> err;</div><div class="line">              <span class="built_in">console</span>.log(<span class="string">'wxss文件创建成功'</span>);</div><div class="line">            &#125;);</div><div class="line">            fs.writeFile(targetPath+<span class="string">'/'</span>+pageName+<span class="string">'.json'</span>, <span class="string">''</span>, (err) =&gt; &#123;</div><div class="line">              <span class="keyword">if</span> (err) <span class="keyword">throw</span> err;</div><div class="line">              <span class="built_in">console</span>.log(<span class="string">'json文件创建成功'</span>);</div><div class="line">            &#125;);</div><div class="line">            fs.writeFile(targetPath+<span class="string">'/'</span>+pageName+<span class="string">'.js'</span>, <span class="string">''</span>, (err) =&gt; &#123;</div><div class="line">              <span class="keyword">if</span> (err) <span class="keyword">throw</span> err;</div><div class="line">              <span class="built_in">console</span>.log(<span class="string">'js文件创建成功'</span>);</div><div class="line">            &#125;);</div><div class="line">          &#125;</div><div class="line">        &#125;);</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">else</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'文件已存在，请检查目录'</span>)</div><div class="line">      &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2016/09/26/小程序新建页面脚本/" data-id="cj77t6lb6001g7vvgdu3xwn1c" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/weixin/">weixin</a></li></ul>
 
     </footer>
   </div>
@@ -581,7 +604,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2016/09/26/weixin小程序/" data-id="cj77t6lb4001e7vvgfhazh351" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2016/09/26/weixin小程序/" data-id="cj798odhy001m28vgwxfny3sx" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/weixin/">weixin</a></li></ul>
@@ -594,10 +617,10 @@
 
 
   
-    <article id="post-use-fiddler" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-小程序新建页面脚本" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/2016/08/09/use-fiddler/" class="article-date">
-  <time datetime="2016-08-09T00:36:08.000Z" itemprop="datePublished">2016-08-09</time>
+    <a href="/2016/09/26/小程序新建页面脚本/" class="article-date">
+  <time datetime="2016-09-26T00:53:00.000Z" itemprop="datePublished">2016-09-26</time>
 </a>
     
   </div>
@@ -608,7 +631,7 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/09/use-fiddler/">使用fiddler</a>
+      <a class="article-title" href="/2016/09/26/小程序新建页面脚本/">小程序新建页面脚本</a>
     </h1>
   
 
@@ -616,58 +639,15 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="其他设备通过fiddler访问网络（手机调试抓包使用）"><a href="#其他设备通过fiddler访问网络（手机调试抓包使用）" class="headerlink" title="其他设备通过fiddler访问网络（手机调试抓包使用）"></a>其他设备通过fiddler访问网络（手机调试抓包使用）</h2><p>菜单栏点击 Tools &gt; Fiddler Options.</p>
-<p>勾选 ‘’’Ensure Allow remote clients to connect’’’.</p>
-<p><img src="/img/use-fiddler/1-1.png" alt="1-1"></p>
-<p>在手机中设置网络代理</p>
-<p>代理模式为手动，IP地址为电脑的IP,端口为上图中port的值</p>
-<p>用手机访问网站时，可以通过fiddler查看网络通信</p>
-<p><strong>事后别忘记把代理关闭，不然你关了fiddler就上不了网了</strong></p>
-<hr>
-<h2 id="fiddler插件安装"><a href="#fiddler插件安装" class="headerlink" title="fiddler插件安装"></a>fiddler插件安装</h2><p>地址：<a href="http://www.telerik.com/fiddler/add-ons" target="_blank" rel="external">http://www.telerik.com/fiddler/add-ons</a></p>
-<p>tip: 如果使用迅雷下载，记得选择只从原始地址下载，不然任务总是失败</p>
-<hr>
-<h2 id="定制fiddler规则-Write-a-FiddlerScript-Rule"><a href="#定制fiddler规则-Write-a-FiddlerScript-Rule" class="headerlink" title="定制fiddler规则 ( Write a FiddlerScript Rule )"></a>定制fiddler规则 ( Write a FiddlerScript Rule )</h2><p>菜单栏点击 Tools &gt; Fiddler Options &gt; Tools. 修改默认编辑器</p>
-<p>菜单栏点击 Rules &gt; Customize Rules.</p>
-<p>修改js文件</p>
-<h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><p>在 OnBeforeRequest 方法中加入代码:</p>
-<pre><code>if (oSession.host.toLowerCase() == &quot;localhost:8888&quot;){
-  oSession.host = &quot;localhost:80&quot;;
-}
-</code></pre><p>访问localhost:8888 实际访问的是localhost:80</p>
-<hr>
-<h2 id="Session-List-操作"><a href="#Session-List-操作" class="headerlink" title="Session List 操作"></a>Session List 操作</h2><ul>
-<li>ctrl+f 查找</li>
-<li>选择session 按p 定为请求的父级 按c 定为请求的子集</li>
-</ul>
-<hr>
-<h2 id="AutoResponder"><a href="#AutoResponder" class="headerlink" title="AutoResponder"></a>AutoResponder</h2><ul>
-<li>在选项卡内勾选Enable rules 开启规则</li>
-<li>rule列表上方的权重较高，可以通过+-来调整rule的权重</li>
-</ul>
-<h4 id="导入-导出rules"><a href="#导入-导出rules" class="headerlink" title="导入/导出rules"></a>导入/导出rules</h4><ol>
-<li>选择多个rule，右击 选择Export all 导出 </li>
-<li>Add Rule 右侧的Import按钮 点击选择之前导出的文件进行导入</li>
-</ol>
-<hr>
-<h2 id="重发请求"><a href="#重发请求" class="headerlink" title="重发请求"></a>重发请求</h2><p>方法1：选择左侧session,右击 选择replay-&gt;reissue requests<br>方法2：</p>
-<ol>
-<li>在右侧composer的选项卡内选择Scratchpad</li>
-<li>点击或者拖动左侧session至选项卡内</li>
-<li>三次点击选中选项卡内的请求头部信息</li>
-<li>点击Execute 发送</li>
-</ol>
-<hr>
-<h2 id="导入-导出网络请求"><a href="#导入-导出网络请求" class="headerlink" title="导入/导出网络请求"></a>导入/导出网络请求</h2><p>File-&gt;import session / File-&gt;export session </p>
-<hr>
+        <h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 创建命令：node createNewWeappPage pagename</span></div><div class="line"><span class="keyword">const</span> path = <span class="built_in">require</span>(<span class="string">'path'</span>);</div><div class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">'fs'</span>);</div><div class="line"><span class="keyword">let</span> pagesPath = path.join(__dirname, <span class="string">'./pages'</span>);</div><div class="line"><span class="keyword">let</span> pageName = process.argv[<span class="number">2</span>];</div><div class="line"><span class="keyword">if</span>(!!pageName)&#123;</div><div class="line">    <span class="keyword">let</span> targetPath = pagesPath + <span class="string">'/'</span>+pageName;</div><div class="line">    fs.exists(targetPath, <span class="function"><span class="keyword">function</span> (<span class="params">exists</span>) </span>&#123;</div><div class="line">      <span class="keyword">if</span>(!exists)&#123;</div><div class="line">        fs.mkdir(targetPath, <span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</div><div class="line">          <span class="keyword">if</span>(err)</div><div class="line">            <span class="keyword">throw</span> err;</div><div class="line">          <span class="keyword">else</span>&#123;</div><div class="line">            <span class="built_in">console</span>.log(<span class="string">'创建目录'</span>+pageName+<span class="string">'成功'</span>);</div><div class="line">            fs.writeFile(targetPath+<span class="string">'/'</span>+pageName+<span class="string">'.wxml'</span>, <span class="string">''</span>, (err) =&gt; &#123;</div><div class="line">              <span class="keyword">if</span> (err) <span class="keyword">throw</span> err;</div><div class="line">              <span class="built_in">console</span>.log(<span class="string">'wxml文件创建成功'</span>);</div><div class="line">            &#125;);</div><div class="line">            fs.writeFile(targetPath+<span class="string">'/'</span>+pageName+<span class="string">'.wxss'</span>, <span class="string">''</span>, (err) =&gt; &#123;</div><div class="line">              <span class="keyword">if</span> (err) <span class="keyword">throw</span> err;</div><div class="line">              <span class="built_in">console</span>.log(<span class="string">'wxss文件创建成功'</span>);</div><div class="line">            &#125;);</div><div class="line">            fs.writeFile(targetPath+<span class="string">'/'</span>+pageName+<span class="string">'.json'</span>, <span class="string">''</span>, (err) =&gt; &#123;</div><div class="line">              <span class="keyword">if</span> (err) <span class="keyword">throw</span> err;</div><div class="line">              <span class="built_in">console</span>.log(<span class="string">'json文件创建成功'</span>);</div><div class="line">            &#125;);</div><div class="line">            fs.writeFile(targetPath+<span class="string">'/'</span>+pageName+<span class="string">'.js'</span>, <span class="string">''</span>, (err) =&gt; &#123;</div><div class="line">              <span class="keyword">if</span> (err) <span class="keyword">throw</span> err;</div><div class="line">              <span class="built_in">console</span>.log(<span class="string">'js文件创建成功'</span>);</div><div class="line">            &#125;);</div><div class="line">          &#125;</div><div class="line">        &#125;);</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">else</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">'文件已存在，请检查目录'</span>)</div><div class="line">      &#125;</div><div class="line">    &#125;);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2016/08/09/use-fiddler/" data-id="cj77t6lb2001c7vvg8qpjdheu" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2016/09/26/小程序新建页面脚本/" data-id="cj798odhy001k28vgvqcasabn" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tools/">tools</a></li></ul>
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/weixin/">weixin</a></li></ul>
 
     </footer>
   </div>
@@ -725,6 +705,10 @@
       <ul>
         
           <li>
+            <a href="/2017/09/07/codewar-05/">codewar-05</a>
+          </li>
+        
+          <li>
             <a href="/2017/09/06/codewar-04/">codewar-04</a>
           </li>
         
@@ -738,10 +722,6 @@
         
           <li>
             <a href="/2017/09/03/codewar-01/">codewar-01</a>
-          </li>
-        
-          <li>
-            <a href="/2017/08/12/微信小程序跨页面通信解决思路/">微信小程序跨页面通信解决思路</a>
           </li>
         
       </ul>

@@ -71,6 +71,53 @@
         <div class="outer">
           <section id="main">
   
+    <article id="post-读书笔记：深入浅出ES6（12）代理 Proxies" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/20/读书笔记：深入浅出ES6（12）代理 Proxies/" class="article-date">
+  <time datetime="2017-04-20T02:54:51.000Z" itemprop="datePublished">2017-04-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/20/读书笔记：深入浅出ES6（12）代理 Proxies/">读书笔记：深入浅出ES6（12）代理 Proxies</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>原文线上地址：<a href="http://www.infoq.com/cn/es6-in-depth/" target="_blank" rel="external">http://www.infoq.com/cn/es6-in-depth/</a></p>
+<h2 id="代理-Proxies"><a href="#代理-Proxies" class="headerlink" title="代理 Proxies"></a>代理 Proxies</h2><p><strong>警告：该功能现在无法通过polyfill进行降级处理，所以不要在浏览器端使用，在Node.js或io.js环境中使用代理，首先你需要添加名为harmony-reflect的polyfill，然后在执行时启用一个非默认的选项（–harmony_proxies）</strong></p>
+<h4 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h4><p>ES6规范定义了一个全新的全局构造函数：代理（Proxy）。它可以接受两个参数：目标对象（target）与句柄对象（handler）</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> target = &#123;&#125;, handler = &#123;&#125;;</div><div class="line"><span class="keyword">var</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(target, handler);</div><div class="line"></div><div class="line">proxy.color = <span class="string">"pink"</span>;</div><div class="line">target.color <span class="comment">//pink</span></div></pre></td></tr></table></figure>
+<p>代理的行为很简单：将代理的所有内部方法转发至目标。简单来说，如果调用proxy.[<a href="">Enumerate]</a>，就会返回target.[<a href="">Enumerate]</a>。</p>
+<h4 id="内部方法"><a href="#内部方法" class="headerlink" title="内部方法"></a>内部方法</h4><p>我们可以在<a href="http://www.ecma-international.org/ecma-262/6.0/index.html#sec-proxy-object-internal-methods-and-internal-slots" target="_blank" rel="external">ES6标准列表5和6</a>中找到全部的14种方法。双方括号[[ ]]代表内部方法，在一般的JS代码中不可见，你可以调用、删除或覆写普通方法，但是无法操作内部方法。</p>
+<p>在整个ES6标准中，只要有可能，任何语法或对象相关的内建函数都是基于这14种内部方法构建的。ES6在对象的中枢系统周围划分了一个清晰的界限，你可以借助代理特性用任意JS代码替换标准中枢系统的内部方法。</p>
+<h4 id="代理句柄"><a href="#代理句柄" class="headerlink" title="代理句柄"></a>代理句柄</h4><p>句柄对象的方法可以覆写任意代理的内部方法。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> target = &#123;&#125;;</div><div class="line"><span class="keyword">var</span> handler = &#123;</div><div class="line">      <span class="attr">set</span>: <span class="function"><span class="keyword">function</span> (<span class="params">target, key, value, receiver</span>) </span>&#123;</div><div class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> <span class="built_in">Error</span>(<span class="string">"请不要为这个对象设置属性。"</span>);</div><div class="line">      &#125;</div><div class="line">&#125;;</div><div class="line"><span class="keyword">var</span> proxy = <span class="keyword">new</span> <span class="built_in">Proxy</span>(target, handler);</div><div class="line">proxy.name = <span class="string">"angelina"</span>; <span class="comment">//Error: 请不要为这个对象设置属性。</span></div></pre></td></tr></table></figure></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（12）代理 Proxies/" data-id="cj798odik002f28vgi47swmvo" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-读书笔记：深入浅出ES6（11）生成器 Generators，续篇" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/04/20/读书笔记：深入浅出ES6（11）生成器 Generators，续篇/" class="article-date">
@@ -123,7 +170,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（11）生成器 Generators，续篇/" data-id="cj77t6lbn00267vvg7fby6ajy" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（11）生成器 Generators，续篇/" data-id="cj798odij002d28vgy63uy1ze" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -205,57 +252,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（10）集合/" data-id="cj77t6lbm00237vvgmlbqrxwd" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-读书笔记：深入浅出ES6（07）箭头函数" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/04/14/读书笔记：深入浅出ES6（07）箭头函数/" class="article-date">
-  <time datetime="2017-04-14T02:54:48.000Z" itemprop="datePublished">2017-04-14</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/04/14/读书笔记：深入浅出ES6（07）箭头函数/">读书笔记：深入浅出ES6（07）箭头函数</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>原文线上地址：<a href="http://www.infoq.com/cn/es6-in-depth/" target="_blank" rel="external">http://www.infoq.com/cn/es6-in-depth/</a></p>
-<h2 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h2><h4 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// ES5</span></div><div class="line"><span class="keyword">var</span> total = values.reduce(<span class="function"><span class="keyword">function</span> (<span class="params">a, b</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> a + b;</div><div class="line"> &#125;, <span class="number">0</span>);</div><div class="line"> <span class="comment">// ES6</span></div><div class="line"> <span class="keyword">var</span> total = values.reduce(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a + b, <span class="number">0</span>);</div></pre></td></tr></table></figure>
-<h4 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h4><ul>
-<li>使用了块语句的箭头函数不会自动返回值，你需要使用return语句将所需值返回。</li>
-<li>当使用箭头函数创建普通对象时，你总是需要将对象包裹在小括号里。</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 为与你玩耍的每一个小狗创建一个新的空对象</span></div><div class="line"><span class="keyword">var</span> chewToys = puppies.map(<span class="function"><span class="params">puppy</span> =&gt;</span> &#123;&#125;); <span class="comment">// 这样写会报Bug！</span></div><div class="line"><span class="keyword">var</span> chewToys = puppies.map(<span class="function"><span class="params">puppy</span> =&gt;</span> (&#123;&#125;)); <span class="comment">//</span></div></pre></td></tr></table></figure>
-<h4 id="和非箭头函数的区别"><a href="#和非箭头函数的区别" class="headerlink" title="和非箭头函数的区别"></a>和非箭头函数的区别</h4><ul>
-<li>箭头函数没有它自己的this值，箭头函数内的this值继承自外围作用域</li>
-<li>箭头函数不会获取它们自己的arguments对象（通过解构来处理参数）</li>
-</ul>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（07）箭头函数/" data-id="cj77t6lbk001z7vvgc6te8p33" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/04/20/读书笔记：深入浅出ES6（10）集合/" data-id="cj798odig002a28vgncj71seg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -321,7 +318,57 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（08）Symbols/" data-id="cj77t6lbl00217vvgyk4q8gfc" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（08）Symbols/" data-id="cj798odie002828vgrvfv8d30" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
+    <article id="post-读书笔记：深入浅出ES6（07）箭头函数" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/04/14/读书笔记：深入浅出ES6（07）箭头函数/" class="article-date">
+  <time datetime="2017-04-14T02:54:48.000Z" itemprop="datePublished">2017-04-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/04/14/读书笔记：深入浅出ES6（07）箭头函数/">读书笔记：深入浅出ES6（07）箭头函数</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>原文线上地址：<a href="http://www.infoq.com/cn/es6-in-depth/" target="_blank" rel="external">http://www.infoq.com/cn/es6-in-depth/</a></p>
+<h2 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h2><h4 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// ES5</span></div><div class="line"><span class="keyword">var</span> total = values.reduce(<span class="function"><span class="keyword">function</span> (<span class="params">a, b</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> a + b;</div><div class="line"> &#125;, <span class="number">0</span>);</div><div class="line"> <span class="comment">// ES6</span></div><div class="line"> <span class="keyword">var</span> total = values.reduce(<span class="function">(<span class="params">a, b</span>) =&gt;</span> a + b, <span class="number">0</span>);</div></pre></td></tr></table></figure>
+<h4 id="注意点"><a href="#注意点" class="headerlink" title="注意点"></a>注意点</h4><ul>
+<li>使用了块语句的箭头函数不会自动返回值，你需要使用return语句将所需值返回。</li>
+<li>当使用箭头函数创建普通对象时，你总是需要将对象包裹在小括号里。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 为与你玩耍的每一个小狗创建一个新的空对象</span></div><div class="line"><span class="keyword">var</span> chewToys = puppies.map(<span class="function"><span class="params">puppy</span> =&gt;</span> &#123;&#125;); <span class="comment">// 这样写会报Bug！</span></div><div class="line"><span class="keyword">var</span> chewToys = puppies.map(<span class="function"><span class="params">puppy</span> =&gt;</span> (&#123;&#125;)); <span class="comment">//</span></div></pre></td></tr></table></figure>
+<h4 id="和非箭头函数的区别"><a href="#和非箭头函数的区别" class="headerlink" title="和非箭头函数的区别"></a>和非箭头函数的区别</h4><ul>
+<li>箭头函数没有它自己的this值，箭头函数内的this值继承自外围作用域</li>
+<li>箭头函数不会获取它们自己的arguments对象（通过解构来处理参数）</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（07）箭头函数/" data-id="cj798odib002428vg9xtnx2we" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -376,7 +423,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（06）解构/" data-id="cj77t6lbi001y7vvg6icomjw7" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（06）解构/" data-id="cj798odic002628vg32qlm0s2" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -426,7 +473,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（04）模板字符串/" data-id="cj77t6lbh001w7vvgjc6fwie5" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（04）模板字符串/" data-id="cj798odi9001z28vgrqulfp9h" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -481,7 +528,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（03）生成器 Generators/" data-id="cj77t6lbe001u7vvg3htxj9z1" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（03）生成器 Generators/" data-id="cj798odia002128vglv7zj8gw" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -547,7 +594,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（02）迭代器和for-of循环/" data-id="cj77t6lbd001r7vvgw3pany4e" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/04/14/读书笔记：深入浅出ES6（02）迭代器和for-of循环/" data-id="cj798odi8001x28vgci0pmgpy" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/es6/">es6</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -594,70 +641,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/04/01/js片段2/" data-id="cj77t6law00147vvgf4ylouwp" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
-
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-数组去重" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/02/27/数组去重/" class="article-date">
-  <time datetime="2017-02-27T10:47:14.000Z" itemprop="datePublished">2017-02-27</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/02/27/数组去重/">数组去重</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>参考地址：<a href="https://www.toobug.net/article/array_unique_in_javascript.html">https://www.toobug.net/article/array_unique_in_javascript.html</a></p>
-<p>先说结论：includes，Map，Set  能正确处理去重</p>
-<h3 id="测试数据："><a href="#测试数据：" class="headerlink" title="测试数据："></a>测试数据：</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> arr = [<span class="number">1</span>,<span class="number">1</span>,<span class="string">'1'</span>,<span class="string">'1'</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="string">'0'</span>,<span class="string">'0'</span>,<span class="literal">undefined</span>,<span class="literal">undefined</span>,<span class="literal">null</span>,<span class="literal">null</span>,<span class="literal">NaN</span>,<span class="literal">NaN</span>,&#123;&#125;,&#123;&#125;,[],[],/a/,/a/]</div><div class="line"><span class="built_in">console</span>.log(unique(arr));</div></pre></td></tr></table></figure>
-<p>测试中没有定义对象的比较方法，因此默认情况下，对象不去重是正确的结果，去重是不正确的结果。</p>
-<h3 id="坑："><a href="#坑：" class="headerlink" title="坑："></a>坑：</h3><ul>
-<li><code>===</code>不能处理<code>NaN</code>的相等性判断</li>
-<li>对象之间的相等判断</li>
-</ul>
-<h3 id="现象"><a href="#现象" class="headerlink" title="现象"></a>现象</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// number</span></div><div class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> <span class="literal">NaN</span>);</div><div class="line"></div><div class="line"><span class="comment">// 全都是false</span></div><div class="line"><span class="number">0</span> &lt; <span class="literal">NaN</span>;</div><div class="line"><span class="number">0</span> &gt; <span class="literal">NaN</span>;</div><div class="line"><span class="number">0</span> == <span class="literal">NaN</span>;</div><div class="line"><span class="number">0</span> === <span class="literal">NaN</span>;</div><div class="line"><span class="literal">NaN</span>==<span class="literal">NaN</span></div><div class="line"><span class="literal">NaN</span>===<span class="literal">NaN</span></div></pre></td></tr></table></figure>
-<h3 id="处理方案："><a href="#处理方案：" class="headerlink" title="处理方案："></a>处理方案：</h3><p>NaN通过isNaN(a) 方法进行比较<br>对象可以通过JSON.stringify()对对象进行序列化之后再比较字符串（可能有坑）<br>发现的坑：</p>
-<ul>
-<li>如果对象的值为undefined，则该键值对会被忽略<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> f = &#123;<span class="attr">d</span>:<span class="literal">undefined</span>,<span class="attr">f</span>:<span class="string">'ss'</span>&#125;</div><div class="line"><span class="built_in">JSON</span>.stringify(f) <span class="comment">//"&#123;"f":"ss"&#125;"</span></div></pre></td></tr></table></figure>
-</li>
-</ul>
-<hr>
-<p>通过规范（<a href="http://www.ecma-international.org/ecma-262/6.0/#sec-array.prototype.indexof">http://www.ecma-international.org/ecma-262/6.0/#sec-array.prototype.indexof</a> ）<br>我们知道了indexOf()使用的是严格比较，也就是===。</p>
-<p>includes()又是用什么方法来比较的呢？如果想当然的话，会觉得肯定跟indexOf()一样喽。但是，程序员的世界里最怕想当然。翻一翻规范，发现它其实是使用的另一种比较方法，叫作“SameValueZero”比较（<a href="https://tc39.github.io/ecma262/2016/#sec-samevaluezero）。">https://tc39.github.io/ecma262/2016/#sec-samevaluezero）。</a></p>
-<blockquote>
-<p>If Type(x) is different from Type(y), return false.<br>If Type(x) is Number, then<br>a. If x is NaN and y is NaN, return true.<br>b. If x is +0 and y is -0, return true.<br>c. If x is -0 and y is +0, return true.<br>d. If x is the same Number value as y, return true.<br>e. Return false.<br>Return SameValueNonNumber(x, y).</p>
-</blockquote>
-        
-          <p class="article-more-link">
-            <a href="/2017/02/27/数组去重/#more">Read More</a>
-          </p>
-        
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/02/27/数组去重/" data-id="cj77t6lb9001m7vvgtallsy9z" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/04/01/js片段2/" data-id="cj798odhv001f28vgn8wf9eiy" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/javascript/">javascript</a></li></ul>
@@ -718,6 +702,10 @@
       <ul>
         
           <li>
+            <a href="/2017/09/07/codewar-05/">codewar-05</a>
+          </li>
+        
+          <li>
             <a href="/2017/09/06/codewar-04/">codewar-04</a>
           </li>
         
@@ -731,10 +719,6 @@
         
           <li>
             <a href="/2017/09/03/codewar-01/">codewar-01</a>
-          </li>
-        
-          <li>
-            <a href="/2017/08/12/微信小程序跨页面通信解决思路/">微信小程序跨页面通信解决思路</a>
           </li>
         
       </ul>

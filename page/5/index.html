@@ -71,6 +71,89 @@
         <div class="outer">
           <section id="main">
   
+    <article id="post-use-fiddler" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/08/09/use-fiddler/" class="article-date">
+  <time datetime="2016-08-09T00:36:08.000Z" itemprop="datePublished">2016-08-09</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/08/09/use-fiddler/">使用fiddler</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="其他设备通过fiddler访问网络（手机调试抓包使用）"><a href="#其他设备通过fiddler访问网络（手机调试抓包使用）" class="headerlink" title="其他设备通过fiddler访问网络（手机调试抓包使用）"></a>其他设备通过fiddler访问网络（手机调试抓包使用）</h2><p>菜单栏点击 Tools &gt; Fiddler Options.</p>
+<p>勾选 ‘’’Ensure Allow remote clients to connect’’’.</p>
+<p><img src="/img/use-fiddler/1-1.png" alt="1-1"></p>
+<p>在手机中设置网络代理</p>
+<p>代理模式为手动，IP地址为电脑的IP,端口为上图中port的值</p>
+<p>用手机访问网站时，可以通过fiddler查看网络通信</p>
+<p><strong>事后别忘记把代理关闭，不然你关了fiddler就上不了网了</strong></p>
+<hr>
+<h2 id="fiddler插件安装"><a href="#fiddler插件安装" class="headerlink" title="fiddler插件安装"></a>fiddler插件安装</h2><p>地址：<a href="http://www.telerik.com/fiddler/add-ons" target="_blank" rel="external">http://www.telerik.com/fiddler/add-ons</a></p>
+<p>tip: 如果使用迅雷下载，记得选择只从原始地址下载，不然任务总是失败</p>
+<hr>
+<h2 id="定制fiddler规则-Write-a-FiddlerScript-Rule"><a href="#定制fiddler规则-Write-a-FiddlerScript-Rule" class="headerlink" title="定制fiddler规则 ( Write a FiddlerScript Rule )"></a>定制fiddler规则 ( Write a FiddlerScript Rule )</h2><p>菜单栏点击 Tools &gt; Fiddler Options &gt; Tools. 修改默认编辑器</p>
+<p>菜单栏点击 Rules &gt; Customize Rules.</p>
+<p>修改js文件</p>
+<h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><p>在 OnBeforeRequest 方法中加入代码:</p>
+<pre><code>if (oSession.host.toLowerCase() == &quot;localhost:8888&quot;){
+  oSession.host = &quot;localhost:80&quot;;
+}
+</code></pre><p>访问localhost:8888 实际访问的是localhost:80</p>
+<hr>
+<h2 id="Session-List-操作"><a href="#Session-List-操作" class="headerlink" title="Session List 操作"></a>Session List 操作</h2><ul>
+<li>ctrl+f 查找</li>
+<li>选择session 按p 定为请求的父级 按c 定为请求的子集</li>
+</ul>
+<hr>
+<h2 id="AutoResponder"><a href="#AutoResponder" class="headerlink" title="AutoResponder"></a>AutoResponder</h2><ul>
+<li>在选项卡内勾选Enable rules 开启规则</li>
+<li>rule列表上方的权重较高，可以通过+-来调整rule的权重</li>
+</ul>
+<h4 id="导入-导出rules"><a href="#导入-导出rules" class="headerlink" title="导入/导出rules"></a>导入/导出rules</h4><ol>
+<li>选择多个rule，右击 选择Export all 导出 </li>
+<li>Add Rule 右侧的Import按钮 点击选择之前导出的文件进行导入</li>
+</ol>
+<hr>
+<h2 id="重发请求"><a href="#重发请求" class="headerlink" title="重发请求"></a>重发请求</h2><p>方法1：选择左侧session,右击 选择replay-&gt;reissue requests<br>方法2：</p>
+<ol>
+<li>在右侧composer的选项卡内选择Scratchpad</li>
+<li>点击或者拖动左侧session至选项卡内</li>
+<li>三次点击选中选项卡内的请求头部信息</li>
+<li>点击Execute 发送</li>
+</ol>
+<hr>
+<h2 id="导入-导出网络请求"><a href="#导入-导出网络请求" class="headerlink" title="导入/导出网络请求"></a>导入/导出网络请求</h2><p>File-&gt;import session / File-&gt;export session </p>
+<hr>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://github.com/pavelShen/2016/08/09/use-fiddler/" data-id="cj798odhx001h28vg2361464k" class="article-share-link">Share</a>
+      
+      
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/tools/">tools</a></li></ul>
+
+    </footer>
+  </div>
+  
+</article>
+
+
+
+  
     <article id="post-learn-koa" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2016/08/09/learn-koa/" class="article-date">
@@ -164,7 +247,7 @@ app.listen(3000);
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2016/08/09/learn-koa/" data-id="cj77t6lax00167vvgl08i69qr" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2016/08/09/learn-koa/" data-id="cj798odht001d28vg7nxl7ry9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/koa/">koa</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/nodejs/">nodejs</a></li></ul>
@@ -226,7 +309,7 @@ app.listen(3000);
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2016/08/06/markdown/" data-id="cj77t6laz00187vvgfryqyy8s" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2016/08/06/markdown/" data-id="cj798odht001b28vg8g5sotr8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/markdown/">markdown</a></li></ul>
@@ -287,6 +370,10 @@ app.listen(3000);
       <ul>
         
           <li>
+            <a href="/2017/09/07/codewar-05/">codewar-05</a>
+          </li>
+        
+          <li>
             <a href="/2017/09/06/codewar-04/">codewar-04</a>
           </li>
         
@@ -300,10 +387,6 @@ app.listen(3000);
         
           <li>
             <a href="/2017/09/03/codewar-01/">codewar-01</a>
-          </li>
-        
-          <li>
-            <a href="/2017/08/12/微信小程序跨页面通信解决思路/">微信小程序跨页面通信解决思路</a>
           </li>
         
       </ul>
