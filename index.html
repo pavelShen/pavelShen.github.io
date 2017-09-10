@@ -93,15 +93,20 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="codewar刷题之旅开始啦"><a href="#codewar刷题之旅开始啦" class="headerlink" title="codewar刷题之旅开始啦~"></a>codewar刷题之旅开始啦~</h1><h2 id="Duplicate-Encoder-根据字母是否出现过进行转码"><a href="#Duplicate-Encoder-根据字母是否出现过进行转码" class="headerlink" title="Duplicate Encoder (根据字母是否出现过进行转码"></a>Duplicate Encoder (根据字母是否出现过进行转码</h2><h4 id="直接判断indexOf和lastIndexOf"><a href="#直接判断indexOf和lastIndexOf" class="headerlink" title="直接判断indexOf和lastIndexOf"></a>直接判断indexOf和lastIndexOf</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">duplicateEncode</span>(<span class="params">word</span>)</span>&#123;</div><div class="line">  <span class="keyword">let</span> result =<span class="string">''</span></div><div class="line">  word = word.toLowerCase()</div><div class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> item <span class="keyword">of</span> word)&#123;</div><div class="line">    <span class="keyword">if</span>(word.indexOf(item)===word.lastIndexOf(item))&#123;</div><div class="line">      result += <span class="string">'('</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span>&#123;</div><div class="line">      result += <span class="string">')'</span></div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  <span class="keyword">return</span> result</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="正则（特殊字符有bug）"><a href="#正则（特殊字符有bug）" class="headerlink" title="正则（特殊字符有bug）"></a>正则（特殊字符有bug）</h4><p>无法再regexp对象的参数中传入转义字符</p>
+        <h1 id="codewar刷题之旅开始啦"><a href="#codewar刷题之旅开始啦" class="headerlink" title="codewar刷题之旅开始啦~"></a>codewar刷题之旅开始啦~</h1><h2 id="Duplicate-Encoder-根据字母是否出现过进行编码"><a href="#Duplicate-Encoder-根据字母是否出现过进行编码" class="headerlink" title="Duplicate Encoder (根据字母是否出现过进行编码)"></a>Duplicate Encoder (根据字母是否出现过进行编码)</h2><h4 id="直接判断indexOf和lastIndexOf"><a href="#直接判断indexOf和lastIndexOf" class="headerlink" title="直接判断indexOf和lastIndexOf"></a>直接判断indexOf和lastIndexOf</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">duplicateEncode</span>(<span class="params">word</span>)</span>&#123;</div><div class="line">  <span class="keyword">let</span> result =<span class="string">''</span></div><div class="line">  word = word.toLowerCase()</div><div class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> item <span class="keyword">of</span> word)&#123;</div><div class="line">    <span class="keyword">if</span>(word.indexOf(item)===word.lastIndexOf(item))&#123;</div><div class="line">      result += <span class="string">'('</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span>&#123;</div><div class="line">      result += <span class="string">')'</span></div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  <span class="keyword">return</span> result</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="正则（特殊字符有bug）"><a href="#正则（特殊字符有bug）" class="headerlink" title="正则（特殊字符有bug）"></a>正则（特殊字符有bug）</h4><p>在有变量的情况下，无法在regexp对象的参数中传入转义字符<br>(low了，只是反斜杠的字符串拼接 要使用转义字符，但是 如果全部转义的话，有会匹配到正则的关键词，问题更大，方案废弃)</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">duplicateEncode</span>(<span class="params">word</span>)</span>&#123;</div><div class="line">  <span class="keyword">let</span> result =<span class="string">''</span></div><div class="line">  </div><div class="line">  <span class="keyword">for</span>(<span class="keyword">let</span> item <span class="keyword">of</span> word)&#123;</div><div class="line">    <span class="keyword">let</span> reg = <span class="keyword">new</span> <span class="built_in">RegExp</span>(item,<span class="string">'ig'</span>)</div><div class="line">    <span class="keyword">if</span>(word.match(reg).length===<span class="number">1</span>)&#123;</div><div class="line">      result += <span class="string">'('</span></div><div class="line">    &#125;</div><div class="line">    <span class="keyword">else</span>&#123;</div><div class="line">      result += <span class="string">')'</span></div><div class="line">    &#125;</div><div class="line">  &#125;</div><div class="line">  </div><div class="line">  <span class="keyword">return</span> result</div><div class="line">&#125;</div><div class="line"></div><div class="line">duplicateEncode(<span class="string">"(( @"</span>)</div></pre></td></tr></table></figure>
 <hr>
-
+<h2 id="Where-my-anagrams-at"><a href="#Where-my-anagrams-at" class="headerlink" title="Where my anagrams at?"></a>Where my anagrams at?</h2><p>指定字符串和数组中的字符串做比较，如果两者的组成（元素的个数与内容）相同，则将他添加到一个新数组中<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">anagrams(<span class="string">'abba'</span>, [<span class="string">'aabb'</span>, <span class="string">'abcd'</span>, <span class="string">'bbaa'</span>, <span class="string">'dada'</span>]) =&gt; [<span class="string">'aabb'</span>, <span class="string">'bbaa'</span>]</div><div class="line">anagrams(<span class="string">'racer'</span>, [<span class="string">'crazer'</span>, <span class="string">'carer'</span>, <span class="string">'racar'</span>, <span class="string">'caers'</span>, <span class="string">'racer'</span>]) =&gt; [<span class="string">'carer'</span>, <span class="string">'racer'</span>]</div><div class="line">anagrams(<span class="string">'laser'</span>, [<span class="string">'lazing'</span>, <span class="string">'lazy'</span>,  <span class="string">'lacer'</span>]) =&gt; []</div></pre></td></tr></table></figure></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">anagrams</span>(<span class="params">word, words</span>) </span>&#123;</div><div class="line">  <span class="keyword">let</span> wordArray = <span class="built_in">Array</span>.from(word).sort().join(<span class="string">''</span>)</div><div class="line">  <span class="keyword">return</span> words.filter(<span class="function">(<span class="params">item,index</span>)=&gt;</span>&#123;</div><div class="line">    <span class="keyword">let</span> itemArray = <span class="built_in">Array</span>.from(item).sort().join(<span class="string">''</span>)</div><div class="line">    <span class="keyword">return</span> wordArray === itemArray</div><div class="line">  &#125;)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+<h2 id="Delete-occurrences-of-an-element-if-it-occurs-more-than-n-times"><a href="#Delete-occurrences-of-an-element-if-it-occurs-more-than-n-times" class="headerlink" title="Delete occurrences of an element if it occurs more than n times"></a>Delete occurrences of an element if it occurs more than n times</h2><p>指定数组中相同元素最多出现次数，过滤掉超出部分后按原顺序返回</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">deleteNth ([<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">1</span>],<span class="number">2</span>) <span class="comment">// return [1,1]</span></div><div class="line">deleteNth ([<span class="number">20</span>,<span class="number">37</span>,<span class="number">20</span>,<span class="number">21</span>],<span class="number">1</span>) <span class="comment">// return [20,37,21]</span></div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">deleteNth</span>(<span class="params">arr,x</span>)</span>&#123;</div><div class="line">  <span class="keyword">if</span>(<span class="keyword">typeof</span> x !== <span class="string">'number'</span> || x&lt;=<span class="number">0</span>)&#123;</div><div class="line">    <span class="keyword">return</span> []</div><div class="line">  &#125;</div><div class="line">  <span class="keyword">else</span>&#123;</div><div class="line">    <span class="keyword">let</span> tempObj = &#123;&#125;</div><div class="line">    <span class="keyword">let</span> resultArr = []</div><div class="line">  </div><div class="line">    <span class="keyword">for</span>(<span class="keyword">let</span> item <span class="keyword">of</span> arr)&#123;</div><div class="line">      tempObj[item] = tempObj[item] ? tempObj[item] + <span class="number">1</span> : <span class="number">1</span></div><div class="line">      </div><div class="line">      <span class="keyword">if</span>(tempObj[item]&lt;=x)&#123;</div><div class="line">        resultArr.push(item)</div><div class="line">      &#125;</div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> resultArr</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/09/07/codewar-05/" data-id="cj798odh2000m28vgni1o9osv" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/09/07/codewar-05/" data-id="cj7ed6f0q000q6vvgs90aipu7" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codewar/">codewar</a></li></ul>
@@ -148,7 +153,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/09/06/codewar-04/" data-id="cj798odh0000k28vgeksus0sd" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/09/06/codewar-04/" data-id="cj7ed6f0x000v6vvgwi0xvphb" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codewar/">codewar</a></li></ul>
@@ -195,7 +200,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/09/05/codewar-03/" data-id="cj798odh9000t28vgunne7mh8" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/09/05/codewar-03/" data-id="cj7ed6f0u000s6vvg3glbmpww" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codewar/">codewar</a></li></ul>
@@ -242,7 +247,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/09/04/codewar-02/" data-id="cj798odh6000q28vgg7tyxnmq" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/09/04/codewar-02/" data-id="cj7ed6f0l000l6vvgyvu2aym8" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codewar/">codewar</a></li></ul>
@@ -295,7 +300,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/09/03/codewar-01/" data-id="cj798odgu000c28vg0rxgw5v8" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/09/03/codewar-01/" data-id="cj7ed6f0j000j6vvgqitfyr3h" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/codewar/">codewar</a></li></ul>
@@ -336,7 +341,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/08/12/微信小程序跨页面通信解决思路/" data-id="cj798odi1001r28vg671q19e4" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/08/12/微信小程序跨页面通信解决思路/" data-id="cj7ed6f1m001l6vvgi5om5v9l" class="article-share-link">Share</a>
       
       
     </footer>
@@ -379,7 +384,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/08/05/javascript设计模式学习-01/" data-id="cj798odhp001728vgz86e6jyq" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/08/05/javascript设计模式学习-01/" data-id="cj7ed6f1e001b6vvg5kw0fyrf" class="article-share-link">Share</a>
       
       
     </footer>
@@ -476,7 +481,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/07/17/canvas学习总结/" data-id="cj798odgi000528vgf8apxdkk" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/07/17/canvas学习总结/" data-id="cj7ed6f0000066vvgklyxvu4u" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
@@ -516,7 +521,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/07/11/canvas链式操作/" data-id="cj798odgs000a28vgco2555aa" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/07/11/canvas链式操作/" data-id="cj7ed6f0g000h6vvgv9bcjuye" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
@@ -576,7 +581,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（07）/" data-id="cj798odgy000h28vgwlks68vj" class="article-share-link">Share</a>
+      <a data-url="https://github.com/pavelShen/2017/07/11/canvas学习笔记-API（07）/" data-id="cj7ed6f0b000c6vvgtw2mmafp" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/canvas/">canvas</a></li></ul>
